@@ -16,8 +16,8 @@ public class SsafyUserDetailsService implements UserDetailsService{
 	private UserService userService;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User userEntity = userService.getUserByUserId(username);
+	public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+		User userEntity = userService.getUserByUserId(userId);
 		if(userEntity != null) {
 			return new SsafyUserDetails(userEntity);
 		}

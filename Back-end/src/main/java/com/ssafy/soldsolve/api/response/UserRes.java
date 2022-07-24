@@ -15,10 +15,16 @@ import lombok.Setter;
 public class UserRes{
 	//@ApiModelProperty(name="User ID")
 	String userId;
+	String userName;
+	String nickName;
+	String email;
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
-		res.setUserId(user.getUsername());
+		res.setUserId(user.getUserid());
+		res.setUserName(user.getUsername());
+		res.setNickName(user.getNickname());
+		res.setEmail(user.getEmail());
 		return res;
 	}
 }

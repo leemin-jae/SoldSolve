@@ -1,6 +1,7 @@
 package com.ssafy.soldsolve.api.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +27,9 @@ import com.ssafy.soldsolve.db.entity.User;
 @RestController
 @RequestMapping("/api/v1/users")
 public class UserController {
+	
+	private final String SUCCESS = "success";
+	private final String FAIL = "fail";
 	
 	@Autowired
 	UserService userService;
@@ -65,5 +69,17 @@ public class UserController {
 		User user = userService.getUserByUserId(userId);
 		
 		return ResponseEntity.status(200).body(UserRes.of(user));
+	}
+	
+	@GetMapping("/idcheck")
+	public ResponseEntity<?> getIdCheck(@RequestBody UserRegisterPostReq registerInfo){
+		User user = userService.getUserByUserId(registerInfo.getId());
+		
+		if(user == null) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+		}
+		
 	}
 }

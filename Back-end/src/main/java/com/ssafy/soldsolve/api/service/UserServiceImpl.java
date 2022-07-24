@@ -21,9 +21,9 @@ public class UserServiceImpl implements UserService{
 	PasswordEncoder passwordEncoder;
 
 	@Override
-	public User getUserByUserId(String username) {
+	public User getUserByUserId(String userId) {
 		// TODO Auto-generated method stub
-		User user = userRepository.findByUsername(username);
+		User user = userRepository.findByUserid(userId);
 		if(user != null) {
 			return user;
 		}else {
@@ -36,9 +36,15 @@ public class UserServiceImpl implements UserService{
 	public User createUser(UserRegisterPostReq registerInfo) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		user.setUsername(registerInfo.getId());
+		user.setUserid(registerInfo.getId());
+		user.setUsername(registerInfo.getUserName());
+		user.setEmail(registerInfo.getEmail());
+		user.setNickname(registerInfo.getNickName());
+		user.setRole("ROLE_USER");
+		
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
 		user.setPassword(passwordEncoder.encode(registerInfo.getPassword()));
+		
 		return userRepository.save(user);
 	}
 	

@@ -22,10 +22,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	private int id;
 	
-	private String username;
+	private String userid;
 	private String password;
+	private String username;
 	private String nickname;
-	
 	private String email;
 	
 	private String role;
@@ -35,10 +35,12 @@ public class User {
 
 	
 	@Builder
-	public User(String username, String password, String nickname, String email, String role, Timestamp createDate) {
+	public User(String userId, String password, String username, String nickname, String email, String role,
+			Timestamp createDate) {
 		super();
-		this.username = username;
+		this.userid = userId;
 		this.password = password;
+		this.username = username;
 		this.nickname = nickname;
 		this.email = email;
 		this.role = role;

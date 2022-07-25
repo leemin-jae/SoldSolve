@@ -8,4 +8,9 @@ public interface UserService {
 	User getUserByUserId(String userId);
 
 	User createUser(UserRegisterPostReq registerInfo);
+
+
+	void updateUser(User user);
+
+	void deleteUser(int id);
 }

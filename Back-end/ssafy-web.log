@@ -1610,3 +1610,191 @@ java.lang.NullPointerException: Cannot invoke "org.springframework.security.core
 	"nickName" : "만득이",
 	"email" : "alswo@naver.com"
 }]
+2022-07-25 11:57:23.731  INFO 5164 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Starting SoldSolveApplication using Java 11.0.6 on DESKTOP-KVCQHCD with PID 5164 (C:\Users\multicampus\Desktop\test\S07P12C110\Back-end\build\classes\java\main started by multicampus in C:\Users\multicampus\Desktop\test\S07P12C110\Back-end)
+2022-07-25 11:57:23.734  INFO 5164 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : No active profile set, falling back to default profiles: default
+2022-07-25 11:57:23.801  INFO 5164 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-25 11:57:23.801  INFO 5164 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-25 11:57:25.245  INFO 5164 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-25 11:57:25.315  INFO 5164 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 63 ms. Found 1 JPA repository interfaces.
+2022-07-25 11:57:25.681  INFO 5164 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@30c5b765' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-25 11:57:25.681  INFO 5164 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-25 11:57:26.030  INFO 5164 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-25 11:57:26.035  INFO 5164 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-25 11:57:26.035  INFO 5164 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-07-25 11:57:26.205  INFO 5164 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-25 11:57:26.205  INFO 5164 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2403 ms
+2022-07-25 11:57:26.380 DEBUG 5164 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'commonsRequestLoggingFilter' configured for use
+2022-07-25 11:57:26.558  INFO 5164 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-25 11:57:26.615  INFO 5164 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2022-07-25 11:57:26.743  INFO 5164 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-25 11:57:26.876  INFO 5164 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-25 11:57:27.257  INFO 5164 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-25 11:57:27.281  INFO 5164 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-07-25 11:57:27.917  INFO 5164 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-25 11:57:27.932  INFO 5164 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-25 11:57:27.994  INFO 5164 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-25 11:57:28.373  WARN 5164 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-25 11:57:28.652 DEBUG 5164 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2022-07-25 11:57:28.827  INFO 5164 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-07-25 11:57:29.215  INFO 5164 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@33d8a10e, org.springframework.security.web.context.SecurityContextPersistenceFilter@72696d40, org.springframework.security.web.header.HeaderWriterFilter@237accbd, org.springframework.web.filter.CorsFilter@3a49b172, org.springframework.security.web.authentication.logout.LogoutFilter@4489fc48, com.ssafy.soldsolve.common.auth.JwtAuthenticationFilter@358cd8c9, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ce53343, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@47870105, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5121625d, org.springframework.security.web.session.SessionManagementFilter@2d1208d4, org.springframework.security.web.access.ExceptionTranslationFilter@4196d2e0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@316448ba]
+2022-07-25 11:57:29.277  INFO 5164 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-07-25 11:57:29.302 DEBUG 5164 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-07-25 11:57:29.360 DEBUG 5164 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-07-25 11:57:29.378 DEBUG 5164 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-07-25 11:57:29.676 DEBUG 5164 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
+2022-07-25 11:57:29.688 DEBUG 5164 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-07-25 11:57:29.992  INFO 5164 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-25 11:57:30.278  INFO 5164 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Started SoldSolveApplication in 7.049 seconds (JVM running for 9.596)
+2022-07-25 11:57:31.505  INFO 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-25 11:57:31.507  INFO 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-25 11:57:31.507 DEBUG 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2022-07-25 11:57:31.507 DEBUG 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2022-07-25 11:57:31.507 DEBUG 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2022-07-25 11:57:31.509 DEBUG 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5a3332cc
+2022-07-25 11:57:31.509 DEBUG 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@7c8dc9db
+2022-07-25 11:57:31.509 DEBUG 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-25 11:57:31.509  INFO 5164 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-07-25 12:57:27.833  WARN 5164 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=38m94ms314µs400ns).
+2022-07-25 13:21:33.097  INFO 13412 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Starting SoldSolveApplication using Java 11.0.6 on DESKTOP-KVCQHCD with PID 13412 (C:\Users\multicampus\Desktop\test\S07P12C110\Back-end\build\classes\java\main started by multicampus in C:\Users\multicampus\Desktop\test\S07P12C110\Back-end)
+2022-07-25 13:21:33.104  INFO 13412 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : No active profile set, falling back to default profiles: default
+2022-07-25 13:21:33.196  INFO 13412 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-25 13:21:33.196  INFO 13412 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-25 13:21:34.854  INFO 13412 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-25 13:21:34.970  INFO 13412 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 104 ms. Found 1 JPA repository interfaces.
+2022-07-25 13:21:35.433  INFO 13412 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@7bb5bd17' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-25 13:21:35.440  INFO 13412 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-25 13:21:35.822  INFO 13412 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-25 13:21:35.834  INFO 13412 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-25 13:21:35.834  INFO 13412 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-07-25 13:21:35.988  INFO 13412 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-25 13:21:35.988  INFO 13412 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2790 ms
+2022-07-25 13:21:36.222 DEBUG 13412 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'commonsRequestLoggingFilter' configured for use
+2022-07-25 13:21:36.507  INFO 13412 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-25 13:21:36.562  INFO 13412 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2022-07-25 13:21:36.741  INFO 13412 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-25 13:21:36.938  INFO 13412 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-25 13:21:37.469  INFO 13412 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-25 13:21:37.493  INFO 13412 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-07-25 13:21:38.698  INFO 13412 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-25 13:21:38.718  INFO 13412 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-25 13:21:38.786  INFO 13412 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-25 13:21:39.558  WARN 13412 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-25 13:21:39.957 DEBUG 13412 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2022-07-25 13:21:40.182  INFO 13412 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-07-25 13:21:40.926  INFO 13412 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@45c1ce4f, org.springframework.security.web.context.SecurityContextPersistenceFilter@3cce6d30, org.springframework.security.web.header.HeaderWriterFilter@aedb85f, org.springframework.web.filter.CorsFilter@5eaecb9c, org.springframework.security.web.authentication.logout.LogoutFilter@709a987d, com.ssafy.soldsolve.common.auth.JwtAuthenticationFilter@7f71dc30, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4d10e62b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5d0ee520, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42b84471, org.springframework.security.web.session.SessionManagementFilter@ce5e238, org.springframework.security.web.access.ExceptionTranslationFilter@7a8187be, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@28ebc61d]
+2022-07-25 13:21:41.056  INFO 13412 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-07-25 13:21:41.081 DEBUG 13412 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-07-25 13:21:41.181 DEBUG 13412 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-07-25 13:21:41.218 DEBUG 13412 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-07-25 13:21:41.593 DEBUG 13412 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
+2022-07-25 13:21:41.607 DEBUG 13412 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-07-25 13:21:42.103  INFO 13412 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-25 13:21:42.737  INFO 13412 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Started SoldSolveApplication in 10.391 seconds (JVM running for 12.253)
+2022-07-25 13:21:44.318  INFO 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-25 13:21:44.320  INFO 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-25 13:21:44.320 DEBUG 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2022-07-25 13:21:44.320 DEBUG 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2022-07-25 13:21:44.321 DEBUG 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2022-07-25 13:21:44.326 DEBUG 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@4b192888
+2022-07-25 13:21:44.326 DEBUG 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@3efeeaf2
+2022-07-25 13:21:44.326 DEBUG 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-25 13:21:44.326  INFO 13412 --- [RMI TCP Connection(5)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2022-07-25 13:24:58.663 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : Before request [POST /api/v1/users, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", cache-control:"no-cache", postman-token:"36a357f0-2776-490b-804a-d09f4beefed9", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"139", Content-Type:"application/json;charset=UTF-8"]]
+2022-07-25 13:24:58.663 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/v1/users", parameters={}
+2022-07-25 13:24:58.663 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.UserController#register(UserRegisterPostReq)
+2022-07-25 13:24:58.720 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.ssafy.soldsolve.api.request.UserRegisterPostReq@36370a4]
+2022-07-25 13:24:59.056 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-25 13:24:59.057 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.soldsolve.common.model.response.BaseResponseBody@95d0b4]
+2022-07-25 13:24:59.086 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-07-25 13:24:59.089 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : After request [POST /api/v1/users, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", cache-control:"no-cache", postman-token:"36a357f0-2776-490b-804a-d09f4beefed9", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"139", Content-Type:"application/json;charset=UTF-8"], payload={
+
+	"id" : "alswo",
+
+	"password" : "123",
+	
+	"userName" : "dlalswo",
+	
+	"nickName" : "aksemrdl",
+	
+	"email" : "sdfasf@dsfasdf"
+}]
+2022-07-25 13:26:01.243 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : GET "/soldsolve", parameters={}
+2022-07-25 13:26:01.246  WARN 13412 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.PageNotFound             : No mapping for GET /soldsolve
+2022-07-25 13:26:01.249 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Using @ExceptionHandler com.ssafy.soldsolve.common.exception.handler.NotFoundHandler#renderDefaultPage(NoHandlerFoundException)
+2022-07-25 13:26:01.259 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'text/plain', given [*/*] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2022-07-25 13:26:01.259 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-3] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing ["There was an error completing the action."]
+2022-07-25 13:26:01.262  WARN 13412 --- [http-nio-127.0.0.1-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.servlet.NoHandlerFoundException: No handler found for GET /soldsolve]
+2022-07-25 13:26:01.262 DEBUG 13412 --- [http-nio-127.0.0.1-8080-exec-3] o.s.web.servlet.DispatcherServlet        : Completed 500 INTERNAL_SERVER_ERROR
+2022-07-25 13:26:28.686  INFO 6280 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Starting SoldSolveApplication using Java 11.0.6 on DESKTOP-KVCQHCD with PID 6280 (C:\Users\multicampus\Desktop\test\S07P12C110\Back-end\build\classes\java\main started by multicampus in C:\Users\multicampus\Desktop\test\S07P12C110\Back-end)
+2022-07-25 13:26:28.692  INFO 6280 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : No active profile set, falling back to default profiles: default
+2022-07-25 13:26:28.740  INFO 6280 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-25 13:26:28.740  INFO 6280 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-25 13:26:30.313  INFO 6280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-25 13:26:30.383  INFO 6280 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 62 ms. Found 1 JPA repository interfaces.
+2022-07-25 13:26:30.766  INFO 6280 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@213729f6' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-25 13:26:30.766  INFO 6280 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-25 13:26:31.068  INFO 6280 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-25 13:26:31.083  INFO 6280 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-25 13:26:31.083  INFO 6280 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-07-25 13:26:31.228  INFO 6280 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-25 13:26:31.228  INFO 6280 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2487 ms
+2022-07-25 13:26:31.389 DEBUG 6280 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'commonsRequestLoggingFilter' configured for use
+2022-07-25 13:26:31.576  INFO 6280 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-25 13:26:31.633  INFO 6280 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2022-07-25 13:26:31.762  INFO 6280 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-25 13:26:31.902  INFO 6280 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-25 13:26:32.216  INFO 6280 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-25 13:26:32.218  INFO 6280 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-07-25 13:26:32.819  INFO 6280 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-25 13:26:32.828  INFO 6280 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-25 13:26:32.880  INFO 6280 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-25 13:26:33.235  WARN 6280 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-25 13:26:33.531 DEBUG 6280 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 12 mappings in 'requestMappingHandlerMapping'
+2022-07-25 13:26:33.645  INFO 6280 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-07-25 13:26:33.932  INFO 6280 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@21a053e5, org.springframework.security.web.context.SecurityContextPersistenceFilter@1074547a, org.springframework.security.web.header.HeaderWriterFilter@4f33c7dd, org.springframework.web.filter.CorsFilter@2ed38e6d, org.springframework.security.web.authentication.logout.LogoutFilter@e0031cd, com.ssafy.soldsolve.common.auth.JwtAuthenticationFilter@48c86e84, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@131e4426, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@23b7efe6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@76f16943, org.springframework.security.web.session.SessionManagementFilter@16c4fe71, org.springframework.security.web.access.ExceptionTranslationFilter@8f7a5fe, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@17264e9f]
+2022-07-25 13:26:34.033  INFO 6280 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-07-25 13:26:34.051 DEBUG 6280 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-07-25 13:26:34.106 DEBUG 6280 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-07-25 13:26:34.135 DEBUG 6280 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-07-25 13:26:34.356 DEBUG 6280 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
+2022-07-25 13:26:34.363 DEBUG 6280 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-07-25 13:26:34.660  INFO 6280 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-25 13:26:34.921  INFO 6280 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Started SoldSolveApplication in 6.7 seconds (JVM running for 8.412)
+2022-07-25 13:26:36.053  INFO 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-25 13:26:36.055  INFO 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-25 13:26:36.055 DEBUG 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2022-07-25 13:26:36.055 DEBUG 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2022-07-25 13:26:36.055 DEBUG 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2022-07-25 13:26:36.057 DEBUG 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@324bcb3e
+2022-07-25 13:26:36.058 DEBUG 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@196e0c3d
+2022-07-25 13:26:36.058 DEBUG 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-25 13:26:36.058  INFO 6280 --- [RMI TCP Connection(3)-192.168.100.100] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2022-07-25 13:26:44.688 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : "ERROR" dispatch for GET "/error", parameters={}
+2022-07-25 13:26:44.696 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController#error(HttpServletRequest)
+2022-07-25 13:26:44.726 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-25 13:26:44.726 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [{timestamp=Mon Jul 25 13:26:44 KST 2022, status=403, error=Forbidden, message=Access Denied, path=/s (truncated)...]
+2022-07-25 13:26:44.754 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Exiting from "ERROR" dispatch, status 403
+2022-07-25 13:27:19.744 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : Before request [POST /api/v1/auth/login, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", cache-control:"no-cache", postman-token:"4da65947-919b-4081-832c-37e30b04697a", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"139", Content-Type:"application/json;charset=UTF-8"]]
+2022-07-25 13:27:19.746 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : POST "/api/v1/auth/login", parameters={}
+2022-07-25 13:27:19.747 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.AuthController#login(UserLoginPostReq)
+2022-07-25 13:27:19.797 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.ssafy.soldsolve.api.request.UserLoginPostReq@71957427]
+2022-07-25 13:27:20.279 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-25 13:27:20.279 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.soldsolve.api.response.UserLoginPostRes@fc55615]
+2022-07-25 13:27:20.287 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-07-25 13:27:20.288 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-2] o.s.w.f.CommonsRequestLoggingFilter      : After request [POST /api/v1/auth/login, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", cache-control:"no-cache", postman-token:"4da65947-919b-4081-832c-37e30b04697a", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"139", Content-Type:"application/json;charset=UTF-8"], payload={
+
+	"id" : "alswo",
+
+	"password" : "123",
+	
+	"userName" : "dlalswo",
+	
+	"nickName" : "aksemrdl",
+	
+	"email" : "sdfasf@dsfasdf"
+}]
+2022-07-25 13:28:43.830 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : GET "/soldsolve", parameters={}
+2022-07-25 13:28:43.832 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.testController#a()
+2022-07-25 13:28:43.834 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Using 'text/plain', given [*/*] and supported [text/plain, */*, text/plain, */*, application/json, application/*+json, application/json, application/*+json]
+2022-07-25 13:28:43.834 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Writing ["fo"]
+2022-07-25 13:28:43.837 DEBUG 6280 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK

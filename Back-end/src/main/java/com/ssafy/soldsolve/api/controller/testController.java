@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/dabid")
+@RequestMapping("/soldsolve")
 public class testController {
 	@GetMapping
 	public String a() {

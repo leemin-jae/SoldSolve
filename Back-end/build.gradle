@@ -34,7 +34,7 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'eclipse'
 apply plugin: 'com.github.node-gradle.node'
 //이클립스인 경우를 위한 QueryDSL 플러그인. IntelliJ는 불필요.
-apply plugin: 'com.ewerk.gradle.plugins.querydsl'
+//apply plugin: 'com.ewerk.gradle.plugins.querydsl'
 
 
 repositories {
@@ -49,28 +49,28 @@ repositories {
 group 'com.ssafy'
 version '1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
-
-node {
-    download = true
-    version = '14.17.0'
-    // Set the work directory where node_modules should be located
-    nodeModulesDir = file("${project.projectDir}/../frontend")
-}
-
-configurations {
-    providedRuntime
-}
+//
+//node {
+//    download = true
+//    version = '14.17.0'
+//    // Set the work directory where node_modules should be located
+//    nodeModulesDir = file("${project.projectDir}/../frontend")
+//}
+//
+//configurations {
+//    providedRuntime
+//}
 
 /*task npmInstall(type: NpmTask, overwrite: true) {
     args = ['install']
 }*/
 
-task webpack(type: NpmTask, dependsOn: 'npmInstall') {
-    args = ['run','build']
-}
+//task webpack(type: NpmTask, dependsOn: 'npmInstall') {
+//    args = ['run','build']
+//}
 
 // processResources is a Java task. Run the webpack bundling before this task using the 'build' task in the package.json
-processResources.dependsOn 'webpack'
+//processResources.dependsOn 'webpack'
 
 //set build time and inject value to application.properties
 def buildTime() {
@@ -180,7 +180,7 @@ dependencies {
     implementation("io.springfox:springfox-bean-validators:3.0.0")
     implementation("io.springfox:springfox-boot-starter:3.0.0")
 
-    compile("javax.annotation:javax.annotation-api:1.2")
+    implementation("javax.annotation:javax.annotation-api:1.2")
 
     implementation("org.projectlombok:lombok:1.18.20")
     annotationProcessor("org.projectlombok:lombok:1.18.20")

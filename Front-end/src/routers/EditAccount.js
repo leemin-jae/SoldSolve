@@ -7,7 +7,7 @@ function EditAccount() {
   const [pwConfirm,setPwConfirm] = useState(null)
   const [button,setButton] = useState('noInput')
 
-  const editAccountForm = {nickname:nickname,password:password}
+  const editAccountForm = {nickName:nickname,password:password}
 
   function inputForm(e) {
     if (e.target.name === 'nickname') {setNickname(e.target.value) 
@@ -35,9 +35,10 @@ function EditAccount() {
     if (password === pwConfirm){
       console.log(editAccountForm)
       axios({
-      url: 'http://localhost:8080/api/v1/auth/login',
-      method: 'post',
-      data: editAccountForm
+      url: 'http://localhost:8080/api/v1/users/update/userinfo',
+      method: 'Patch',
+      data: editAccountForm,
+      headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => {
         console.log(res)

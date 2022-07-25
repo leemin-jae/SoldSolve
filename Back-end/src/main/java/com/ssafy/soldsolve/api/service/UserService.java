@@ -11,9 +11,10 @@ public interface UserService {
 
 	void deleteUser(int id);
 
-	void updateUserNickName(User user);
 
 	void updateUserPassword(String userId, String password);
 
 	boolean getPasswordCheck(String userId, String password);
+
+	void updateUserUserInfo(String userId, String password, String nickName);
 }

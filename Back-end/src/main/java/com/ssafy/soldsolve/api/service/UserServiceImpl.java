@@ -54,10 +54,6 @@ public class UserServiceImpl implements UserService{
 		userRepository.deleteById(id);
 	}
 
-	@Override
-	public void updateUserNickName(User user) {
-		userRepository.save(user);
-	}
 
 	@Override
 	public void updateUserPassword(String userId, String password) {
@@ -75,6 +71,18 @@ public class UserServiceImpl implements UserService{
 		}else{
 			return false;
 		}
+	}
+
+	@Override
+	public void updateUserUserInfo(String userId, String password, String nickName) {
+		User user = getUserByUserId(userId);
+		System.out.println("password " + password);
+		System.out.println("1 " + user.getPassword());
+		user.setPassword(passwordEncoder.encode(password));
+		System.out.println("2 " + user.getPassword());
+		user.setNickname(nickName);
+
+		userRepository.save(user);
 	}
 
 

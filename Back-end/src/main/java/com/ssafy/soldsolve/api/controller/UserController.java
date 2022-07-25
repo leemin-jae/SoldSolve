@@ -123,18 +123,19 @@ public class UserController {
 //            @ApiResponse(code = 200, message = "성공"),
 //            @ApiResponse(code = 500, message = "서버 오류")
 //    })
+
+	//{password , nickName}
 	public ResponseEntity<? extends BaseResponseBody> updateUserNickName(
 			@RequestBody UserRegisterPostReq info,
 			Authentication authentication) {
 
 		String nickName = info.getNickName();
+		String password = info.getPassword();
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
-		User user = userService.getUserByUserId(userId);
+		userService.updateUserUserInfo(userId , password , nickName);
 
-		user.setNickname(nickName);
 
-		userService.updateUserNickName(user);
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
 	}
 

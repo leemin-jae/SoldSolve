@@ -45,7 +45,7 @@ public class UserController {
 		//임의로 리턴된 User 인스턴스. 현재 코드는 회원 가입 성공 여부만 판단하기 때문에 굳이 Insert 된 유저 정보를 응답하지 않음.
 		User user = userService.createUser(registerInfo);
 		
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
 	}
 	
 	@GetMapping("/me")
@@ -80,17 +80,50 @@ public class UserController {
 		
 	}
 
+	@GetMapping("/passwordCheck")
+	public ResponseEntity<?> getPasswordCheck(@RequestBody UserRegisterPostReq registerInfo, Authentication authentication){
+
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+
+		if(userService.getPasswordCheck(userId, registerInfo.getPassword())) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+		}
+
+	}
 
 
 
-
-	@PatchMapping()
+	@PatchMapping("/update/password")
 //    @ApiOperation(value = "회원 정보 수정", notes = "사용자의 <strong>닉네임</strong>을 수정한다.")
 //    @ApiResponses({
 //            @ApiResponse(code = 200, message = "성공"),
 //            @ApiResponse(code = 500, message = "서버 오류")
 //    })
-	public ResponseEntity<? extends BaseResponseBody> update(
+	public ResponseEntity<? extends BaseResponseBody> updateUserPassword(
+			@RequestBody UserRegisterPostReq info,
+			Authentication authentication) {
+
+		String password = info.getPassword();
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+
+		userService.updateUserPassword(userId, password);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
+	}
+
+
+
+
+	@PatchMapping("/update/userinfo")
+//    @ApiOperation(value = "회원 정보 수정", notes = "사용자의 <strong>닉네임</strong>을 수정한다.")
+//    @ApiResponses({
+//            @ApiResponse(code = 200, message = "성공"),
+//            @ApiResponse(code = 500, message = "서버 오류")
+//    })
+	public ResponseEntity<? extends BaseResponseBody> updateUserNickName(
 			@RequestBody UserRegisterPostReq info,
 			Authentication authentication) {
 
@@ -101,8 +134,8 @@ public class UserController {
 
 		user.setNickname(nickName);
 
-		userService.updateUser(user);
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		userService.updateUserNickName(user);
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
 	}
 
 	@DeleteMapping()
@@ -118,7 +151,7 @@ public class UserController {
 		int Id = userDetails.getUser().getId();
 		userService.deleteUser(Id);
 
-		return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
 	}
 
 

@@ -9,8 +9,11 @@ public interface UserService {
 
 	User createUser(UserRegisterPostReq registerInfo);
 
-
-	void updateUser(User user);
-
 	void deleteUser(int id);
+
+	void updateUserNickName(User user);
+
+	void updateUserPassword(String userId, String password);
+
+	boolean getPasswordCheck(String userId, String password);
 }

@@ -1,3 +1,51 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* { 
+font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+
+}
+
+
+
+.mypage{
+  text-align: center;
+}
+
+.icon {
+  color: #6667AB;
+}
+
+.account_container {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgb(107, 106, 106);
+  margin-top: 2em;
+  width: auto;
+  max-width: 400px;
+  min-height: 100px;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: white;
+  position: relative;
+  display: flex;
+
+}
+
+.history_container, .heart_container {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+}
+
+.column {
+  width: 50%;
+}
+
+
 .test{
   margin-block: 50px;
   margin-inline: 10%;
@@ -63,6 +111,15 @@ input[type=password]{
   font-family: 'ONE-Mobile-Regular';
 }
 
+.dot {
+  height: 100px;
+  width: 100px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  display: inline-block;
+  border-color: #6667AB
+}
+
 @media (max-width: 767px){
   /* .inputform{
       width: 100%;
@@ -81,3 +138,4 @@ input[type=password]{
 @media (min-width: 1200px){
   /* 데스크탑 일반 */
 }
+

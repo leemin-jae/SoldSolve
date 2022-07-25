@@ -18,8 +18,21 @@ let token = createSlice({
   }
 })
 
+let info = createSlice({
+  name: 'info',
+  initialState: {
+    id: '',
+  },
+  reducers: {
+    getID(state, action) {
+      state.id = action.payload
+    },
+  }
+})
+
 const reducers = combineReducers({
   token: token.reducer,
+  info: info.reducer,
 });
 
 const persistConfig = {
@@ -32,6 +45,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 
 
 export let { getToken } = token.actions
+export let { getID } = info.actions
 
 export default configureStore({
   reducer: persistedReducer,

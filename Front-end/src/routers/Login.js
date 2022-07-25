@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar"
 import { useState } from 'react'
 import axios from "axios"
 import { useDispatch, useSelector } from 'react-redux'
-import { getToken } from '../store.js'
+import { getToken,getID } from '../store.js'
 
 // import url from '../api/api.js'
 
@@ -34,21 +34,21 @@ function Login() {
     if (e.target.value && id) { setButton('input') }
     else if (e.target.value === '') { setButton('noInput') }
   }
-  const loginForm = { username: id, password: password }
+  const loginForm = { id: id, password: password }
   // console.log(loginForm)
   // console.log(url.login)
 
   function tryLogin(getLoginForm) {
 
     axios({
-      url: 'http://localhost:8000/accounts/login/',
+      url: 'http://localhost:8080/api/v1/auth/login',
       method: 'post',
       data: getLoginForm
     })
       .then(res => {
-        // console.log(res)
-        const token = res.data.key
+        const token = res.data.accessToken
         dispatch(getToken(token))
+        dispatch(getID(id))
         localStorage.setItem('token', token)
         document.location.href = '/'
       })

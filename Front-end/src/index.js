@@ -10,6 +10,7 @@ import FindAccount from './routers/FindAccount';
 import Search from './routers/Search';
 import MyPage from './routers/MyPage';
 import NotFound from './routers/PageNotFound';
+import EditAccount from './routers/EditAccount';
 
 //
 import reportWebVitals from './reportWebVitals';
@@ -39,6 +40,7 @@ root.render(
               <Route path="/search" element={<Search />} />
               <Route path="/*" element={<NotFound />} />
               <Route path="/mypage" element={<MyPage />} />
+              <Route path="/editaccount" element={<EditAccount />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>  

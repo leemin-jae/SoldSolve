@@ -46,7 +46,7 @@ function SignUp() {
     }
 
 
-  const signUpForm = {username:id, password1:password, password2:pwConfirm}
+  const signUpForm = {id:id, password:password, email:email, nickName:nickname, userName:username}
 
   function submitLogin(e){
     e.preventDefault();
@@ -56,7 +56,7 @@ function SignUp() {
 
   function axiosSignup(credentials) {
     axios({
-        url:'http://localhost:8000/accounts/signup/' ,
+        url:'http://localhost:8080/api/v1/users' ,
         method: 'post',
         data: credentials
       })

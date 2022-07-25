@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NavBar from '../components/NavBar'
 import Modal from '../components/Modals/Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,19 @@ import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import './routers.css';
 
 function MyPage() {
+
+    const [loading, setLoading] = useState(false);
+    const [profile, setProfile] = useState([]);
+
+    useEffect(() => {
+        const getProfile = async () => {
+            setLoading(true);
+            const response = await fetch(`https://localhost:8080/api/v1/users/me`);
+            setProfile(await response.json());
+            setLoading(false);
+        }
+        getProfile();
+    }, []);
 
     const [modalOpen, setModalOpen] = useState(false);
 
@@ -26,7 +39,7 @@ function MyPage() {
                 <div className='account_container'>
                     <div className='column'>사진자리</div>
                     <div className='column'>
-                        <div className=''>이름자리</div>
+                        <div className=''>{profile.userName}</div>
                         <div className=''>회원정보 수정 자리</div>
                         
                     </div>
@@ -66,7 +79,6 @@ function MyPage() {
                 </div>
                 <hr />
             </div>
-
         </>
     )
 }

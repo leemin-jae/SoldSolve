@@ -41,6 +41,10 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
   display: flex;
 }
 
+.history_container {
+  max-width: 400px;
+}
+
 .column {
   width: 50%;
 }

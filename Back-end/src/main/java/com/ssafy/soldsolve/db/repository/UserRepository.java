@@ -9,7 +9,8 @@ import com.ssafy.soldsolve.db.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
 	User findByUserid(String userid);
-	
+	User findByEmail(String email);
+	User findByUseridAndEmail(String userid, String email);
 	
 
 }

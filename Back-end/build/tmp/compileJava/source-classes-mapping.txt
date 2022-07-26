@@ -44,5 +44,7 @@ com/ssafy/soldsolve/db/entity/User.java
  com.ssafy.soldsolve.db.entity.User$UserBuilder
 com/ssafy/soldsolve/api/response/UserRes.java
  com.ssafy.soldsolve.api.response.UserRes
+com/ssafy/soldsolve/api/service/MailSendService.java
+ com.ssafy.soldsolve.api.service.MailSendService
 com/ssafy/soldsolve/api/controller/UserController.java
  com.ssafy.soldsolve.api.controller.UserController

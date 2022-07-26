@@ -9,6 +9,8 @@ public interface UserService {
 
 	User createUser(UserRegisterPostReq registerInfo);
 
+	User getUserByUserIdAndEmail(String userid, String email);
+
 	void deleteUser(int id);
 
 
@@ -16,5 +18,9 @@ public interface UserService {
 
 	boolean getPasswordCheck(String userId, String password);
 
+	boolean getEmailCheck(String email);
+
 	void updateUserUserInfo(String userId, String password, String nickName);
+
+
 }

@@ -1,10 +1,10 @@
 package com.ssafy.soldsolve.api.controller;
 
+import com.ssafy.soldsolve.api.service.MailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.ssafy.soldsolve.api.request.UserRegisterPostReq;
@@ -13,8 +13,6 @@ import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
 import com.ssafy.soldsolve.db.entity.User;
-
-import java.util.Map;
 
 
 /**
@@ -30,7 +28,11 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-	
+
+	@Autowired
+	MailSendService mailSendService;
+
+
 	@PostMapping()
 //	@ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.") 
 //    @ApiResponses({
@@ -87,6 +89,17 @@ public class UserController {
 		String userId = userDetails.getUsername();
 
 		if(userService.getPasswordCheck(userId, registerInfo.getPassword())) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@GetMapping("/emailcheck")
+	public ResponseEntity<?> getEmailCheck(@RequestBody UserRegisterPostReq registerInfo){
+
+		if(userService.getEmailCheck(registerInfo.getEmail())) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
@@ -153,6 +166,39 @@ public class UserController {
 		userService.deleteUser(Id);
 
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
+	}
+
+
+
+	@GetMapping("/AuthMail")
+	//@ResponseBody
+	public ResponseEntity<String> mailAuth(@RequestParam String email) throws Exception {
+
+		String authKey = mailSendService.sendAuthMail(email); //사용자가 입력한 메일주소로 메일을 보냄
+		return new ResponseEntity<String>(authKey, HttpStatus.OK);
+	}
+
+
+
+	@PatchMapping("/temporaryPw")
+	//@ResponseBody
+	public ResponseEntity<String> temporaryPw(@RequestBody UserRegisterPostReq userInfo) throws Exception {
+
+		String userId = userInfo.getId();
+		String userEmail = userInfo.getEmail();
+
+		User user = userService.getUserByUserIdAndEmail(userId,userEmail);
+
+		if(user != null) {
+			String temporaryPwd = mailSendService.sendPwMail(userEmail);
+			userService.updateUserPassword(userId, temporaryPwd);
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}else{
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+		}
+
+
+
 	}
 
 

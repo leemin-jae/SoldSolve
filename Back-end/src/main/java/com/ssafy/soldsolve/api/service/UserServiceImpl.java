@@ -48,6 +48,17 @@ public class UserServiceImpl implements UserService{
 		return userRepository.save(user);
 	}
 
+	@Override
+	public User getUserByUserIdAndEmail(String userid, String email) {
+		User user = userRepository.findByUseridAndEmail(userid,email);
+		if(user != null) {
+			return user;
+		}else {
+			return null;
+		}
+
+	}
+
 
 	@Override
 	public void deleteUser(int id) {
@@ -67,6 +78,17 @@ public class UserServiceImpl implements UserService{
 	public boolean getPasswordCheck(String userId, String password) {
 		User user = getUserByUserId(userId);
 		if(passwordEncoder.matches(password, user.getPassword())){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
+	public boolean getEmailCheck(String email) {
+		User user = userRepository.findByEmail(email);
+
+		if(user == null){
 			return true;
 		}else{
 			return false;

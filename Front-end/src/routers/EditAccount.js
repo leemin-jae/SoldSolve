@@ -1,6 +1,9 @@
 import NavBar from "../components/NavBar"
 import axios from "axios"
 import { useState } from 'react'
+import './routers.css'
+
+
 function EditAccount() {
   const [nickname,setNickname] = useState(null)
   const [password,setPassword] = useState(null)
@@ -42,6 +45,9 @@ function EditAccount() {
     })
       .then(res => {
         console.log(res)
+        alert("회원정보가 수정되었습니다.")
+        document.location.href = '/mypage'
+
       })
       .catch(err => {
         console.error(err.response.data)
@@ -81,7 +87,7 @@ function EditAccount() {
                   <input className="inputform" name="nickname" onKeyUp={e =>{inputForm(e)}} type="text" placeholder="NICKNAME"></input><br />
                   <input className="inputform" name="password" onKeyUp={e =>{inputForm(e)}} type="password" placeholder="PASSWORD"></input><br />
                   <input className="inputform" name="pwconfirm" onKeyUp={e =>{inputForm(e)}} type="password" placeholder="PASSWORD CONFIRM"></input><br />
-                  <a className="atag" onClick={e => deleteAccount(e)} href="#!">회원 탈퇴하기</a>
+                  <a className="atag" onClick={e => deleteAccount(e)} href="#!">회원 탈퇴하기</a><br />
                   {submitButton}
                 </form>
             </div>

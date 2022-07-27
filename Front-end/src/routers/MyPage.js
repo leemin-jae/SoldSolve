@@ -10,11 +10,20 @@ function MyPage() {
 
     const [loading, setLoading] = useState(false);
     const [profile, setProfile] = useState([]);
-
+    console.log(loading)
     useEffect(() => {
+
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Authorization':  `Bearer ${localStorage.token}`}
+            
+        };
+
+
         const getProfile = async () => {
             setLoading(true);
-            const response = await fetch(`https://localhost:8080/api/v1/users/me`);
+            
+            const response = await fetch(`http://localhost:8080/api/v1/users/me`, requestOptions);
             setProfile(await response.json());
             setLoading(false);
         }
@@ -70,9 +79,15 @@ function MyPage() {
                         찜한상품
                     </div>
                     <div className='column'>
-                        더보기
+                    <button className='' onClick={openModal}>
+                        <div>더보기</div>
+                        </button>
+                        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                            더보기리스트
+                        </Modal>
                     </div>
                 </div>
+                <br/>
                 <div>
                     상품 6개만 나오게
                     없으면 없다 표시

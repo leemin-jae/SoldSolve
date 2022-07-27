@@ -73,6 +73,11 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
   max-width: 500px;
 }
 
+.inputform2{
+  text-align: center;
+}
+
+
 .pform {
   width: 100%;
   height: 65px;

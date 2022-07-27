@@ -13,6 +13,7 @@ import NotFound from './routers/PageNotFound';
 import EditAccount from './routers/EditAccount';
 import NoticePage from './routers/NoticePage';
 import CreateRoom from './routers/CreateRoom';
+import LivePage from './routers/LivePage';
 
 //
 import reportWebVitals from './reportWebVitals';
@@ -45,6 +46,7 @@ root.render(
               <Route path="/editaccount" element={<EditAccount />} />
               <Route path="/notice" element={<NoticePage />} />
               <Route path='/createroom' element={<CreateRoom/>}></Route>
+              <Route path='/live' element={<LivePage/>}></Route>
           </Routes>
         </BrowserRouter>
       </PersistGate>  

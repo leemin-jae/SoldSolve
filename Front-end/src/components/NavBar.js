@@ -22,7 +22,7 @@ function NavBar() {
 
   if (storeToken.token.token || localStorage.token) {
     NavAcouuntTab1 = <li><a href='#!' onClick={(e) => axiosLogout(e)}><h5>로그아웃</h5></a></li>
-    NavAcouuntTab2 = <li><a href='/#'><h5>마이페이지</h5></a></li>
+    NavAcouuntTab2 = <li><a href='/mypage'><h5>마이페이지</h5></a></li>
   }
 
   return (
@@ -33,7 +33,7 @@ function NavBar() {
         </label>
         <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
         <ul className="screen_menu">
-          <li><a className="icon_sort" href='/'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
+          <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
           <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
           {NavAcouuntTab1}
           {NavAcouuntTab2}
@@ -55,7 +55,7 @@ function NavBar() {
       <input id="account" type="checkbox"></input>
       <div id="right_toggle">
         <ul className="mobile_menu">
-          <li><a href='/'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
+          <li><a href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
           <li><a href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
           {NavAcouuntTab1}
           {NavAcouuntTab2}

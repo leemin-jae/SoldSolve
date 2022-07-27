@@ -72,6 +72,45 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
   padding-block: 5px;
   max-width: 500px;
 }
+
+.inputform2{
+  text-align: center;
+}
+
+
+.pform {
+  width: 100%;
+  height: 65px;
+  margin-block: 10px;
+  margin-inline: auto;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.descriptionform {
+  width: 100%;
+  height: 150px;
+  margin-block: 10px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.descriptionform::placeholder {
+  font-family: 'ONE-Mobile-Regular';
+  text-align: center;
+  transform: translateY(250%);
+}
+
+input[type="text"]:disabled {
+  background-color: rgb(255, 255, 255);
+}
+
 .submitbutton-disable{
   background-color: #EAEAF6;
   color: gray;
@@ -111,8 +150,10 @@ font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, '
 input[type=password]{
   font-family:"굴림";
 }
-::placeholder {
+
+input::placeholder {
   font-family: 'ONE-Mobile-Regular';
+  text-align: center;
 }
 
 .dot {
@@ -143,3 +184,20 @@ input[type=password]{
   /* 데스크탑 일반 */
 }
 
+.noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+}
+
+.noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+}

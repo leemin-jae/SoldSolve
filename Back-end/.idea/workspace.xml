@@ -5,13 +5,61 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="226997b0-f264-4c61-860a-5190733525ba" name="Changes" comment="Changes">
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/components/Notice/Message.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/components/Notice/Notice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/routers/CreateRoom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/routers/LivePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/routers/NoticePage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/routers/Product.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/routers/Products.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Front-end/src/routers/notice.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/SoldSolveApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/SoldSolveApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/api/request/MessagePostReq.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/api/request/MessagePostReq.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/api/response/MessageRes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/api/response/MessageRes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/api/service/MessageServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/api/service/MessageServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/db/entity/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ssafy/soldsolve/db/entity/Message.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/SoldSolveApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/controller/AuthController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/controller/UserController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/controller/testController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/request/UserLoginPostReq.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/request/UserRegisterPostReq.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/response/UserLoginPostRes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/response/UserRes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/service/UserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/api/service/UserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/auth/JwtAuthenticationFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/auth/SsafyUserDetails$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/auth/SsafyUserDetails.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/auth/SsafyUserDetailsService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/exception/handler/NotFoundHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/model/response/BaseResponseBody.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/util/JwtTokenUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/common/util/ResponseBodyWriteUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/config/JpaConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/config/SecurityConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/config/WebMvcConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/config/encoderService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/entity/QUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/entity/QUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/entity/User$UserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/entity/User$UserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/entity/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/entity/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/ssafy/soldsolve/db/repository/UserRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/com/ssafy/soldsolve/db/entity/QUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/sources/annotationProcessor/java/main/com/ssafy/soldsolve/db/entity/QUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/source-classes-mapping.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ssafy-web.log" beforeDir="false" afterPath="$PROJECT_DIR$/ssafy-web.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/components/NavBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/components/NavBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/components/components.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/components/components.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/routers/EditAccount.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/routers/EditAccount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/routers/MyPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/routers/MyPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/routers/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/routers/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Front-end/src/routers/routers.css" beforeDir="false" afterPath="$PROJECT_DIR$/../Front-end/src/routers/routers.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +76,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="soldsolve" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -154,6 +197,9 @@
       <workItem from="1658899395253" duration="222000" />
       <workItem from="1658899634387" duration="1337000" />
       <workItem from="1658901330290" duration="2430000" />
+      <workItem from="1658906592145" duration="1334000" />
+      <workItem from="1658910476430" duration="197000" />
+      <workItem from="1658911120336" duration="67000" />
     </task>
     <servers />
   </component>

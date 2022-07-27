@@ -50,7 +50,18 @@ function SignUp() {
 
   function submitLogin(e){
     e.preventDefault();
-    axiosSignup(signUpForm)
+    if (password === pwConfirm){
+      axiosSignup(signUpForm)
+    } else{
+      alert("비밀번호가 서로 맞지 않습니다.")
+      console.log(e.target.password)
+      e.target.password.value = ''
+      e.target.pwconfirm.value = ''
+      setPassword(null)
+      setPwConfirm(null)
+      setButton('noInput')
+    }
+    
   }
 
 

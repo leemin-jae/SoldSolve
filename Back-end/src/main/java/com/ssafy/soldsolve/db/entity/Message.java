@@ -17,9 +17,6 @@ public class Message {
     @Column(name = "message_id")
     public int id;
 
-    @Column(length=50)
-    private String title;
-
     private String content;
 
     @CreationTimestamp

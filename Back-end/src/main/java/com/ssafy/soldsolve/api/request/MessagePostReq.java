@@ -10,7 +10,6 @@ import javax.persistence.ManyToOne;
 @Setter
 public class MessagePostReq {
     String id;
-    String title;
     String content;
     String isRead;
     @ManyToOne

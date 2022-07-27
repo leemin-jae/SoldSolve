@@ -12,7 +12,6 @@ public class MessageRes {
 
     public static MessageRes of(Message message) {
         MessageRes res = new MessageRes();
-        res.setTitle(message.getTitle());
         res.setContent(message.getContent());
         res.setIsRead(message.getIsRead());
         return res;

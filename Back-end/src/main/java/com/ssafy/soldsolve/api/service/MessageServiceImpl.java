@@ -20,7 +20,6 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public Message createMessage(MessagePostReq registerInfo) {
         Message message = new Message();
-        message.setTitle(registerInfo.getTitle());
         message.setContent(registerInfo.getContent());
         message.setIsRead(false);
         return messageRepository.save(message);
@@ -34,7 +33,6 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public void updateMessage(MessagePostReq messagePostReq, Message message) {
-        message.setTitle(messagePostReq.getTitle());
         message.setContent(messagePostReq.getContent());
         messageRepository.save(message);
     }

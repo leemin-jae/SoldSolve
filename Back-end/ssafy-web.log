@@ -3281,3 +3281,87 @@ Identify and stop the process that's listening on port 8080 or configure this ap
     "password" : "1234",
     "email" : "uiui96@naver.com"
 }]
+2022-07-27 11:55:55.190  INFO 14004 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Starting SoldSolveApplication using Java 11.0.15 on DESKTOP-KVCQHCD with PID 14004 (C:\Users\multicampus\soldsolve\S07P12C110\Back-end\build\classes\java\main started by multicampus in C:\Users\multicampus\soldsolve\S07P12C110\Back-end)
+2022-07-27 11:55:55.194  INFO 14004 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : No active profile set, falling back to default profiles: default
+2022-07-27 11:55:55.251  INFO 14004 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2022-07-27 11:55:55.252  INFO 14004 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2022-07-27 11:55:56.689  INFO 14004 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-07-27 11:55:56.747  INFO 14004 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 53 ms. Found 3 JPA repository interfaces.
+2022-07-27 11:55:57.012  INFO 14004 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@137d047b' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-27 11:55:57.016  INFO 14004 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-07-27 11:55:57.255  INFO 14004 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2022-07-27 11:55:57.264  INFO 14004 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-07-27 11:55:57.264  INFO 14004 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2022-07-27 11:55:57.363  INFO 14004 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-07-27 11:55:57.364  INFO 14004 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2111 ms
+2022-07-27 11:55:57.472 DEBUG 14004 --- [restartedMain] o.s.w.f.CommonsRequestLoggingFilter      : Filter 'commonsRequestLoggingFilter' configured for use
+2022-07-27 11:55:57.587  INFO 14004 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-07-27 11:55:57.622  INFO 14004 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.30.Final
+2022-07-27 11:55:57.715  INFO 14004 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-07-27 11:55:57.790  INFO 14004 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-07-27 11:55:58.037  INFO 14004 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-07-27 11:55:58.048  INFO 14004 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2022-07-27 11:55:58.583  INFO 14004 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-07-27 11:55:58.590  INFO 14004 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-07-27 11:55:58.623  INFO 14004 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2022-07-27 11:55:58.965  WARN 14004 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-07-27 11:55:59.146 DEBUG 14004 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerMapping : 27 mappings in 'requestMappingHandlerMapping'
+2022-07-27 11:55:59.238  INFO 14004 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-07-27 11:55:59.419  INFO 14004 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1c693782, org.springframework.security.web.context.SecurityContextPersistenceFilter@3ed249a3, org.springframework.security.web.header.HeaderWriterFilter@e56c134, org.springframework.web.filter.CorsFilter@670daec8, org.springframework.security.web.authentication.logout.LogoutFilter@38813c97, com.ssafy.soldsolve.common.auth.JwtAuthenticationFilter@4631e923, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4ce8d3c8, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6b014c58, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@fae48a9, org.springframework.security.web.session.SessionManagementFilter@1f06aaa5, org.springframework.security.web.access.ExceptionTranslationFilter@7e1170ce, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3a4645e9]
+2022-07-27 11:55:59.467  INFO 14004 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-07-27 11:55:59.479 DEBUG 14004 --- [restartedMain] s.w.s.m.m.a.RequestMappingHandlerAdapter : ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2022-07-27 11:55:59.510 DEBUG 14004 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/swagger-ui/] in 'viewControllerHandlerMapping'
+2022-07-27 11:55:59.523 DEBUG 14004 --- [restartedMain] o.s.w.s.c.annotation.WebMvcConfigurer    : Default resource handling disabled
+2022-07-27 11:55:59.670 DEBUG 14004 --- [restartedMain] o.s.w.s.handler.SimpleUrlHandlerMapping  : Patterns [/resources/**, /swagger-ui.html, /webjars/**, /css/**, /fonts/**, /icons/**, /img/**, /js/**, /swagger-ui/**] in 'resourceHandlerMapping'
+2022-07-27 11:55:59.678 DEBUG 14004 --- [restartedMain] .m.m.a.ExceptionHandlerExceptionResolver : ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2022-07-27 11:55:59.870  INFO 14004 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2022-07-27 11:56:00.114  INFO 14004 --- [restartedMain] c.ssafy.soldsolve.SoldSolveApplication   : Started SoldSolveApplication in 5.498 seconds (JVM running for 6.925)
+2022-07-27 11:56:00.808  INFO 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-07-27 11:56:00.810  INFO 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-07-27 11:56:00.811 DEBUG 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Detected StandardServletMultipartResolver
+2022-07-27 11:56:00.811 DEBUG 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Detected AcceptHeaderLocaleResolver
+2022-07-27 11:56:00.811 DEBUG 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Detected FixedThemeResolver
+2022-07-27 11:56:00.812 DEBUG 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@5987d7d0
+2022-07-27 11:56:00.812 DEBUG 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Detected org.springframework.web.servlet.support.SessionFlashMapManager@7bf340e6
+2022-07-27 11:56:00.812 DEBUG 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2022-07-27 11:56:00.812  INFO 14004 --- [RMI TCP Connection(2)-192.168.100.127] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-07-27 11:56:29.442 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : Before request [POST /api/v1/messages, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"482e04b0-6f1f-4a6c-b127-13f2a439bbd9", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"55", Content-Type:"application/json;charset=UTF-8"]]
+2022-07-27 11:56:29.443 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : POST "/api/v1/messages", parameters={}
+2022-07-27 11:56:29.445 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.MessageController#createMessage(MessagePostReq)
+2022-07-27 11:56:29.473 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.ssafy.soldsolve.api.request.MessagePostReq@11b40c4d]
+2022-07-27 11:56:29.545 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-27 11:56:29.545 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.soldsolve.common.model.response.BaseResponseBody@1263e147]
+2022-07-27 11:56:29.558 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-07-27 11:56:29.560 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : After request [POST /api/v1/messages, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"482e04b0-6f1f-4a6c-b127-13f2a439bbd9", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"55", Content-Type:"application/json;charset=UTF-8"], payload={
+    "title" : "제목",
+    "content" : "내용"
+}]
+2022-07-27 11:57:32.044 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.f.CommonsRequestLoggingFilter      : Before request [PUT /api/v1/messages/2, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"766f7ad0-e581-400b-ac68-340958eb45ef", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"55", Content-Type:"application/json;charset=UTF-8"]]
+2022-07-27 11:57:32.044 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : PUT "/api/v1/messages/2", parameters={}
+2022-07-27 11:57:32.045 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.MessageController#readMessage(int, MessagePostReq)
+2022-07-27 11:57:32.047 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.ssafy.soldsolve.api.request.MessagePostReq@c272685]
+2022-07-27 11:57:32.095 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-27 11:57:32.095 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.soldsolve.common.model.response.BaseResponseBody@4a98604d]
+2022-07-27 11:57:32.097 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-07-27 11:57:32.098 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-5] o.s.w.f.CommonsRequestLoggingFilter      : After request [PUT /api/v1/messages/2, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"766f7ad0-e581-400b-ac68-340958eb45ef", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"55", Content-Type:"application/json;charset=UTF-8"], payload={
+    "title" : "제목",
+    "content" : "내용"
+}]
+2022-07-27 11:57:45.897 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.f.CommonsRequestLoggingFilter      : Before request [PATCH /api/v1/messages/2, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"ac2ae277-2e62-451e-b788-00c89e1d4fcd", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"64", Content-Type:"application/json;charset=UTF-8"]]
+2022-07-27 11:57:45.898 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : PATCH "/api/v1/messages/2", parameters={}
+2022-07-27 11:57:45.898 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.MessageController#updateMessage(int, MessagePostReq)
+2022-07-27 11:57:45.899 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] m.m.a.RequestResponseBodyMethodProcessor : Read "application/json;charset=UTF-8" to [com.ssafy.soldsolve.api.request.MessagePostReq@c50d8e4]
+2022-07-27 11:57:45.908 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-27 11:57:45.908 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.soldsolve.common.model.response.BaseResponseBody@794c9f0e]
+2022-07-27 11:57:45.909 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-07-27 11:57:45.910 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-6] o.s.w.f.CommonsRequestLoggingFilter      : After request [PATCH /api/v1/messages/2, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"ac2ae277-2e62-451e-b788-00c89e1d4fcd", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"64", Content-Type:"application/json;charset=UTF-8"], payload={
+    "title" : "제목입니다",
+    "content" : "내용"
+}]
+2022-07-27 11:57:54.105 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.f.CommonsRequestLoggingFilter      : Before request [DELETE /api/v1/messages/2, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"1ca8ae4f-d529-4fba-8aa7-e47a3741720d", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"64", Content-Type:"application/json;charset=UTF-8"]]
+2022-07-27 11:57:54.105 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : DELETE "/api/v1/messages/2", parameters={}
+2022-07-27 11:57:54.106 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] s.w.s.m.m.a.RequestMappingHandlerMapping : Mapped to com.ssafy.soldsolve.api.controller.MessageController#deleteMessage(int)
+2022-07-27 11:57:54.128 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Using 'application/json', given [*/*] and supported [application/json, application/*+json, application/json, application/*+json]
+2022-07-27 11:57:54.129 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.s.m.m.a.HttpEntityMethodProcessor  : Writing [com.ssafy.soldsolve.common.model.response.BaseResponseBody@30e5a870]
+2022-07-27 11:57:54.131 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] o.s.web.servlet.DispatcherServlet        : Completed 200 OK
+2022-07-27 11:57:54.131 DEBUG 14004 --- [http-nio-127.0.0.1-8080-exec-7] o.s.w.f.CommonsRequestLoggingFilter      : After request [DELETE /api/v1/messages/2, client=127.0.0.1, headers=[user-agent:"PostmanRuntime/7.29.2", accept:"*/*", postman-token:"1ca8ae4f-d529-4fba-8aa7-e47a3741720d", host:"localhost:8080", accept-encoding:"gzip, deflate, br", connection:"keep-alive", content-length:"64", Content-Type:"application/json;charset=UTF-8"]]

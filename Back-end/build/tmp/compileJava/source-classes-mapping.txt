@@ -1,19 +1,15 @@
-com/ssafy/soldsolve/config/WebMvcConfig.java
- com.ssafy.soldsolve.config.WebMvcConfig
+com/ssafy/soldsolve/api/request/NoticePostReq.java
+ com.ssafy.soldsolve.api.request.NoticePostReq
 com/ssafy/soldsolve/db/repository/UserRepository.java
  com.ssafy.soldsolve.db.repository.UserRepository
-com/ssafy/soldsolve/common/auth/JwtAuthenticationFilter.java
- com.ssafy.soldsolve.common.auth.JwtAuthenticationFilter
 com/ssafy/soldsolve/SoldSolveApplication.java
  com.ssafy.soldsolve.SoldSolveApplication
-com/ssafy/soldsolve/api/response/UserLoginPostRes.java
- com.ssafy.soldsolve.api.response.UserLoginPostRes
-com/ssafy/soldsolve/common/util/JwtTokenUtil.java
- com.ssafy.soldsolve.common.util.JwtTokenUtil
 com/ssafy/soldsolve/api/controller/AuthController.java
  com.ssafy.soldsolve.api.controller.AuthController
-com/ssafy/soldsolve/api/request/UserLoginPostReq.java
- com.ssafy.soldsolve.api.request.UserLoginPostReq
+com/ssafy/soldsolve/api/controller/NoticeController.java
+ com.ssafy.soldsolve.api.controller.NoticeController
+com/ssafy/soldsolve/db/entity/Notice.java
+ com.ssafy.soldsolve.db.entity.Notice
 com/ssafy/soldsolve/config/JpaConfig.java
  com.ssafy.soldsolve.config.JpaConfig
 com/ssafy/soldsolve/api/controller/testController.java
@@ -21,20 +17,54 @@ com/ssafy/soldsolve/api/controller/testController.java
 com/ssafy/soldsolve/common/auth/SsafyUserDetails.java
  com.ssafy.soldsolve.common.auth.SsafyUserDetails
  com.ssafy.soldsolve.common.auth.SsafyUserDetails$1
+com/ssafy/soldsolve/api/service/NoticeService.java
+ com.ssafy.soldsolve.api.service.NoticeService
+com/ssafy/soldsolve/common/auth/SsafyUserDetailsService.java
+ com.ssafy.soldsolve.common.auth.SsafyUserDetailsService
+com/ssafy/soldsolve/api/service/MessageServiceImpl.java
+ com.ssafy.soldsolve.api.service.MessageServiceImpl
+com/ssafy/soldsolve/db/repository/MessageRepository.java
+ com.ssafy.soldsolve.db.repository.MessageRepository
+com/ssafy/soldsolve/api/controller/UserController.java
+ com.ssafy.soldsolve.api.controller.UserController
+com/ssafy/soldsolve/api/response/NoticeRes.java
+ com.ssafy.soldsolve.api.response.NoticeRes
+com/ssafy/soldsolve/config/WebMvcConfig.java
+ com.ssafy.soldsolve.config.WebMvcConfig
+com/ssafy/soldsolve/api/controller/MessageController.java
+ com.ssafy.soldsolve.api.controller.MessageController
+com/ssafy/soldsolve/common/auth/JwtAuthenticationFilter.java
+ com.ssafy.soldsolve.common.auth.JwtAuthenticationFilter
+com/ssafy/soldsolve/api/response/UserLoginPostRes.java
+ com.ssafy.soldsolve.api.response.UserLoginPostRes
+com/ssafy/soldsolve/api/service/NoticeServiceImpl.java
+ com.ssafy.soldsolve.api.service.NoticeServiceImpl
+com/ssafy/soldsolve/common/util/JwtTokenUtil.java
+ com.ssafy.soldsolve.common.util.JwtTokenUtil
+com/ssafy/soldsolve/api/request/UserLoginPostReq.java
+ com.ssafy.soldsolve.api.request.UserLoginPostReq
+com/ssafy/soldsolve/db/repository/NoticeRepository.java
+ com.ssafy.soldsolve.db.repository.NoticeRepository
 com/ssafy/soldsolve/api/request/UserRegisterPostReq.java
  com.ssafy.soldsolve.api.request.UserRegisterPostReq
 com/ssafy/soldsolve/common/util/ResponseBodyWriteUtil.java
  com.ssafy.soldsolve.common.util.ResponseBodyWriteUtil
 com/ssafy/soldsolve/api/service/UserService.java
  com.ssafy.soldsolve.api.service.UserService
+com/ssafy/soldsolve/api/service/MessageService.java
+ com.ssafy.soldsolve.api.service.MessageService
 com/ssafy/soldsolve/api/service/UserServiceImpl.java
  com.ssafy.soldsolve.api.service.UserServiceImpl
-com/ssafy/soldsolve/common/auth/SsafyUserDetailsService.java
- com.ssafy.soldsolve.common.auth.SsafyUserDetailsService
+com/ssafy/soldsolve/db/entity/Message.java
+ com.ssafy.soldsolve.db.entity.Message
 com/ssafy/soldsolve/config/encoderService.java
  com.ssafy.soldsolve.config.encoderService
+com/ssafy/soldsolve/api/request/MessagePostReq.java
+ com.ssafy.soldsolve.api.request.MessagePostReq
 com/ssafy/soldsolve/common/exception/handler/NotFoundHandler.java
  com.ssafy.soldsolve.common.exception.handler.NotFoundHandler
+com/ssafy/soldsolve/api/response/MessageRes.java
+ com.ssafy.soldsolve.api.response.MessageRes
 com/ssafy/soldsolve/config/SecurityConfig.java
  com.ssafy.soldsolve.config.SecurityConfig
 com/ssafy/soldsolve/common/model/response/BaseResponseBody.java
@@ -46,5 +76,3 @@ com/ssafy/soldsolve/api/response/UserRes.java
  com.ssafy.soldsolve.api.response.UserRes
 com/ssafy/soldsolve/api/service/MailSendService.java
  com.ssafy.soldsolve.api.service.MailSendService
-com/ssafy/soldsolve/api/controller/UserController.java
- com.ssafy.soldsolve.api.controller.UserController

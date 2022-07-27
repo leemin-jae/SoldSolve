@@ -143,3 +143,20 @@ input[type=password]{
   /* 데스크탑 일반 */
 }
 
+.noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+}
+
+.noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+}

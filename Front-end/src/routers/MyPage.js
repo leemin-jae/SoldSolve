@@ -10,7 +10,7 @@ function MyPage() {
 
     const [loading, setLoading] = useState(false);
     const [profile, setProfile] = useState([]);
-
+    console.log(loading)
     useEffect(() => {
 
         const requestOptions = {

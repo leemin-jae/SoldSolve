@@ -11,6 +11,7 @@ import Search from './routers/Search';
 import MyPage from './routers/MyPage';
 import NotFound from './routers/PageNotFound';
 import EditAccount from './routers/EditAccount';
+import NoticePage from './routers/NoticePage';
 
 //
 import reportWebVitals from './reportWebVitals';
@@ -41,6 +42,7 @@ root.render(
               <Route path="/*" element={<NotFound />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/editaccount" element={<EditAccount />} />
+              <Route path="/notice" element={<NoticePage />} />
           </Routes>
         </BrowserRouter>
       </PersistGate>  

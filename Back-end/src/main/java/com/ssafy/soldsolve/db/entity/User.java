@@ -1,11 +1,10 @@
 package com.ssafy.soldsolve.db.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -20,6 +19,7 @@ public class User {
 	
 	@Id   
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
+	@Column(name = "user_pk")
 	private int id;
 	
 	private String userid;
@@ -33,18 +33,22 @@ public class User {
 	@CreationTimestamp
 	private Timestamp createDate;
 
+	@OneToMany(mappedBy = "user")
+	private List<Message> messages = new ArrayList<>();
+
 	
 	@Builder
-	public User(String userId, String password, String username, String nickname, String email, String role,
-			Timestamp createDate) {
+	public User(String userid, String password, String username, String nickname, String email, String role,
+			Timestamp createDate, List<Message> messages) {
 		super();
-		this.userid = userId;
+		this.userid = userid;
 		this.password = password;
 		this.username = username;
 		this.nickname = nickname;
 		this.email = email;
 		this.role = role;
 		this.createDate = createDate;
+		this.messages = messages;
 	}
 
 

@@ -12,6 +12,7 @@ import MyPage from './routers/MyPage';
 import NotFound from './routers/PageNotFound';
 import EditAccount from './routers/EditAccount';
 import NoticePage from './routers/NoticePage';
+import CreateRoom from './routers/CreateRoom';
 
 //
 import reportWebVitals from './reportWebVitals';
@@ -43,6 +44,7 @@ root.render(
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/editaccount" element={<EditAccount />} />
               <Route path="/notice" element={<NoticePage />} />
+              <Route path='/createroom' element={<CreateRoom/>}></Route>
           </Routes>
         </BrowserRouter>
       </PersistGate>  

@@ -224,6 +224,24 @@ input::placeholder {
     display: grid;
     grid-template-columns: 12fr;
   }
+
+  .inputform3 {
+    width: 431px;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -252,6 +270,24 @@ input::placeholder {
     display: grid;
     grid-template-columns: 12fr;
 
+  }
+
+  .inputform3 {
+    width: 610px;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: 5px;
   }
 }
 
@@ -282,7 +318,24 @@ input::placeholder {
     border-radius: 10px;
     display: grid;
     grid-template-columns: 12fr;
+  }
 
+  .inputform3 {
+    width: 190px;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: 5px;
   }
 }
 
@@ -316,10 +369,99 @@ input::placeholder {
     grid-template-columns: 9fr 3fr;
   }
 
-  .chat_input {
+  .inputform3 {
+    width: 190px;
+    height: 30px;
     margin-left: 1em;
-    width: 220px;
+    border-radius: 10px;
+    border: 1px solid;
+  }
 
+  .inputbox {
+    max-width: 290px;
+    padding: 0%;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: 5px;
+  }
+}
+
+.noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+}
+
+.noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+}
+
+@media (min-width: 1400px) {
+
+  /* 데스크탑 일반 */
+  .livebox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+
+  }
+
+  .chatbox {
+    border: 1px solid black;
+    max-width: 300px;
+    height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+  }
+
+  .container {
+    border: 10px solid rgba(black, .1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+  }
+
+  .inputform3 {
+    width: 240px;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+
+  .inputbox {
+    max-width: 290px;
+    padding: 0%;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: 5px;
   }
 }
 

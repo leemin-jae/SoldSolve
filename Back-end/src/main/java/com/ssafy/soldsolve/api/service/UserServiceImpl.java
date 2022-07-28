@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService{
 	public User createUser(UserRegisterPostReq registerInfo) {
 		// TODO Auto-generated method stub
 		User user = new User();
-		user.setUserid(registerInfo.getId());
+		user.setUserid(registerInfo.getUserId());
 		user.setUsername(registerInfo.getUserName());
 		user.setEmail(registerInfo.getEmail());
 		user.setNickname(registerInfo.getNickName());

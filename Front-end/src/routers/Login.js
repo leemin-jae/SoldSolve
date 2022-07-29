@@ -1,7 +1,7 @@
 import NavBar from "../components/NavBar"
 import { useState } from 'react'
 import axios from "axios"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getToken,getID } from '../store.js'
 
 // import url from '../api/api.js'
@@ -10,8 +10,6 @@ import { getToken,getID } from '../store.js'
 function Login() {
 
   let dispatch = useDispatch()
-  let storeToken = useSelector((state) => { return state })
-  console.log(storeToken)
   const [id, setId] = useState(null)
   const [password, setPassword] = useState(null)
   const [button, setButton] = useState('noInput')

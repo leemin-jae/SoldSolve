@@ -68,8 +68,8 @@ function Login() {
           <div className="test3">
             <h1 className="my-5">LOGIN</h1>
             <form onSubmit={e => { submitLogin(e) }}>
-              <input className="inputform" onKeyUp={e => { inputId(e) }} type="text" placeholder="ID"></input><br />
-              <input className="inputform" onKeyUp={e => { inputPw(e) }} type="password" placeholder="PASSWORD"></input><br />
+              <input className="inputform" onChange={e => { inputId(e) }} type="text" placeholder="ID"></input><br />
+              <input className="inputform" onChange={e => { inputPw(e) }} type="password" placeholder="PASSWORD"></input><br />
               {submitButton}
             </form>
             <a className="atag" href="/find">ID/PW 찾기</a><br />

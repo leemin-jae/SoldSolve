@@ -21,7 +21,7 @@ function SignUp() {
   } else if (button === 'input') {
     submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
   }
-
+  
   function inputForm(e) {
     if (e.target.name === 'id') {setId(e.target.value) 
       if (e.target.value && email && password && pwConfirm && nickname && username) {setButton('input')}

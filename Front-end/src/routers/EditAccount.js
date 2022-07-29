@@ -14,7 +14,7 @@ function EditAccount() {
 
   function inputForm(e) {
     if (e.target.name === 'nickname') {setNickname(e.target.value) 
-      if (e.target.value && password && pwConfirm && nickname) {setButton('input')}
+      if (e.target.value && password && pwConfirm) {setButton('input')}
       else if (e.target.value ==='') {setButton('noInput')}} 
 
     else if (e.target.name === 'password') {setPassword(e.target.value)

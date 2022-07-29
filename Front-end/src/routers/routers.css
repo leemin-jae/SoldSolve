@@ -172,7 +172,6 @@ input[type="text"]:disabled {
   color: gray;
   text-align: left;
   max-width: 500px;
-  margin-bottom: 100px;
 }
 
 .form {
@@ -502,4 +501,7 @@ input::placeholder {
 
 .checkedcolor {
   color: rgb(36, 255, 72);
+}
+.emailcode {
+  color: #6667ab;
 }

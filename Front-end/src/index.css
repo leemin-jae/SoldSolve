@@ -7,13 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
 
 @font-face {
   font-family: 'ONE-Mobile-Title';
@@ -33,11 +30,26 @@ code {
   font-family: 'ONE-Mobile-Regular';
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'ONE-Mobile-Title';
 }
 
-@media (max-width: 767px){
+@media (min-width: 360px) and (max-width: 428px) {
+  .user_box {
+    display: flex;
+    font-size: 12px;
+    max-width: 313px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 767px) {
   .background {
     background-color: white;
     /* box-shadow: 2px 2px 1px 1px rgba(209, 207, 207, 0.39); */
@@ -47,7 +59,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px){
+@media (min-width: 768px) and (max-width: 991px) {
+
   /* 태블릿 세로 */
   .background {
     background-color: white;
@@ -58,7 +71,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px){
+@media (min-width: 992px) and (max-width: 1199px) {
+
   /* 태블릿 가로 */
   .background {
     background-color: white;
@@ -69,7 +83,16 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1200px) {
+  .user_box {
+    display: flex;
+
+    width: 76%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 900px;
+  }
+
   /* 데스크탑 일반 */
   .background {
     background-color: white;

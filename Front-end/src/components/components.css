@@ -17,6 +17,8 @@ div#left_toggle,
 div#right_toggle,
 .account_toggle {
   display: none;
+  z-index: 99;
+
 }
 
 

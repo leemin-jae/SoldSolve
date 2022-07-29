@@ -108,18 +108,25 @@
   margin: auto;
 }
 
-.user_box {
+/* .user_info {
   display: flex;
-  width: 76%;
-  margin: auto;
+  margin: auto auto auto 0;
 }
 
-.score {}
+.user_name {
+  margin: 0;
+  align-self: center;
+}
 
-.carousel {
+.score {
+  margin: 0 5px 0 0;
+  align-self: center;
+} */
+
+/* .carousel {
   width: auto;
   height: auto;
-}
+} */
 
 /*  */
 
@@ -530,6 +537,7 @@ input::placeholder {
 .checkedcolor {
   color: rgb(36, 255, 72);
 }
+
 .emailcode {
   color: #6667ab;
 }

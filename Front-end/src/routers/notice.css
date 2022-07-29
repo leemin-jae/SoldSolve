@@ -18,25 +18,23 @@
     opacity: 40%;
 }
 
-
-
-
-
-.articleSpan{
+.articleSpan {
     color: #6667ab;
     font-size: x-small;
 }
-.noticeTitle{
+
+.noticeTitle {
     display: flex;
     justify-content: space-between;
     padding-inline: 5%;
 
 }
+
 .hide {
     display: none;
 }
 
 .overText {
-    word-break:break-all;
+    word-break: break-all;
     padding: 5%;
 }

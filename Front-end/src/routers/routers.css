@@ -198,7 +198,9 @@ input::placeholder {
   border-color: #6667AB
 }
 
-@media (min-width: 1px) {
+@media (min-width: 360px) and (max-width: 428px) {
+
+  /* 모바일 iphone, Galaxy */
   .livebox {
     border: 1px solid black;
     max-width: 950px;
@@ -226,11 +228,13 @@ input::placeholder {
   }
 
   .inputform3 {
-    width: 431px;
+    width: 91%;
     height: 30px;
     margin-left: 1em;
     border-radius: 10px;
     border: 1px solid;
+    padding: 0 55px 0 10px;
+
   }
 
   .inputsubmitbutton {
@@ -240,11 +244,11 @@ input::placeholder {
     height: 30px;
     border: 0;
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: -50px;
   }
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .livebox {
     border: 1px solid black;
     max-width: 950px;
@@ -273,11 +277,13 @@ input::placeholder {
   }
 
   .inputform3 {
-    width: 610px;
+    width: 96%;
     height: 30px;
     margin-left: 1em;
     border-radius: 10px;
     border: 1px solid;
+    padding: 0 55px 0 10px;
+
   }
 
   .inputsubmitbutton {
@@ -287,11 +293,12 @@ input::placeholder {
     height: 30px;
     border: 0;
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: -50px;
+
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 1025px) and (max-width: 1199px) {
 
   /* 태블릿 가로 */
   .livebox {
@@ -321,11 +328,12 @@ input::placeholder {
   }
 
   .inputform3 {
-    width: 190px;
+    width: 97%;
     height: 30px;
     margin-left: 1em;
     border-radius: 10px;
     border: 1px solid;
+    padding: 0 55px 0 10px;
   }
 
   .inputsubmitbutton {
@@ -335,7 +343,7 @@ input::placeholder {
     height: 30px;
     border: 0;
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: -50px;
   }
 }
 
@@ -344,7 +352,7 @@ input::placeholder {
   /* 데스크탑 일반 */
   .livebox {
     border: 1px solid black;
-    max-width: 950px;
+    max-width: 1500px;
     min-height: 500px;
     border-radius: 10px;
     margin: 1em;
@@ -356,13 +364,13 @@ input::placeholder {
 
   .chatbox {
     border: 1px solid black;
-    max-width: 300px;
+    width: 86%;
     height: 500px;
     border-radius: 10px;
     margin: 1em;
   }
 
-  .container {
+  .live_container {
     border: 10px solid rgba(black, .1);
     border-radius: 10px;
     display: grid;
@@ -370,17 +378,18 @@ input::placeholder {
   }
 
   .inputform3 {
-    width: 190px;
+    width: 86%;
     height: 30px;
     margin-left: 1em;
     border-radius: 10px;
     border: 1px solid;
+    padding: 0 55px 0 10px;
+
   }
 
-  .inputbox {
+  /* .inputbox {
     max-width: 290px;
-    padding: 0%;
-  }
+  } */
 
   .inputsubmitbutton {
     background-color: #6667ab;
@@ -389,7 +398,8 @@ input::placeholder {
     height: 30px;
     border: 0;
     border-radius: 10px;
-    margin-left: 5px;
+    margin-left: -50px;
+
   }
 }
 
@@ -411,10 +421,10 @@ input::placeholder {
   border: none;
 }
 
-@media (min-width: 1400px) {
+/* @media (min-width: 1400px) {
 
   /* 데스크탑 일반 */
-  .livebox {
+/* .livebox {
     border: 1px solid black;
     max-width: 950px;
     min-height: 500px;
@@ -424,9 +434,9 @@ input::placeholder {
     grid-template-columns: auto auto auto auto;
 
 
-  }
+  } */
 
-  .chatbox {
+/* .chatbox {
     border: 1px solid black;
     max-width: 300px;
     height: 500px;
@@ -434,7 +444,7 @@ input::placeholder {
     margin: 1em;
   }
 
-  .container {
+  .live_container {
     border: 10px solid rgba(black, .1);
     border-radius: 10px;
     display: grid;
@@ -462,8 +472,8 @@ input::placeholder {
     border: 0;
     border-radius: 10px;
     margin-left: 5px;
-  }
-}
+  } */
+/* } */
 
 .noticeSpan {
   background-color: white;

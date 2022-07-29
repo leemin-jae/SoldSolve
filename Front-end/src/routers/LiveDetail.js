@@ -10,9 +10,9 @@ import { faUser } from '@fortawesome/free-solid-svg-icons'
 
 function LiveDetail() {
   return (
-    <div>
+    <div className='App' id="container">
       <NavBar></NavBar>
-      <div className='container'>
+      <div className='live_container'>
         <div>
           <div className='livebox'><h3>live</h3></div>
           <p style={{ margin: '1em' }}><FontAwesomeIcon icon={faUser} size="2x" style={{ marginRight: '10px' }} />
@@ -22,10 +22,11 @@ function LiveDetail() {
         </div>
         <div>
           <div className='chatbox'><h3>채팅방</h3></div>
-          <input className='inputform3' type="text" />
-          <button className='inputsubmitbutton'>입력</button>
+          <div>
+            <input className='inputform3' type="text" />
+            <button className='inputsubmitbutton'>입력</button>
+          </div>
         </div>
-
       </div>
 
     </div>

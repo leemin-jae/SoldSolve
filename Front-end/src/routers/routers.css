@@ -492,3 +492,14 @@ input::placeholder {
   color: #6667ab71;
   border: none;
 }
+
+.IDcheck {
+  color: rgba(128, 128, 128, 0.438);
+  width: 80px; 
+  margin-left: -80px;
+  margin-bottom: -5px;
+}
+
+.checkedcolor {
+  color: rgb(36, 255, 72);
+}

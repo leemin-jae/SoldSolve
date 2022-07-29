@@ -94,6 +94,34 @@
   text-align: center;
 }
 
+/* 상품 디테일 css */
+.product_box {
+  margin: auto;
+  border: 1px solid black;
+  width: 80%;
+  height: 400px;
+  border-radius: 10px;
+  margin: 1em;
+}
+
+.pro_img {
+  margin: auto;
+}
+
+.user_box {
+  display: flex;
+  width: 76%;
+  margin: auto;
+}
+
+.score {}
+
+.carousel {
+  width: auto;
+  height: auto;
+}
+
+/*  */
 
 .inputform {
   width: 100%;
@@ -495,7 +523,7 @@ input::placeholder {
 
 .IDcheck {
   color: rgba(128, 128, 128, 0.438);
-  width: 80px; 
+  width: 80px;
   margin-left: -80px;
   margin-bottom: -5px;
 }

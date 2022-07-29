@@ -72,7 +72,7 @@ public class UserController {
 	
 	@GetMapping("/idcheck")
 	public ResponseEntity<?> getIdCheck(@RequestBody UserRegisterPostReq registerInfo){
-		User user = userService.getUserByUserId(registerInfo.getId());
+		User user = userService.getUserByUserId(registerInfo.getUserId());
 		
 		if(user == null) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -172,9 +172,9 @@ public class UserController {
 
 	@GetMapping("/AuthMail")
 	//@ResponseBody
-	public ResponseEntity<String> mailAuth(@RequestParam String email) throws Exception {
+	public ResponseEntity<String> mailAuth(@RequestBody UserRegisterPostReq userInfo) throws Exception {
 
-		String authKey = mailSendService.sendAuthMail(email); //사용자가 입력한 메일주소로 메일을 보냄
+		String authKey = mailSendService.sendAuthMail(userInfo.getEmail()); //사용자가 입력한 메일주소로 메일을 보냄
 		return new ResponseEntity<String>(authKey, HttpStatus.OK);
 	}
 

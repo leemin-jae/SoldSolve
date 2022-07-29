@@ -19,7 +19,7 @@ public class UserRegisterPostReq {
 	String password;
 	
 	String userName;
-	
+
 	String nickName;
 	
 	String email;

@@ -49,14 +49,24 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public User getUserByUserIdAndEmail(String userid, String email) {
-		User user = userRepository.findByUseridAndEmail(userid,email);
+	public User getUserByUserIdAndEmailAndUserName(String userid, String email,String userName) {
+		User user = userRepository.findByUseridAndEmailAndUsername(userid,email,userName);
 		if(user != null) {
 			return user;
 		}else {
 			return null;
 		}
 
+	}
+
+	@Override
+	public User getUserByUserNameAndUserEmail(String userName, String userEmail) {
+		User user = userRepository.findByUsernameAndEmail(userName,userEmail);
+		if(user != null) {
+			return user;
+		}else {
+			return null;
+		}
 	}
 
 
@@ -87,7 +97,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean getEmailCheck(String email) {
 		User user = userRepository.findByEmail(email);
-
+		System.out.println(user);
 		if(user == null){
 			return true;
 		}else{

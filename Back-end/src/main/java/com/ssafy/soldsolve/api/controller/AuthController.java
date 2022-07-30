@@ -37,7 +37,7 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<UserLoginPostRes> login(@RequestBody UserLoginPostReq loginInfo) {
-		String userId = loginInfo.getId();
+		String userId = loginInfo.getUserId();
 		String password = loginInfo.getPassword();
 		
 		User user = userService.getUserByUserId(userId);

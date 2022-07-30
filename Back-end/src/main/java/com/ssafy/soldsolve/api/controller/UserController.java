@@ -73,7 +73,7 @@ public class UserController {
 		User user = userService.getUserByUserId(userId);
 		
 		if(user == null) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+			return new ResponseEntity<String>(user.getUserid(), HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 		}
@@ -91,12 +91,10 @@ public class UserController {
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 		}
-
 	}
 
 	@GetMapping("/check/email")
 	public ResponseEntity<?> getEmailCheck(@RequestParam String email){
-
 		if(userService.getEmailCheck(email)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}else {
@@ -161,22 +159,36 @@ public class UserController {
 	@PatchMapping("/mail/password")
 	public ResponseEntity<String> temporaryPw(@RequestBody UserRegisterPostReq userInfo) throws Exception {
 
+		String userName = userInfo.getUserName();
 		String userId = userInfo.getId();
 		String userEmail = userInfo.getEmail();
 
-		User user = userService.getUserByUserIdAndEmail(userId,userEmail);
+		User user = userService.getUserByUserIdAndEmailAndUserName(userId,userEmail,userName);
 
 		if(user != null) {
 			String temporaryPwd = mailSendService.sendPwMail(userEmail);
 			userService.updateUserPassword(userId, temporaryPwd);
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
-		}else{
+		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 		}
 
+	}
 
+
+	@GetMapping("confirm/id")
+	public ResponseEntity<?> getId(@RequestParam String userName, @RequestParam String email){
+		User user = userService.getUserByUserNameAndUserEmail(userName,email);
+		String userId = user.getUserid();
+		//userId.
+		if(user == null) {
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
+		}
 
 	}
+
 
 
 }

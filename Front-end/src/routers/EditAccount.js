@@ -2,9 +2,11 @@ import NavBar from "../components/NavBar"
 import axios from "axios"
 import { useState } from 'react'
 import './routers.css'
-
+import { getToken } from '../store.js'
+import { useDispatch } from 'react-redux'
 
 function EditAccount() {
+  let dispatch = useDispatch()
   const [nickname,setNickname] = useState(null)
   const [password,setPassword] = useState(null)
   const [pwConfirm,setPwConfirm] = useState(null)
@@ -38,7 +40,7 @@ function EditAccount() {
     if (password === pwConfirm){
       console.log(editAccountForm)
       axios({
-      url: 'http://localhost:8080/api/v1/users/update/userinfo',
+      url: 'http://localhost:8080/api/users/update/userinfo',
       method: 'Patch',
       data: editAccountForm,
       headers: { Authorization: `Bearer ${localStorage.token}` }
@@ -61,12 +63,16 @@ function EditAccount() {
     e.preventDefault();
     if (window.confirm("정말 회원을 탈퇴 하시겠습니까?")) {
       axios({
-        url: 'http://localhost:8080/api/v1/auth/login',
-        method: 'post',
-        data: editAccountForm
+        url: 'http://localhost:8080/api/users',
+        method: 'delete',
+        headers : { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res)
+          dispatch(getToken(null))
+          localStorage.setItem('token', null)
+          alert("탈퇴가 완료 되었습니다")
+          document.location.href = '/'
         })
         .catch(err => {
           console.error(err)

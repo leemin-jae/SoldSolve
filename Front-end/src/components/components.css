@@ -270,3 +270,7 @@ div#left_toggle ul li {
   word-break: break-all;
   padding: 5%;
 }
+
+.findForm{
+  min-width: 300px;
+}

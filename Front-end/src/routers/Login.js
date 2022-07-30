@@ -32,14 +32,14 @@ function Login() {
     if (e.target.value && id) { setButton('input') }
     else if (e.target.value === '') { setButton('noInput') }
   }
-  const loginForm = { id: id, password: password }
+  const loginForm = { userId: id, password: password }
   // console.log(loginForm)
   // console.log(url.login)
 
   function tryLogin(getLoginForm) {
-
+    console.log(getLoginForm)
     axios({
-      url: 'http://localhost:8080/api/v1/auth/login',
+      url: 'http://localhost:8080/api/auth/login',
       method: 'post',
       data: getLoginForm
     })

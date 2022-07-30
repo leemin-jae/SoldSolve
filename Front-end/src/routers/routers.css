@@ -89,9 +89,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: center;
-  align-content: center;
-  text-align: center;
 }
 
 /* 상품 디테일 css */

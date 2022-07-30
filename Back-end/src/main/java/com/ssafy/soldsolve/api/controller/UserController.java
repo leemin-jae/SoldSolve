@@ -73,7 +73,7 @@ public class UserController {
 		User user = userService.getUserByUserId(userId);
 		
 		if(user == null) {
-			return new ResponseEntity<String>(user.getUserid(), HttpStatus.OK);
+			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 		}
@@ -180,9 +180,12 @@ public class UserController {
 	public ResponseEntity<?> getId(@RequestParam String userName, @RequestParam String email){
 		User user = userService.getUserByUserNameAndUserEmail(userName,email);
 		String userId = user.getUserid();
+		int len = userId.length();
+		userId = userId.replace(userId.substring(len-2,len),"").concat("**");
+
 		//userId.
-		if(user == null) {
-			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
+		if(user != null) {
+			return new ResponseEntity<String>(userId, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
 		}

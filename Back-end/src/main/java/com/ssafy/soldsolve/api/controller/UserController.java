@@ -18,9 +18,21 @@ import com.ssafy.soldsolve.db.entity.User;
 /**
  * 유저 관련 API 요청 처리를 위한 컨트롤러 정의.
  */
-//@Api(value = "유저 API", tags = {"User"})
+
+/**
+ * 	post 요청 시에
+ 	UserRegisterPostReq 안의
+ 	userId, password, userName, nickName, email을 받아서 사용
+
+ 	get 요청 시에
+ 	해당 변수를 params로 받아서 사용
+
+
+ 	Authentication authentication
+ 	로그인 후 생성되는 엑세스 토큰이 헤더에 등록되어 있으면 자동으로 사용
+ */
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/users")
 public class UserController {
 	
 	private final String SUCCESS = "success";
@@ -34,13 +46,6 @@ public class UserController {
 
 
 	@PostMapping()
-//	@ApiOperation(value = "회원 가입", notes = "<strong>아이디와 패스워드</strong>를 통해 회원가입 한다.") 
-//    @ApiResponses({
-//        @ApiResponse(code = 200, message = "성공"),
-//        @ApiResponse(code = 401, message = "인증 실패"),
-//        @ApiResponse(code = 404, message = "사용자 없음"),
-//        @ApiResponse(code = 500, message = "서버 오류")
-//    })
 	public ResponseEntity<? extends BaseResponseBody> register(
 			@RequestBody  UserRegisterPostReq registerInfo) {
 		
@@ -51,14 +56,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/me")
-//	@ApiOperation(value = "회원 본인 정보 조회", notes = "로그인한 회원 본인의 정보를 응답한다.") 
-//    @ApiResponses({
-//        @ApiResponse(code = 200, message = "성공"),
-//        @ApiResponse(code = 401, message = "인증 실패"),
-//        @ApiResponse(code = 404, message = "사용자 없음"),
-//        @ApiResponse(code = 500, message = "서버 오류")
-//    })
-	public ResponseEntity<UserRes> getUserInfo( Authentication authentication) {
+	public ResponseEntity<UserRes> getUserInfo(Authentication authentication) {
 		/**
 		 * 요청 헤더 액세스 토큰이 포함된 경우에만 실행되는 인증 처리이후, 리턴되는 인증 정보 객체(authentication) 통해서 요청한 유저 식별.
 		 * 액세스 토큰이 없이 요청하는 경우, 403 에러({"error": "Forbidden", "message": "Access Denied"}) 발생.
@@ -70,9 +68,9 @@ public class UserController {
 		return ResponseEntity.status(200).body(UserRes.of(user));
 	}
 	
-	@GetMapping("/idcheck")
-	public ResponseEntity<?> getIdCheck(@RequestBody UserRegisterPostReq registerInfo){
-		User user = userService.getUserByUserId(registerInfo.getUserId());
+	@GetMapping("/check/id")
+	public ResponseEntity<?> getIdCheck(@RequestParam String userId){
+		User user = userService.getUserByUserId(userId);
 		
 		if(user == null) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
@@ -82,13 +80,13 @@ public class UserController {
 		
 	}
 
-	@GetMapping("/passwordCheck")
-	public ResponseEntity<?> getPasswordCheck(@RequestBody UserRegisterPostReq registerInfo, Authentication authentication){
+	@GetMapping("/check/password")
+	public ResponseEntity<?> getPasswordCheck(@RequestParam String password, Authentication authentication){
 
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
 
-		if(userService.getPasswordCheck(userId, registerInfo.getPassword())) {
+		if(userService.getPasswordCheck(userId, password)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
@@ -96,10 +94,10 @@ public class UserController {
 
 	}
 
-	@GetMapping("/emailcheck")
-	public ResponseEntity<?> getEmailCheck(@RequestBody UserRegisterPostReq registerInfo){
+	@GetMapping("/check/email")
+	public ResponseEntity<?> getEmailCheck(@RequestParam String email){
 
-		if(userService.getEmailCheck(registerInfo.getEmail())) {
+		if(userService.getEmailCheck(email)) {
 			return new ResponseEntity<String>(SUCCESS, HttpStatus.OK);
 		}else {
 			return new ResponseEntity<String>(FAIL, HttpStatus.BAD_REQUEST);
@@ -110,11 +108,6 @@ public class UserController {
 
 
 	@PatchMapping("/update/password")
-//    @ApiOperation(value = "회원 정보 수정", notes = "사용자의 <strong>닉네임</strong>을 수정한다.")
-//    @ApiResponses({
-//            @ApiResponse(code = 200, message = "성공"),
-//            @ApiResponse(code = 500, message = "서버 오류")
-//    })
 	public ResponseEntity<? extends BaseResponseBody> updateUserPassword(
 			@RequestBody UserRegisterPostReq info,
 			Authentication authentication) {
@@ -128,16 +121,7 @@ public class UserController {
 	}
 
 
-
-
 	@PatchMapping("/update/userinfo")
-//    @ApiOperation(value = "회원 정보 수정", notes = "사용자의 <strong>닉네임</strong>을 수정한다.")
-//    @ApiResponses({
-//            @ApiResponse(code = 200, message = "성공"),
-//            @ApiResponse(code = 500, message = "서버 오류")
-//    })
-
-	//{password , nickName}
 	public ResponseEntity<? extends BaseResponseBody> updateUserNickName(
 			@RequestBody UserRegisterPostReq info,
 			Authentication authentication) {
@@ -153,13 +137,6 @@ public class UserController {
 	}
 
 	@DeleteMapping()
-//    @ApiOperation(value = "회원 탈퇴", notes = "로그인한 회원의 정보를 삭제한다.")
-//    @ApiResponses({
-//            @ApiResponse(code = 200, message = "성공"),
-//            @ApiResponse(code = 401, message = "인증 실패"),
-//            @ApiResponse(code = 404, message = "사용자 없음"),
-//            @ApiResponse(code = 500, message = "서버 오류")
-//    })
 	public ResponseEntity<? extends BaseResponseBody> deleteUser(Authentication authentication) {
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		int Id = userDetails.getUser().getId();
@@ -170,18 +147,16 @@ public class UserController {
 
 
 
-	@GetMapping("/AuthMail")
-	//@ResponseBody
-	public ResponseEntity<String> mailAuth(@RequestBody UserRegisterPostReq userInfo) throws Exception {
+	@GetMapping("/mail/auth")
+	public ResponseEntity<String> mailAuth(@RequestParam String email) throws Exception {
 
-		String authKey = mailSendService.sendAuthMail(userInfo.getEmail()); //사용자가 입력한 메일주소로 메일을 보냄
+		String authKey = mailSendService.sendAuthMail(email); //사용자가 입력한 메일주소로 메일을 보냄
 		return new ResponseEntity<String>(authKey, HttpStatus.OK);
 	}
 
 
 
-	@PatchMapping("/temporaryPw")
-	//@ResponseBody
+	@PatchMapping("/mail/password")
 	public ResponseEntity<String> temporaryPw(@RequestBody UserRegisterPostReq userInfo) throws Exception {
 
 		String userId = userInfo.getId();

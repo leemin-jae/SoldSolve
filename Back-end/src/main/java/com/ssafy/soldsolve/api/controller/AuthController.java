@@ -18,9 +18,16 @@ import com.ssafy.soldsolve.db.entity.User;
 /**
  * 인증 관련 API 요청 처리를 위한 컨트롤러 정의.
  */
-//@Api(value = "인증 API", tags = {"Auth."})
+
+/**
+ * 	post
+ UserloginPostReq 안의
+ userId, password을 받아서 사용
+
+ 생성된 엑세스 토큰을 herder에 Authorization : Bearer + 엑세스 토큰 형태로 저장
+ */
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 	@Autowired
 	UserService userService;
@@ -29,13 +36,6 @@ public class AuthController {
 	PasswordEncoder passwordEncoder;
 	
 	@PostMapping("/login")
-//	@ApiOperation(value = "로그인", notes = "<strong>아이디와 패스워드</strong>를 통해 로그인 한다.") 
-//    @ApiResponses({
-//        @ApiResponse(code = 200, message = "성공", response = UserLoginPostRes.class),
-//        @ApiResponse(code = 401, message = "인증 실패", response = BaseResponseBody.class),
-//        @ApiResponse(code = 404, message = "사용자 없음", response = BaseResponseBody.class),
-//        @ApiResponse(code = 500, message = "서버 오류", response = BaseResponseBody.class)
-//    })
 	public ResponseEntity<UserLoginPostRes> login(@RequestBody UserLoginPostReq loginInfo) {
 		String userId = loginInfo.getId();
 		String password = loginInfo.getPassword();

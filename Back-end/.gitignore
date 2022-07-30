@@ -37,3 +37,4 @@ out/
 .vscode/
 
 ssafy-web.log
+*.log

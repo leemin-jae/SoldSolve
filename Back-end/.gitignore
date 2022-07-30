@@ -38,4 +38,6 @@ out/
 
 ssafy-web.log
 *.log
-*.properties
+application.properties
+application-local.properties
+application-server.properties

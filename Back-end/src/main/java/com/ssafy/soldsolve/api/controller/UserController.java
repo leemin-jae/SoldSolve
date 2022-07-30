@@ -121,6 +121,8 @@ public class UserController {
 	}
 
 
+
+
 	@PatchMapping("/update/userinfo")
 	public ResponseEntity<? extends BaseResponseBody> updateUserNickName(
 			@RequestBody UserRegisterPostReq info,

@@ -160,9 +160,9 @@ public class UserController {
 	public ResponseEntity<String> temporaryPw(@RequestBody UserRegisterPostReq userInfo) throws Exception {
 
 		String userName = userInfo.getUserName();
-		String userId = userInfo.getId();
+		String userId = userInfo.getUserId();
 		String userEmail = userInfo.getEmail();
-
+		System.out.println(userName + " " + userId + " " + userEmail);
 		User user = userService.getUserByUserIdAndEmailAndUserName(userId,userEmail,userName);
 
 		if(user != null) {

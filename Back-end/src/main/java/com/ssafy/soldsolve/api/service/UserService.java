@@ -9,7 +9,9 @@ public interface UserService {
 
 	User createUser(UserRegisterPostReq registerInfo);
 
-	User getUserByUserIdAndEmail(String userid, String email);
+	User getUserByUserIdAndEmailAndUserName(String userId, String userEmail, String userName);
+
+	User getUserByUserNameAndUserEmail(String userName, String userEmail);
 
 	void deleteUser(int id);
 
@@ -21,6 +23,7 @@ public interface UserService {
 	boolean getEmailCheck(String email);
 
 	void updateUserUserInfo(String userId, String password, String nickName);
+
 
 
 }

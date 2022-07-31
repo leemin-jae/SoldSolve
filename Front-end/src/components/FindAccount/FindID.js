@@ -16,7 +16,7 @@ function FindID() {
   function findID(e) {
     e.preventDefault();
       axios({
-        url:'http://i7c110.p.ssafy.io:8080/api/users/confirm/id' ,
+        url:'/api/users/confirm/id' ,
         method: 'get',
         params: { userName:name,email:email}
       })

@@ -23,7 +23,7 @@ function MyPage() {
         const getProfile = async () => {
             setLoading(true);
             
-            const response = await fetch(`http://i7c110.p.ssafy.io:8080/api/users/me`, requestOptions);
+            const response = await fetch(`/api/users/me`, requestOptions);
             setProfile(await response.json());
             setLoading(false);
         }

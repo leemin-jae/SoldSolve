@@ -67,7 +67,7 @@ function SignUp() {
 
   function axiosSignup(credentials) {
     axios({
-        url:'http://i7c110.p.ssafy.io:8080/api/users' ,
+        url:'/api/users' ,
         method: 'post',
         data: credentials
       })
@@ -83,7 +83,7 @@ function SignUp() {
   function CheckID(e) {
     e.preventDefault();
     axios({
-      url:'http://i7c110.p.ssafy.io:8080/api/users/check/id' ,
+      url:'/api/users/check/id' ,
       method: 'get',
       params: { userId : id}
     })
@@ -106,7 +106,7 @@ function SignUp() {
     setIdCheck(true)
     if (idCheck) {
       axios({
-      url:'http://i7c110.p.ssafy.io:8080/api/users/check/email' ,
+      url:'/api/users/check/email' ,
       method: 'get',
       params: { email:email}
       })
@@ -127,7 +127,7 @@ function SignUp() {
 
   function codeEmail(e) {
     axios({
-      url:'http://i7c110.p.ssafy.io:8080/api/users/mail/auth' ,
+      url:'/api/users/mail/auth' ,
       method: 'get',
       params: { email:email}
     })

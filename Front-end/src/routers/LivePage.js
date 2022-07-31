@@ -22,7 +22,7 @@ class LivePage extends Component {
         };
 
         axios({
-            url: 'http://i7c110.p.ssafy.io:8080/api/v1/users/me',
+            url: '/api/v1/users/me',
             method: 'get',
             headers: { 'Authorization':  `Bearer ${localStorage.token}`}
             })

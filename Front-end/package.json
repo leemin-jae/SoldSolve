@@ -50,5 +50,7 @@
   },
   "overrides": {
     "autoprefixer": "10.4.5"
-  }
+  },
+
+  "proxy": "http://i7c110.p.ssafy.io:8080"
 }

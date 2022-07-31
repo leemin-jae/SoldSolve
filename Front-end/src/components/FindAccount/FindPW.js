@@ -33,7 +33,7 @@ function FindPW() {
   function findPW(e) {
     e.preventDefault();
     axios({
-      url:'http://localhost:8080/api/users/mail/password',
+      url:'http://i7c110.p.ssafy.io:8080/api/users/mail/password',
       method: 'Patch',
       data: { userId:id, userName:name, email:email}
     })

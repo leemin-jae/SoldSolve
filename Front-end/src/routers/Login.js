@@ -39,7 +39,7 @@ function Login() {
   function tryLogin(getLoginForm) {
     console.log(getLoginForm)
     axios({
-      url: 'http://localhost:8080/api/auth/login',
+      url: 'http://i7c110.p.ssafy.io:8080/api/auth/login',
       method: 'post',
       data: getLoginForm
     })

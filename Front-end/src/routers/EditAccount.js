@@ -40,7 +40,7 @@ function EditAccount() {
     if (password === pwConfirm){
       console.log(editAccountForm)
       axios({
-      url: 'http://localhost:8080/api/users/update/userinfo',
+      url: 'http://i7c110.p.ssafy.io:8080/api/users/update/userinfo',
       method: 'Patch',
       data: editAccountForm,
       headers: { Authorization: `Bearer ${localStorage.token}` }
@@ -63,7 +63,7 @@ function EditAccount() {
     e.preventDefault();
     if (window.confirm("정말 회원을 탈퇴 하시겠습니까?")) {
       axios({
-        url: 'http://localhost:8080/api/users',
+        url: 'http://i7c110.p.ssafy.io:8080/api/users',
         method: 'delete',
         headers : { Authorization: `Bearer ${localStorage.token}` }
       })

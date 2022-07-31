@@ -13,7 +13,8 @@ function SignUp() {
   const [email,setEmail] = useState(null)
   const [button,setButton] = useState('noInput')
   const [idCheck,setIdCheck] = useState(false)
-  const [emailCheck,setEmailCheck] = useState(false)
+  const [inputCode,setInputCode] = useState('')
+  const [mailCode,setMailCode] = useState('')
 
   let submitButton = null;
   if (button === 'noInput') {
@@ -22,30 +23,22 @@ function SignUp() {
     submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
   }
 
+  function inputCodeForm(e) {
+    setInputCode(e.target.value)
+    if (id && password && pwConfirm && nickname && username && email) {
+      setButton('input')
+    }
+  }
+  
   function inputForm(e) {
-    if (e.target.name === 'id') {setId(e.target.value) 
-      if (e.target.value && email && password && pwConfirm && nickname && username) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}} 
-
+    if (e.target.name === 'id') {setId(e.target.value)} 
     else if (e.target.name === 'password') {setPassword(e.target.value)
-      if (e.target.value && id && email && pwConfirm && nickname && username) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}}
-
-    else if (e.target.name === 'pwconfirm') {setPwConfirm(e.target.value) 
-      if (e.target.value && id && password && email && nickname && username) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}}
-
-    else if (e.target.name === 'nickname') {setNickname(e.target.value)
-      if (e.target.value && id && password && pwConfirm && email && username) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}}  
-
-    else if (e.target.name === 'username') {setUsername(e.target.value)
-      if (e.target.value && id && password && pwConfirm && nickname && email) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}} 
-
-    else if (e.target.name === 'email') {setEmail(e.target.value)
-      if (e.target.value && id && password && pwConfirm && nickname && username) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}}
+      if (inputCode && pwConfirm) {setButton('input')}}
+    else if (e.target.name === 'pwconfirm') {setPwConfirm(e.target.value)
+      if (inputCode && password) {setButton('input')}}
+    else if (e.target.name === 'nickname') {setNickname(e.target.value)}  
+    else if (e.target.name === 'username') {setUsername(e.target.value)} 
+    else if (e.target.name === 'email') {setEmail(e.target.value)}
     }
 
 
@@ -53,20 +46,19 @@ function SignUp() {
 
   function submitSignup(e){
     e.preventDefault();
-    if (password !== pwConfirm){
+    if (inputCode === '') {
+      alert("인증코드를 입력해주세요!")
+    } else if (password !== pwConfirm){
       alert("비밀번호가 서로 맞지 않습니다.")
-      console.log(e.target.password)
       e.target.password.value = ''
       e.target.pwconfirm.value = ''
       setPassword(null)
       setPwConfirm(null)
       setButton('noInput')
-    } else if (idCheck === false) {
-      alert("ID 중복체크를 해주세요!")
-    } else if (emailCheck === false) {
-      alert("Email 중복체크를 해주세요!")
     }
-    else{
+    else if (mailCode !== inputCode) {
+      alert("인증번호가 일치하지 않습니다!")
+    } else {
       axiosSignup(signUpForm)
     }
     
@@ -74,9 +66,8 @@ function SignUp() {
 
 
   function axiosSignup(credentials) {
-    console.log(credentials)
     axios({
-        url:'http://localhost:8080/api/v1/users' ,
+        url:'http://localhost:8080/api/users' ,
         method: 'post',
         data: credentials
       })
@@ -92,18 +83,18 @@ function SignUp() {
   function CheckID(e) {
     e.preventDefault();
     axios({
-      url:'http://localhost:8080/api/v1/users/idcheck' ,
-      method: 'post',
-      data: { userId:id}
+      url:'http://localhost:8080/api/users/check/id' ,
+      method: 'get',
+      params: { userId : id}
     })
   .then(res => {
       console.log(res)
-      e.target.classList.add('checkedcolor')
+      e.target.classList.add('emailcode')
       setIdCheck(true)
   })
   .catch(err => {
       console.log(err)
-      e.target.classList.remove('checkedcolor')
+      e.target.classList.remove('emailcode')
       setIdCheck(false)
       alert("이미 사용중인 ID 입니다.")
   })
@@ -112,24 +103,46 @@ function SignUp() {
 
   function CheckEmail(e) {
     e.preventDefault();
-    axios({
-      url:'http://localhost:8080/api/v1/users/emailcheck' ,
-      method: 'post',
-      data: { email:email}
-    })
-  .then(res => {
-      console.log(res)
-      e.target.classList.add('checkedcolor')
-      setEmailCheck(true)
-  })
-  .catch(err => {
-      console.log(err)
-      e.target.classList.remove('checkedcolor')
-      setEmailCheck(false)
-      alert("이미 사용중인 Email 입니다.")
-  })
+    setIdCheck(true)
+    if (idCheck) {
+      axios({
+      url:'http://localhost:8080/api/users/check/email' ,
+      method: 'get',
+      params: { email:email}
+      })
+      .then(res => {
+          console.log(res)
+          codeEmail(e)
+      })
+      .catch(err => {
+          console.log(err)
+          e.target.classList.remove('emailcode')
+          alert("이미 사용중인 Email 입니다.")
+      })
+    } else {
+      alert("ID 중복확인을 먼저 해주세요!")
+    }
+    
   }
 
+  function codeEmail(e) {
+    axios({
+      url:'http://localhost:8080/api/users/mail/auth' ,
+      method: 'get',
+      params: { email:email}
+    })
+    .then(res => {
+        e.target.classList.add('emailcode')
+        document.getElementById('CodeForm').hidden=false
+        setButton('input')
+        setMailCode(res.data)
+        alert("인증코드를 전송했습니다. Email을 확인해주세요")
+    })
+    .catch(err => {
+        console.log(err)
+        e.target.classList.remove('emailcode')
+    })
+  }
 
   return (
     <div>
@@ -145,6 +158,7 @@ function SignUp() {
               <input className="inputform" name="nickname" onChange={e =>{inputForm(e)}} type="text" placeholder="NICKNAME"></input><br />
               <input className="inputform" name="username" onChange={e =>{inputForm(e)}} type="text" placeholder="USERNAME"></input><br />
               <input className="inputform" name="email" onChange={e =>{inputForm(e)}} type="email" placeholder="EMAIL"></input><a href="#!" ><FontAwesomeIcon className='IDcheck' onClick={e => CheckEmail(e)} icon={faSquareCheck} size="2x" /></a><br />
+              <input className="inputform" id="CodeForm" onChange={e => inputCodeForm(e)} type="password" hidden={true} placeholder="EMAIL CODE"></input><br />
               { submitButton }
             </form>
           </div>   

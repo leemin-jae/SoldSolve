@@ -25,6 +25,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom' // react-router-
 import 'bootstrap/dist/css/bootstrap.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
+import Product from './routers/Product';
 
 
 let persistor = persistStore(store);
@@ -50,6 +51,8 @@ root.render(
               <Route path='/createroom' element={<CreateRoom />}></Route>
               <Route path='/live' element={<LivePage />}></Route>
               <Route path='/livedetail' element={<LiveDetail />}></Route>
+              <Route path='/product' element={<Product />}></Route>
+
             </Routes>
           </BrowserRouter>
         </PersistGate>

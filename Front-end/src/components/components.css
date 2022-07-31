@@ -17,6 +17,8 @@ div#left_toggle,
 div#right_toggle,
 .account_toggle {
   display: none;
+  z-index: 99;
+
 }
 
 
@@ -267,4 +269,8 @@ div#left_toggle ul li {
 .overText {
   word-break: break-all;
   padding: 5%;
+}
+
+.findForm{
+  min-width: 300px;
 }

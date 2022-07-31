@@ -32,14 +32,14 @@ function Login() {
     if (e.target.value && id) { setButton('input') }
     else if (e.target.value === '') { setButton('noInput') }
   }
-  const loginForm = { id: id, password: password }
+  const loginForm = { userId: id, password: password }
   // console.log(loginForm)
   // console.log(url.login)
 
   function tryLogin(getLoginForm) {
-
+    console.log(getLoginForm)
     axios({
-      url: 'http://localhost:8080/api/v1/auth/login',
+      url: 'http://localhost:8080/api/auth/login',
       method: 'post',
       data: getLoginForm
     })
@@ -68,8 +68,8 @@ function Login() {
           <div className="test3">
             <h1 className="my-5">LOGIN</h1>
             <form onSubmit={e => { submitLogin(e) }}>
-              <input className="inputform" onKeyUp={e => { inputId(e) }} type="text" placeholder="ID"></input><br />
-              <input className="inputform" onKeyUp={e => { inputPw(e) }} type="password" placeholder="PASSWORD"></input><br />
+              <input className="inputform" onChange={e => { inputId(e) }} type="text" placeholder="ID"></input><br />
+              <input className="inputform" onChange={e => { inputPw(e) }} type="password" placeholder="PASSWORD"></input><br />
               {submitButton}
             </form>
             <a className="atag" href="/find">ID/PW 찾기</a><br />

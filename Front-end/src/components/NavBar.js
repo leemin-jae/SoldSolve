@@ -10,7 +10,7 @@ function NavBar() {
   let dispatch = useDispatch()
   let storeToken = useSelector((state) => { return state })
 
-  function axiosLogout(e) {
+  function Logout(e) {
     e.preventDefault();
     localStorage.removeItem('token')
     dispatch(getToken(null))
@@ -20,8 +20,8 @@ function NavBar() {
   let NavAcouuntTab1 = <li><a href='/login'><h5>로그인</h5></a></li>
   let NavAcouuntTab2 = <li><a href='/signup'><h5>회원가입</h5></a></li>
 
-  if (storeToken.token.token || localStorage.token) {
-    NavAcouuntTab1 = <li><a href='#!' onClick={(e) => axiosLogout(e)}><h5>로그아웃</h5></a></li>
+  if (storeToken.token.token) {
+    NavAcouuntTab1 = <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
     NavAcouuntTab2 = <li><a href='/mypage'><h5>마이페이지</h5></a></li>
   }
 

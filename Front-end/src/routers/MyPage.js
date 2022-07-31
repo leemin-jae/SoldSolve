@@ -23,7 +23,7 @@ function MyPage() {
         const getProfile = async () => {
             setLoading(true);
             
-            const response = await fetch(`http://localhost:8080/api/v1/users/me`, requestOptions);
+            const response = await fetch(`http://localhost:8080/api/users/me`, requestOptions);
             setProfile(await response.json());
             setLoading(false);
         }
@@ -49,7 +49,7 @@ function MyPage() {
                     <div className='column'>사진자리</div>
                     <div className='column'>
                         <div className=''>{profile.userName}</div>
-                        <div className=''>회원정보 수정 자리</div>
+                        <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
                         
                     </div>
                 </div>

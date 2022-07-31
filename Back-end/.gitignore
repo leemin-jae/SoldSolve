@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+ssafy-web.log
+*.log
+*.gz
+application.properties
+application-local.properties
+application-server.properties

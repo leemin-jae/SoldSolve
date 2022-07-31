@@ -1,0 +1,40 @@
+.articles {
+    margin: 1%;
+    min-height: 1000px;
+    padding-inline: 0%;
+    padding-block: 3%;
+}
+
+.Article {
+    margin-block: 2%;
+    padding: 2%;
+    background-color: rgba(128, 128, 128, 0.116);
+    border-radius: 10px;
+    align-items: center;
+    list-style: none;
+}
+
+.read {
+    opacity: 40%;
+}
+
+.articleSpan {
+    color: #6667ab;
+    font-size: x-small;
+}
+
+.noticeTitle {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 5%;
+
+}
+
+.hide {
+    display: none;
+}
+
+.overText {
+    word-break: break-all;
+    padding: 5%;
+}

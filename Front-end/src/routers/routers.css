@@ -1,0 +1,540 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+* {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+
+}
+
+.stream-container {
+  padding: 0;
+}
+
+
+
+.mypage {
+  text-align: center;
+}
+
+.icon {
+  color: #6667AB;
+}
+
+.account_container {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid rgb(107, 106, 106);
+  margin-top: 2em;
+  width: auto;
+  max-width: 400px;
+  min-height: 100px;
+  padding: 40px;
+  border-radius: 10px;
+  background-color: white;
+  position: relative;
+  display: flex;
+
+}
+
+.livebox {
+  border: 1px solid black;
+  max-width: 950px;
+  min-height: 500px;
+  border-radius: 10px;
+  margin: 2em;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+
+
+}
+
+.chatbox {
+  border: 1px solid black;
+  max-width: 300px;
+  min-height: 500px;
+  border-radius: 10px;
+  margin: 2em;
+}
+
+.container {
+  border: 10px solid rgba(black, .1);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+
+}
+
+.history_container,
+.heart_container {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+}
+
+.history_container {
+  max-width: 400px;
+}
+
+.column {
+  width: 50%;
+}
+
+
+.test {
+  margin-block: 50px;
+  margin-inline: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 상품 디테일 css */
+.product_box {
+  margin: auto;
+  border: 1px solid black;
+  width: 80%;
+  height: 400px;
+  border-radius: 10px;
+  margin: 1em;
+}
+
+.pro_img {
+  margin: auto;
+}
+
+/* .user_info {
+  display: flex;
+  margin: auto auto auto 0;
+}
+
+.user_name {
+  margin: 0;
+  align-self: center;
+}
+
+.score {
+  margin: 0 5px 0 0;
+  align-self: center;
+} */
+
+/* .carousel {
+  width: auto;
+  height: auto;
+} */
+
+/*  */
+
+.inputform {
+  width: 100%;
+  height: 65px;
+  margin-block: 10px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.inputform2 {
+  text-align: center;
+}
+
+
+.pform {
+  width: 100%;
+  height: 65px;
+  margin-block: 10px;
+  margin-inline: auto;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.descriptionform {
+  width: 100%;
+  height: 150px;
+  margin-block: 10px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.descriptionform::placeholder {
+  font-family: 'ONE-Mobile-Regular';
+  text-align: center;
+  transform: translateY(250%);
+}
+
+input[type="text"]:disabled {
+  background-color: rgb(255, 255, 255);
+}
+
+.submitbutton-disable {
+  background-color: #EAEAF6;
+  color: gray;
+  max-width: 500px;
+}
+
+.submitbutton-able {
+  background-color: #6667ab;
+  color: white;
+  max-width: 500px;
+}
+
+.test3 {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.atag {
+  text-decoration: none;
+  color: gray;
+}
+
+.findtext {
+  color: gray;
+  text-align: left;
+  max-width: 500px;
+}
+
+.form {
+  max-width: 600px;
+  margin-inline: 20%;
+}
+
+input[type=password] {
+  font-family: "굴림";
+}
+
+input::placeholder {
+  font-family: 'ONE-Mobile-Regular';
+  text-align: center;
+}
+
+.dot {
+  height: 100px;
+  width: 100px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  display: inline-block;
+  border-color: #6667AB
+}
+
+@media (min-width: 360px) and (max-width: 428px) {
+
+  /* 모바일 iphone, Galaxy */
+  .livebox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 350px;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+
+
+  }
+
+  .chatbox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 200px;
+    border-radius: 10px;
+    margin: 0 1em 1em 1em;
+  }
+
+  .container {
+    border: 10px solid rgba(black, .1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 12fr;
+  }
+
+  .inputform3 {
+    width: 91%;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 0 55px 0 10px;
+
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: -50px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .livebox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+
+
+  }
+
+  .chatbox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 200px;
+    border-radius: 10px;
+    margin: 0 1em 1em 1em;
+  }
+
+  .container {
+    border: 10px solid rgba(black, .1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 12fr;
+
+  }
+
+  .inputform3 {
+    width: 96%;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 0 55px 0 10px;
+
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: -50px;
+
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1199px) {
+
+  /* 태블릿 가로 */
+  .livebox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+
+
+  }
+
+  .chatbox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 200px;
+    border-radius: 10px;
+    margin: 0 1em 1em 1em;
+  }
+
+  .container {
+    border: 10px solid rgba(black, .1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 12fr;
+  }
+
+  .inputform3 {
+    width: 97%;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 0 55px 0 10px;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: -50px;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  /* 데스크탑 일반 */
+  .livebox {
+    border: 1px solid black;
+    max-width: 1500px;
+    min-height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+
+  }
+
+  .chatbox {
+    border: 1px solid black;
+    width: 86%;
+    height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+  }
+
+  .live_container {
+    border: 10px solid rgba(black, .1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+  }
+
+  .inputform3 {
+    width: 86%;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 0 55px 0 10px;
+
+  }
+
+  /* .inputbox {
+    max-width: 290px;
+  } */
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: -50px;
+
+  }
+}
+
+.noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+}
+
+.noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+}
+
+/* @media (min-width: 1400px) {
+
+  /* 데스크탑 일반 */
+/* .livebox {
+    border: 1px solid black;
+    max-width: 950px;
+    min-height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+
+  } */
+
+/* .chatbox {
+    border: 1px solid black;
+    max-width: 300px;
+    height: 500px;
+    border-radius: 10px;
+    margin: 1em;
+  }
+
+  .live_container {
+    border: 10px solid rgba(black, .1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+  }
+
+  .inputform3 {
+    width: 240px;
+    height: 30px;
+    margin-left: 1em;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+
+  .inputbox {
+    max-width: 290px;
+    padding: 0%;
+  }
+
+  .inputsubmitbutton {
+    background-color: #6667ab;
+    color: white;
+    width: 50px;
+    height: 30px;
+    border: 0;
+    border-radius: 10px;
+    margin-left: 5px;
+  } */
+/* } */
+
+.noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+}
+
+.noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+}
+
+.IDcheck {
+  color: rgba(128, 128, 128, 0.438);
+  width: 80px;
+  margin-left: -80px;
+  margin-bottom: -5px;
+}
+
+.checkedcolor {
+  color: rgb(36, 255, 72);
+}
+
+.emailcode {
+  color: #6667ab;
+}

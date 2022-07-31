@@ -33,17 +33,19 @@ function FindPW() {
   function findPW(e) {
     e.preventDefault();
     axios({
-      url:'http://localhost:8080/api/users/mail/password' ,
-      method: 'patch',
-      data: { userId:id,userName:name, userEmail:email}
+      url:'http://localhost:8080/api/users/mail/password',
+      method: 'Patch',
+      data: { userId:id, userName:name, email:email}
     })
     .then(res => {
       console.log(res)
       alert("메일로 임시 비밀번호가 전송되었습니다!")
-      document.location.href = '/'
+      document.location.href = '/login'
     })
     .catch(err => {
-      console.log(err)
+      if (err.response.status === 400) {
+        alert("일치하는 회원 정보가 존재하지 않습니다.")
+      }
     })
   }
 

@@ -25,6 +25,9 @@ function SignUp() {
 
   function inputCodeForm(e) {
     setInputCode(e.target.value)
+    if (id && password && pwConfirm && nickname && username && email) {
+      setButton('input')
+    }
   }
   
   function inputForm(e) {
@@ -43,10 +46,10 @@ function SignUp() {
 
   function submitSignup(e){
     e.preventDefault();
-    console.log(mailCode,inputCode)
-    if (password !== pwConfirm){
+    if (inputCode === '') {
+      alert("인증코드를 입력해주세요!")
+    } else if (password !== pwConfirm){
       alert("비밀번호가 서로 맞지 않습니다.")
-      console.log(e.target.password)
       e.target.password.value = ''
       e.target.pwconfirm.value = ''
       setPassword(null)
@@ -63,7 +66,6 @@ function SignUp() {
 
 
   function axiosSignup(credentials) {
-    console.log(credentials)
     axios({
         url:'http://localhost:8080/api/users' ,
         method: 'post',

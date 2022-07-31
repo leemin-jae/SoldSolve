@@ -21,6 +21,7 @@ public class MessageServiceImpl implements MessageService {
     public Message createMessage(MessagePostReq registerInfo) {
         Message message = new Message();
         message.setContent(registerInfo.getContent());
+        message.setUser(registerInfo.getUser());
         message.setIsRead(false);
         return messageRepository.save(message);
     }

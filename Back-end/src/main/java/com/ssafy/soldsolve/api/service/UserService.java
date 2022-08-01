@@ -22,8 +22,8 @@ public interface UserService {
 
 	boolean getEmailCheck(String email);
 
-	void updateUserUserInfo(String userId, String nickName);
+	void updateUserUserInfo(String userId, String nickName, String password);
 
 
-	void updateUserProfile(String userId, String profileUrl);
+	void updateUserProfile(String userId, String profileUrl) ;
 }

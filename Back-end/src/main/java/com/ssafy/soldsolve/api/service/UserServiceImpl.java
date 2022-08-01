@@ -107,10 +107,10 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void updateUserUserInfo(String userId,  String nickName) {
+	public void updateUserUserInfo(String userId,  String nickName , String password) {
 		User user = getUserByUserId(userId);
 		user.setNickname(nickName);
-
+		user.setPassword(passwordEncoder.encode(password));
 
 		userRepository.save(user);
 	}

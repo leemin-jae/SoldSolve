@@ -137,12 +137,14 @@ public class UserController {
 			Authentication authentication)  throws Exception {
 
 		String nickName = null;
+		String password = null;
 		if(info != null) {
 			nickName = info.getNickName();
+			password = info.getPassword();
 		}
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
-		userService.updateUserUserInfo(userId , nickName);
+		userService.updateUserUserInfo(userId , nickName , password);
 
 
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));

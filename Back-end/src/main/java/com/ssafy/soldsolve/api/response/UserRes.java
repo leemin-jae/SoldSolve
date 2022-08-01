@@ -18,6 +18,7 @@ public class UserRes{
 	String userName;
 	String nickName;
 	String email;
+	String profileUrl;
 	
 	public static UserRes of(User user) {
 		UserRes res = new UserRes();
@@ -25,6 +26,7 @@ public class UserRes{
 		res.setUserName(user.getUsername());
 		res.setNickName(user.getNickname());
 		res.setEmail(user.getEmail());
+		res.setProfileUrl(user.getProfileUrl());
 		return res;
 	}
 }

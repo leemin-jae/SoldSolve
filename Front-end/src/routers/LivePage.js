@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import UserVideoComponent from './Live/UserVideoComponent';
 
 
-const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
+const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 
 class LivePage extends Component {

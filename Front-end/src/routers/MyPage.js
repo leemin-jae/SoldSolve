@@ -16,6 +16,7 @@ function MyPage() {
         const requestOptions = {
             method: 'GET',
             headers: { 'Authorization':  `Bearer ${localStorage.token}`}
+            //localStorage.getItem('token');
             
         };
 
@@ -23,9 +24,16 @@ function MyPage() {
         const getProfile = async () => {
             setLoading(true);
             
-            const response = await fetch(`/api/users/me`, requestOptions);
-            setProfile(await response.json());
-            setLoading(false);
+            try {
+                const response = await fetch(`/api/users/me`, requestOptions);
+                const data = await response.json();
+                console.log(data);
+                setProfile(data);
+            } catch(error) {
+                console.error(error);
+            } finally {
+                setLoading(false);
+            }
         }
         getProfile();
     }, []);
@@ -48,7 +56,7 @@ function MyPage() {
                 <div className='account_container'>
                     <div className='column'>사진자리</div>
                     <div className='column'>
-                        <div className=''>{profile.userName}</div>
+                        <div className=''>{profile.nickName}</div>
                         <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
                         
                     </div>

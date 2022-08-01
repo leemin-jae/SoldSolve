@@ -67,7 +67,7 @@ function MyPage() {
                         <FontAwesomeIcon className='icon' icon={faCartArrowDown} size="2x" />
                         <div>구매내역</div>
                         </button>
-                        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                        <Modal open={modalOpen} close={closeModal} header="구매내역">
                             구매내역리스트
                         </Modal>
                     </div>
@@ -76,7 +76,7 @@ function MyPage() {
                         <FontAwesomeIcon className='icon' icon={faReceipt} size="2x" />
                         <div>판매내역</div>
                         </button>
-                        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                        <Modal open={modalOpen} close={closeModal} header="판매내역">
                             판매내역리스트
                         </Modal>
                     </div>
@@ -90,7 +90,7 @@ function MyPage() {
                     <button className='' onClick={openModal}>
                         <div>더보기</div>
                         </button>
-                        <Modal open={modalOpen} close={closeModal} header="Modal heading">
+                        <Modal open={modalOpen} close={closeModal} header="찜한상품">
                             더보기리스트
                         </Modal>
                     </div>

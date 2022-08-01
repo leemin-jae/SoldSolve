@@ -1,14 +1,14 @@
 import React from 'react'
-import './routers.css'
-import NavBar from '../components/NavBar'
+import '../routers.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import './Carousel.css'
+import NavBar from '../../components/NavBar';
 function Product() {
   return (
 
     <>
-      <NavBar></NavBar>
+      <NavBar />
 
       <div className='carousel_box'>
         <div className="slider">

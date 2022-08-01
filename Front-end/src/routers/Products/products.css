@@ -1,0 +1,6 @@
+
+.InfiniteScroll_wrap {
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import NavBar from '../../components/NavBar';
+import './products.css'
 
 function Products() {
   const [data, setData] = useState([]);
@@ -10,7 +12,7 @@ function Products() {
     let componentMounted = true;
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("상품리스트api");
+      const response = await fetch("https://fakestoreapi.com/products");
       if (componentMounted) {
         setData(await response.clone().json());
         setFilter(await response.json());
@@ -23,7 +25,7 @@ function Products() {
       };
     };
     getProducts();
-  });
+  }, []);
 
   const Loading = () => {
     return (
@@ -39,19 +41,19 @@ function Products() {
   }
 
   const ShowProducts = () => {
-    filterProduct("bag")
+    filterProduct("electronics")
     return (
       <>
         {filter.map((product) => {
           return (
             <>
-              <div key={product.id}>
-                <img
+              <div className='ProductCard_wrap' key={product.id}>
+                <img className='ProductCard_img'
                   src={product.image}
                   alt={product.title}
                 />
-                <div>
-                  {product.subscribed}
+                <div className='ProductCard_text'>
+                  {product.title}
                 </div>
               </div>
             </>
@@ -63,7 +65,8 @@ function Products() {
 
   return (
     <>
-      <div className=''>
+      <NavBar />
+      <div className='InfiniteScroll_wrap' id='maincontent'>
         {loading ? <Loading /> : <ShowProducts />}
       </div>
     </>

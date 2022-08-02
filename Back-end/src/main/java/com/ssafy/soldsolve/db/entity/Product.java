@@ -17,7 +17,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
-    private int id;
+    private int no;
 
     private String title; // 상품 이름
     private String content; // 상품 설명
@@ -27,13 +27,14 @@ public class Product {
     private String category; // 카테고리 -> table 생성 후 외래키
 
     @ElementCollection
-    @CollectionTable(name = "productimg")
+    @CollectionTable(name = "productimg" )
     private List<String> productImg = new ArrayList<>(); // 상품 사진 여러개
-
 
     private int viewCount;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_pk")
     private User user;
+
+
 }

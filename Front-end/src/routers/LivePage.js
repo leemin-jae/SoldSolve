@@ -2,39 +2,27 @@ import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
 import UserVideoComponent from './Live/UserVideoComponent';
+import NavBar from '../components/NavBar';
+import './routers.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-
-const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':';
+const OPENVIDU_SERVER_URL = 'https://' + window.location.hostname + ':4443';
 const OPENVIDU_SERVER_SECRET = 'MY_SECRET';
 
 class LivePage extends Component {
     constructor(props) {
         
-            
         super(props);
+        
         this.state = {
-            mySessionId: '판매방'+Math.floor(Math.random() * 100),
-            myUserName: 'User',
+            mySessionId: 'sell'+Math.floor(Math.random() * 1000),
+            myUserName: localStorage.nickName,
             session: undefined,
             mainStreamManager: undefined,
             publisher: undefined,
             subscribers: [],
         };
-
-        axios({
-            url: '/api/v1/users/me',
-            method: 'get',
-            headers: { 'Authorization':  `Bearer ${localStorage.token}`}
-            })
-            .then(res => {
-                console.log(res.data.nickName)
-                this.setState({
-                    mySessionId: res.data.nickName
-                })
-            })
-            .catch(err => {
-                console.error(err.response.data)
-            })
 
     
         this.joinSession = this.joinSession.bind(this);
@@ -154,10 +142,10 @@ class LivePage extends Component {
                                 videoSource: videoDevices[0].deviceId, // The source of video. If undefined default webcam
                                 publishAudio: true, // Whether you want to start publishing with your audio unmuted or not
                                 publishVideo: true, // Whether you want to start publishing with your video enabled or not
-                                resolution: '640x480', // The resolution of your video
+                                resolution: '800x500', // The resolution of your video
                                 frameRate: 30, // The frame rate of your video
                                 insertMode: 'APPEND', // How the video is inserted in the target element 'video-container'
-                                mirror: false, // Whether to mirror your local video or not
+                                mirror: true, // Whether to mirror your local video or not
                             });
 
                             // --- 6) Publish your stream ---
@@ -194,11 +182,12 @@ class LivePage extends Component {
         this.setState({
             session: undefined,
             subscribers: [],
-            mySessionId: 'Session' + Math.floor(Math.random() * 100),
-            myUserName: 'USER',
+            mySessionId: 'sell'+Math.floor(Math.random() * 1000),
+            myUserName: localStorage.nickName,
             mainStreamManager: undefined,
             publisher: undefined
         });
+        document.location.href = '/'
     }
 
     async switchCamera() {
@@ -237,77 +226,62 @@ class LivePage extends Component {
     }
 
     render() {
-        const mySessionId = this.state.mySessionId;
-        const myUserName = this.state.myUserName;
-
+        if (this.state.session === undefined) {
+            this.joinSession()
+        }
         return (
-            <div className="container">
-                {this.state.session === undefined ? (
-                    <div id="join">
-                        <div id="img-div">
-                            <img src="resources/images/openvidu_grey_bg_transp_cropped.png" alt="OpenVidu logo" />
-                        </div>
-                        <div id="join-dialog" className="jumbotron vertical-center">
-                            <h1> Join a video session </h1>
-                            <form className="form-group" onSubmit={this.joinSession}>
-                                <p>
-                                    <label>Participant: </label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="userName"
-                                        value={myUserName}
-                                        onChange={this.handleChangeUserName}
-                                        required
-                                    />
-                                </p>
-                                <p>
-                                    <label> Session: </label>
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="sessionId"
-                                        value={mySessionId}
-                                        onChange={this.handleChangeSessionId}
-                                        required
-                                    />
-                                </p>
-                                <p className="text-center">
-                                    <input className="btn btn-lg btn-success" name="commit" type="submit" value="JOIN" />
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                ) : null}
-
+            <div>
+                <NavBar></NavBar>
+            <div className="test">
                 {this.state.session !== undefined ? (
+                    
                     <div id="session">
-                        <div id="session-header">
-                            <h1 id="session-title">{mySessionId}</h1>
+                        <div className='d-flex'>
+                            <h1 id="session-title">{localStorage.LiveRoom}</h1>
                             <input
-                                className="btn btn-large btn-danger"
-                                type="button"
-                                id="buttonLeaveSession"
-                                onClick={this.leaveSession}
-                                value="Leave session"
-                            />
-                        </div>
-
-                        {this.state.mainStreamManager !== undefined ? (
-                            <div id="main-video" className="col-md-6">
-                                <UserVideoComponent streamManager={this.state.mainStreamManager} />
-                                <input
+                                    className="btn btn-large btn-danger"
+                                    type="button"
+                                    id="buttonLeaveSession"
+                                    onClick={this.leaveSession}
+                                    value="Leave session"
+                                />
+                            <input
                                     className="btn btn-large btn-success"
                                     type="button"
                                     id="buttonSwitchCamera"
                                     onClick={this.switchCamera}
                                     value="Switch Camera"
                                 />
+                        </div>
+                        
+                        <div className='live_container'>
+                            
+                            <div>
+                                <div>
+                                {this.state.mainStreamManager !== undefined ? (
+                                    <div className='livebox'>
+                                        <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
+                                    </div>
+                                 ) : null}
+                                </div>
+                                <p style={{ margin: '1em' }}><FontAwesomeIcon icon={faUser} size="2x" style={{ marginRight: '10px' }} />
+                                    닉네임 (본인이 설정한 지역), 평점</p>
+                                <p style={{ margin: '1em' }}> ~~~~ 팝니다!</p>
+                                <hr style={{ width: '100%' }} />
                             </div>
-                        ) : null}
+                            <div>
+                            <div className='chatbox'><h3>채팅방</h3></div>
+                            <div>
+                                <input className='inputform3' type="text" />
+                                <button className='inputsubmitbutton'>입력</button>
+                            </div>
+                            </div>
+                        </div>
                     </div>
                 ) : null}
             </div>
+            </div>
+            
         );
     }
 

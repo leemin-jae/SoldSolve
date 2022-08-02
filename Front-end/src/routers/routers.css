@@ -99,13 +99,14 @@
 
 .inputform {
   width: 100%;
-  height: 65px;
+  min-height: 65px;
   margin-block: 10px;
   border-radius: 10px;
   border: 1px solid #6667ab;
   padding-inline: 20px;
   padding-block: 5px;
   max-width: 500px;
+  margin-inline: auto;
 }
 
 .inputform2 {
@@ -451,4 +452,7 @@ input::placeholder {
 
 .emailcode {
   color: #6667ab;
+}
+.emailcode2 {
+  color: rgba(128, 128, 128, 0.438);
 }

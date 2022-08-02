@@ -15,6 +15,7 @@ import NoticePage from './routers/NoticePage';
 import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
 import LiveDetail from './routers/LiveDetail';
+import CreateProduct from './routers/CreateProduct';
 
 
 //
@@ -45,7 +46,6 @@ root.render(
               <Route path="/signup" element={<SignUp />} />
               <Route path="/find" element={<FindAccount />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/*" element={<NotFound />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/editaccount" element={<EditAccount />} />
               <Route path="/notice" element={<NoticePage />} />
@@ -54,7 +54,9 @@ root.render(
               <Route path='/livedetail' element={<LiveDetail />}></Route>
               <Route path='/product' element={<Product />}></Route>
               <Route path='/products' element={<Products />}></Route>
+              <Route path='/createproduct' element={<CreateProduct />}></Route>
 
+              <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </PersistGate>

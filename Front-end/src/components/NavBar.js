@@ -47,16 +47,23 @@ function NavBar() {
       <input id="category" type="checkbox"></input>
       <div id="left_toggle">
         <ul>
-          <li><a href="#!">shoes</a></li>
-          <li><a href="#!">bag</a></li>
+          <li><a href="#!"><h5>디지털기기</h5></a></li>
+          <li><a href="#!"><h5>생활가전</h5></a></li>
+          <li><a href="#!"><h5>가구</h5></a></li>
+          <li><a href="#!"><h5>패션/잡화</h5></a></li>
+          <li><a href="#!"><h5>뷰티/미용</h5></a></li>
+          <li><a href="#!"><h5>스포츠</h5></a></li>
+          <li><a href="#!"><h5>취미/게임</h5></a></li>
+          <li><a href="#!"><h5>도서</h5></a></li>
+          <li><a href="#!"><h5>기타</h5></a></li>
         </ul>
       </div>
 
       <input id="account" type="checkbox"></input>
       <div id="right_toggle">
         <ul className="mobile_menu">
-          <li><a href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
-          <li><a href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
+          <li><a href='/notice'><h5>알림함</h5></a></li>
+          <li><a href='/search'><h5>검색</h5></a></li>
           {NavAcouuntTab1}
           {NavAcouuntTab2}
         </ul>

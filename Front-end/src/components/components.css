@@ -11,6 +11,8 @@ nav {
 }
 
 
+
+
 input#category,
 input#account,
 div#left_toggle,
@@ -21,6 +23,17 @@ div#right_toggle,
 
 }
 
+@keyframes fadeInRight {
+  0% {
+      opacity: 0;
+      transform: translate3d(-20%, 0, 0);
+  }
+  to {
+      opacity: 1;
+      transform: translateZ(0);
+  }
+}
+
 
 input#category:checked+div#left_toggle {
   background-color: white;
@@ -28,8 +41,9 @@ input#category:checked+div#left_toggle {
   flex-direction: column;
   position: absolute;
   margin: 0 0 15px;
-  height: 100%;
-  width: 10em;
+  /* height: 100%; */
+  width: 10rem;
+  animation: fadeInRight 0.5s;
 }
 
 .category_toggle {
@@ -114,28 +128,28 @@ ul li a {
   color: #6667AB;
 }
 
+
 ul.mobile_menu {
   list-style: none;
-  border: 3px solid #6667AB;
-  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 
 ul.mobile_menu li {
   display: block;
-  margin: 5px 0px 0px 0px;
-
+  margin: 10px 15px 0px 0px;
 }
 
 div#left_toggle ul {
   list-style: none;
+  margin: 10px 0px 0px 0px;
 
 }
 
 div#left_toggle ul li {
   display: block;
-  margin: 10px 0px 20px 5px;
-  font-size: 1.5rem;
+  margin: 10px 0px 30px 0px;
 
 }
 
@@ -151,17 +165,28 @@ div#left_toggle ul li {
     align-items: center;
   }
 
+  @keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -30%, 0);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateZ(0);
+    }
+  }
+  
+
 
   input#account:checked+div#right_toggle {
     background-color: white;
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: 0em;
-    /* top: 9vh; */
-    margin: 0 0.7em;
-    height: 10em;
-    width: 9em;
+    width: 96%;
+    opacity: 80%;
+    animation: fadeInDown 1s;
+    
 
   }
 
@@ -187,17 +212,25 @@ div#left_toggle ul li {
     align-items: center;
   }
 
+  @keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, -30%, 0);
+    }
+    to {
+        opacity: 0.8;
+        transform: translateZ(0);
+    }
+  }
 
   input#account:checked+div#right_toggle {
     background-color: white;
     display: flex;
     flex-direction: column;
     position: absolute;
-    right: 0.4em;
-    /* top: 9vh; */
-    margin: 0 1em;
-    height: 10em;
-    width: 10em;
+    width: 96%;
+    opacity: 80%;
+    animation: fadeInDown 1s;
   }
 
   .screen_menu {

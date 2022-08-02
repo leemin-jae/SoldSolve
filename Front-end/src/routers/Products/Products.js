@@ -41,21 +41,24 @@ function Products() {
   }
 
   const ShowProducts = () => {
-    filterProduct("electronics")
+    filterProduct("women's clothing")
     return (
       <>
-        {filter.map((product) => {
+        {data.map((product) => {
           return (
             <>
-              <div className='ProductCard_wrap' key={product.id}>
-                <img className='ProductCard_img'
+              <li className='cards_item'>
+                <a href={`/products/${product.id}`} className='card'>
+                <img className='card_image'
                   src={product.image}
                   alt={product.title}
                 />
-                <div className='ProductCard_text'>
-                  {product.title}
+                <div className='card_content'>
+                  <h5 className='card_title'>{product.title}</h5>
+                  <p className='card_text'>{product.price}</p>
                 </div>
-              </div>
+                </a>
+              </li>
             </>
           );
         })}
@@ -66,8 +69,11 @@ function Products() {
   return (
     <>
       <NavBar />
-      <div className='InfiniteScroll_wrap' id='maincontent'>
-        {loading ? <Loading /> : <ShowProducts />}
+      <div className='content'>
+        <h1>옷</h1>
+        <ul className='cards' id='maincontent'>
+          {loading ? <Loading /> : <ShowProducts />}
+        </ul>
       </div>
     </>
   );

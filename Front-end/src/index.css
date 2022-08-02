@@ -41,7 +41,7 @@ h6 {
 
 @media (min-width: 360px) and (max-width: 767px) {}
 
-@media (max-width: 767px) {
+@media (max-width: 414px) {
   .background {
     background-color: white;
     /* box-shadow: 2px 2px 1px 1px rgba(209, 207, 207, 0.39); */
@@ -54,6 +54,24 @@ h6 {
     display: flex;
     font-size: 12px;
     max-width: 313px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 415px) and (max-width: 767px) {
+  .background {
+    background-color: white;
+    /* box-shadow: 2px 2px 1px 1px rgba(209, 207, 207, 0.39); */
+    border-radius: 20px;
+    margin-inline: 2%;
+    margin-block: 2%;
+  }
+
+  .user_box {
+    display: flex;
+    font-size: 12px;
+    max-width: 500px;
     margin-right: auto;
     margin-left: auto;
   }

@@ -4,9 +4,10 @@ import { faBars, faMagnifyingGlass, faEnvelope, faUser } from '@fortawesome/free
 import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getToken } from '../store.js'
+import { useNavigate } from 'react-router-dom';
 
 function NavBar() {
-
+  let navigate = useNavigate()
   let dispatch = useDispatch()
   let storeToken = useSelector((state) => { return state })
 
@@ -46,6 +47,10 @@ function NavBar() {
 
       <input id="category" type="checkbox"></input>
       <div id="left_toggle">
+        <button onClick={() => {
+          navigate('/createproduct')
+        }} style={{ backgroundColor: '#6667ab', color: 'white', width: '132px', height: '40px', textAlign: 'center', border: '0', borderRadius: '10px', alignContent: 'center', margin: '20px auto auto auto' }} >상품 등록하기</button>
+        <h3 style={{ textAlign: 'center', margin: '20px 0 0 0', color: '#6667ab' }}>Category</h3><hr />
         <ul>
           <li><a href="#!"><h5>디지털기기</h5></a></li>
           <li><a href="#!"><h5>생활가전</h5></a></li>

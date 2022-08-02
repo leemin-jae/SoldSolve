@@ -101,7 +101,7 @@
 }
 
 
-@media (max-width: 767px) {
+@media (max-width: 414px) {
   .slider {
     width: 300px;
   }
@@ -113,6 +113,24 @@
   .slides>div {
     width: 100%;
     height: 150px;
+  }
+
+}
+
+@media (min-width: 415px) and (max-width: 767px) {
+  .slider {
+    width: 500px;
+  }
+
+
+
+  .slides>div {
+    width: 600px;
+    height: 300px;
+  }
+
+  .slider>a {
+    margin: 0.5rem 0.5rem 0.5rem 0;
   }
 
 }

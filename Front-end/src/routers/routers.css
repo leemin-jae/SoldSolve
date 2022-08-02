@@ -142,6 +142,21 @@
   transform: translateY(250%);
 }
 
+.product_description {
+  display: block;
+  /* font-size: 12px; */
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.product_description>.button_box {
+  display: flex;
+  margin: auto;
+  justify-content: flex-end
+}
+
 input[type="text"]:disabled {
   background-color: rgb(255, 255, 255);
 }
@@ -240,7 +255,7 @@ input::placeholder {
   border: 2px solid #6667AB;
 } */
 
-@media (max-width: 767px) {
+@media (max-width: 413px) {
 
   /* 모바일 iphone, Galaxy */
   .livebox {
@@ -260,7 +275,7 @@ input::placeholder {
 
   .category_reco_box {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     /* padding: 0 20px 0 20px */
   }
 
@@ -276,7 +291,66 @@ input::placeholder {
     height: 130px;
   }
 
+  .product_description {
+    display: block;
+    font-size: 12px;
+    max-width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+
 }
+
+@media (min-width: 414px) and (max-width: 767px) {
+  .livebox {
+    max-width: 950px;
+    min-height: 500px;
+  }
+
+  .chatbox {
+    max-width: 950px;
+    min-height: 200px;
+  }
+
+  .inputform3 {
+    width: 96%;
+    height: 30px;
+  }
+
+  .category_reco_box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* padding: 0 20px 0 20px */
+  }
+
+  .category_reco {
+    /* border: 1px solid #6667AB; */
+    width: 200px;
+    border-radius: 10px;
+    margin: 20px auto 20px auto;
+
+  }
+
+  .category_img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .product_description {
+    max-width: 700px;
+  }
+
+  .product_description {
+    display: block;
+    font-size: 12px;
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+}
+
 
 @media (min-width: 768px) and (max-width: 991px) {
   .livebox {
@@ -311,6 +385,10 @@ input::placeholder {
   .category_img {
     width: 200px;
     height: 200px;
+  }
+
+  .product_description {
+    max-width: 700px;
   }
 }
 
@@ -349,6 +427,10 @@ input::placeholder {
   .category_img {
     width: 200px;
     height: 200px;
+  }
+
+  .product_description {
+    max-width: 800px;
   }
 }
 
@@ -400,6 +482,10 @@ input::placeholder {
   .category_img {
     width: 200px;
     height: 200px;
+  }
+
+  .product_description {
+    max-width: 900px;
   }
 }
 
@@ -453,6 +539,7 @@ input::placeholder {
 .emailcode {
   color: #6667ab;
 }
+
 .emailcode2 {
   color: rgba(128, 128, 128, 0.438);
 }

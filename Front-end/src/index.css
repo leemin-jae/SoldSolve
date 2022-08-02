@@ -39,15 +39,7 @@ h6 {
   font-family: 'ONE-Mobile-Title';
 }
 
-@media (min-width: 360px) and (max-width: 428px) {
-  .user_box {
-    display: flex;
-    font-size: 12px;
-    max-width: 313px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-}
+@media (min-width: 360px) and (max-width: 767px) {}
 
 @media (max-width: 767px) {
   .background {
@@ -56,6 +48,14 @@ h6 {
     border-radius: 20px;
     margin-inline: 2%;
     margin-block: 2%;
+  }
+
+  .user_box {
+    display: flex;
+    font-size: 12px;
+    max-width: 313px;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 
@@ -69,6 +69,14 @@ h6 {
     margin-inline: 2%;
     margin-block: 2%;
   }
+
+  .user_box {
+    display: flex;
+    font-size: 12px;
+    max-width: 700px;
+    margin-right: auto;
+    margin-left: auto;
+  }
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
@@ -78,8 +86,16 @@ h6 {
     background-color: white;
     /* box-shadow: 10px 10px 5px 5px rgba(209, 207, 207, 0.39); */
     border-radius: 20px;
-    margin-inline: 7%;
+    margin-inline: 2%;
     margin-block: 2%;
+  }
+
+  .user_box {
+    display: flex;
+    font-size: 12px;
+    max-width: 800px;
+    margin-right: auto;
+    margin-left: auto;
   }
 }
 

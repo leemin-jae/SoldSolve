@@ -29,6 +29,8 @@ public class User {
 	private String email;
 	
 	private String role;
+
+	private String profileUrl;
 	
 	@CreationTimestamp
 	private Timestamp createDate;
@@ -38,21 +40,15 @@ public class User {
 
 	
 	@Builder
-	public User(String userid, String password, String username, String nickname, String email, String role,
-			Timestamp createDate, List<Message> messages) {
-		super();
+	public User(String userid, String password, String username, String nickname, String email, String role, String profileUrl, Timestamp createDate, List<Message> messages) {
 		this.userid = userid;
 		this.password = password;
 		this.username = username;
 		this.nickname = nickname;
 		this.email = email;
 		this.role = role;
+		this.profileUrl = profileUrl;
 		this.createDate = createDate;
 		this.messages = messages;
 	}
-
-
-	
-	
-	
 }

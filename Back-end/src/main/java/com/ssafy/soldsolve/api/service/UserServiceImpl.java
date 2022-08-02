@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService{
 		user.setUsername(registerInfo.getUserName());
 		user.setEmail(registerInfo.getEmail());
 		user.setNickname(registerInfo.getNickName());
+		user.setProfileUrl(System.getProperty("user.dir") + "/src/main/resources/images/profile/basic.png");
 		user.setRole("ROLE_USER");
 		
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.
@@ -106,15 +107,18 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void updateUserUserInfo(String userId, String password, String nickName) {
+	public void updateUserUserInfo(String userId,  String nickName , String password) {
 		User user = getUserByUserId(userId);
-		System.out.println("password " + password);
-		System.out.println("1 " + user.getPassword());
-		user.setPassword(passwordEncoder.encode(password));
-		System.out.println("2 " + user.getPassword());
 		user.setNickname(nickName);
+		user.setPassword(passwordEncoder.encode(password));
 
 		userRepository.save(user);
+	}
+
+	@Override
+	public void updateUserProfile(String userId, String profileUrl) {
+		User user = getUserByUserId(userId);
+		user.setProfileUrl(profileUrl);
 	}
 
 

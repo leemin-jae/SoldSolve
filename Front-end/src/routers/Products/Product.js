@@ -1,12 +1,62 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../routers.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import './Carousel.css'
 import NavBar from '../../components/NavBar';
-function Product() {
-  return (
+import axios from 'axios';
+import './products.css'
 
+function Product() {
+
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(false);
+
+
+  useEffect(() => {
+    axios.get('https://fakestoreapi.com/products')
+      .then(res => {
+        setProducts(res.data)
+        // console.log(res.data)
+        // console.log(products)
+        setLoading(true)
+      })
+
+  }, [])
+
+  const ShowProducts = () => {
+    return (
+      <>{
+        products.map((product) => {
+          console.log(product)
+          return (
+            <>
+              <div className='category_reco' key={product.id}>
+                <img className='category_img'
+                  src={product.image}
+                  alt={product.title}
+                />
+                <div className='category_content'>
+                  <h6 className='category_title' style={{ marginTop: '15px' }}>{product.title}</h6>
+                  <p className='category_text'>{product.price}</p>
+                </div>
+              </div>
+
+            </>
+          )
+        })
+      }</>)
+  }
+
+  const Loading = () => {
+    return (
+      <>
+        Loading...
+      </>
+    );
+  };
+  console.log(loading)
+  return (
     <>
       <NavBar />
 
@@ -33,7 +83,11 @@ function Product() {
         </div>
         <p className='score'>평점</p>
       </div>
-
+      <hr></hr>
+      <h5 style={{ textAlign: "center" }}>카테고리 별 추천 상품</h5>
+      <div className='category_reco_box'>
+        {loading ? <ShowProducts /> : <Loading />}
+      </div>
     </>
   )
 }

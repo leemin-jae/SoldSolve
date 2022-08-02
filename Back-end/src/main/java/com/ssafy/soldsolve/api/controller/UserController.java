@@ -1,8 +1,10 @@
 package com.ssafy.soldsolve.api.controller;
 
+import com.ssafy.soldsolve.api.service.FileService;
 import com.ssafy.soldsolve.api.service.MailSendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,10 @@ import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
 import com.ssafy.soldsolve.db.entity.User;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
 
 
 /**
@@ -43,6 +49,9 @@ public class UserController {
 
 	@Autowired
 	MailSendService mailSendService;
+
+	@Autowired
+	FileService fileService;
 
 
 	@PostMapping()
@@ -121,16 +130,38 @@ public class UserController {
 
 
 
+
 	@PatchMapping("/update/userinfo")
 	public ResponseEntity<? extends BaseResponseBody> updateUserNickName(
 			@RequestBody UserRegisterPostReq info,
-			Authentication authentication) {
+			Authentication authentication)  throws Exception {
 
-		String nickName = info.getNickName();
-		String password = info.getPassword();
+		String nickName = null;
+		String password = null;
+		if(info != null) {
+			nickName = info.getNickName();
+			password = info.getPassword();
+		}
 		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
 		String userId = userDetails.getUsername();
-		userService.updateUserUserInfo(userId , password , nickName);
+		userService.updateUserUserInfo(userId , nickName , password);
+
+
+		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));
+	}
+
+
+
+	@PatchMapping("/update/profile")
+	public ResponseEntity<? extends BaseResponseBody> updateProfile(
+			@RequestPart MultipartFile files,
+			Authentication authentication)  throws Exception {
+
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+
+		String profileUrl = fileService.ImageDir(files , "profile");
+		userService.updateUserProfile(userId , profileUrl);
 
 
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));

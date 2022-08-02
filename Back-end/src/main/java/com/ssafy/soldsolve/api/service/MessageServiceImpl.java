@@ -35,6 +35,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void updateMessage(MessagePostReq messagePostReq, Message message) {
         message.setContent(messagePostReq.getContent());
+        message.setUser(messagePostReq.getUser());
         messageRepository.save(message);
     }
 

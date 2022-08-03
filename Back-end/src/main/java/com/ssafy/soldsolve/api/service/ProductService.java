@@ -9,15 +9,13 @@ public interface ProductService {
 
     List<Product> searchAllProduct();
 
-    List<Product> searchByNickNameProduct(String nickName);
-
     List<Product> searchByTitleProduct(String title);
-
-    Product searchByNoProduct(int parseInt);
 
     int registProduct(ProductPostReq product);
 
-    int updateProduct(ProductPostReq product);
+    int updateProduct(String no, ProductPostReq product);
 
     int deleteProduct(String no);
+
+    Product getProduct(String no);
 }

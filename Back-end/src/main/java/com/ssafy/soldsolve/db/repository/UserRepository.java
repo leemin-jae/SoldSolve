@@ -1,6 +1,7 @@
 package com.ssafy.soldsolve.db.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.ssafy.soldsolve.db.entity.User;
@@ -15,5 +16,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	User findByUseridAndEmailAndUsername(String userid, String email,String username);
     User findByUsernameAndEmail(String username, String email);
 
-	List<User> findByNicknameContains(String nickName);
+
 }
+

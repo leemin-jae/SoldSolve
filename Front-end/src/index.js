@@ -15,6 +15,7 @@ import NoticePage from './routers/NoticePage';
 import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
 import LiveDetail from './routers/LiveDetail';
+import CreateProduct from './routers/CreateProduct';
 
 
 //
@@ -25,7 +26,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom' // react-router-
 import 'bootstrap/dist/css/bootstrap.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import Product from './routers/Product';
+import Product from './routers/Products/Product';
+import Products from './routers/Products/Products';
 
 
 let persistor = persistStore(store);
@@ -44,7 +46,6 @@ root.render(
               <Route path="/signup" element={<SignUp />} />
               <Route path="/find" element={<FindAccount />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/*" element={<NotFound />} />
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/editaccount" element={<EditAccount />} />
               <Route path="/notice" element={<NoticePage />} />
@@ -52,7 +53,10 @@ root.render(
               <Route path='/live' element={<LivePage />}></Route>
               <Route path='/livedetail' element={<LiveDetail />}></Route>
               <Route path='/product' element={<Product />}></Route>
+              <Route path='/products' element={<Products />}></Route>
+              <Route path='/createproduct' element={<CreateProduct />}></Route>
 
+              <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
         </PersistGate>

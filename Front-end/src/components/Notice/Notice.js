@@ -1,4 +1,5 @@
 import '../components.css'
+import NoticeTest from './test.js'
 
 function Notice() {
     const readlis = []
@@ -43,6 +44,7 @@ function Notice() {
   return (
     <div>
       <div className="articles">
+      <NoticeTest></NoticeTest>
         {lis}
         {readlis}
       </div> 

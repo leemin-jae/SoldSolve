@@ -255,7 +255,7 @@ input::placeholder {
   border: 2px solid #6667AB;
 } */
 
-@media (max-width: 413px) {
+@media (max-width: 414px) {
 
   /* 모바일 iphone, Galaxy */
   .livebox {
@@ -294,15 +294,19 @@ input::placeholder {
   .product_description {
     display: block;
     font-size: 12px;
-    max-width: 700px;
+    max-width: 313px;
     margin-right: auto;
     margin-left: auto;
     margin-top: 20px;
   }
 
+  .notice_list{
+    font-size: 13px;
+  }
+
 }
 
-@media (min-width: 414px) and (max-width: 767px) {
+@media (min-width: 415px) and (max-width: 767px) {
   .livebox {
     max-width: 950px;
     min-height: 500px;
@@ -349,6 +353,9 @@ input::placeholder {
     margin-left: auto;
     margin-top: 20px;
   }
+  .notice_list{
+    font-size: large;
+  }
 }
 
 
@@ -389,6 +396,9 @@ input::placeholder {
 
   .product_description {
     max-width: 700px;
+  }
+  .notice_list{
+    font-size: x-large;
   }
 }
 
@@ -431,6 +441,9 @@ input::placeholder {
 
   .product_description {
     max-width: 800px;
+  }
+  .notice_list{
+    font-size: x-large;
   }
 }
 
@@ -487,12 +500,18 @@ input::placeholder {
   .product_description {
     max-width: 900px;
   }
+  .notice_list{
+    font-size: x-large;
+  }
 }
-
+.notice_list{
+  display: flex;
+  justify-content:space-evenly;
+}
 .noticeSpan {
   background-color: white;
   margin-inline: 5%;
-  font-size: x-large;
+  /* font-size: large; */
   font-weight: bolder;
   color: #6667ab;
   border: none;
@@ -501,7 +520,7 @@ input::placeholder {
 .noticeSpan2 {
   background-color: white;
   margin-inline: 5%;
-  font-size: x-large;
+  /* font-size: large; */
   font-weight: bolder;
   color: #6667ab71;
   border: none;
@@ -516,14 +535,14 @@ input::placeholder {
   border: none;
 } */
 
-.noticeSpan2 {
+/* .noticeSpan2 {
   background-color: white;
   margin-inline: 5%;
   font-size: x-large;
   font-weight: bolder;
   color: #6667ab71;
   border: none;
-}
+} */
 
 .IDcheck {
   color: rgba(128, 128, 128, 0.438);
@@ -542,4 +561,9 @@ input::placeholder {
 
 .emailcode2 {
   color: rgba(128, 128, 128, 0.438);
+}
+
+.notice_list{
+  display: flex;
+  justify-content: space-evenly;
 }

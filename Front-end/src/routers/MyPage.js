@@ -54,7 +54,7 @@ function MyPage() {
             <div className='mypage' style={{ margin: 30 }}>
                 <h3>MY PAGE</h3>
                 <div className='account_container'>
-                    <div className='column'>사진자리</div>
+                    <div className='column'>{profile.profileImg}</div>
                     <div className='column'>
                         <div className=''>{profile.nickName}</div>
                         <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>

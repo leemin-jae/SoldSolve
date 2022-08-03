@@ -507,14 +507,14 @@ input::placeholder {
   border: none;
 }
 
-.noticeSpan {
+/* .noticeSpan {
   background-color: white;
   margin-inline: 5%;
   font-size: x-large;
   font-weight: bolder;
   color: #6667ab;
   border: none;
-}
+} */
 
 .noticeSpan2 {
   background-color: white;

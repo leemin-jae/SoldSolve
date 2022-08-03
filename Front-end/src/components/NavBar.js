@@ -69,6 +69,7 @@ function NavBar() {
         <ul className="mobile_menu">
           <li><a href='/notice'><h5>알림함</h5></a></li>
           <li><a href='/search'><h5>검색</h5></a></li>
+          
           {NavAcouuntTab1}
           {NavAcouuntTab2}
         </ul>

@@ -132,10 +132,9 @@ h6 {
     background-color: white;
     /* box-shadow: 10px 10px 5px 5px rgba(209, 207, 207, 0.39); */
     border-radius: 20px;
-    margin-inline: 7%;
+    /* margin-inline: 7%; */
     margin-block: 2%;
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
   }
 }

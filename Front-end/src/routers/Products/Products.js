@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import NavBar from '../../components/NavBar';
 import './products.css'
 
+
 function Products() {
   const [data, setData] = useState([]);
-  const [filter, setFilter] = useState(data);
+  // const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
 
 
@@ -15,9 +16,9 @@ function Products() {
       const response = await fetch("https://fakestoreapi.com/products");
       if (componentMounted) {
         setData(await response.clone().json());
-        setFilter(await response.json());
+        // setFilter(await response.json());
         setLoading(false);
-        console.log(filter);
+        // console.log(filter);
       }
 
       return () => {
@@ -35,19 +36,19 @@ function Products() {
     );
   };
 
-  const filterProduct = (cat) => {
-    const updatedList = data.filter((x) => x.category === cat);
-    setFilter(updatedList);
-  }
+  // const filterProduct = (cat) => {
+  //   const updatedList = data.filter((x) => x.category === cat);
+  //   setFilter(updatedList);
+  // }
 
   const ShowProducts = () => {
-    filterProduct("women's clothing")
+    // filterProduct("women's clothing")
     return (
       <>
         {data.map((product) => {
           return (
-            <>
-              <li className='cards_item'>
+            
+              <li className='cards_item' key={product.id}>
                 <a href={`/products/${product.id}`} className='card'>
                 <img className='card_image'
                   src={product.image}
@@ -59,7 +60,7 @@ function Products() {
                 </div>
                 </a>
               </li>
-            </>
+            
           );
         })}
       </>

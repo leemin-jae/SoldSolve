@@ -36,8 +36,8 @@ function Product() {
           console.log(product)
           let goDetail = '/detail/' + product.id
           return (
-            <>
-              <div className='category_reco' key={product.id}>
+            <div key={product.id}>
+              <div className='category_reco' >
                 <img style={{ cursor: 'pointer' }} onClick={() => {
                   navigate(goDetail)
                 }} className='category_img'
@@ -50,7 +50,7 @@ function Product() {
                 </div>
               </div>
 
-            </>
+            </div>
           )
         })
       }</>)
@@ -64,6 +64,7 @@ function Product() {
     );
   };
   console.log(loading)
+  
   return (
     <>
       <NavBar />

@@ -45,6 +45,12 @@ function CreateRoom() {
     }
   }
 
+  function goLive(e) {
+    e.preventDefault();
+    localStorage.setItem('LiveRoom', document.getElementById('roomName').value)
+    document.location.href = '/live'
+  }
+  
   return (
     <>
       <div>
@@ -53,7 +59,7 @@ function CreateRoom() {
           <div className="test">
             <div className="test3">
               <h1 className="my-5">CREATE ROOM</h1>
-              <form>
+              <form onSubmit={e=> goLive(e)}>
                 <div className="pform" name="category" style={{ marginTop: '10px', marginBottom: '15px' }}>
                   <p style={{ height: '53px', margin: 0, padding: '15px' }}>{item.category_id}</p>
                 </div>

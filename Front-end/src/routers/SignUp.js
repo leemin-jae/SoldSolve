@@ -112,12 +112,19 @@ function SignUp() {
       })
       .then(res => {
           console.log(res)
+          document.getElementById('CodeForm').hidden=false
+          setButton('input')
+          e.target.classList.add('emailcode')
+          e.target.classList.remove('emailcode2')
+          alert("인증코드를 전송했습니다. Email을 확인해주세요")
+          
           codeEmail(e)
       })
       .catch(err => {
           console.log(err)
-          e.target.classList.remove('emailcode')
           alert("이미 사용중인 Email 입니다.")
+          e.target.classList.remove('emailcode')
+          e.target.classList.add('emailcode2')
       })
     } else {
       alert("ID 중복확인을 먼저 해주세요!")
@@ -132,11 +139,7 @@ function SignUp() {
       params: { email:email}
     })
     .then(res => {
-        e.target.classList.add('emailcode')
-        document.getElementById('CodeForm').hidden=false
-        setButton('input')
         setMailCode(res.data)
-        alert("인증코드를 전송했습니다. Email을 확인해주세요")
     })
     .catch(err => {
         console.log(err)

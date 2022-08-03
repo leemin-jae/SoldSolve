@@ -306,7 +306,7 @@ input::placeholder {
 
 }
 
-@media (min-width: 415px) and (max-width: 767px) {
+@media (min-width: 414px) and (max-width: 767px) {
   .livebox {
     max-width: 950px;
     min-height: 500px;
@@ -359,7 +359,7 @@ input::placeholder {
 }
 
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 767px) and (max-width: 991px) {
   .livebox {
     max-width: 950px;
     min-height: 500px;
@@ -402,7 +402,7 @@ input::placeholder {
   }
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 991px) and (max-width: 1199px) {
 
   /* 태블릿 가로 */
   .livebox {
@@ -447,7 +447,7 @@ input::placeholder {
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1199px) {
 
   /* 데스크탑 일반 */
   .livebox {

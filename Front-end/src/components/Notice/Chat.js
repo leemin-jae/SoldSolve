@@ -19,7 +19,7 @@ function Chat() {
         {roomLists.map((roomList) =>
           <li className='chat_room' key={roomList.id}>
             <div className="profile_box" style={{ background: '#BDBDBD' }}>
-              <img className="profile_img" src={`${roomList.thumbnail}`} alt='profileImg' />
+              <img className="profile_img" src={roomList.thumbnail} alt='profileImg' />
             </div>
             <div className='profile_text'>
               <h6>{roomList.buyer}</h6>

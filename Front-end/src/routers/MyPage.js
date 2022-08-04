@@ -41,9 +41,12 @@ function MyPage() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
+    console.log(modalOpen)
     setModalOpen(true);
   };
   const closeModal = () => {
+    console.log(modalOpen)
+
     setModalOpen(false);
   };
 

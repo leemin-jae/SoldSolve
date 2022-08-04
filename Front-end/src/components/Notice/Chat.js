@@ -1,11 +1,24 @@
 import React from 'react';
 import { useState } from "react"
 // import ChatRoom from '../Modals/ChatRoom'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import ModalChat from '../Modals/ModalChat';
 
 function Chat() {
 
-  let navigate = useNavigate()
+  // let navigate = useNavigate()
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+    console.log(modalOpen)
+
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+    console.log(modalOpen)
+
+  };
 
 
   const data = [
@@ -24,9 +37,9 @@ function Chat() {
       <ul>
         {roomLists.map((roomList) =>
           // 버튼 클릭 시 방 세션으로 넘어가기 (A-1, A-2, A-3, ...) 만약 없으면 새로운 방 생성?
-          <li className='chat_room' key={roomList.id} style={{ cursor: 'pointer' }} onClick={() => {
-            navigate('/chatRoom')
-          }}>
+          <li className='chat_room' key={roomList.id} style={{ cursor: 'pointer' }} onClick={openModal}>
+            <ModalChat open={modalOpen} close={closeModal}>
+            </ModalChat>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div className="profile_box" style={{ background: '#BDBDBD' }}>
                 <img className="profile_img" src={roomList.thumbnail} alt='profileImg' />

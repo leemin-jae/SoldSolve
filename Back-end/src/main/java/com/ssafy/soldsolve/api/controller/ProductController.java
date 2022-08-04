@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("soldsolve/product")
+@RequestMapping("/api/product")
 public class ProductController {
 
 
@@ -55,8 +55,9 @@ public class ProductController {
 
         System.out.println("등록 : " + product);
         try {
-            productService.registProduct(product);
-            return new ResponseEntity<String>("등록 성공", HttpStatus.OK);
+
+
+            return new ResponseEntity<Product>(productService.getProduct(Integer.toString(productService.registProduct(product))), HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<String>("등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -90,7 +91,7 @@ public class ProductController {
 
         try {
             if(productService.updateProduct(no,product) == 1) {
-                return new ResponseEntity<String>("수정 성공", HttpStatus.OK);
+                return new ResponseEntity<Product>(productService.getProduct(no), HttpStatus.OK);
             }else{
                 return new ResponseEntity<String>("수정 실패", HttpStatus.NO_CONTENT);
             }
@@ -99,8 +100,8 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<?> deleteProduct(@RequestParam String no) {
+    @DeleteMapping("/{no}")
+    public ResponseEntity<?> deleteProduct(@PathVariable("no") String no) {
         try {
             productService.deleteProduct(no);
             return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);

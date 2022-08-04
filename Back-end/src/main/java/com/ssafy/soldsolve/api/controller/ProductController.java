@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping()
+@RequestMapping("/api/product")
 public class ProductController {
 
 
@@ -22,23 +22,16 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public ResponseEntity<?> searchNotice(@RequestParam(required = false) String no, @RequestParam(required = false) String nickName,
-                                          @RequestParam(required = false) String title) {
-        System.out.println("ID : " + nickName);
+    public ResponseEntity<?> listProduct(@RequestParam(required = false) String title) {
         System.out.println("TITLE : " + title);
-        System.out.println("No : " + no);
         try {
             List<Product> result=null;
-            if (nickName == null && title == null &&no==null) {
+            if (title == null) {
                 result=productService.searchAllProduct();
-            } else if (nickName != null) {
-                result=productService.searchByNickNameProduct(nickName);
             } else if (title != null) {
                 result=productService.searchByTitleProduct(title);
-            }else if(no!=null){
-                result = new ArrayList<>();
-                result.add(productService.searchByNoProduct(Integer.parseInt(no)));
             }
+
             if(result==null) {
                 return new ResponseEntity<String>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
             }else if(result.size()==0) {
@@ -54,7 +47,7 @@ public class ProductController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> registNotice(@RequestBody ProductPostReq product, Authentication authentication) {
+    public ResponseEntity<?> registProduct(@RequestBody ProductPostReq product, Authentication authentication) {
 
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();
@@ -62,28 +55,43 @@ public class ProductController {
 
         System.out.println("등록 : " + product);
         try {
-            productService.registProduct(product);
-            return new ResponseEntity<String>("등록 성공", HttpStatus.OK);
+
+
+            return new ResponseEntity<Product>(productService.getProduct(Integer.toString(productService.registProduct(product))), HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<String>("등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PatchMapping("")
-    public ResponseEntity<?> updateNotice(@RequestBody ProductPostReq product, Authentication authentication) {
+    @GetMapping("/{no}")
+    public ResponseEntity<?> getProduct(@PathVariable("no") String no){
+
+
+        try {
+            Product product  = productService.getProduct(no);
+
+            if(product != null) {
+                return new ResponseEntity<Product>(product, HttpStatus.OK);
+            }else{
+                return new ResponseEntity<String>("수정 실패", HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<String>("수정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PatchMapping("/{no}")
+    public ResponseEntity<?> updateProduct(@PathVariable("no") String no, @RequestBody ProductPostReq product, Authentication authentication) {
 
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();
         product.setUserId(userId);
 
-        if(product.getNo() == 0){
-            return new ResponseEntity<String>("수정 실패", HttpStatus.NO_CONTENT);
-        }
-
         try {
-            if(productService.updateProduct(product) == 1) {
-                return new ResponseEntity<String>("수정 성공", HttpStatus.OK);
+            if(productService.updateProduct(no,product) == 1) {
+                return new ResponseEntity<Product>(productService.getProduct(no), HttpStatus.OK);
             }else{
                 return new ResponseEntity<String>("수정 실패", HttpStatus.NO_CONTENT);
             }
@@ -92,8 +100,8 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<?> deleteNotice(@RequestParam String no) {
+    @DeleteMapping("/{no}")
+    public ResponseEntity<?> deleteProduct(@PathVariable("no") String no) {
         try {
             productService.deleteProduct(no);
             return new ResponseEntity<String>("삭제 성공", HttpStatus.OK);

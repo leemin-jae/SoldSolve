@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Builder;
@@ -23,6 +25,8 @@ public class User {
 	private int id;
 	
 	private String userid;
+
+	@JsonIgnore
 	private String password;
 	private String username;
 	private String nickname;
@@ -36,6 +40,7 @@ public class User {
 	private Timestamp createDate;
 
 	@OneToMany(mappedBy = "user")
+	@JsonIgnore
 	private List<Message> messages = new ArrayList<>();
 
 	

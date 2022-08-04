@@ -18,7 +18,7 @@ public class FileService {
 
         File destinationFile;
         String destinationFileName;
-        String fileUrl = path + "\\src\\main\\resources\\images\\" + special +"\\";
+        String fileUrl = path + "\\images\\" + special +"\\";
 
         do {
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;

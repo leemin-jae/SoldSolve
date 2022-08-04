@@ -8,7 +8,7 @@ import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -26,27 +26,12 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
-    @Override
-    public List<Product> searchByNickNameProduct(String nickName) {
-        List<User> userList = userRepository.findByNicknameContains(nickName);
-        List<Product> productList = new ArrayList<>();
-
-        for(User a : userList){
-            productList.addAll(productRepository.findByUser(a));
-        }
-
-        return productList;
-    }
 
     @Override
     public List<Product> searchByTitleProduct(String title) {
         return productRepository.findByTitleContains(title);
     }
 
-    @Override
-    public Product searchByNoProduct(int parseInt) {
-        return productRepository.findByNo(parseInt);
-    }
 
     @Override
     public int registProduct(ProductPostReq product) {
@@ -60,13 +45,12 @@ public class ProductServiceImpl implements ProductService {
         User user = userRepository.findByUserid(product.getUserId());
         p.setUser(user);
 
-
         return productRepository.save(p).getNo();
     }
 
     @Override
-    public int updateProduct(ProductPostReq product) {
-        Product p = productRepository.findByNo(product.getNo());
+    public int updateProduct(String no , ProductPostReq product) {
+        Product p = productRepository.findByNo(Integer.parseInt(no));
 
         if(p != null){
             p.setCategory(product.getCategory());
@@ -86,5 +70,13 @@ public class ProductServiceImpl implements ProductService {
     public int deleteProduct(String no) {
         productRepository.delete(productRepository.getOne(Integer.parseInt(no)));
         return 0;
+    }
+
+    @Override
+    public Product getProduct(String no) {
+        Product p = productRepository.getOne(Integer.parseInt(no));
+        p.setViewCount(p.getViewCount()+1);
+        productRepository.save(p);
+        return p;
     }
 }

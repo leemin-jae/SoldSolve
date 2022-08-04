@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 		user.setUsername(registerInfo.getUserName());
 		user.setEmail(registerInfo.getEmail());
 		user.setNickname(registerInfo.getNickName());
-		user.setProfileUrl(System.getProperty("user.dir") + "/src/main/resources/images/profile/basic.png");
+		user.setProfileUrl("/images/profile/basic.png");
 		user.setRole("ROLE_USER");
 		
 		// 보안을 위해서 유저 패스워드 암호화 하여 디비에 저장.

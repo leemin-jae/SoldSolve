@@ -293,6 +293,7 @@ div#left_toggle ul li {
 /* Chat */
 .chat_room {
   display: flex;
+  justify-content: space-between;
   margin-block: 2%;
   padding: 2%;
   background-color: #8080801E;
@@ -304,16 +305,65 @@ div#left_toggle ul li {
 
 .profile_box {
   width: 50px;
-  height: 50px; 
+  height: 50px;
   border-radius: 70%;
   overflow: hidden;
 }
+
 .profile_img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* .profile_text{
-  
-} */
+.profile_text {
+  margin: 10px 0 0 20px;
+}
+
+.not_read_message {
+  width: 30px;
+  height: 30px;
+  border-radius: 70%;
+  background-color: rgb(221, 46, 68);
+  margin: auto;
+  text-align: center;
+  line-height: 30px;
+}
+
+/* Chat Room */
+.chat_box {
+  display: flex;
+  position: relative;
+  align-items: center;
+  /* margin: auto; */
+  flex-direction: column;
+}
+
+.chat_background {
+  border-radius: 10px;
+  border: #6667AB 2px solid;
+  width: 330px;
+  margin: 30px auto auto auto;
+  height: 500px;
+  background-color: #8080801E;
+}
+
+.input_box {
+  display: flex;
+  width: 330px;
+  margin-top: 10px;
+}
+
+.chat_input {
+  width: 300px;
+  height: 40px;
+  border: #6667AB 1px solid;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.buyer_nickname {
+  text-align: center;
+  position: absolute;
+  top: 50px;
+}

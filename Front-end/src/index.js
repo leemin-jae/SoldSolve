@@ -16,7 +16,7 @@ import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
 import LiveDetail from './routers/LiveDetail';
 import CreateProduct from './routers/CreateProduct';
-
+import ChatRoom from './components/Modals/ChatRoom';
 
 //
 import reportWebVitals from './reportWebVitals';
@@ -55,6 +55,7 @@ root.render(
               <Route path='/product' element={<Product />}></Route>
               <Route path='/products' element={<Products />}></Route>
               <Route path='/createproduct' element={<CreateProduct />}></Route>
+              <Route path='/chatroom' element={<ChatRoom />}></Route>
 
               <Route path="/*" element={<NotFound />} />
             </Routes>

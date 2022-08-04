@@ -8,7 +8,7 @@ import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @Service
@@ -45,7 +45,6 @@ public class ProductServiceImpl implements ProductService {
         User user = userRepository.findByUserid(product.getUserId());
         p.setUser(user);
 
-
         return productRepository.save(p).getNo();
     }
 
@@ -75,6 +74,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product getProduct(String no) {
-        return productRepository.getOne(Integer.parseInt(no));
+        Product p = productRepository.getOne(Integer.parseInt(no));
+        p.setViewCount(p.getViewCount()+1);
+        productRepository.save(p);
+        return p;
     }
 }

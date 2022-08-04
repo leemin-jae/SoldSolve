@@ -15,7 +15,7 @@ import NoticePage from './routers/NoticePage';
 import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
 import LiveDetail from './routers/LiveDetail';
-import CreateProduct from './routers/CreateProduct';
+import CreateProduct from './routers/ProductForm';
 import ChatRoom from './components/Modals/ChatRoom';
 
 //
@@ -52,9 +52,10 @@ root.render(
               <Route path='/createroom' element={<CreateRoom />}></Route>
               <Route path='/live' element={<LivePage />}></Route>
               <Route path='/livedetail' element={<LiveDetail />}></Route>
-              <Route path='/product' element={<Product />}></Route>
+              <Route path='/product/:id' element={<Product />}></Route>
               <Route path='/products' element={<Products />}></Route>
               <Route path='/createproduct' element={<CreateProduct />}></Route>
+              <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
               <Route path='/chatroom' element={<ChatRoom />}></Route>
 
               <Route path="/*" element={<NotFound />} />

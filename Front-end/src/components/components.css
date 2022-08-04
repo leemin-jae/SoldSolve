@@ -318,6 +318,11 @@ div#left_toggle ul li {
 
 .profile_text {
   margin: 10px 0 0 20px;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .not_read_message {
@@ -325,9 +330,49 @@ div#left_toggle ul li {
   height: 30px;
   border-radius: 70%;
   background-color: rgb(221, 46, 68);
-  margin: auto;
+  /* margin: auto; */
   text-align: center;
   line-height: 30px;
+  color: white;
+  margin-left: auto;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+
+  .profile_box {
+    width: 30px;
+    height: 30px;
+    border-radius: 70%;
+    overflow: hidden;
+  }
+
+  .profile_img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile_text {
+    font-size: 10px;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .message_time {
+    font-size: 10px;
+  }
+
+  .not_read_message {
+    width: 15px;
+    height: 15px;
+    font-size: 8px;
+    line-height: 14px;
+  }
+
 }
 
 /* Chat Room */
@@ -340,22 +385,22 @@ div#left_toggle ul li {
 }
 
 .chat_background {
-  border-radius: 10px;
-  border: #6667AB 2px solid;
-  width: 330px;
-  margin: 30px auto auto auto;
+  border-radius: 30px;
+  border: #6667AB 1px solid;
+  width: 100%;
+  margin: 0 auto auto auto;
   height: 500px;
   background-color: #8080801E;
 }
 
 .input_box {
   display: flex;
-  width: 330px;
+  width: 100%;
   margin-top: 10px;
 }
 
 .chat_input {
-  width: 300px;
+  width: 100%;
   height: 40px;
   border: #6667AB 1px solid;
   margin: auto;
@@ -364,6 +409,7 @@ div#left_toggle ul li {
 
 .buyer_nickname {
   text-align: center;
+  font-size: x-large;
   position: absolute;
-  top: 50px;
+  top: 15px;
 }

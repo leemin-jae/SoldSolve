@@ -31,7 +31,8 @@ function ChatRoom() {
         }} />
         <div className='buyer_nickname'>상대방 닉네임</div>
         <div className='buyer_nickname'>상대방 닉네임</div>
-        <div className='chat_background'></div>
+        <div className='chat_background'>
+        </div>
         <div className='input_box'>
           <input className='chat_input' type="text" />
           <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} />

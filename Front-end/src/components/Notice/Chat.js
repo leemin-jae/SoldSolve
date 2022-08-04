@@ -43,14 +43,10 @@ function Chat() {
       <>
         {roomLists.map((roomList) => {
           return (
-
             <li className='chat_room' key={roomList.id} style={{ cursor: 'pointer' }} >
-
-
               <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
                 // setBuyerName()
                 openModal(roomList.buyer)
-
               }}>
                 <div className="profile_box" style={{ background: '#BDBDBD' }}>
                   <img className="profile_img" src={roomList.thumbnail} alt='profileImg' />
@@ -64,19 +60,14 @@ function Chat() {
               <div>
                 <div className='message_info'>
                   <p className='message_time'>{roomList.time}</p>
-
                   <div className='not_read_message'>
                     <p>2</p>
                   </div>
                 </div>
               </div>
-
-
               <ModalChat open={modalOpen} close={closeModal} header={buyerName}>
               </ModalChat>
             </li>
-
-
           );
         })}
       </>
@@ -88,7 +79,7 @@ function Chat() {
   return (
     <>
       <h2 style={{ textAlign: 'center', marginTop: '40px' }}>{userName}의 채팅방</h2>
-      <ul>
+      <ul style={{ padding: '0' }}>
         {<ShowChat />}
       </ul>
     </>

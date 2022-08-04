@@ -19,9 +19,23 @@ const ModalChat = (props) => {
         <section>
           <main>
             <div className='chat_box'>
-              <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px' }} onClick={close} />
+              <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px' }} onClick={close} />
               <h3 className='buyer_nickname'>{header}</h3>
-              <div className='chat_background'></div>
+              <div className='chat_background'>
+                <div className='chat_div'>
+                  <ul className='chat_list'>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dasdfasdfasdfasdfasdfs</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+
+
+                  </ul>
+                </div>
+              </div>
               <div className='input_box'>
                 <input className='chat_input' type="text" />
                 <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} />

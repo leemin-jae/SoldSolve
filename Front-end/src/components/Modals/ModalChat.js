@@ -24,13 +24,13 @@ const ModalChat = (props) => {
               <div className='chat_background'>
                 <div className='chat_div'>
                   <ul className='chat_list'>
-                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
-                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
-                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>ddd</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>ddd</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>ddd</li>
                     <li className='li_box' style={{ listStyle: 'none' }}>dasdfasdfasdfasdfasdfs</li>
-                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
-                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
-                    <li className='li_box' style={{ listStyle: 'none' }}>dltjgus</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>ddd</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>ddd</li>
+                    <li className='li_box' style={{ listStyle: 'none' }}>ddd</li>
 
 
                   </ul>

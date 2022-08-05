@@ -2,15 +2,25 @@ package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.api.request.MessagePostReq;
 import com.ssafy.soldsolve.db.entity.Message;
+import com.ssafy.soldsolve.db.entity.User;
 import com.ssafy.soldsolve.db.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MessageServiceImpl implements MessageService {
 
     @Autowired
     MessageRepository messageRepository;
+
+    @Override
+    public Page<Message> findAll(User user, int page) {
+        return messageRepository.findAllByUser(user, (PageRequest.of(page, 10)));
+    }
 
     @Override
     public Message getMessage(int messageId) {

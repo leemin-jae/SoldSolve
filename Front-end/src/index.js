@@ -49,8 +49,8 @@ root.render(
               <Route path="/mypage" element={<MyPage />} />
               <Route path="/editaccount" element={<EditAccount />} />
               <Route path="/notice" element={<NoticePage />} />
-              <Route path='/createroom' element={<CreateRoom />}></Route>
-              <Route path='/live' element={<LivePage />}></Route>
+              <Route path='/createroom/:id' element={<CreateRoom />}></Route>
+              <Route path='/live/:user/:title' element={<LivePage />}></Route>
               <Route path='/livedetail' element={<LiveDetail />}></Route>
               <Route path='/product/:id' element={<Product />}></Route>
               <Route path='/products' element={<Products />}></Route>

@@ -48,6 +48,7 @@ function Login() {
         dispatch(getToken(token))
         dispatch(getID(id))
         localStorage.setItem('token', token)
+        localStorage.setItem('myID', id)
         document.location.href = '/'
       })
       .catch(err => {

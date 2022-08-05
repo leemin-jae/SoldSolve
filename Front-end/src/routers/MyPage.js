@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar'
 import Modal from '../components/Modals/Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
-
+import axios from 'axios'
 import './routers.css';
 
 function MyPage() {
@@ -17,7 +17,6 @@ function MyPage() {
       method: 'GET',
       headers: { 'Authorization': `Bearer ${localStorage.token}` }
       //localStorage.getItem('token');
-
     };
 
 
@@ -50,6 +49,39 @@ function MyPage() {
     setModalOpen(false);
   };
 
+  function imgTest(e) {
+    e.preventDefault();
+    if (document.getElementById('imgChange').hidden) {
+      document.getElementById('imgChange').hidden = false
+    } else {
+      document.getElementById('imgChange').hidden = true
+    }
+    
+  }
+  function axiosimgChange(e) {
+    e.preventDefault();
+    const imgdata = new FormData();
+    imgdata.append('file',imgupload);
+    console.log(imgdata)
+    axios({
+      url: '/api/users/update/profile',
+      method: 'patch',
+    })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  }
+
+  const [imgupload,setImgupload] = useState('')
+  function imgupdate(e){
+    e.preventDefault();
+    console.log(e)
+    setImgupload(e.target.files[0])
+  }
+
 
   return (
     <>
@@ -61,6 +93,11 @@ function MyPage() {
           <div className='column'>
             <div className=''>{profile.nickName}</div>
             <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
+            <div className=''><a href='#!' onClick={e=>imgTest(e)}>프로필사진 변경</a></div>
+            <div className=''>
+              <input type="img" onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
+              <button onClick={e=>axiosimgChange(e)}>제출</button>
+            </div>
 
           </div>
         </div>

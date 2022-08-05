@@ -144,10 +144,15 @@ function CreateProduct() {
               <div>
                 <select className="pform" onChange={e => inputForm(e)} name="categorys">
                   <option selected disabled>카테고리</option>
-                  <option value="전자기기">전자기기</option>
-                  <option value="신발">신발</option>
-                  <option value="옷">옷</option>
-                  <option value="악세서리">악세서리</option>
+                  <option value={"digital"}>디지털기기</option>
+                  <option value={"appliances"}>생활가전</option>
+                  <option value={"furniture"}>가구</option>
+                  <option value={"fashion"}>패션/잡화</option>
+                  <option value={"beauty"}>뷰티/미용</option>
+                  <option value={"sports"}>스포츠</option>
+                  <option value={"games"}>취미/게임</option>
+                  <option value={"book"}>도서</option>
+                  <option value={"etc"}>기타</option>
                 </select>
               </div>
               <input onChange={e => { inputForm(e) }} className="inputform" name="articlename" type="text" placeholder="글 제목"></input><br />

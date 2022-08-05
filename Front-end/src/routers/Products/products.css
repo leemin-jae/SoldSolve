@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 
+
 .content{
     max-width: 1200px;
     margin: 0 auto;
@@ -22,6 +23,7 @@
 .cards_item {
     display: flex;
     padding: 1rem;
+    justify-content: space-around;
 }
   
 @media (max-width: 767px) {
@@ -66,9 +68,11 @@
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 2em;
     font-weight: 400;
     text-align: center;
+    margin-bottom: 4rem;
+    margin-top: 4rem;
 }
 
 

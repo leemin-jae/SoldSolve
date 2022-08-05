@@ -154,7 +154,7 @@ div#left_toggle ul li {
     }
 
     to {
-      opacity: 0.8;
+      opacity: 1;
       transform: translateZ(0);
     }
   }
@@ -167,7 +167,7 @@ div#left_toggle ul li {
     flex-direction: column;
     position: absolute;
     width: 96%;
-    opacity: 80%;
+    opacity: 100%;
     animation: fadeInDown 1s;
   }
 
@@ -200,7 +200,7 @@ div#left_toggle ul li {
     }
 
     to {
-      opacity: 0.8;
+      opacity: 1;
       transform: translateZ(0);
     }
   }
@@ -211,7 +211,7 @@ div#left_toggle ul li {
     flex-direction: column;
     position: absolute;
     width: 96%;
-    opacity: 80%;
+    opacity: 100%;
     animation: fadeInDown 1s;
   }
 

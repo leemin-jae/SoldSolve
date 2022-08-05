@@ -154,7 +154,7 @@ div#left_toggle ul li {
     }
 
     to {
-      opacity: 0.8;
+      opacity: 1;
       transform: translateZ(0);
     }
   }
@@ -167,7 +167,7 @@ div#left_toggle ul li {
     flex-direction: column;
     position: absolute;
     width: 96%;
-    opacity: 80%;
+    opacity: 100%;
     animation: fadeInDown 1s;
   }
 
@@ -200,7 +200,7 @@ div#left_toggle ul li {
     }
 
     to {
-      opacity: 0.8;
+      opacity: 1;
       transform: translateZ(0);
     }
   }
@@ -211,7 +211,7 @@ div#left_toggle ul li {
     flex-direction: column;
     position: absolute;
     width: 96%;
-    opacity: 80%;
+    opacity: 100%;
     animation: fadeInDown 1s;
   }
 
@@ -385,12 +385,14 @@ div#left_toggle ul li {
 }
 
 .chat_background {
+  /* position: absolute; */
   border-radius: 30px;
   border: #6667AB 1px solid;
   width: 100%;
   margin: 0 auto auto auto;
   height: 500px;
   background-color: #8080801E;
+  padding: 50px 0 0 0;
 }
 
 .input_box {
@@ -412,4 +414,51 @@ div#left_toggle ul li {
   font-size: x-large;
   position: absolute;
   top: 15px;
+}
+
+.li_box {
+  position: relative;
+  /* display: inline-block; */
+  /* max-width: 75%; */
+  height: 45px;
+  padding: 0px;
+  background: #898ace;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  margin-top: 5px;
+  word-break: break-all
+    /* left: 85px; */
+    /* color: white; */
+
+}
+
+.li_box:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 0 10px 15px;
+  border-color: transparent #898ace;
+  display: block;
+  width: 0;
+  z-index: 1;
+  right: -15px;
+  top: 9px;
+}
+
+.chat_div {
+  position: absolute;
+  width: 100%;
+  margin: 0 auto auto auto;
+  height: 439px;
+  overflow-y: scroll;
+
+}
+
+.chat_list {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 50px 0 7px 0px;
+  width: 100%;
+
 }

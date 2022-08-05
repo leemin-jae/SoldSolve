@@ -28,6 +28,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import Product from './routers/Products/Product';
 import Products from './routers/Products/Products';
+import SearchProduct from './routers/Products/SearchProduct';
 
 
 let persistor = persistStore(store);
@@ -57,6 +58,7 @@ root.render(
               <Route path='/createproduct' element={<CreateProduct />}></Route>
               <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
               <Route path='/chatroom' element={<ChatRoom />}></Route>
+              <Route path='/:category/:title' element={<SearchProduct />}></Route>
 
               <Route path="/*" element={<NotFound />} />
             </Routes>

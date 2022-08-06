@@ -27,11 +27,17 @@ public class WishController {
 // 로그인한 유저 찜한 상품 추가
     @PostMapping("")
     public ResponseEntity<? extends BaseResponseBody> createWishProduct(Authentication authentication, @RequestParam(name = "product") int product) {
-        SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
-        String userId = userDetails.getUsername();
-        User user = userService.getUserByUserId(userId);
-        wishService.createWishProduct(user, product);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        try {
+            SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+            String userId = userDetails.getUsername();
+            User user = userService.getUserByUserId(userId);
+            wishService.createWishProduct(user, product);
+            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return ResponseEntity.status(200).body(BaseResponseBody.of(400, "이미 추가된 상품입니다."));
+
     }
 
 //    로그인한 유저의 찜한 상품 조회
@@ -42,5 +48,15 @@ public class WishController {
         User user = userService.getUserByUserId(userId);
         List<Wish> wishList = wishService.getWishProduct(user);
         return ResponseEntity.status(200).body(wishList);
+    }
+
+    // 로그인한 유저의 찜한 상품 삭제
+    @DeleteMapping("")
+    public ResponseEntity<? extends BaseResponseBody> deleteWishProduct(Authentication authentication, @RequestParam(name = "product") int product) {
+        SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+        String userId = userDetails.getUsername();
+        User user = userService.getUserByUserId(userId);
+        wishService.deleteWishProduct(user, product);
+        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 }

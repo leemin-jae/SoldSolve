@@ -24,11 +24,28 @@ public class WishServiceImpl implements WishService {
     }
 
     @Override
+    public boolean checkWishProduct(User user, int product) {
+        Product wishedProduct = productRepository.findByNo(product);
+        int check = wishRepository.countByUserAndProduct(user, wishedProduct);
+        if (check==0) return false;
+        else return true;
+    }
+
+    @Override
     public void createWishProduct(User user, int product) {
         Wish wish = new Wish();
         Product wishedProduct = productRepository.findByNo(product);
         wish.setProduct(wishedProduct);
         wish.setUser(user);
-        wishRepository.save(wish);
+        if (wishRepository.countByUserAndProduct(user, wishedProduct)==0) wishRepository.save(wish);
+        else return;
     }
+
+    @Override
+    public void deleteWishProduct(User user, int product) {
+        Product wishedProduct = productRepository.findByNo(product);
+        Wish wish = wishRepository.findByUserAndProduct(user, wishedProduct).orElse(null);
+        wishRepository.delete(wish);
+    }
+
 }

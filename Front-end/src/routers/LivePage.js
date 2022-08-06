@@ -154,25 +154,28 @@ class LivePage extends Component {
               publisher: publisher,
               });
             } else {
-                var publisher = this.OV.initPublisher(undefined, {
-                audioSource: undefined,
-                videoSource: undefined,
-                publishAudio: false,
-                publishVideo: false,
-                resolution: '800x500',
-                frameRate: 30,
-                insertMode: 'APPEND',
-                mirror: true,
-                });
-              
-              console.log(publisher)
-              mySession.publish(publisher);
+                var devices = await this.OV.getDevices();
+                var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
-              this.setState ({
-              currentVideoDevice: undefined,
-              mainStreamManager: undefined,
-              publisher: undefined,
-              });
+                  var publisher = this.OV.initPublisher(undefined, {
+                  audioSource: false,
+                  videoSource: false,
+                  publishAudio: false,
+                  publishVideo: false,
+                  resolution: '800x500',
+                  frameRate: 30,
+                  insertMode: 'APPEND',
+                  mirror: true,
+                  });
+                
+                console.log(publisher)
+                mySession.publish(publisher);
+
+                this.setState ({
+                currentVideoDevice: videoDevices[0],
+                mainStreamManager: publisher,
+                publisher: publisher,
+                });
 
             }
             console.log(publisher)
@@ -249,22 +252,25 @@ class LivePage extends Component {
           {this.state.session !== undefined ? (
 
             <div id="session">
-              <div className='d-flex'>
-                <h1 id="session-title">{localStorage.LiveRoom}</h1>
-                <input
-                  className="btn btn-large btn-danger"
+              <div className='d-flex liveTitle my-3 justify-content-between'>
+                <h3 id="session-title">{localStorage.LiveRoom}</h3>
+                <div>
+                  <input
+                  className="btn btn-large btn-danger mx-1 video_button"
                   type="button"
                   id="buttonLeaveSession"
                   onClick={this.leaveSession}
-                  value="Leave session"
-                />
-                <input
-                  className="btn btn-large btn-success"
-                  type="button"
-                  id="buttonSwitchCamera"
-                  onClick={this.switchCamera}
-                  value="Switch Camera"
-                />
+                  value="나가기"
+                  />
+                  <input
+                    className="btn btn-large btn-success mx-1 video_button"
+                    type="button"
+                    id="buttonSwitchCamera"
+                    onClick={this.switchCamera}
+                    value="카메라변경"
+                  />
+                </div>
+                
               </div>
 
               <div className='live_container'>

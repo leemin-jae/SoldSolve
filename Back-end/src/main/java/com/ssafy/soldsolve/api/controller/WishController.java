@@ -24,7 +24,7 @@ public class WishController {
     @Autowired
     UserService userService;
 
-// 로그인한 유저 찜한 상품 추가
+    // 로그인한 유저 찜한 상품 추가
     @PostMapping("")
     public ResponseEntity<? extends BaseResponseBody> createWishProduct(Authentication authentication, @RequestParam(name = "product") int product) {
         try {
@@ -40,7 +40,7 @@ public class WishController {
 
     }
 
-//    로그인한 유저의 찜한 상품 조회
+    // 로그인한 유저의 찜한 상품 조회
     @GetMapping("")
     public ResponseEntity<?> readWishProduct(Authentication authentication) {
         SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
@@ -58,5 +58,16 @@ public class WishController {
         User user = userService.getUserByUserId(userId);
         wishService.deleteWishProduct(user, product);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+    }
+
+    // 찜한 상품인지 체크 ( 빨간색 or 빈하트 구분용 )
+    @GetMapping("/check/{product}")
+    public ResponseEntity<?> checkWishProduct(@PathVariable int product, Authentication authentication) {
+        SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+        String userId = userDetails.getUsername();
+        User user = userService.getUserByUserId(userId);
+        Boolean flag = false;
+        flag = wishService.checkWishProduct(user, product);
+        return ResponseEntity.status(200).body(flag);
     }
 }

@@ -1,26 +1,46 @@
-import { useState } from "react"
+import { useEffect,useState } from "react"
 import NavBar from "../components/NavBar"
+import { useParams } from 'react-router-dom';
+import axios from "axios"
 
 function CreateRoom() {
 
-  const item =
-{
-  category_id: '전자제품',
-  price: '300,000'
-
-}
   let [timeState, setTimeState] = useState(0)
   const [button, setButton] = useState('noInput')
   const [roomName, setRoomName] = useState(null)
   const [description, setDescription] = useState(null)
   const [time, setTime] = useState('')
-
+  const productid = useParams().id;
+  const [productData, setProductData] = useState(null);
+  const [money,setMoney] = useState('')
   let submitButton = null;
   if (button === 'noInput') {
     submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
   } else if (button === 'input') {
     submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
   }
+
+  useEffect(()=>{
+    if (productid) {
+      axios({
+      url: `/api/product/${productid}`,
+      method: 'get',
+      })
+      .then(res => {
+        console.log(res)
+        setProductData(res.data)
+        // document.getElementsByName('roomTitle')[0].value = res.data.title
+        let value = res.data.price;
+        const formatValue = value.toLocaleString('ko-KR');
+        setMoney(formatValue)
+        setRoomName(res.data.title)
+        setDescription(res.data.content)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+    }
+  },[productid])
 
   function inputForm(e) {
 
@@ -30,14 +50,12 @@ function CreateRoom() {
       else if (e.target.value === '') { setButton('noInput') }
     }
 
-    else if (e.target.name === 'roomName') {
+    else if (e.target.name === 'roomTitle') {
       setRoomName(e.target.value)
-
       if (e.target.value && time && roomName && description) { setButton('input') }
       else if (e.target.value === '') { setButton('noInput') }
     }
-
-    else if (e.target.name === 'description') {
+    else if (e.target.name === 'roomContent') {
       setDescription(e.target.value)
 
       if (e.target.value && time && roomName && description) { setButton('input') }
@@ -45,10 +63,32 @@ function CreateRoom() {
     }
   }
 
+  const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
+  const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
+
+  function createSession(sessionId) { 
+        var data = JSON.stringify({ customSessionId: 'sell'+sessionId });
+        axios
+            .post(OPENVIDU_SERVER_URL + '/openvidu/api/sessions', data, {
+                headers: {
+                    Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then((response) => {
+                console.log('CREATE SESION', response);
+                console.log(response.data.id)
+                document.location.href = `/live/${productData.user.userid}/sell${productid}`
+            })
+            .catch(err=>{
+              console.log(err)
+            })
+  }
+
   function goLive(e) {
     e.preventDefault();
-    localStorage.setItem('LiveRoom', document.getElementById('roomName').value)
-    document.location.href = '/live'
+    localStorage.setItem('LiveRoom', roomName)
+    createSession(productid)
   }
   
   return (
@@ -56,22 +96,20 @@ function CreateRoom() {
       <div>
         <NavBar></NavBar>
         <div>
-          <div className="test">
+          { productData ? <div className="test">
             <div className="test3">
               <h1 className="my-5">CREATE ROOM</h1>
               <form onSubmit={e=> goLive(e)}>
                 <div className="pform" name="category" style={{ marginTop: '10px', marginBottom: '15px' }}>
-                  <p style={{ height: '53px', margin: 0, padding: '15px' }}>{item.category_id}</p>
+                  <p style={{ height: '53px', margin: 0, padding: '15px' }}>{productData.category}</p>
                 </div>
                 <div className="pform" name="price" style={{ marginTop: '20px', marginBottom: '10px' }}>
-                  <p style={{ height: '53px', margin: 0, padding: '15px' }}>{item.price} 원</p>
+                  <p style={{ height: '53px', margin: 0, padding: '15px' }}>{money} 원</p>
                 </div>
-                <input onKeyUp={e => { inputForm(e) }} className="inputform" name="roomName" type="text" placeholder="방 제목"></input>
-                {/* <input className="descriptionform" type="text" placeholder="설명"></input><br /> */}
+                <input onChange={e => { inputForm(e) }} className="inputform" name="roomTitle" id="roomTitle" type="text" placeholder="방 제목"></input>
                 <div>
-                  <textarea onKeyUp={e => { inputForm(e) }} className="descriptionform" name="description" placeholder="설명"></textarea>
+                  <textarea onChange={e => { inputForm(e) }} className="descriptionform" name="roomContent" id="roomContent" placeholder="설명">{productData.content}</textarea>
                 </div>
-                {/* <input className="inputform" type="text" placeholder="방송 시작 시간"></input><br /> */}
                 <div onClick={() => {
                   setTimeState(1)
                 }}>
@@ -80,7 +118,8 @@ function CreateRoom() {
                 {submitButton}
               </form>
             </div>
-          </div>
+          </div> : null }
+          
         </div>
       </div>
     </>

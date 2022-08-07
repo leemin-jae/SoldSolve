@@ -7,6 +7,7 @@
   left: 0;
   z-index: 99;
   background-color: rgba(0, 0, 0, 0.6);
+
 }
 
 .modal button {
@@ -19,7 +20,9 @@
   width: 90%;
   max-width: 450px;
   margin: 0 auto;
-  border-radius: 0.3rem;
+  border-radius: 30px;
+  border: rgba(0, 0, 0, 0.6) 2px solid;
+
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
@@ -46,9 +49,14 @@
 }
 
 .modal>section>main {
+  border-radius: 30px;
+
+  /* border: #6667AB 2px solid; */
+  /* width: 330px; */
   padding: 16px;
   border-bottom: 1px solid #dee2e6;
   border-top: 1px solid #dee2e6;
+  /* display: none; */
 }
 
 .modal>section>footer {
@@ -69,6 +77,8 @@
   align-items: center;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-bg-show 0.3s;
+  background-color: rgba(0, 0, 0, 0.2);
+
 }
 
 @keyframes modal-show {

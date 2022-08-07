@@ -39,7 +39,7 @@ function Login() {
   function tryLogin(getLoginForm) {
     console.log(getLoginForm)
     axios({
-      url: '/api/auth/login',
+      url: 'http://localhost:8080/api/auth/login',
       method: 'post',
       data: getLoginForm
     })

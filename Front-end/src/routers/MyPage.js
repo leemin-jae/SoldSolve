@@ -24,7 +24,7 @@ function MyPage() {
       setLoading(true);
 
       try {
-        const response = await fetch(`/api/users/me`, requestOptions);
+        const response = await fetch(`http://localhost:8080/api/users/me`, requestOptions);
         const data = await response.json();
         console.log(data);
         setProfile(data);
@@ -61,12 +61,29 @@ function MyPage() {
   function axiosimgChange(e) {
     e.preventDefault();
     const imgdata = new FormData();
-    imgdata.append('file',imgupload);
-    console.log(imgdata)
+    imgdata.append('files',imgupload,"");
+    console.log(imgupload)
+
+    const config = {
+      header : { Authorization: `Bearer ${localStorage.token}`,
+      'Content-Type': 'multipart/form-data',
+    }
+    }
     axios({
-      url: '/api/users/update/profile',
-      method: 'patch',
+      url: 'http://localhost:8080/api/users/update/profile',
+      method: 'post',
+      data: imgdata,
+      header :  { Authorization: `Bearer ${localStorage.token}`,
+      'Content-Type': 'multipart/form-data'}
     })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.error(err)
+      })
+
+    axios.post('http://localhost:8080/api/users/update/profile',imgdata,config)
       .then(res => {
         console.log(res)
       })
@@ -78,7 +95,7 @@ function MyPage() {
   const [imgupload,setImgupload] = useState('')
   function imgupdate(e){
     e.preventDefault();
-    console.log(e)
+    console.log(e.target.files)
     setImgupload(e.target.files[0])
   }
 
@@ -89,13 +106,13 @@ function MyPage() {
       <div className='mypage' style={{ margin: 30 }}>
         <h3>MY PAGE</h3>
         <div className='account_container'>
-          <div className='column'>{profile.profileImg}</div>
+          <div className='column'><img src={profile.profileImg} alt="#"></img></div>
           <div className='column'>
             <div className=''>{profile.nickName}</div>
             <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
             <div className=''><a href='#!' onClick={e=>imgTest(e)}>프로필사진 변경</a></div>
             <div className=''>
-              <input type="img" onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
+              <input type="file" onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
               <button onClick={e=>axiosimgChange(e)}>제출</button>
             </div>
 

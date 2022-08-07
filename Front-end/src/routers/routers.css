@@ -17,7 +17,7 @@
 }
 
 button {
-  border:none;
+  border: none;
   background-color: white;
 }
 
@@ -43,6 +43,8 @@ button {
   margin-inline: 2em;
   display: grid;
   grid-template-columns: auto auto auto auto;
+  list-style: none;
+  text-align: center;
 }
 
 .chatbox {
@@ -304,8 +306,8 @@ input::placeholder {
     margin-top: 20px;
   }
 
-  .notice_list{
-    font-size: 13px;
+  .notice_list {
+    font-size: 12px;
   }
 
 }
@@ -357,7 +359,8 @@ input::placeholder {
     margin-left: auto;
     margin-top: 20px;
   }
-  .notice_list{
+
+  .notice_list {
     font-size: large;
   }
 }
@@ -401,7 +404,8 @@ input::placeholder {
   .product_description {
     max-width: 700px;
   }
-  .notice_list{
+
+  .notice_list {
     font-size: x-large;
   }
 }
@@ -446,7 +450,8 @@ input::placeholder {
   .product_description {
     max-width: 800px;
   }
-  .notice_list{
+
+  .notice_list {
     font-size: x-large;
   }
 }
@@ -504,14 +509,17 @@ input::placeholder {
   .product_description {
     max-width: 900px;
   }
-  .notice_list{
+
+  .notice_list {
     font-size: x-large;
   }
 }
-.notice_list{
+
+.notice_list {
   display: flex;
-  justify-content:space-evenly;
+  justify-content: space-evenly;
 }
+
 .noticeSpan {
   background-color: white;
   margin-inline: 5%;
@@ -567,7 +575,7 @@ input::placeholder {
   color: rgba(128, 128, 128, 0.438);
 }
 
-.notice_list{
+.notice_list {
   display: flex;
   justify-content: space-evenly;
 }

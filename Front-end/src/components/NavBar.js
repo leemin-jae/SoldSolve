@@ -5,7 +5,6 @@ import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getToken } from '../store.js'
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 
 function NavBar() {
   let navigate = useNavigate()
@@ -69,7 +68,7 @@ function NavBar() {
         <ul className="mobile_menu">
           <li><a href='/notice'><h5>알림함</h5></a></li>
           <li><a href='/search'><h5>검색</h5></a></li>
-          
+
           {NavAcouuntTab1}
           {NavAcouuntTab2}
         </ul>

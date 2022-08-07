@@ -184,6 +184,8 @@ div#left_toggle ul li {
 
   .navbar__logo {
     align-items: center;
+    margin-left: 370px;
+
   }
 
   @keyframes fadeInDown {
@@ -222,7 +224,7 @@ div#left_toggle ul li {
 
   /* 태블릿 가로 */
   .navbar_logo {
-    margin-left: 300px;
+    margin-left: 365px;
     align-items: center;
   }
 
@@ -232,8 +234,9 @@ div#left_toggle ul li {
 
   /* 데스크탑 일반 */
   .navbar_logo {
-    margin-left: 300px;
+    /* margin-left: 300px; */
     align-items: center;
+    margin-left: 30%;
   }
 
 }
@@ -318,7 +321,7 @@ div#left_toggle ul li {
   display: inline-block;
 }
 
-.not_read_message {
+.unread_message {
   width: 30px;
   height: 30px;
   border-radius: 70%;
@@ -331,11 +334,18 @@ div#left_toggle ul li {
   text-align: center;
 }
 
+.message_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+}
+
 @media (max-width: 600px) {
 
   .profile_box {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     border-radius: 70%;
     overflow: hidden;
   }
@@ -347,7 +357,7 @@ div#left_toggle ul li {
   }
 
   .profile_text {
-    font-size: 10px;
+    font-size: 13px;
     width: 50px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -357,13 +367,14 @@ div#left_toggle ul li {
 
   .message_time {
     font-size: 10px;
+    margin: 10px, 0, 0, 0;
   }
 
-  .not_read_message {
-    width: 15px;
-    height: 15px;
-    font-size: 8px;
-    line-height: 14px;
+  .unread_message {
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    line-height: 25px;
   }
 
 }
@@ -386,6 +397,7 @@ div#left_toggle ul li {
   height: 500px;
   background-color: #8080801E;
   padding: 50px 0 0 0;
+
 }
 
 .input_box {
@@ -409,34 +421,73 @@ div#left_toggle ul li {
   top: 15px;
 }
 
-.li_box {
+.li_box_container {
+  width: 100%;
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0;
+}
+
+.li_box_me {
   position: relative;
   /* display: inline-block; */
-  /* max-width: 75%; */
-  height: 45px;
+  height: 35px;
   padding: 0px;
-  background: #898ace;
+  background: #9a9bdf;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   border-radius: 7px;
   margin-top: 5px;
-  word-break: break-all
-    /* left: 85px; */
-    /* color: white; */
+  margin-right: 5%;
+  margin-left: auto;
+
+  line-height: 34px;
+  padding: 0 10px 0 10px;
 
 }
 
-.li_box:after {
+.li_box_me:after {
   content: '';
   position: absolute;
   border-style: solid;
-  border-width: 10px 0 10px 15px;
-  border-color: transparent #898ace;
+  border-width: 8px 0 8px 15px;
+  border-color: transparent #9a9bdf;
   display: block;
   width: 0;
   z-index: 1;
-  right: -15px;
-  top: 9px;
+  right: -14px;
+  top: 6px;
+}
+
+.li_box_other {
+  position: relative;
+  /* display: inline-block; */
+  height: 35px;
+  padding: 0px;
+  background: #c1c2f1;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
+  margin-top: 5px;
+  margin-left: 5%;
+  margin-right: auto;
+  line-height: 34px;
+  padding: 0 10px 0 10px;
+}
+
+
+
+.li_box_other:after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 8px 15px 8px 0;
+  border-color: transparent #c1c2f1;
+  display: block;
+  width: 0;
+  z-index: 1;
+  left: -14px;
+  top: 6px;
 }
 
 .chat_div {
@@ -451,7 +502,13 @@ div#left_toggle ul li {
 .chat_list {
   display: flex;
   flex-direction: column-reverse;
-  padding: 50px 0 7px 0px;
-  width: 100%;
+  padding: 50px 20px 7px 20px;
+  align-items: flex-end;
+}
 
+.chat_list_other {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 50px 20px 7px 20px;
+  align-items: flex-start;
 }

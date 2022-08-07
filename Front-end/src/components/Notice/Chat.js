@@ -27,11 +27,11 @@ function Chat() {
 
 
   const data = [
-    { id: 1, buyer: 'buyer 1', thumbnail: 'https://images.mypetlife.co.kr/content/uploads/2019/09/09152804/ricky-kharawala-adK3Vu70DEQ-unsplash.jpg', text: '안녕하세유', time: '2022-08-03 pm 09:56' },
-    { id: 2, buyer: 'buyer 2', thumbnail: 'https://post-phinf.pstatic.net/MjAyMDAyMjJfMSAg/MDAxNTgyMzY1NzE3MzEw.GsKJMsvSf2CnkhZQ4eTSGD8m3DS5QLUJNKPs3P97vW0g.ca3xreRCcA2dmsA73cDuVU8c15vaQaPbjANR-ykoYDog.JPEG/%ED%96%84%EC%8A%A4%ED%84%B05.jpg?type=w1200', text: '가나다라', time: '2022-08-03 pm 09:56' },
-    { id: 3, buyer: 'buyer 3', thumbnail: 'https://pds.joongang.co.kr/news/FbMetaImage/202203/96548fe5-a590-41ea-9233-262ee6774a4f.png', text: '반갑습니다', time: '2022-08-03 pm 09:56' },
-    { id: 4, buyer: 'buyer 4', thumbnail: 'https://img.seoul.co.kr/img/upload/2021/05/03/SSI_20210503113234_O2.jpg', text: '하이하이', time: '2022-08-03 pm 09:56' },
-    { id: 5, buyer: 'buyer 5', thumbnail: 'https://blog.kakaocdn.net/dn/5hzaw/btqDqiXDHo6/gtyyKVxoQbDgzJuzMMzDYk/img.jpg', text: '졸립니다', time: '2022-08-03 pm 09:56' },
+    { id: 1, buyer: 'buyer 1', thumbnail: 'https://images.mypetlife.co.kr/content/uploads/2019/09/09152804/ricky-kharawala-adK3Vu70DEQ-unsplash.jpg', text: '안녕하세유', time: '22/08/03 pm 09:56' },
+    { id: 2, buyer: 'buyer 2', thumbnail: 'https://post-phinf.pstatic.net/MjAyMDAyMjJfMSAg/MDAxNTgyMzY1NzE3MzEw.GsKJMsvSf2CnkhZQ4eTSGD8m3DS5QLUJNKPs3P97vW0g.ca3xreRCcA2dmsA73cDuVU8c15vaQaPbjANR-ykoYDog.JPEG/%ED%96%84%EC%8A%A4%ED%84%B05.jpg?type=w1200', text: '가나다라', time: '22/08/03 pm 09:56' },
+    { id: 3, buyer: 'buyer 3', thumbnail: 'https://pds.joongang.co.kr/news/FbMetaImage/202203/96548fe5-a590-41ea-9233-262ee6774a4f.png', text: '반갑습니다', time: '22/08/03 pm 09:56' },
+    { id: 4, buyer: 'buyer 4', thumbnail: 'https://img.seoul.co.kr/img/upload/2021/05/03/SSI_20210503113234_O2.jpg', text: '하이하이', time: '22/08/03 pm 09:56' },
+    { id: 5, buyer: 'buyer 5', thumbnail: 'https://blog.kakaocdn.net/dn/5hzaw/btqDqiXDHo6/gtyyKVxoQbDgzJuzMMzDYk/img.jpg', text: '졸립니다', time: '22/08/03 pm 09:56' },
   ]
   const [roomLists] = useState(data)
   const [userName] = useState('hoho')
@@ -53,14 +53,14 @@ function Chat() {
                 </div>
 
                 <div>
-                  <h6 className='profile_text'>{roomList.buyer}</h6>
+                  <h6 className='profile_text'>{roomList.buyer}</h6><br />
                   <div className='profile_text'>{roomList.text}</div>
                 </div>
               </div>
               <div>
                 <div className='message_info'>
                   <p className='message_time'>{roomList.time}</p>
-                  <div className='not_read_message'>
+                  <div className='unread_message'>
                     <p>2</p>
                   </div>
                 </div>

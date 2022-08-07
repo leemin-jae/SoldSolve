@@ -111,22 +111,22 @@
   }
 
   .slides>div {
-    width: 100%;
+    width: 300px;
     height: 150px;
   }
 
 }
 
-@media (min-width: 415px) and (max-width: 767px) {
+@media (min-width: 414px) and (max-width: 767px) {
   .slider {
-    width: 500px;
+    width: 24rem;
   }
 
 
 
   .slides>div {
-    width: 600px;
-    height: 300px;
+    width: 24rem;
+    height: 12rem;
   }
 
   .slider>a {
@@ -135,7 +135,7 @@
 
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
+@media (min-width: 767px) and (max-width: 991px) {
 
 
   .slider {
@@ -155,7 +155,7 @@
 
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 991px) and (max-width: 1199px) {
   .slider {
     width: 800px;
   }
@@ -170,7 +170,7 @@
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1199px) {
 
 
   .slider {

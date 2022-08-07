@@ -39,7 +39,7 @@ function Login() {
   function tryLogin(getLoginForm) {
     console.log(getLoginForm)
     axios({
-      url: '/api/auth/login',
+      url: 'http://localhost:8080/api/auth/login',
       method: 'post',
       data: getLoginForm
     })
@@ -48,6 +48,7 @@ function Login() {
         dispatch(getToken(token))
         dispatch(getID(id))
         localStorage.setItem('token', token)
+        localStorage.setItem('myID', id)
         document.location.href = '/'
       })
       .catch(err => {

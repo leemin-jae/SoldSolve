@@ -7,6 +7,8 @@ import './routers.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
+const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:3478';
+const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
 const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';

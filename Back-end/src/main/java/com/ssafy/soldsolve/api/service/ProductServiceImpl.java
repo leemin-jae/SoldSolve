@@ -79,4 +79,13 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(p);
         return p;
     }
+
+    @Override
+    public List<Product> searchByCateforyProduct(String category, String title) {
+        String t = "";
+        if(title != null){
+            t = title;
+        }
+        return productRepository.findByCategoryAndTitleContains(category, t);
+    }
 }

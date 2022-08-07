@@ -22,13 +22,18 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public ResponseEntity<?> listProduct(@RequestParam(required = false) String title) {
-        System.out.println("TITLE : " + title);
+    public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category) {
+
+
         try {
             List<Product> result=null;
-            if (title == null) {
+            if (title == null && category == null) {
                 result=productService.searchAllProduct();
-            } else if (title != null) {
+            }
+            else if(category != null){
+                result = productService.searchByCateforyProduct(category, title);
+            }
+            else if (title != null) {
                 result=productService.searchByTitleProduct(title);
             }
 

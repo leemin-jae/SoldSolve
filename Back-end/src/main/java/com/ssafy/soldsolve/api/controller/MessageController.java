@@ -2,10 +2,14 @@ package com.ssafy.soldsolve.api.controller;
 
 import com.ssafy.soldsolve.api.request.MessagePostReq;
 import com.ssafy.soldsolve.api.service.MessageService;
+import com.ssafy.soldsolve.api.service.UserService;
+import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
 import com.ssafy.soldsolve.db.entity.Message;
+import com.ssafy.soldsolve.db.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -13,8 +17,19 @@ import org.springframework.web.bind.annotation.*;
 public class MessageController {
 
     @Autowired
+    UserService userService;
+    @Autowired
     MessageService messageService;
 
+    // 자기 메시지 조회
+    @GetMapping("")
+    public ResponseEntity<?> selectMessage(Authentication authentication,
+                                           @RequestParam(name = "page") int page) {
+        SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+        String userId = userDetails.getUsername();
+        User user = userService.getUserByUserId(userId);
+        return ResponseEntity.status(200).body(messageService.findAll(user, page));
+    }
     // 메시지 생성
     @PostMapping("")
     public ResponseEntity<? extends BaseResponseBody> createMessage(@RequestBody MessagePostReq registerInfo) {

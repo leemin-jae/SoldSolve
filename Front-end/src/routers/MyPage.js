@@ -24,7 +24,7 @@ function MyPage() {
       setLoading(true);
 
       try {
-        const response = await fetch(`http://localhost:8080/api/users/me`, requestOptions);
+        const response = await fetch(`/api/users/me`, requestOptions);
         const data = await response.json();
         console.log(data);
         setProfile(data);
@@ -70,7 +70,7 @@ function MyPage() {
     }
     }
     axios({
-      url: 'http://localhost:8080/api/users/update/profile',
+      url: '/api/users/update/profile',
       method: 'post',
       data: imgdata,
       header :  { Authorization: `Bearer ${localStorage.token}`,
@@ -83,7 +83,7 @@ function MyPage() {
         console.error(err)
       })
 
-    axios.post('http://localhost:8080/api/users/update/profile',imgdata,config)
+    axios.post('/api/users/update/profile',imgdata,config)
       .then(res => {
         console.log(res)
       })

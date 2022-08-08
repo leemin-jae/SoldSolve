@@ -1,9 +1,25 @@
 import '../components.css'
 import NoticeTest from './test.js'
+import axios from 'axios'
 
 function Notice() {
     const readlis = []
     const lis = []
+
+    axios({
+      url:'/api/notices' ,
+      method: 'get',
+      params: { page : 0}   // 10페이지정도 불러오도록
+    })
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
+
+
     const noticedata = [
         { id:1, title:'공지사항 테스트 데이터 1', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 25일 10시 30분', read:1},
         { id:2, title:'공지사항 테스트 데이터 2', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 25일 16시 30분', read:1},
@@ -26,7 +42,13 @@ function Notice() {
             content = <h5>{t.title}</h5>
         }
 
-        let noticeTag = <li className='Article' onClick={e => clickNotice(e)} key={t.id}><div className='noticeTitle'>{ content }<span className='articleSpan'>{t.time}</span></div><p className='hide'>{t.content}</p></li>
+        let noticeTag = 
+          <li className='Article' onClick={e => clickNotice(e)} key={t.id}>
+            <div className='noticeTitle'>{ content }
+              <span className='articleSpan'>{t.time}</span>
+            </div><p className='hide'>{t.content}</p>
+            <button>DLETE</button>
+          </li>
         lis.push(noticeTag)
     }
 

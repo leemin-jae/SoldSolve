@@ -52,15 +52,15 @@ function NavBar() {
         }} style={{ backgroundColor: '#6667ab', color: 'white', width: '132px', height: '40px', textAlign: 'center', border: '0', borderRadius: '10px', alignContent: 'center', margin: '20px auto auto auto' }} >상품 등록하기</button>
         <h3 style={{ textAlign: 'center', margin: '20px 0 0 0', color: '#6667ab' }}>Category</h3><hr />
         <ul>
-          <li><Link to={`/products`} state={{ category: "digital" }}><h5>디지털기기</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "appliances" }}><h5><input id="category" type="checkbox"></input>생활가전</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "furniture" }}><h5><input id="category" type="checkbox"></input>가구</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "fashion" }}><h5>패션/잡화</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "beauty" }}><h5>뷰티/미용</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "sports" }}><h5>스포츠</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "games" }}><h5>취미/게임</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "book" }}><h5>도서</h5></Link></li>
-          <li><Link to={`/products`} state={{ category: "etc" }}><h5>기타</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "digital" }}><h5>디지털기기</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "appliances" }}><h5><input id="category" type="checkbox"></input>생활가전</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "furniture" }}><h5><input id="category" type="checkbox"></input>가구</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "fashion" }}><h5>패션/잡화</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "beauty" }}><h5>뷰티/미용</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "sports" }}><h5>스포츠</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "games" }}><h5>취미/게임</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "book" }}><h5>도서</h5></Link></li>
+          <li><Link to={`/product`} state={{ category: "etc" }}><h5>기타</h5></Link></li>
         </ul>
       </div>
       <input id="account" type="checkbox"></input>

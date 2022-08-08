@@ -84,6 +84,8 @@ h1 {
   
 .card_content {
     padding: 0.5rem;
+    text-align: center;
+    align-items: center;
 }
 
 .card_title {
@@ -92,6 +94,7 @@ h1 {
     text-transform: capitalize;
     margin: 0px;
     font-family: Pretendard;
+    text-align: center;
 }
 
 .card_text {
@@ -99,4 +102,5 @@ h1 {
     font-size: 0.8rem;
     line-height: 1.5;
     font-family: Pretendard;
+    text-align: center;
 }

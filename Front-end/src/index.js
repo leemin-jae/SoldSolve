@@ -55,7 +55,7 @@ root.render(
               <Route path='/live/:user/:title' element={<LivePage />}></Route>
               <Route path='/livedetail' element={<LiveDetail />}></Route>
               <Route path='/product/:id' element={<Product />}></Route>
-              <Route path='/products' element={<Products />}></Route>
+              <Route path='/product' element={<Products />}></Route>
               <Route path='/createproduct' element={<CreateProduct />}></Route>
               <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
               <Route path='/chatroom' element={<ChatRoom />}></Route>

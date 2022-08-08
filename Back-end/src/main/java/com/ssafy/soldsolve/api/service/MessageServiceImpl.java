@@ -7,6 +7,7 @@ import com.ssafy.soldsolve.db.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public Page<Message> findAll(User user, int page) {
-        return messageRepository.findAllByUser(user, (PageRequest.of(page, 10)));
+        return messageRepository.findAllByUser(user, (PageRequest.of(page, 10, Sort.by("writtenTimes").descending())));
     }
 
     @Override

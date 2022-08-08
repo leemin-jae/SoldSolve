@@ -10,6 +10,4 @@ public interface NoticeService {
     Notice getNotice(int noticeId);
     void updateNotice(NoticePostReq noticePostReq, Notice notice);
     void deleteNotice(int noticeId);
-
-    void readNotice(NoticePostReq noticePostReq, Notice notice);
 }

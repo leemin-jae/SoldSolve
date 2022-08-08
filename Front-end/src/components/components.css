@@ -277,6 +277,7 @@ div#left_toggle ul li {
   display: none;
 }
 
+
 .overText {
   word-break: break-all;
   padding: 5%;
@@ -511,4 +512,8 @@ div#left_toggle ul li {
   flex-direction: column-reverse;
   padding: 50px 20px 7px 20px;
   align-items: flex-start;
+}
+
+.article_line{
+  white-space: pre-wrap;
 }

@@ -102,6 +102,15 @@ function Product() {
         })
     }
   }
+  function createLive(e){
+    e.preventDefault();
+    document.location.href = `/createroom/${productid}`
+  }
+  function goLive(e){
+    e.preventDefault();
+    console.log(productData.user.userid)
+    document.location.href = `/live/${productData.user.userid}/sell${productid}`
+  }
 
   return (
     <>
@@ -139,20 +148,32 @@ function Product() {
           <br></br>
           <p style={{ margin: '0 10px 0 10px' }}>{productData.content}</p>
           <hr></hr>
-          <p className='button_box'>
-            { store.info.id === productData.user.userid 
-            ? <>
-            <button className='submitbutton-able' onClick={e=>editProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>수정하기</button>
-            <button className='submitbutton-able' onClick={e=>deleteProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>삭제하기</button>
+          <div className='button_box'>
+            { store.info.info.userId === productData.user.userid 
+            ? 
+            <>
+              <button className='submitbutton-able' onClick={e=>createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+              <div>
+                <button className='submitbutton-able' onClick={e=>editProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>수정하기</button>
+                <button className='submitbutton-able' onClick={e=>deleteProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>삭제하기</button>
+              </div>
+            
             </>
              
-            : <><FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} />
-            <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>채팅하기</button>
-            <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 10px 0 10px' }}>Live 요청</button></>}
+            : 
+            <>
+              <button className='submitbutton-able' onClick={e=>goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+              <div>
+                <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} />
+                <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>채팅하기</button>
+                <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 10px 0 10px' }}>Live 요청</button>
+              </div>
+            </>
+            }
             
 
 
-          </p>
+          </div>
         </div>
         <hr></hr>
         <h5 style={{ textAlign: "center" }}>카테고리 별 추천 상품</h5>

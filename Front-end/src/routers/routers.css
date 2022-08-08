@@ -160,7 +160,7 @@ button {
 .product_description>.button_box {
   display: flex;
   margin: auto;
-  justify-content: flex-end
+  justify-content: space-between
 }
 
 input[type="text"]:disabled {

@@ -2,8 +2,11 @@ import { useEffect,useState } from "react"
 import NavBar from "../components/NavBar"
 import { useParams } from 'react-router-dom';
 import axios from "axios"
+import { useSelector } from 'react-redux'
+
 
 function CreateRoom() {
+  let store = useSelector((state) => { return state })
 
   let [timeState, setTimeState] = useState(0)
   const [button, setButton] = useState('noInput')
@@ -27,7 +30,10 @@ function CreateRoom() {
       method: 'get',
       })
       .then(res => {
-        console.log(res)
+        if (store.info.info.userId !== res.data.user.userid) {
+          alert("잘못된 접근입니다!.")
+          window.location.href='/'
+        }
         setProductData(res.data)
         // document.getElementsByName('roomTitle')[0].value = res.data.title
         let value = res.data.price;

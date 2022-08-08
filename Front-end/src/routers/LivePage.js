@@ -7,9 +7,6 @@ import './routers.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 
-const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:3478';
-const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
-
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
 const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
 
@@ -34,7 +31,7 @@ class LivePage extends Component {
     };
 
     axios({
-      url: '/api/users/me',
+      url: '/api/product/'+this.state.params[3],
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
@@ -45,6 +42,19 @@ class LivePage extends Component {
       .catch(err => {
         console.error(err)
       })
+
+      axios({
+        url: '/api/users/me',
+        method: 'get',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          this.state.myId = res.data.userId
+          this.state.myUserName = res.data.nickName
+        })
+        .catch(err => {
+          console.error(err)
+        })
 
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);

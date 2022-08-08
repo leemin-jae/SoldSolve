@@ -4,7 +4,7 @@ import { faBars, faMagnifyingGlass, faEnvelope, faUser } from '@fortawesome/free
 import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getToken } from '../store.js'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function NavBar() {
   let navigate = useNavigate()
@@ -52,24 +52,23 @@ function NavBar() {
         }} style={{ backgroundColor: '#6667ab', color: 'white', width: '132px', height: '40px', textAlign: 'center', border: '0', borderRadius: '10px', alignContent: 'center', margin: '20px auto auto auto' }} >상품 등록하기</button>
         <h3 style={{ textAlign: 'center', margin: '20px 0 0 0', color: '#6667ab' }}>Category</h3><hr />
         <ul>
-          <li><a href="#!"><h5>디지털기기</h5></a></li>
-          <li><a href="#!"><h5>생활가전</h5></a></li>
-          <li><a href="#!"><h5>가구</h5></a></li>
-          <li><a href="#!"><h5>패션/잡화</h5></a></li>
-          <li><a href="#!"><h5>뷰티/미용</h5></a></li>
-          <li><a href="#!"><h5>스포츠</h5></a></li>
-          <li><a href="#!"><h5>취미/게임</h5></a></li>
-          <li><a href="#!"><h5>도서</h5></a></li>
-          <li><a href="#!"><h5>기타</h5></a></li>
+          <li><Link to={`/products`} state={{ category: "digital" }}><h5>디지털기기</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "appliances" }}><h5><input id="category" type="checkbox"></input>생활가전</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "furniture" }}><h5><input id="category" type="checkbox"></input>가구</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "fashion" }}><h5>패션/잡화</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "beauty" }}><h5>뷰티/미용</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "sports" }}><h5>스포츠</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "games" }}><h5>취미/게임</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "book" }}><h5>도서</h5></Link></li>
+          <li><Link to={`/products`} state={{ category: "etc" }}><h5>기타</h5></Link></li>
         </ul>
       </div>
-
       <input id="account" type="checkbox"></input>
       <div id="right_toggle">
         <ul className="mobile_menu">
           <li><a href='/notice'><h5>알림함</h5></a></li>
           <li><a href='/search'><h5>검색</h5></a></li>
-          
+
           {NavAcouuntTab1}
           {NavAcouuntTab2}
         </ul>

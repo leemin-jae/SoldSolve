@@ -1,32 +1,30 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import './products.css'
 
 
 function Products() {
   const [data, setData] = useState([]);
-  // const [filter, setFilter] = useState(data);
+  const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
-
-
+  const location = useLocation().state.category;
+  
   useEffect(() => {
-    let componentMounted = true;
-    const getProducts = async () => {
-      setLoading(true);
-      const response = await fetch("https://fakestoreapi.com/products");
-      if (componentMounted) {
-        setData(await response.clone().json());
-        // setFilter(await response.json());
-        setLoading(false);
-        // console.log(filter);
-      }
+    setLoading(true)
+    async function fetchData() {
+      const result = await axios.get(
+          `/api/product`
+      );
+      setData(result.data);
+      setLoading(false)
+      const updatedList = result.data.filter((x) => x.category === location)
+      setFilter(updatedList);
+    }
+    fetchData();
+    }, [location]);
 
-      return () => {
-        componentMounted = false;
-      };
-    };
-    getProducts();
-  }, []);
 
   const Loading = () => {
     return (
@@ -36,20 +34,15 @@ function Products() {
     );
   };
 
-  // const filterProduct = (cat) => {
-  //   const updatedList = data.filter((x) => x.category === cat);
-  //   setFilter(updatedList);
-  // }
+
 
   const ShowProducts = () => {
-    // filterProduct("women's clothing")
     return (
       <>
-        {data.map((product) => {
+        {filter.map((product) => {
           return (
-            
-              <li className='cards_item' key={product.id}>
-                <a href={`/products/${product.id}`} className='card'>
+              <li className='cards_item' key={product.no}>
+                <a href={`/product/${product.no}`} className='card'>
                 <img className='card_image'
                   src={product.image}
                   alt={product.title}
@@ -71,7 +64,7 @@ function Products() {
     <>
       <NavBar />
       <div className='content'>
-        <h1>옷</h1>
+        <h1>{location}</h1>
         <ul className='cards' id='maincontent'>
           {loading ? <Loading /> : <ShowProducts />}
         </ul>

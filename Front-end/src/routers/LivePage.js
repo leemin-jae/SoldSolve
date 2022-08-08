@@ -166,11 +166,11 @@ class LivePage extends Component {
               publisher: publisher,
               });
             } else {
-                var devices = await this.OV.getDevices();
-                var videoDevices = devices.filter(device => device.kind === 'videoinput');
+                var devices2 = await this.OV.getDevices();
+                var videoDevices2 = devices2.filter(device => device.kind === 'videoinput');
 
-                  var publisher = this.OV.initPublisher(undefined, {
-                  audioSource: false,
+                  var publisher2 = this.OV.initPublisher(undefined, {
+                  audioSource: undefined,
                   videoSource: false,
                   publishAudio: false,
                   publishVideo: false,
@@ -180,13 +180,13 @@ class LivePage extends Component {
                   mirror: true,
                   });
                 
-                console.log(publisher)
-                mySession.publish(publisher);
+                console.log(publisher2)
+                mySession.publish(publisher2);
 
                 this.setState ({
-                currentVideoDevice: videoDevices[0],
-                mainStreamManager: publisher,
-                publisher: publisher,
+                currentVideoDevice: videoDevices2[0],
+                mainStreamManager: publisher2,
+                publisher: publisher2,
                 });
 
             }

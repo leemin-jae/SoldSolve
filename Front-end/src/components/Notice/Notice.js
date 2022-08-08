@@ -32,7 +32,21 @@ function Notice() {
         { id:9, title:'공지사항 테스트 데이터 9', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 16시 30분', read:0},
         { id:10, title:'공지사항 테스트 데이터 10', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 16시 30분', read:0},
     ]
+    function deleteArticle(e){
+      console.log(e)
+      axios({
+        url:'/api/notices/' ,
+        method: 'delete',
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
 
+      
+    }
     for (let i=noticedata.length-1; 0<=i; i--) {
         let t = noticedata[i]
         let content = null
@@ -46,8 +60,12 @@ function Notice() {
           <li className='Article' onClick={e => clickNotice(e)} key={t.id}>
             <div className='noticeTitle'>{ content }
               <span className='articleSpan'>{t.time}</span>
-            </div><p className='hide'>{t.content}</p>
-            <button>DLETE</button>
+            </div>
+            <div className='hide'>
+              <p >{t.content}</p>
+              <button onClick={e => deleteArticle(t.id)}>DLETE</button>
+            </div>
+            
           </li>
         lis.push(noticeTag)
     }

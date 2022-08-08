@@ -152,7 +152,7 @@ public class UserController {
 
 
 
-	@PatchMapping("/update/profile")
+	@PostMapping("/update/profile")
 	public ResponseEntity<? extends BaseResponseBody> updateProfile(
 			@RequestPart MultipartFile files,
 			Authentication authentication)  throws Exception {

@@ -11,8 +11,9 @@ const ModalNotice = (props) => {
   const [content,setContent] = useState('')
   
   useEffect(()=>{
-
-    axios({
+    if (header !== 0){
+      console.log(header)
+      axios({
       url:'/api/notices/'+header ,
       method: 'get',
     })
@@ -26,6 +27,7 @@ const ModalNotice = (props) => {
     .catch(err => {
       console.log(err)
     })
+    }
   },[open])
 
 
@@ -33,24 +35,26 @@ const ModalNotice = (props) => {
     e.preventDefault();
     if (header !== 0) {
       axios({
-        url:'/api/notices' ,
-        method: 'post',
-        data : { title:title, content:content}
-      })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
-    } else {
-      axios({
         url:'/api/notices/'+header ,
         method: 'patch',
         data : { title:title, content:content}
       })
       .then(res => {
         console.log(res)
+        close()
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    } else {
+      axios({
+        url:'/api/notices' ,
+        method: 'post',
+        data : { title:title, content:content}
+      })
+      .then(res => {
+        console.log(res)
+        close()
       })
       .catch(err => {
         console.log(err)

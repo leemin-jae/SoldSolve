@@ -81,11 +81,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchByCateforyProduct(String category, String title) {
-        String t = "";
-        if(title != null){
-            t = title;
-        }
-        return productRepository.findByCategoryAndTitleContains(category, t);
+    public List<Product> searchByCateforyProduct(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+    @Override
+    public List<Product> searchByTitleAndCategoryProduct(String title, String category) {
+        return productRepository.findByTitleContainingAndCategory(title,category);
     }
 }

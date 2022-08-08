@@ -31,16 +31,6 @@ public class NoticeController {
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 
-    // 공지 읽음 // PutMapping시 isRead 필드 true로 변환
-    @PutMapping("/{noticeId}")
-    public ResponseEntity<?> readNotice(
-            @PathVariable int noticeId,
-            @RequestBody NoticePostReq noticeInfo) {
-        Notice notice = noticeService.getNotice(noticeId);
-        noticeService.readNotice(noticeInfo, notice);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-    }
-
     // 공지 수정 // api/v1/notices/notice_id를 적으면 notice_id를 기준으로 수정 가능. title과 content Json형태로 Body
     @PatchMapping("/{noticeId}")
     public ResponseEntity<?> updateNotice(

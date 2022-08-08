@@ -19,8 +19,6 @@ public class Notice {
 
     private String content;
 
-    private Boolean isRead;
-
     @CreationTimestamp
     private Timestamp writtenTimes;
 }

@@ -30,14 +30,7 @@ public class NoticeServiceImpl implements NoticeService {
         Notice notice = new Notice();
         notice.setTitle(registerInfo.getTitle());
         notice.setContent(registerInfo.getContent());
-        notice.setIsRead(false);
         return noticeRepository.save(notice);
-    }
-
-    @Override
-    public void readNotice(NoticePostReq noticePostReq, Notice notice) {
-        notice.setIsRead(true);
-        noticeRepository.save(notice);
     }
 
     @Override

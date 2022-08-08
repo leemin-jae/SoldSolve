@@ -9,5 +9,4 @@ public class NoticePostReq {
     String id;
     String title;
     String content;
-    Boolean isRead;
 }

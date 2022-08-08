@@ -19,5 +19,7 @@ public interface ProductService {
 
     Product getProduct(String no);
 
-    List<Product> searchByCateforyProduct(String category, String title);
+    List<Product> searchByCateforyProduct(String category);
+
+    List<Product> searchByTitleAndCategoryProduct(String title, String category);
 }

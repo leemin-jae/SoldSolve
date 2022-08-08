@@ -30,13 +30,14 @@ public class ProductController {
             if (title == null && category == null) {
                 result=productService.searchAllProduct();
             }
-            else if(category != null){
-                result = productService.searchByCateforyProduct(category, title);
+            else if(category != null && title == null){
+                result = productService.searchByCateforyProduct(category);
             }
-            else if (title != null) {
+            else if (title != null && category == null) {
                 result=productService.searchByTitleProduct(title);
+            }else {
+                result = productService.searchByTitleAndCategoryProduct(title, category);
             }
-
             if(result==null) {
                 return new ResponseEntity<String>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
             }else if(result.size()==0) {

@@ -6,55 +6,36 @@ import NavBar from '../components/NavBar';
 import './routers.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'
+
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
 const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
 
 class LivePage extends Component {
   constructor(props) {
-
+    
     super(props);
 
     const params = window.location.pathname.split('/')
 
-
+    console.log(props.storeInfo)
 
     this.state = {
-      myId:undefined,
+      myId:props.storeInfo.userId,
       params: params,
       mySessionId: params[3],
-      myUserName: localStorage.nickName,
+      myUserName: props.storeInfo.nickName,
       session: undefined,
       mainStreamManager: undefined,
       publisher: undefined,
       subscribers: [],
     };
+    console.log(this.state.params)
 
-    axios({
-      url: '/api/product/'+this.state.params[3],
-      method: 'get',
-      headers: { Authorization: `Bearer ${localStorage.token}` }
-    })
-      .then(res => {
-        this.state.myId = res.data.userId
-        this.state.myUserName = res.data.nickName
-      })
-      .catch(err => {
-        console.error(err)
-      })
-
-      axios({
-        url: '/api/users/me',
-        method: 'get',
-        headers: { Authorization: `Bearer ${localStorage.token}` }
-      })
-        .then(res => {
-          this.state.myId = res.data.userId
-          this.state.myUserName = res.data.nickName
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    this.state.myId = props.storeInfo.userId
+    this.state.myUserName = props.storeInfo.nickName
+      
 
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
@@ -320,6 +301,7 @@ class LivePage extends Component {
 
     );
   }
+  
 
   getToken(sessionId) {
     return new Promise((resolve, reject) => {
@@ -344,4 +326,8 @@ class LivePage extends Component {
 
 }
 
-export default LivePage;
+const mapStateToProps = (state) => ({
+  storeInfo: state.info.info
+});
+
+export default connect(mapStateToProps)(LivePage);

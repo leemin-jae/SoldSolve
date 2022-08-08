@@ -80,6 +80,8 @@ function Notice() {
   };
   const closeModal = () => {
     setModalOpen(false);
+    console.log(1234)
+    window.location.href='/notice'
   };
 
   function createButton(e) {
@@ -94,9 +96,8 @@ function Notice() {
 
   return (
     <div>
-      
       <div className="articles">
-        <button className='noticeSpan my-1' onClick={e=>createButton(e)}>공지사항 작성하기</button>
+        <button className='noticeButton my-1 d-flex justify-content-end' onClick={e=>createButton(e)}>공지사항 작성하기</button>
         {lis}
       </div>
       <ModalNotice open={modalOpen} close={closeModal} header={modalMode}>

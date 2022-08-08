@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faMagnifyingGlass, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
 import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { getToken } from '../store.js'
+import { getToken,getInfo } from '../store.js'
 import { Link, useNavigate } from 'react-router-dom';
 
 function NavBar() {
@@ -15,6 +15,7 @@ function NavBar() {
     e.preventDefault();
     localStorage.removeItem('token')
     dispatch(getToken(null))
+    dispatch(getInfo(null))
     document.location.href = '/'
   }
 

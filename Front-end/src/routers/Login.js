@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar"
 import { useState } from 'react'
 import axios from "axios"
 import { useDispatch } from 'react-redux'
-import { getToken,getID } from '../store.js'
+import { getToken,getInfo } from '../store.js'
 
 // import url from '../api/api.js'
 
@@ -46,15 +46,28 @@ function Login() {
       .then(res => {
         const token = res.data.accessToken
         dispatch(getToken(token))
-        dispatch(getID(id))
         localStorage.setItem('token', token)
-        document.location.href = '/'
+        getMyInfo()
       })
       .catch(err => {
         console.error(err.response.data)
       })
   }
-
+  function getMyInfo(){
+    axios({
+      url: '/api/users/me',
+      method: 'get',
+      headers: { Authorization: `Bearer ${localStorage.token}` }
+    })
+    .then(res => {
+      console.log(res)
+      dispatch(getInfo(res.data))
+      window.location.href='/'
+    })
+    .catch(err => {
+      console.error(err)
+    })
+  }
   function submitLogin(e) {
     e.preventDefault()
     tryLogin(loginForm)

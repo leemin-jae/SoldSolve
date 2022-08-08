@@ -1,42 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import Modal from '../components/Modals/Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import './routers.css';
+import { useSelector } from 'react-redux'
 
 function MyPage() {
 
+  let store = useSelector((state) => { return state })
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState([]);
-  console.log(loading)
-  useEffect(() => {
 
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Authorization': `Bearer ${localStorage.token}` }
-      //localStorage.getItem('token');
-    };
-
-
-    const getProfile = async () => {
-      setLoading(true);
-
-      try {
-        const response = await fetch(`/api/users/me`, requestOptions);
-        const data = await response.json();
-        console.log(data);
-        setProfile(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getProfile();
-  }, []);
-
+  const profile = store.info.info
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -45,7 +21,6 @@ function MyPage() {
   };
   const closeModal = () => {
     console.log(modalOpen)
-
     setModalOpen(false);
   };
 
@@ -64,7 +39,7 @@ function MyPage() {
     imgdata.append('files',imgupload);
     axios({
       url: '/api/users/update/profile',
-      method: 'POST',
+      method: 'post',
       data : imgdata,
       headers :  { Authorization: `Bearer ${localStorage.token}`,
       "Content-Type": "multipart/form-data"}
@@ -83,8 +58,7 @@ function MyPage() {
     console.log(e.target.files)
     setImgupload(e.target.files[0])
   }
-  console.log(profile)
-  console.log(document.getElementById("testtest"))
+
   return (
     <>
       <NavBar />

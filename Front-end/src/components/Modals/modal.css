@@ -102,3 +102,20 @@
     opacity: 1;
   }
 }
+
+.NoticeModal_title{
+  min-height: 50px;
+  width: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid gray;
+}
+
+.NoticeModal_content{
+  min-height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid gray;
+  white-space: pre-wrap;
+}

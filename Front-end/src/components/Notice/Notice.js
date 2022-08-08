@@ -1,94 +1,109 @@
 import '../components.css'
-import NoticeTest from './test.js'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
+import ModalNotice from '../Modals/ModalNotice'
+
 
 function Notice() {
-    const readlis = []
-    const lis = []
-
+  const lis = []
+  const [noticeData, setNoticeData] = useState('')
+  useEffect(() => {
     axios({
-      url:'/api/notices' ,
+      url: '/api/notices',
       method: 'get',
-      params: { page : 0}   // 10페이지정도 불러오도록
+      params: { page: 0 }
     })
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-
-
-
-    const noticedata = [
-        { id:1, title:'공지사항 테스트 데이터 1', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 25일 10시 30분', read:1},
-        { id:2, title:'공지사항 테스트 데이터 2', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 25일 16시 30분', read:1},
-        { id:3, title:'공지사항 테스트 데이터 3', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 05시 30분', read:1},
-        { id:4, title:'공지사항 테스트 데이터 4', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 07시 30분', read:1},
-        { id:5, title:'공지사항 테스트 데이터 5', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 08시 30분', read:1},
-        { id:6, title:'공지사항 테스트 데이터 6', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 09시 30분', read:1},
-        { id:7, title:'공지사항 테스트 데이터 7', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 10시 30분', read:0},
-        { id:8, title:'공지사항 테스트 데이터 8', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 13시 30분', read:0},
-        { id:9, title:'공지사항 테스트 데이터 9', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 16시 30분', read:0},
-        { id:10, title:'공지사항 테스트 데이터 10', content:'안녕하세요. 쏠쏠 개발팀입니다. @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', time:'2022년 7월 26일 16시 30분', read:0},
-    ]
-    function deleteArticle(e){
-      console.log(e)
-      axios({
-        url:'/api/notices/' ,
-        method: 'delete',
-      })
       .then(res => {
         console.log(res)
+        console.log(res.data.content)
+        setNoticeData(res.data.content)
       })
       .catch(err => {
         console.log(err)
       })
+  }, [])
 
-      
-    }
-    for (let i=noticedata.length-1; 0<=i; i--) {
-        let t = noticedata[i]
-        let content = null
-        if (t.read) {
-            content = <h5 className='read'>{t.title}</h5>
-        } else {
-            content = <h5>{t.title}</h5>
-        }
 
-        let noticeTag = 
-          <li className='Article' onClick={e => clickNotice(e)} key={t.id}>
-            <div className='noticeTitle'>{ content }
-              <span className='articleSpan'>{t.time}</span>
-            </div>
-            <div className='hide'>
-              <p >{t.content}</p>
-              <button onClick={e => deleteArticle(t.id)}>DLETE</button>
-            </div>
-            
-          </li>
-        lis.push(noticeTag)
+  function deleteArticle(e) {
+    console.log(e)
+    axios({
+      url: '/api/notices/' + e,
+      method: 'delete',
+    })
+      .then(res => {
+        console.log(res)
+        window.location.href='/notice'
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+
+  for (let i = 0; i < noticeData.length; i++) {
+    let t = noticeData[i]
+    let content = null
+    if (t.read) {
+      content = <h5 className='read'>{t.title}</h5>
+    } else {
+      content = <h5>{t.title}</h5>
     }
 
-    function clickNotice(e){ //읽음으로 바꾸는 axios 추가 안읽은것을 선택하면 title이 투명해져야함
-        e.stopPropagation();
-        let selectedli = e.currentTarget
-        if (selectedli.lastChild.className ==='overText') {
-          selectedli.lastChild.className = 'hide'
-        } else {
-          selectedli.lastChild.className ='overText'
-        }
-        
+    let noticeTag =
+      <li className='Article' id={t.id} onClick={e => clickNotice(e)} key={t.id}>
+        <div className='noticeTitle'>{content}
+          <span className='articleSpan'>{t.time}</span>
+        </div>
+        <div className='hide' id={'ArticleContent' + t.id}>
+          <p className='article_line'>{t.content}</p>
+          <button onClick={e => updateButton(t.id)} id={t.id} className='mx-3'>UPDATE</button>
+          <button onClick={e => deleteArticle(t.id)}>DLETE</button>
+        </div>
+      </li>
+    lis.push(noticeTag)
+  }
+
+  function clickNotice(e) { //읽음으로 바꾸는 axios 추가 안읽은것을 선택하면 title이 투명해져야함
+    e.stopPropagation();
+    if (document.getElementById('ArticleContent' + e.currentTarget.id).classList.value === 'overText') {
+      document.getElementById('ArticleContent' + e.currentTarget.id).classList = 'hide'
+    } else if (document.getElementById('ArticleContent' + e.currentTarget.id).classList.value === 'hide') {
+      document.getElementById('ArticleContent' + e.currentTarget.id).classList = 'overText'
     }
+  }
+
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMode,setModalMode] = useState(0)
+
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  function createButton(e) {
+    e.preventDefault();
+    setModalMode(0)
+    openModal()
+  }
+  function updateButton(e) {
+    setModalMode(e)
+    openModal()
+  }
 
   return (
     <div>
       <div className="articles">
-      <NoticeTest></NoticeTest>
         {lis}
-        {readlis}
-      </div> 
+      </div>
+      <button onClick={e=>createButton(e)}>글쓰기</button>
+      <ModalNotice open={modalOpen} close={closeModal} header={modalMode}>
+        판매내역리스트
+      </ModalNotice>
     </div>
+
   )
 }
 

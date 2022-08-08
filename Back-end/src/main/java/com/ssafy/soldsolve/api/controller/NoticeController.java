@@ -44,8 +44,7 @@ public class NoticeController {
     public ResponseEntity<?> updateNotice(
             @PathVariable int noticeId,
             @RequestBody NoticePostReq noticeInfo){
-        Notice notice = noticeService.getNotice(noticeId);
-        noticeService.updateNotice(noticeInfo,notice);
+        noticeService.updateNotice(noticeInfo,noticeId);
         return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
     }
 

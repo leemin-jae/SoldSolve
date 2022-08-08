@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
@@ -17,7 +19,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Notice getNotice(int noticeId) {
-        return noticeRepository.findById(noticeId).get();
+        return noticeRepository.findById(noticeId);
     }
 
     @Override
@@ -34,7 +36,8 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public void updateNotice(NoticePostReq noticePostReq, Notice notice) {
+    public void updateNotice(NoticePostReq noticePostReq, int noticeId) {
+        Notice notice = noticeRepository.findById(noticeId);
         notice.setTitle(noticePostReq.getTitle());
         notice.setContent(noticePostReq.getContent());
         noticeRepository.save(notice);

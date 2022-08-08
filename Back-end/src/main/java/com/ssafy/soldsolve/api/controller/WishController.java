@@ -37,7 +37,6 @@ public class WishController {
             e.printStackTrace();
         }
         return ResponseEntity.status(200).body(BaseResponseBody.of(400, "이미 추가된 상품입니다."));
-
     }
 
     // 로그인한 유저의 찜한 상품 조회

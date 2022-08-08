@@ -1,6 +1,7 @@
 package com.ssafy.soldsolve.api.controller;
 
 import com.ssafy.soldsolve.api.request.NoticePostReq;
+import com.ssafy.soldsolve.api.response.NoticeRes;
 import com.ssafy.soldsolve.api.service.NoticeService;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
 import com.ssafy.soldsolve.db.entity.Notice;
@@ -22,6 +23,13 @@ public class NoticeController {
     @GetMapping("")
     public ResponseEntity<?> selectNotice(@RequestParam(name="page") int page) {
         return ResponseEntity.status(200).body(noticeService.findAll(page));
+    }
+
+    // 특정 공지 조회
+    @GetMapping("/{noticeId}")
+    public ResponseEntity<?> choiceNotice(@PathVariable int noticeId) {
+        Notice notice = noticeService.getNotice(noticeId);
+        return ResponseEntity.status(200).body(NoticeRes.of(notice));
     }
 
     // 공지 생성. title과 content Json형태로 Body에 넣어주기.

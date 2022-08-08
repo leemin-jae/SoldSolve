@@ -1,9 +1,23 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
+
+let user = createSlice({
+  name:'user',
+  initialState:{
+    userPk: null,
+    createDate: '',
+    email: '',
+    nickName: '',
+    role:'',
+    userName:''
+  },
+  reducers:{
+
+  }
+})
 
 let token = createSlice({
   name: 'token',

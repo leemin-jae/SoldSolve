@@ -17,7 +17,7 @@ import LivePage from './routers/LivePage';
 import LiveDetail from './routers/LiveDetail';
 import CreateProduct from './routers/ProductForm';
 import ChatRoom from './components/Modals/ChatRoom';
-
+import ChatTest from './components/Notice/ChatTest';
 //
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
@@ -60,8 +60,8 @@ root.render(
               <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
               <Route path='/chatroom' element={<ChatRoom />}></Route>
               <Route path='/:category/:title' element={<SearchProduct />}></Route>
+              <Route path='/chattest' element={<ChatTest />}></Route>
               <Route path='/:title' element={<SearchProductAll />}></Route>
-
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

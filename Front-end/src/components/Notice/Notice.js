@@ -42,22 +42,21 @@ function Notice() {
 
   for (let i = 0; i < noticeData.length; i++) {
     let t = noticeData[i]
-    let content = null
-    if (t.read) {
-      content = <h5 className='read'>{t.title}</h5>
-    } else {
-      content = <h5>{t.title}</h5>
-    }
+
 
     let noticeTag =
       <li className='Article' id={t.id} onClick={e => clickNotice(e)} key={t.id}>
-        <div className='noticeTitle'>{content}
-          <span className='articleSpan'>{t.time}</span>
+        <div className='noticeTitle'>
+        <h6>{t.title}</h6>
+          <span className='articleSpan'>{t.writtenTimes}</span>
         </div>
         <div className='hide' id={'ArticleContent' + t.id}>
           <p className='article_line'>{t.content}</p>
-          <button onClick={e => updateButton(t.id)} id={t.id} className='mx-3'>UPDATE</button>
-          <button onClick={e => deleteArticle(t.id)}>DLETE</button>
+          
+          <div className='d-flex justify-content-end'>
+            <button onClick={e => updateButton(t.id)} className='noticeButton'>UPDATE</button>
+            <button onClick={e => deleteArticle(t.id)} className='noticeButton'>DLETE</button>
+          </div>
         </div>
       </li>
     lis.push(noticeTag)
@@ -95,10 +94,11 @@ function Notice() {
 
   return (
     <div>
+      
       <div className="articles">
+        <button className='noticeSpan my-1' onClick={e=>createButton(e)}>공지사항 작성하기</button>
         {lis}
       </div>
-      <button onClick={e=>createButton(e)}>글쓰기</button>
       <ModalNotice open={modalOpen} close={closeModal} header={modalMode}>
         판매내역리스트
       </ModalNotice>

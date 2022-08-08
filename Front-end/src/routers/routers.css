@@ -612,3 +612,12 @@ input::placeholder {
   max-height: 50px;
   margin-inline: 2em;
 }
+
+
+.profile_img{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+
+}

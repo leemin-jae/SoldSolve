@@ -61,29 +61,14 @@ function MyPage() {
   function axiosimgChange(e) {
     e.preventDefault();
     const imgdata = new FormData();
-    imgdata.append('files',imgupload,"");
-    console.log(imgupload)
-
-    const config = {
-      header : { Authorization: `Bearer ${localStorage.token}`,
-      'Content-Type': 'multipart/form-data',
-    }
-    }
+    imgdata.append('files',imgupload);
     axios({
       url: '/api/users/update/profile',
-      method: 'post',
-      data: imgdata,
-      header :  { Authorization: `Bearer ${localStorage.token}`,
-      'Content-Type': 'multipart/form-data'}
+      method: 'POST',
+      data : imgdata,
+      headers :  { Authorization: `Bearer ${localStorage.token}`,
+      "Content-Type": "multipart/form-data"}
     })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.error(err)
-      })
-
-    axios.post('/api/users/update/profile',imgdata,config)
       .then(res => {
         console.log(res)
       })
@@ -98,21 +83,21 @@ function MyPage() {
     console.log(e.target.files)
     setImgupload(e.target.files[0])
   }
-
-
+  console.log(profile)
+  console.log(document.getElementById("testtest"))
   return (
     <>
       <NavBar />
       <div className='mypage' style={{ margin: 30 }}>
         <h3>MY PAGE</h3>
         <div className='account_container'>
-          <div className='column'><img src={profile.profileImg} alt="#"></img></div>
+          <div className='column'><img className='profile_img' src={'https://i7c110.p.ssafy.io'+profile.profileUrl} alt="#"></img></div>
           <div className='column'>
             <div className=''>{profile.nickName}</div>
             <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
             <div className=''><a href='#!' onClick={e=>imgTest(e)}>프로필사진 변경</a></div>
             <div className=''>
-              <input type="file" onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
+              <input type="file" accept='image/*' multiple onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
               <button onClick={e=>axiosimgChange(e)}>제출</button>
             </div>
 

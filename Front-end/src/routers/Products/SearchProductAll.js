@@ -15,8 +15,7 @@ function SearchProduct() {
                 `/api/product`,
                 {
                     params: {
-                        title: params.title,
-                        category: params.category
+                        title: params.title
                     }
                 }
             );

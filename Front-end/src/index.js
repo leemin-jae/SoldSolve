@@ -29,6 +29,7 @@ import { persistStore } from 'redux-persist';
 import Product from './routers/Products/Product';
 import Products from './routers/Products/Products';
 import SearchProduct from './routers/Products/SearchProduct';
+import SearchProductAll from './routers/Products/SearchProductAll';
 
 
 let persistor = persistStore(store);
@@ -59,6 +60,7 @@ root.render(
               <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
               <Route path='/chatroom' element={<ChatRoom />}></Route>
               <Route path='/:category/:title' element={<SearchProduct />}></Route>
+              <Route path='/:title' element={<SearchProductAll />}></Route>
 
               <Route path="/*" element={<NotFound />} />
             </Routes>

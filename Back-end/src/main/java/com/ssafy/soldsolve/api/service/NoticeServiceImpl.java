@@ -6,6 +6,7 @@ import com.ssafy.soldsolve.db.repository.NoticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +22,7 @@ public class NoticeServiceImpl implements NoticeService {
 
     @Override
     public Page<Notice> findAll(int page) {
-        return noticeRepository.findAll(PageRequest.of(page, 10));
+        return noticeRepository.findAll(PageRequest.of(page, 10, Sort.by("writtenTimes").descending()));
     }
 
     @Override

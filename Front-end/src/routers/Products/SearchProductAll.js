@@ -38,29 +38,29 @@ function SearchProduct() {
                     return (
 
                         <li className='cards_item' key={product.no}>
-              <div  className='card'>
-              <a href={`/product/${product.no}`}>
-                <img className='card_image'
-                  src={product.image}
-                  alt={product.title}
-                />
-                <div className='card_content'>
-                  <h5 className='card_title'>{product.title}</h5>
-                  <p className='card_text'>{product.price}</p>
-            </div>
-                
-              </a>
-              <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}>
-                  <IconButton aria-label="add to favorites">
-                    <FavoriteIcon />
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                  </CardActions>
-                  </div>
+                            <div className='card'>
+                                <a href={`/product/${product.no}`}>
+                                    <img className='card_image'
+                                        src={product.image}
+                                        alt={product.title}
+                                    />
+                                    <div className='card_content'>
+                                        <h5 className='card_title'>{product.title}</h5>
+                                        <p className='card_text'>{product.price}</p>
+                                    </div>
 
-            </li>
+                                </a>
+                                <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}>
+                                    <IconButton aria-label="add to favorites">
+                                        <FavoriteIcon />
+                                    </IconButton>
+                                    <IconButton aria-label="share">
+                                        <ShareIcon />
+                                    </IconButton>
+                                </CardActions>
+                            </div>
+
+                        </li>
 
 
                     );

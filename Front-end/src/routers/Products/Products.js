@@ -17,6 +17,10 @@ function Products() {
   const [loading, setLoading] = useState(false);
   const location = useLocation().state.category;
 
+  const [like, setLike] = useState(false);
+  const [wishlist, setWishlist] = useState([]);
+  const [wish, setWish] = useState([]);
+
   const url = window.location.href;
 
   useEffect(() => {
@@ -31,7 +35,43 @@ function Products() {
       setFilter(updatedList);
     }
     fetchData();
-  }, [location]);
+
+
+    // const wishData = () => {
+    //   axios.get(`/api/wishes`, {
+    //     headers: {
+    //       Authorization: `Bearer ${localStorage.token}` //the token is a variable which holds the token
+    //     }
+    //   }).then(res => {
+    //     console.log(res.data)
+    //     setWishlist(res.data)
+    //   }).catch(err => console.log(err.response.status))
+    // }
+
+    // wishData();
+    // console.log(wishlist)
+
+    // const wishItem = () => {
+    //   wishlist.map((wishitem) => {
+    //     // console.log(wishitem.product.no, '+')
+    //     setWish(wish => [...wish, wishitem.product.no]);
+    //   })
+    // }
+    // wishItem();
+    // console.log(wish, '+')
+    
+  }, []);
+
+  // const isLike = (no) => {
+  //   axios.get(`/api/wishes/check/` + no, {
+  //     headers: {
+  //       Authorization: `Bearer ${localStorage.token}` 
+  //     }
+  //   }).then(res => {
+  //     console.log(res.data)
+  //     setLike(res.data)
+  //   }).catch(err => console.log(err.response.status))
+  // }
 
 
   const Loading = () => {
@@ -42,37 +82,58 @@ function Products() {
     );
   };
 
+  const LikeButton = (no) => {
+    const [like, setLike] = useState(false)
+
+    useEffect(async () => {
+      const likeData = async () => {
+        const res = await axios.get(
+          `/api/wishes/check/` + no, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.token}` 
+                }
+              }
+        )
+        console.log(res)
+        // if (res.data.type === 'liked') setLike(true)
+      }
+      
+    }, []);
+
+  }
 
 
   const ShowProducts = () => {
+    console.log(filter)
+    LikeButton(8)
     return (
       <>
         {filter.map((product) => {
           return (
             <li className='cards_item' key={product.no}>
-              <div  className='card'>
-              <a href={`/product/${product.no}`}>
-                <img className='card_image'
-                  src={product.image}
-                  alt={product.title}
-                />
-                <div className='card_content'>
-                  <h5 className='card_title'>{product.title}</h5>
-                  <p className='card_text'>{product.price}</p>
-            </div>
-                
-              </a>
-              <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}>
-                  <IconButton aria-label="add to favorites">
+              <div className='card'>
+                <a href={`/product/${product.no}`}>
+                  <img className='card_image'
+                    src={product.image}
+                    alt={product.title}
+                  />
+                  <div className='card_content'>
+                    <h5 className='card_title'>{product.title}</h5>
+                    <p className='card_text'>{product.price}</p>
+                  </div>
+
+                </a>
+                <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}  >
+                  <IconButton aria-label="add to favorites" >
                     <FavoriteIcon />
                   </IconButton>
-                  <IconButton aria-label="share" onClick={function() {alert('링크가 복사되었습니다.')}} >
-                  <CopyToClipboard text={url +`/`+ product.no}>
-                    <ShareIcon />
+                  <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
+                    <CopyToClipboard text={url + `/` + product.no}>
+                      <ShareIcon />
                     </CopyToClipboard>
                   </IconButton>
-                  </CardActions>
-                  </div>
+                </CardActions>
+              </div>
 
             </li>
 

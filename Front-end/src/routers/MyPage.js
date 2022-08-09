@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NavBar from '../components/NavBar'
 import Modal from '../components/Modals/Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,10 +7,60 @@ import axios from 'axios'
 import './routers.css';
 import { useSelector } from 'react-redux'
 
+import Paper from '@mui/material/Paper';
+import '../components/Products/products.css';
+
+
 function MyPage() {
 
   let store = useSelector((state) => { return state })
-  const [loading, setLoading] = useState(false);
+
+  const [wish, setWish] = useState([]);
+  const [allwish, setAllWish] = useState([]);
+
+  useEffect(() => {
+    async function wishData() {
+      const result = await axios.get(
+        `/api/wishes`,
+        {
+          headers: {
+          Authorization: `Bearer ${localStorage.token}`
+        }}
+      );
+      setWish(result.data.slice(0, 6));
+      setAllWish(result.data)
+    }
+    wishData();
+    console.log(wish)
+
+  }, []);
+
+  const ShowWishProducts = (data) => {
+    console.log(data.data)
+    return (
+      <>
+        {data.data.map((products) => {
+          return (
+            <li className='heart_item' key={products.product.no}>
+                <a href={`/product/${products.product.no}`}>
+                <Paper>
+                  <img className='card_image'
+                    src={products.product.image}
+                    alt={products.product.title}
+                  />
+                  <div className='card_content'>
+                    <h5 className='card_title'>{products.product.title}</h5>
+                    <p className='card_text'>{products.product.price}</p>
+                  </div>
+                  </Paper>
+                </a>
+            </li>
+          );
+        })}
+      </>
+    );
+    
+  };
 
   const profile = store.info.info
   const [modalOpen, setModalOpen] = useState(false);
@@ -31,18 +81,20 @@ function MyPage() {
     } else {
       document.getElementById('imgChange').hidden = true
     }
-    
+
   }
   function axiosimgChange(e) {
     e.preventDefault();
     const imgdata = new FormData();
-    imgdata.append('files',imgupload);
+    imgdata.append('files', imgupload);
     axios({
       url: '/api/users/update/profile',
       method: 'post',
-      data : imgdata,
-      headers :  { Authorization: `Bearer ${localStorage.token}`,
-      "Content-Type": "multipart/form-data"}
+      data: imgdata,
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+        "Content-Type": "multipart/form-data"
+      }
     })
       .then(res => {
         console.log(res)
@@ -52,8 +104,8 @@ function MyPage() {
       })
   }
 
-  const [imgupload,setImgupload] = useState('')
-  function imgupdate(e){
+  const [imgupload, setImgupload] = useState('')
+  function imgupdate(e) {
     e.preventDefault();
     console.log(e.target.files)
     setImgupload(e.target.files[0])
@@ -65,14 +117,14 @@ function MyPage() {
       <div className='mypage' style={{ margin: 30 }}>
         <h3>MY PAGE</h3>
         <div className='account_container'>
-          <div className='column'><img className='profile_img' src={'https://i7c110.p.ssafy.io'+profile.profileUrl} alt="#"></img></div>
+          <div className='column'><img className='profile_img' src={'https://i7c110.p.ssafy.io' + profile.profileUrl} alt="#"></img></div>
           <div className='column'>
             <div className=''>{profile.nickName}</div>
             <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
-            <div className=''><a href='#!' onClick={e=>imgTest(e)}>프로필사진 변경</a></div>
+            <div className=''><a href='#!' onClick={e => imgTest(e)}>프로필사진 변경</a></div>
             <div className=''>
-              <input type="file" accept='image/*' multiple onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
-              <button onClick={e=>axiosimgChange(e)}>제출</button>
+              <input type="file" accept='image/*' multiple onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
+              <button onClick={e => axiosimgChange(e)}>제출</button>
             </div>
 
           </div>
@@ -107,14 +159,17 @@ function MyPage() {
               <div>더보기</div>
             </button>
             <Modal open={modalOpen} close={closeModal} header="찜한상품">
-              더보기리스트
+            <ul className='hearts'>
+            <ShowWishProducts data={allwish} />
+          </ul>
             </Modal>
           </div>
         </div>
         <br />
         <div>
-          상품 6개만 나오게
-          없으면 없다 표시
+          <ul className='hearts'>
+            <ShowWishProducts data={wish} />
+          </ul>
         </div>
         <hr />
       </div>

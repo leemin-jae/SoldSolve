@@ -36,7 +36,7 @@ function Products() {
     }
     fetchData();
 
-  }, []);
+  }, [location]);
 
 
   const Loading = () => {
@@ -47,10 +47,65 @@ function Products() {
     );
   };
 
+
+
+  const ChangeLike = (noprops) => {
+    console.log(noprops)
+    const [like, setLike] = useState(false)
+    async function likeData(noprops) {
+      const res = await axios.get(
+        `/api/wishes/check/` + noprops, {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`
+        }
+      }
+      )
+      console.log(res.data)
+      if (res.data === true) {
+        setLike(true)
+      }
+    }
+    likeData(noprops)
+    console.log(noprops, like)
+
+    
+    if (like === true){
+      axios({
+        url:  `/api/wishes`,
+        method: 'delete',
+        params: { product: noprops },
+        headers : { Authorization: `Bearer ${localStorage.token}` }
+      })
+
+      .then(res => {
+        console.log("삭제 성공")
+        setLike(false)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    } else {
+      axios({
+        url:  `/api/wishes`,
+        method: 'post',
+        params: { product: noprops },
+        headers : { Authorization: `Bearer ${localStorage.token}` }
+      })
+
+      .then(res => {
+        console.log("추가 성공")
+        setLike(true)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }  
+    console.log('change', like)
+  }
+
   const LikeButton = (no) => {
     const [like, setLike] = useState(false)
-    console.log(no)
-    useEffect(() => {
+
 
       async function likeData(no) {
         const res = await axios.get(
@@ -67,27 +122,23 @@ function Products() {
       }
       likeData(no)
 
-    }, []);
 
     return (
       <>
         {like ?
-          <IconButton aria-label="add to favorites" >
+        <IconButton aria-label="add to favorites">
             <FavoriteIcon />
-          </IconButton>
+            </IconButton>
           :
-          <IconButton aria-label="add to favorites" >
+          <IconButton aria-label="add to favorites">
             <FavoriteBorderIcon />
-          </IconButton>
+            </IconButton>
         }
       </>
     )
   }
 
-  const ChangeLike = (e) => {
-    e.preventDefault();
-    console.log(e)
-  }
+
 
 
   const ShowProducts = () => {
@@ -109,7 +160,7 @@ function Products() {
 
                 </a>
                 <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}  >
-                  <LikeButton no={product.no} onClick={ChangeLike} />
+                  <LikeButton no={product.no}/>
                   <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
                     <CopyToClipboard text={url + `/` + product.no}>
                       <ShareIcon />

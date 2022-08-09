@@ -18,14 +18,14 @@ public class FileService {
 
         File destinationFile;
         String destinationFileName;
-        String fileUrl = path + "\\images\\" + special +"\\";
+        String fileUrl = path + "/images/" + special +"/";
 
         do {
             destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + sourceFileNameExtension;
             destinationFile = new File(fileUrl + destinationFileName);
         } while (destinationFile.exists());
 
-        destinationFile.getParentFile().mkdirs();
+        //destinationFile.getParentFile().mkdirs();
         files.transferTo(destinationFile);
 
         return fileUrl + destinationFileName;

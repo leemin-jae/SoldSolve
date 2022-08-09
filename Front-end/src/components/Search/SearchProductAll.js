@@ -5,15 +5,17 @@ import NavBar from '../../components/NavBar';
 import SearchBar from './SearchBar';
 
 import CardActions from '@mui/material/CardActions';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
 import ShareIcon from '@mui/icons-material/Share';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import LiveButton from '../Products/LiveButton';
+import LikeButton from '../Products/LikeButton';
 
 
 function SearchProduct() {
     const [searchData, setSearchData] = useState([]);
     const params = useParams();
-    console.log(params)
+    // console.log(params)
 
     useEffect(() => {
         async function fetchData() {
@@ -29,7 +31,7 @@ function SearchProduct() {
                 setSearchData(result.data)
             } else {
                 const allData = await axios.get(`/api/product`);
-                console.log(allData)
+                // console.log(allData)
                 setSearchData(allData.data)
             }
         }
@@ -56,11 +58,12 @@ function SearchProduct() {
 
                                 </a>
                                 <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}>
-                                    <IconButton aria-label="add to favorites">
-                                        <FavoriteIcon />
-                                    </IconButton>
-                                    <IconButton aria-label="share">
-                                        <ShareIcon />
+                                    <LikeButton no={product.no} />
+                                    <LiveButton no={product.no} />
+                                    <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
+                                        <CopyToClipboard text={`https://i7c110.p.ssafy.io/product/` + product.no}>
+                                            <ShareIcon />
+                                        </CopyToClipboard>
                                     </IconButton>
                                 </CardActions>
                             </div>

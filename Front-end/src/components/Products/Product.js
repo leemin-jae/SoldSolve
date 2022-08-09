@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../routers.css'
+import '../../routers/routers.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -9,7 +9,7 @@ import axios from 'axios';
 import './products.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import NotFound from '../PageNotFound'
+import NotFound from '../../routers/PageNotFound'
 
 function Product() {
   const [products, setProducts] = useState([])

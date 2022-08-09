@@ -14,13 +14,15 @@ function CreateProduct() {
   const [category, setCategory] = useState('')
   const [detailImgs, setDetailImgs] = useState('')
   const editMode = useParams().id
+  const [imgData,setImgData] = useState('')
 
   useEffect(() => {
     if (editMode) {
     axios({
       url: `/api/product/${editMode}`,
       method: 'get',
-      headers: { Authorization: `Bearer ${localStorage.token}` }
+      headers :  { Authorization: `Bearer ${localStorage.token}`,
+      "Content-Type": "multipart/form-data"}
       })
       .then(res => {
         console.log(res)
@@ -64,6 +66,18 @@ function CreateProduct() {
 
   function submitProduct(e) {
     e.preventDefault();
+    const productData = new FormData()
+    console.log(imgData)
+    for (let i=0; i<imgData.length; i++) {
+      console.log(imgData[i])
+      productData.append('files',imgData[i]);
+    }
+
+    let value = price
+    value = Number(value.replaceAll(',', ''))
+    const jsondata = { title:articlename, content:description, price:value, region:place, category:category}
+    
+    productData.append("data", new Blob([JSON.stringify(jsondata)], { type: "application/json" }))
 
     let method = 'post'
     let url = ''
@@ -79,13 +93,11 @@ function CreateProduct() {
     else if (description === '') { alert("상세 설명을 적어주세요") }
     else if (place === '') { alert("거래하는 지역을 입력해주세요") }
     else {
-      let value = price
-      value = Number(value.replaceAll(',', ''))
-      const data = { title:articlename, content:description, price:value, region:place, category:category}
+      
       axios({
         url: '/api/product/'+ url,
         method: method,
-        data: data,
+        data: productData,
         headers: { Authorization: `Bearer ${localStorage.token}` }
         })
         .then(res => {
@@ -110,6 +122,7 @@ function CreateProduct() {
 
   const handleImageUpload = (e) => {
     const fileArr = e.target.files;
+    setImgData(fileArr)
     let fileURLs = [];
     let file;
     let filesLength = fileArr.length > 10 ? 10 : fileArr.length;

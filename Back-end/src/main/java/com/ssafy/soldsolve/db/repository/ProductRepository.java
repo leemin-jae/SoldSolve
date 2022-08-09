@@ -11,11 +11,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     Product findByNo(int no);
 
-    List<Product> findByTitleContains(String Title);
-
-    List<Product> findByCategoryAndTitleContains(String category, String title);
-
-    List<Product> findByCategory(String category);
-
-    List<Product> findByTitleContainingAndCategory(String title, String category);
+    List<Product> findByTitleContainingAndCategoryContainingAndRegionContaining(String t, String c, String r);
 }

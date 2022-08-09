@@ -21,16 +21,6 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    @Override
-    public List<Product> searchAllProduct() {
-        return productRepository.findAll();
-    }
-
-
-    @Override
-    public List<Product> searchByTitleProduct(String title) {
-        return productRepository.findByTitleContains(title);
-    }
 
 
     @Override
@@ -81,12 +71,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> searchByCateforyProduct(String category) {
-        return productRepository.findByCategory(category);
+    public List<Product> searchProduct(String t, String c, String r) {
+
+        return productRepository.findByTitleContainingAndCategoryContainingAndRegionContaining(t,c,r);
     }
 
-    @Override
-    public List<Product> searchByTitleAndCategoryProduct(String title, String category) {
-        return productRepository.findByTitleContainingAndCategory(title,category);
-    }
 }

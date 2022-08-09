@@ -14,7 +14,7 @@ const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
 
 class LivePage extends Component {
   constructor(props) {
-    
+
     super(props);
 
     const params = window.location.pathname.split('/')
@@ -22,7 +22,7 @@ class LivePage extends Component {
     console.log(props.storeInfo)
 
     this.state = {
-      myId:props.storeInfo.userId,
+      myId: props.storeInfo.userId,
       params: params,
       mySessionId: params[3],
       myUserName: props.storeInfo.nickName,
@@ -35,7 +35,7 @@ class LivePage extends Component {
 
     this.state.myId = props.storeInfo.userId
     this.state.myUserName = props.storeInfo.nickName
-      
+
 
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
@@ -124,33 +124,33 @@ class LivePage extends Component {
             )
             .then(async () => {
               if (this.state.myId === this.state.params[2]) {
-              var devices = await this.OV.getDevices();
-              var videoDevices = devices.filter(device => device.kind === 'videoinput');
+                var devices = await this.OV.getDevices();
+                var videoDevices = devices.filter(device => device.kind === 'videoinput');
 
                 var publisher = this.OV.initPublisher(undefined, {
-                audioSource: undefined,
-                videoSource: videoDevices[0].deviceId,
-                publishAudio: true,
-                publishVideo: true,
-                resolution: '800x500',
-                frameRate: 30,
-                insertMode: 'APPEND',
-                mirror: true,
+                  audioSource: undefined,
+                  videoSource: videoDevices[0].deviceId,
+                  publishAudio: true,
+                  publishVideo: true,
+                  resolution: '800x500',
+                  frameRate: 30,
+                  insertMode: 'APPEND',
+                  mirror: true,
                 });
-              
-              console.log(publisher)
-              mySession.publish(publisher);
 
-              this.setState ({
-              currentVideoDevice: videoDevices[0],
-              mainStreamManager: publisher,
-              publisher: publisher,
-              });
-            } else {
+                console.log(publisher)
+                mySession.publish(publisher);
+
+                this.setState({
+                  currentVideoDevice: videoDevices[0],
+                  mainStreamManager: publisher,
+                  publisher: publisher,
+                });
+              } else {
                 var devices2 = await this.OV.getDevices();
                 var videoDevices2 = devices2.filter(device => device.kind === 'videoinput');
 
-                  var publisher2 = this.OV.initPublisher(undefined, {
+                var publisher2 = this.OV.initPublisher(undefined, {
                   audioSource: undefined,
                   videoSource: false,
                   publishAudio: false,
@@ -159,19 +159,19 @@ class LivePage extends Component {
                   frameRate: 30,
                   insertMode: 'APPEND',
                   mirror: true,
-                  });
-                
+                });
+
                 console.log(publisher2)
                 mySession.publish(publisher2);
 
-                this.setState ({
-                currentVideoDevice: videoDevices2[0],
-                mainStreamManager: publisher2,
-                publisher: publisher2,
+                this.setState({
+                  currentVideoDevice: videoDevices2[0],
+                  mainStreamManager: publisher2,
+                  publisher: publisher2,
                 });
 
-            }
-            console.log(publisher)
+              }
+              console.log(publisher)
             })
             .catch((error) => {
               console.log('There was an error connecting to the session:', error.code, error.message);
@@ -217,7 +217,7 @@ class LivePage extends Component {
             publishVideo: true,
             mirror: true
           });
-          
+
           await this.state.session.unpublish(this.state.mainStreamManager)
 
           await this.state.session.publish(newPublisher)
@@ -237,7 +237,7 @@ class LivePage extends Component {
     if (this.state.session === undefined) {
       this.joinSession()
     }
-    console.log(this.state.subscribers  )
+    console.log(this.state.subscribers)
     return (
       <div>
         <NavBar></NavBar>
@@ -247,13 +247,15 @@ class LivePage extends Component {
             <div id="session">
               <div className='d-flex liveTitle my-3 justify-content-between'>
                 <h3 id="session-title">{localStorage.LiveRoom}</h3>
-                <div>
+                {this.state.params[2] === this.state.myId ?
+                  <>
+                    <div>
                   <input
-                  className="btn btn-large btn-danger mx-1 video_button"
-                  type="button"
-                  id="buttonLeaveSession"
-                  onClick={this.leaveSession}
-                  value="나가기"
+                    className="btn btn-large btn-danger mx-1 video_button"
+                    type="button"
+                    id="buttonLeaveSession"
+                    onClick={this.leaveSession}
+                    value="나가기"
                   />
                   <input
                     className="btn btn-large btn-success mx-1 video_button"
@@ -263,15 +265,16 @@ class LivePage extends Component {
                     value="카메라변경"
                   />
                 </div>
-                
+                  </>
+                  : null}
               </div>
 
               <div className='live_container'>
 
                 <div>
                   <div>
-                    { this.state.myId === this.state.params[2] ? (
-                      <div className='livebox'> 
+                    {this.state.myId === this.state.params[2] ? (
+                      <div className='livebox'>
                         <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
                       </div>
                     ) : (
@@ -279,7 +282,7 @@ class LivePage extends Component {
                         <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
                       </div>
                     )}
-                  
+
                   </div>
                   <p style={{ margin: '1em' }}><FontAwesomeIcon icon={faUser} size="2x" style={{ marginRight: '10px' }} />
                     닉네임 (본인이 설정한 지역), 평점</p>
@@ -301,7 +304,7 @@ class LivePage extends Component {
 
     );
   }
-  
+
 
   getToken(sessionId) {
     return new Promise((resolve, reject) => {

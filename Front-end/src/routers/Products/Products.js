@@ -84,28 +84,36 @@ function Products() {
 
   const LikeButton = (no) => {
     const [like, setLike] = useState(false)
+    console.log(no)
+    useEffect(()=> {
 
-    useEffect(async () => {
-      const likeData = async () => {
+      async function likeData(no) {
         const res = await axios.get(
-          `/api/wishes/check/` + no, {
+          `/api/wishes/check/` + no.no, {
                 headers: {
                   Authorization: `Bearer ${localStorage.token}` 
                 }
               }
         )
-        console.log(res)
-        // if (res.data.type === 'liked') setLike(true)
+        console.log(res.data)
+        if (res.data === true){
+          setLike(true)
+        }
       }
+      likeData(no)
       
     }, []);
+    return(
+        <>
+        {like ? <FavoriteIcon /> : <ShareIcon />}
+        </>
+    )
+    
 
   }
 
 
   const ShowProducts = () => {
-    console.log(filter)
-    LikeButton(8)
     return (
       <>
         {filter.map((product) => {
@@ -124,6 +132,7 @@ function Products() {
 
                 </a>
                 <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}  >
+                <LikeButton no={product.no} />
                   <IconButton aria-label="add to favorites" >
                     <FavoriteIcon />
                   </IconButton>

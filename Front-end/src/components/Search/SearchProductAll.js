@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from "axios"
 import NavBar from '../../components/NavBar';
+import SearchBar from './SearchBar';
 
 import CardActions from '@mui/material/CardActions';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -24,9 +25,13 @@ function SearchProduct() {
                     }
                 }
             );
-            setSearchData(result.data);
-            console.log(searchData);
-            console.log(result.data)
+            if (result.data.length > 0) {
+                setSearchData(result.data)
+            } else {
+                const allData = await axios.get(`/api/product`);
+                console.log(allData)
+                setSearchData(allData.data)
+            }
         }
         fetchData();
     }, []);
@@ -72,6 +77,7 @@ function SearchProduct() {
     return (
         <>
             <NavBar />
+            <SearchBar></SearchBar>
             <div className='content'>
                 <ul className='cards' id='maincontent'>
                     {<ShowProducts />}

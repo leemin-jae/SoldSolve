@@ -16,7 +16,10 @@ function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (title === ''){
+    console.log(category)
+    if (category === '' && title !== '') {
+      document.location.href = `/` + title;
+    } else if (title === ''){
       alert("검색어를 입력해주세요")
     } else {
       document.location.href = `/` + category + `/` + title;
@@ -41,7 +44,7 @@ function Search() {
               color="secondary"
               onChange={event => setCategory(event.target.value)}
           >
-              <option value={"none"}>카테고리</option>
+              <option value={"all"}>카테고리</option>
               <option value={"digital"}>디지털기기</option>
               <option value={"appliances"}>생활가전</option>
               <option value={"furniture"}>가구</option>

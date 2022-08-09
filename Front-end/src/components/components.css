@@ -249,10 +249,10 @@ div#left_toggle ul li {
 }
 
 .Article {
-  margin-block: 2%;
-  padding: 2%;
-  background-color: rgba(128, 128, 128, 0.116);
-  border-radius: 10px;
+  margin-block: 1%;
+  padding: 1%;
+  background-color: rgba(180, 179, 179, 0.116);
+  border-radius: 5px;
   align-items: center;
   list-style: none;
 }
@@ -277,9 +277,14 @@ div#left_toggle ul li {
   display: none;
 }
 
+
 .overText {
   word-break: break-all;
-  padding: 5%;
+  padding: 5% 5% 0 5%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .findForm {
@@ -511,4 +516,20 @@ div#left_toggle ul li {
   flex-direction: column-reverse;
   padding: 50px 20px 7px 20px;
   align-items: flex-start;
+}
+
+.article_line{
+  white-space: pre-wrap;
+}
+
+.noticeButton {
+  margin-right: 10px;
+  color: white;
+  background-color: #6667AB;
+
+}
+.noticeButtons {
+  display: flex;
+  flex-direction: column-reverse;
+
 }

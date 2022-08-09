@@ -1,42 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import NavBar from '../components/NavBar'
 import Modal from '../components/Modals/Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import './routers.css';
+import { useSelector } from 'react-redux'
 
 function MyPage() {
 
+  let store = useSelector((state) => { return state })
   const [loading, setLoading] = useState(false);
-  const [profile, setProfile] = useState([]);
-  console.log(loading)
-  useEffect(() => {
 
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Authorization': `Bearer ${localStorage.token}` }
-      //localStorage.getItem('token');
-    };
-
-
-    const getProfile = async () => {
-      setLoading(true);
-
-      try {
-        const response = await fetch(`/api/users/me`, requestOptions);
-        const data = await response.json();
-        console.log(data);
-        setProfile(data);
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    getProfile();
-  }, []);
-
+  const profile = store.info.info
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -45,7 +21,6 @@ function MyPage() {
   };
   const closeModal = () => {
     console.log(modalOpen)
-
     setModalOpen(false);
   };
 
@@ -61,29 +36,14 @@ function MyPage() {
   function axiosimgChange(e) {
     e.preventDefault();
     const imgdata = new FormData();
-    imgdata.append('files',imgupload,"");
-    console.log(imgupload)
-
-    const config = {
-      header : { Authorization: `Bearer ${localStorage.token}`,
-      'Content-Type': 'multipart/form-data',
-    }
-    }
+    imgdata.append('files',imgupload);
     axios({
       url: '/api/users/update/profile',
       method: 'post',
-      data: imgdata,
-      header :  { Authorization: `Bearer ${localStorage.token}`,
-      'Content-Type': 'multipart/form-data'}
+      data : imgdata,
+      headers :  { Authorization: `Bearer ${localStorage.token}`,
+      "Content-Type": "multipart/form-data"}
     })
-      .then(res => {
-        console.log(res)
-      })
-      .catch(err => {
-        console.error(err)
-      })
-
-    axios.post('/api/users/update/profile',imgdata,config)
       .then(res => {
         console.log(res)
       })
@@ -99,20 +59,19 @@ function MyPage() {
     setImgupload(e.target.files[0])
   }
 
-
   return (
     <>
       <NavBar />
       <div className='mypage' style={{ margin: 30 }}>
         <h3>MY PAGE</h3>
         <div className='account_container'>
-          <div className='column'><img src={profile.profileImg} alt="#"></img></div>
+          <div className='column'><img className='profile_img' src={'https://i7c110.p.ssafy.io'+profile.profileUrl} alt="#"></img></div>
           <div className='column'>
             <div className=''>{profile.nickName}</div>
             <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
             <div className=''><a href='#!' onClick={e=>imgTest(e)}>프로필사진 변경</a></div>
             <div className=''>
-              <input type="file" onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
+              <input type="file" accept='image/*' multiple onChange={e=>imgupdate(e)} id="imgChange" hidden={true}></input>
               <button onClick={e=>axiosimgChange(e)}>제출</button>
             </div>
 

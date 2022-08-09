@@ -1,9 +1,9 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
-
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
+
 
 let token = createSlice({
   name: 'token',
@@ -18,21 +18,23 @@ let token = createSlice({
   }
 })
 
-let info = createSlice({
-  name: 'info',
-  initialState: {
-    id: '',
+let user = createSlice({
+  name:'user',
+  initialState:{
+    info : ''
   },
   reducers: {
-    getID(state, action) {
-      state.id = action.payload
+    getInfo(state, action) {
+      state.info = action.payload
+      console.log(state.info)
     },
   }
+
 })
 
 const reducers = combineReducers({
   token: token.reducer,
-  info: info.reducer,
+  info: user.reducer,
 });
 
 const persistConfig = {
@@ -45,7 +47,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 
 
 export let { getToken } = token.actions
-export let { getID } = info.actions
+export let { getInfo } = user.actions
 
 export default configureStore({
   reducer: persistedReducer,

@@ -62,6 +62,7 @@ root.render(
               <Route path='/:category/:title' element={<SearchProduct />}></Route>
               <Route path='/chattest' element={<ChatTest />}></Route>
               <Route path='/:title' element={<SearchProductAll />}></Route>
+              
               <Route path="/*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

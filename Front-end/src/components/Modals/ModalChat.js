@@ -1,16 +1,84 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { over } from 'stompjs'
+import SockJS from 'sockjs-client';
+import axios from 'axios'
 import './modal.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 // import '../../routers/routers.css'
 // import { useNavigate } from 'react-router-dom';
 
+let stompClient = null
 
 const ModalChat = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
 
   const { open, close, header } = props;
+
+  const [chats, setChats] = useState([])
+  // const [privateChats, setPrivateChats] = useState(new Map())
+  // const [tab, setTab] = useState("CHAT ROOM")
+  const [userData, setUserData] = useState({
+    username: '',
+    receivername: '',
+    connected: false,
+    message: ''
+  })
+  const onConnected = () => {
+    // console.log(payload)
+    setUserData({ ...userData, "": true })
+    console.log('???')
+    console.log(stompClient)
+    stompClient.subscribe('/sub/chat/room/1', (payload) => {
+      let payloadData = JSON.parse(payload.body);
+      chats.push(payloadData);
+      setChats([...chats]);
+      console.log(chats)
+    })
+  }
+
+  useEffect(() => {
+    let Sock = new SockJS("http://localhost:8080/ws-stomp")
+    // console.log(Sock)
+    stompClient = over(Sock)
+    stompClient.connect({}, onConnected)
+    // const userJoin = () => {
+    //   // let chatMessage = {
+    //   //   senderName: userData.username,
+    //   //   status: 'JOIN'
+    //   }
+    //   // stompClient.send('/sub/chat/room/1', {}, JSON.stringify(chatMessage))
+    //   console.log('!@#!@#!@#')
+    // }
+  }, [])
+  const getAxios = () => {
+    axios.get('http://localhost:8080/api/users/me', {
+      headers: {
+        Authorization: `Bearer ${localStorage.token}` //the token is a variable which holds the token
+      }
+    }).then(res => {
+      setUserData({ ...userData, 'username': res.data.userId })
+    }).catch(err => console.log(err.response.status))
+  }
+  const handleValue = (e) => {
+    const { value, name } = e.target
+    setUserData({ ...userData, [name]: value })
+  }
+  // const onPublicMessageReceived = 
+  const sendPublicMessage = () => {
+    if (stompClient) {
+      let chatMessage = {
+        senderName: userData.username,
+        message: userData.message,
+        roomId: '1',
+        status: 'MESSAGE'
+      }
+      stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+      setUserData({ ...userData, "message": "" })
+      console.log(userData)
+    }
+  }
 
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
@@ -24,26 +92,18 @@ const ModalChat = (props) => {
               <div className='chat_background'>
                 <div className='chat_div' >
                   <ul className='li_box_container'>
-                    <span className='li_box_me'>me : 1</span>
-                    <span className='li_box_other'>other : 1</span>
-                    <span className='li_box_me'>me : 2</span>
-                    <span className='li_box_other'>other : 2</span>
-                    <span className='li_box_me'>me : 3</span>
-                    <span className='li_box_other'>other : 3</span>
-                    <span className='li_box_me'>me : 4</span>
-                    <span className='li_box_other'>other : 4</span>
-                    <span className='li_box_me'>me : 5</span>
-                    <span className='li_box_other'>other : 5</span>
-                    <span className='li_box_me'>me : 6</span>
-                    <span className='li_box_other'>other : 6</span>
-
+                    {chats.map(chat => {
+                      return (
+                        <span className='li_box_me' key={userData.userId}>{chat.message}</span>
+                      )
+                    })}
                   </ul>
                 </div>
               </div>
             </div>
             <div className='input_box'>
-              <input className='chat_input' type="text" />
-              <FontAwesomeIcon i con={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} />
+              <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message} onChange={handleValue} />
+              <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={sendPublicMessage} />
             </div>
           </main>
         </section>

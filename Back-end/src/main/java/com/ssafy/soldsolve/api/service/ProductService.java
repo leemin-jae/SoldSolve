@@ -7,9 +7,7 @@ import java.util.List;
 
 public interface ProductService {
 
-    List<Product> searchAllProduct();
 
-    List<Product> searchByTitleProduct(String title);
 
     int registProduct(ProductPostReq product);
 
@@ -19,7 +17,5 @@ public interface ProductService {
 
     Product getProduct(String no);
 
-    List<Product> searchByCateforyProduct(String category);
-
-    List<Product> searchByTitleAndCategoryProduct(String title, String category);
+    List<Product> searchProduct(String t, String c, String r);
 }

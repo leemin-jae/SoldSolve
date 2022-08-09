@@ -1,5 +1,11 @@
 package com.ssafy.soldsolve.api.controller;
 
+import com.ssafy.soldsolve.api.request.ChatMessage;
+import com.ssafy.soldsolve.db.entity.Chat;
+import com.ssafy.soldsolve.db.entity.Room;
+import com.ssafy.soldsolve.db.repository.ChatRepository;
+import com.ssafy.soldsolve.db.repository.RoomRepository;
+import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

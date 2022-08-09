@@ -13,24 +13,24 @@ let stompClient = null
 const ModalChat = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
-
-  const { open, close, header } = props;
-
+  const { open, close, header, roomId, me, seller, buyer, stompClient } = props;
+  const [receiverId, setReceiverId] = useState('')
   const [chats, setChats] = useState([])
   // const [privateChats, setPrivateChats] = useState(new Map())
   // const [tab, setTab] = useState("CHAT ROOM")
   const [userData, setUserData] = useState({
     username: '',
-    receivername: '',
+    receivername: receiverId,
     connected: false,
     message: ''
   })
+
   const onConnected = () => {
     // console.log(payload)
     setUserData({ ...userData, "": true })
     console.log('???')
     console.log(stompClient)
-    stompClient.subscribe('/sub/chat/room/1', (payload) => {
+    stompClient.subscribe(`/sub/chat/room/${roomId}`, (payload) => {
       let payloadData = JSON.parse(payload.body);
       chats.push(payloadData);
       setChats([...chats]);
@@ -39,9 +39,18 @@ const ModalChat = (props) => {
   }
 
   useEffect(() => {
-    let Sock = new SockJS("http://localhost:8080/ws-stomp")
-    // console.log(Sock)
-    stompClient = over(Sock)
+    if (me !== buyer) {
+      setReceiverId(buyer)
+    } else {
+      setReceiverId(seller)
+    }
+
+  })
+
+  useEffect(() => {
+    // let Sock = new SockJS("/ws-stomp")
+    // // console.log(Sock)
+    // stompClient = over(Sock)
     stompClient.connect({}, onConnected)
     // const userJoin = () => {
     //   // let chatMessage = {
@@ -52,15 +61,6 @@ const ModalChat = (props) => {
     //   console.log('!@#!@#!@#')
     // }
   }, [])
-  const getAxios = () => {
-    axios.get('http://localhost:8080/api/users/me', {
-      headers: {
-        Authorization: `Bearer ${localStorage.token}` //the token is a variable which holds the token
-      }
-    }).then(res => {
-      setUserData({ ...userData, 'username': res.data.userId })
-    }).catch(err => console.log(err.response.status))
-  }
   const handleValue = (e) => {
     const { value, name } = e.target
     setUserData({ ...userData, [name]: value })
@@ -71,9 +71,11 @@ const ModalChat = (props) => {
       let chatMessage = {
         senderName: userData.username,
         message: userData.message,
-        roomId: '1',
+        roomId: roomId,
         status: 'MESSAGE'
       }
+      console.log(stompClient)
+
       stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
       setUserData({ ...userData, "message": "" })
       console.log(userData)

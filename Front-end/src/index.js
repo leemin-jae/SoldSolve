@@ -26,8 +26,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom' // react-router-
 import 'bootstrap/dist/css/bootstrap.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import Product from './routers/Products/Product';
-import Products from './routers/Products/Products';
+import Product from './components/Products/Product';
+import Products from './components/Products/Products';
 import SearchProduct from './components/Search/SearchProduct';
 import SearchProductAll from './components/Search/SearchProductAll';
 

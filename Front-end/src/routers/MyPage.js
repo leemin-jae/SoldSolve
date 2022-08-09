@@ -22,6 +22,7 @@ function MyPage() {
   const [allwish, setAllWish] = useState([]);
 
   useEffect(() => {
+    profileUpdate()
     async function wishData() {
       const result = await axios.get(
         `/api/wishes`,
@@ -93,7 +94,7 @@ function MyPage() {
       })
   }
 
-  
+
   function imgupdate(e) {
     e.preventDefault();
     const imgdata = new FormData();
@@ -124,7 +125,7 @@ function MyPage() {
         <div className='account_container'>
           <div className='column'>
             <img className='profile_img' src={'https://i7c110.p.ssafy.io' + profile.profileUrl} alt="#"></img>
-            <input type="file" accept='image/*' multiple onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
+            <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
             <label className="uploadlabel" htmlFor="imgChange">사진 변경</label>
           </div>
           <div className='column'>

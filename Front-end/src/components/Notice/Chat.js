@@ -15,8 +15,6 @@ let stompClient = null;
 
 function Chat() {
   const [roomList, setRoomList] = useState([])
-  const [name, setName] = useState('')
-  const [receiver, setReceiver] = useState('')
   let store = useSelector((state) => { return state })
   console.log(store.info.info.nickName, '사용자이름')
   useEffect(() => {
@@ -55,20 +53,6 @@ function Chat() {
         .then(res => {
           // console.log(res, '!!!')
           setRoomList(res.data)
-          // console.log(roomList)
-
-          res.data.map((room) => {
-            console.log(store.info.nickname)
-            if (room.seller.nickname == store.info.info.nickName) {
-              setName(room.buyer.nickname)
-              setReceiver(room.buyer.nickname)
-            } else if (room.buyer.nickname == store.info.info.nickName) {
-              setName(room.seller.nickname)
-              setReceiver(room.seller.nickname)
-            }
-
-          })
-
         })
         .catch(err => {
           console.log(err)
@@ -79,17 +63,13 @@ function Chat() {
   }, [])
 
 
-  console.log(roomList)
-  const [buyerName, setBuyerName] = useState('')
 
   // let navigate = useNavigate()
   const [modalOpen, setModalOpen] = useState(false);
-
-  const openModal = (buyerName) => {
-    // console.log(e)
-    setBuyerName(buyerName)
+  const [selectChat,setSelectChat] = useState(null);
+  const openModal = (room) => {
+    setSelectChat(room)
     setModalOpen(true);
-    // console.log(buyerName)
 
   };
   const closeModal = () => {
@@ -111,24 +91,38 @@ function Chat() {
 
   const ShowChat = () => {
     // filterProduct("women's clothing")
-    console.log(buyerName)
+
     console.log(stompClient)
     return (
       <>
         {roomList.map((room, idx) => {
+          let you = null;
+          let yourImg = null;
+          let yourEmail = null;
+
+          if (store.info.info.userId === room.buyer.userid) {
+            you = room.seller.nickname
+            yourImg = room.seller.profileUrl
+            yourEmail = room.seller.email
+          } else {
+            you = room.buyer.nickname
+            yourImg = room.buyer.profileUrl
+            yourEmail = room.buyer.email
+          }
+
           return (
             <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
               <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
                 // setBuyerName()
-                openModal(room.seller.nickname)
+                openModal(room)
               }}>
                 <div className="profile_box" style={{ background: '#BDBDBD' }}>
-                  <img className="profile_img" src={room.profileUrl} alt='profileImg' />
+                  <img className="profile_img" src={'https://i7c110.p.ssafy.io'+yourImg} alt='profileImg' />
                 </div>
 
                 <div>
-                  <h6 className='profile_text'>{name}</h6><br />
-                  <div className='profile_text'>{room.seller.email}</div>
+                  <h6 className='profile_text'>{you}</h6><br />
+                  <div className='profile_text'>{yourEmail}</div>
                 </div>
               </div>
               <div>
@@ -140,8 +134,6 @@ function Chat() {
                 </div>
               </div>
               {console.log(room.roomId)}
-              <ModalChat open={modalOpen} close={closeModal} header={name} receiver={receiver} sender={store.info.info.userId} roomId={room.roomId} stompClient={stompClient}>
-              </ModalChat>
             </span>
           );
         })}
@@ -157,6 +149,7 @@ function Chat() {
       <ul style={{ padding: '0' }}>
         {<ShowChat />}
       </ul>
+      <ModalChat open={modalOpen} close={closeModal} header={selectChat} stompClient={stompClient}></ModalChat>
     </>
   );
 }

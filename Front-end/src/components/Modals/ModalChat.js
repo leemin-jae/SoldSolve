@@ -13,14 +13,13 @@ let stompClient = null
 const ModalChat = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
-  const { open, close, header, roomId, me, seller, buyer, stompClient } = props;
-  const [receiverId, setReceiverId] = useState('')
+  const { open, close, header, roomId, stompClient, receiver, sender } = props;
   const [chats, setChats] = useState([])
   // const [privateChats, setPrivateChats] = useState(new Map())
   // const [tab, setTab] = useState("CHAT ROOM")
   const [userData, setUserData] = useState({
-    username: '',
-    receivername: receiverId,
+    username: sender,
+    receivername: receiver,
     connected: false,
     message: ''
   })
@@ -37,15 +36,6 @@ const ModalChat = (props) => {
       console.log(chats)
     })
   }
-
-  useEffect(() => {
-    if (me !== buyer) {
-      setReceiverId(buyer)
-    } else {
-      setReceiverId(seller)
-    }
-
-  })
 
   useEffect(() => {
     // let Sock = new SockJS("/ws-stomp")
@@ -69,10 +59,10 @@ const ModalChat = (props) => {
   const sendPublicMessage = () => {
     if (stompClient) {
       let chatMessage = {
-        senderName: userData.username,
+        sender: sender,
         message: userData.message,
         roomId: roomId,
-        status: 'MESSAGE'
+        type: 'MESSAGE'
       }
       console.log(stompClient)
 
@@ -90,7 +80,7 @@ const ModalChat = (props) => {
           <main>
             <div className='chat_box'>
               <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px' }} onClick={close} />
-              <h3 className='buyer_nickname'>{header}</h3>
+              <h3 className='buyer_nickname'>{receiver}</h3>
               <div className='chat_background'>
                 <div className='chat_div' >
                   <ul className='li_box_container'>

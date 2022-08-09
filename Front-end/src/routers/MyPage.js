@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import './routers.css';
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
+
+import { getInfo } from '../store.js'
 
 import Paper from '@mui/material/Paper';
 import '../components/Products/products.css';
@@ -14,6 +16,7 @@ import '../components/Products/products.css';
 function MyPage() {
 
   let store = useSelector((state) => { return state })
+  let dispatch = useDispatch()
 
   const [wish, setWish] = useState([]);
 
@@ -72,19 +75,27 @@ function MyPage() {
     setModalOpen(false);
   };
 
-  function imgTest(e) {
-    e.preventDefault();
-    if (document.getElementById('imgChange').hidden) {
-      document.getElementById('imgChange').hidden = false
-    } else {
-      document.getElementById('imgChange').hidden = true
-    }
-
+  function profileUpdate(){
+    axios({
+      url: '/api/users/me',
+      method: 'get',
+      headers: {
+        Authorization: `Bearer ${localStorage.token}`,
+      }
+    })
+      .then(res => {
+        dispatch(getInfo(res.data))
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
-  function axiosimgChange(e) {
+
+  
+  function imgupdate(e) {
     e.preventDefault();
     const imgdata = new FormData();
-    imgdata.append('files', imgupload);
+    imgdata.append('files', e.target.files[0]);
     axios({
       url: '/api/users/update/profile',
       method: 'post',
@@ -96,17 +107,11 @@ function MyPage() {
     })
       .then(res => {
         console.log(res)
+        profileUpdate()
       })
       .catch(err => {
         console.error(err)
       })
-  }
-
-  const [imgupload, setImgupload] = useState('')
-  function imgupdate(e) {
-    e.preventDefault();
-    console.log(e.target.files)
-    setImgupload(e.target.files[0])
   }
 
   return (
@@ -115,16 +120,14 @@ function MyPage() {
       <div className='mypage' style={{ margin: 30 }}>
         <h3>MY PAGE</h3>
         <div className='account_container'>
-          <div className='column'><img className='profile_img' src={'https://i7c110.p.ssafy.io' + profile.profileUrl} alt="#"></img></div>
+          <div className='column'>
+            <img className='profile_img' src={'https://i7c110.p.ssafy.io' + profile.profileUrl} alt="#"></img>
+            <input type="file" accept='image/*' multiple onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
+            <label className="uploadlabel" htmlFor="imgChange">사진 변경</label>
+          </div>
           <div className='column'>
             <div className=''>{profile.nickName}</div>
             <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
-            <div className=''><a href='#!' onClick={e => imgTest(e)}>프로필사진 변경</a></div>
-            <div className=''>
-              <input type="file" accept='image/*' multiple onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
-              <button onClick={e => axiosimgChange(e)}>제출</button>
-            </div>
-
           </div>
         </div>
         <div className='history_container'>

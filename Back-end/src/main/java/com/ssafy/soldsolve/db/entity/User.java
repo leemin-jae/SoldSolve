@@ -43,7 +43,11 @@ public class User {
 	@JsonIgnore
 	private List<Message> messages = new ArrayList<>();
 
-	
+	@OneToMany(orphanRemoval = true, mappedBy = "roomId")
+	@JsonIgnore
+	List<Room> roomList = new ArrayList<>();
+
+
 	@Builder
 	public User(String userid, String password, String username, String nickname, String email, String role, String profileUrl, Timestamp createDate, List<Message> messages) {
 		this.userid = userid;

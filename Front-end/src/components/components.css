@@ -314,7 +314,7 @@ div#left_toggle ul li {
 .profile_img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
 }
 
 .profile_text {
@@ -358,7 +358,7 @@ div#left_toggle ul li {
   .profile_img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: fill;
   }
 
   .profile_text {

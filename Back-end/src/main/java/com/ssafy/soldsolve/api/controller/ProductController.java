@@ -22,22 +22,17 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("")
-    public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category) {
+    public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category, @RequestParam(required = false) String region) {
 
 
         try {
             List<Product> result=null;
-            if (title == null && category == null) {
-                result=productService.searchAllProduct();
-            }
-            else if(category != null && title == null){
-                result = productService.searchByCateforyProduct(category);
-            }
-            else if (title != null && category == null) {
-                result=productService.searchByTitleProduct(title);
-            }else {
-                result = productService.searchByTitleAndCategoryProduct(title, category);
-            }
+            String t = title==null?"":title;
+            String c = category==null?"":category;
+            String r = region==null?"":region;
+
+            result = productService.searchProduct(t,c,r);
+
             if(result==null) {
                 return new ResponseEntity<String>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
             }else if(result.size()==0) {

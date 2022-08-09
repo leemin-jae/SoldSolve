@@ -116,18 +116,20 @@ function Product() {
   }
 
   const createRoom = () => {
-    axios({
-      url: '/api/room',
-      method: 'post',
-      params: { seller: userId },
-      headers: { Authorization: `Bearer ${localStorage.token}` }
-    })
-      .then(res => {
-        console.log(res.data, '방생성')
+    if (window.confirm("판매자와 연락하시겠습니까?")) {
+      axios({
+        url: '/api/room',
+        method: 'post',
+        params: { seller: userId },
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
-      .catch(err => {
-        console.log(err)
-      })
+        .then(res => {
+          console.log(res.data, '방생성')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 
   return (

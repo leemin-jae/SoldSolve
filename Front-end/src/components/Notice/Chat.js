@@ -15,8 +15,10 @@ let stompClient = null;
 
 function Chat() {
   const [roomList, setRoomList] = useState([])
+  const [name, setName] = useState('')
+  const [receiver, setReceiver] = useState('')
   let store = useSelector((state) => { return state })
-
+  console.log(store.info.info.nickName, '사용자이름')
   useEffect(() => {
     console.log('연결중')
     let Sock = new SockJS('/ws-stomp');
@@ -42,6 +44,8 @@ function Chat() {
   };
 
   useEffect(() => {
+    // const currentUserName = store.info.info.nickname
+    // console.log(currentUserName, '이름이름')
     const getRoomList = () => {
       axios({
         url: '/api/room',
@@ -49,8 +53,22 @@ function Chat() {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
+          // console.log(res, '!!!')
           setRoomList(res.data)
-          console.log(roomList)
+          // console.log(roomList)
+
+          res.data.map((room) => {
+            console.log(store.info.nickname)
+            if (room.seller.nickname == store.info.info.nickName) {
+              setName(room.buyer.nickname)
+              setReceiver(room.buyer.nickname)
+            } else if (room.buyer.nickname == store.info.info.nickName) {
+              setName(room.seller.nickname)
+              setReceiver(room.seller.nickname)
+            }
+
+          })
+
         })
         .catch(err => {
           console.log(err)
@@ -97,9 +115,9 @@ function Chat() {
     console.log(stompClient)
     return (
       <>
-        {roomList.map((room) => {
+        {roomList.map((room, idx) => {
           return (
-            <span className='chat_room' key={room.roomId} style={{ cursor: 'pointer' }} >
+            <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
               <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
                 // setBuyerName()
                 openModal(room.seller.nickname)
@@ -109,7 +127,7 @@ function Chat() {
                 </div>
 
                 <div>
-                  <h6 className='profile_text'>{room.seller.nickname}</h6><br />
+                  <h6 className='profile_text'>{name}</h6><br />
                   <div className='profile_text'>{room.seller.email}</div>
                 </div>
               </div>
@@ -122,7 +140,7 @@ function Chat() {
                 </div>
               </div>
               {console.log(room.roomId)}
-              <ModalChat open={modalOpen} close={closeModal} header={buyerName} seller={room.seller.nickname} buyer={room.buyer.nickname} me={store.info.info.userId} roomId={room.roomId} stompClient={stompClient}>
+              <ModalChat open={modalOpen} close={closeModal} header={name} receiver={receiver} sender={store.info.info.userId} roomId={room.roomId} stompClient={stompClient}>
               </ModalChat>
             </span>
           );

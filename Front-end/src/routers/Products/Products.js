@@ -6,6 +6,7 @@ import './products.css'
 
 import CardActions from '@mui/material/CardActions';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import IconButton from '@mui/material/IconButton';
 import ShareIcon from '@mui/icons-material/Share';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
@@ -17,7 +18,6 @@ function Products() {
   const [loading, setLoading] = useState(false);
   const location = useLocation().state.category;
 
-  const [like, setLike] = useState(false);
   const [wishlist, setWishlist] = useState([]);
   const [wish, setWish] = useState([]);
 
@@ -36,42 +36,7 @@ function Products() {
     }
     fetchData();
 
-
-    // const wishData = () => {
-    //   axios.get(`/api/wishes`, {
-    //     headers: {
-    //       Authorization: `Bearer ${localStorage.token}` //the token is a variable which holds the token
-    //     }
-    //   }).then(res => {
-    //     console.log(res.data)
-    //     setWishlist(res.data)
-    //   }).catch(err => console.log(err.response.status))
-    // }
-
-    // wishData();
-    // console.log(wishlist)
-
-    // const wishItem = () => {
-    //   wishlist.map((wishitem) => {
-    //     // console.log(wishitem.product.no, '+')
-    //     setWish(wish => [...wish, wishitem.product.no]);
-    //   })
-    // }
-    // wishItem();
-    // console.log(wish, '+')
-    
   }, []);
-
-  // const isLike = (no) => {
-  //   axios.get(`/api/wishes/check/` + no, {
-  //     headers: {
-  //       Authorization: `Bearer ${localStorage.token}` 
-  //     }
-  //   }).then(res => {
-  //     console.log(res.data)
-  //     setLike(res.data)
-  //   }).catch(err => console.log(err.response.status))
-  // }
 
 
   const Loading = () => {
@@ -85,31 +50,43 @@ function Products() {
   const LikeButton = (no) => {
     const [like, setLike] = useState(false)
     console.log(no)
-    useEffect(()=> {
+    useEffect(() => {
 
       async function likeData(no) {
         const res = await axios.get(
           `/api/wishes/check/` + no.no, {
-                headers: {
-                  Authorization: `Bearer ${localStorage.token}` 
-                }
-              }
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`
+          }
+        }
         )
         console.log(res.data)
-        if (res.data === true){
+        if (res.data === true) {
           setLike(true)
         }
       }
       likeData(no)
-      
-    }, []);
-    return(
-        <>
-        {like ? <FavoriteIcon /> : <ShareIcon />}
-        </>
-    )
-    
 
+    }, []);
+
+    return (
+      <>
+        {like ?
+          <IconButton aria-label="add to favorites" >
+            <FavoriteIcon />
+          </IconButton>
+          :
+          <IconButton aria-label="add to favorites" >
+            <FavoriteBorderIcon />
+          </IconButton>
+        }
+      </>
+    )
+  }
+
+  const ChangeLike = (e) => {
+    e.preventDefault();
+    console.log(e)
   }
 
 
@@ -132,10 +109,7 @@ function Products() {
 
                 </a>
                 <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}  >
-                <LikeButton no={product.no} />
-                  <IconButton aria-label="add to favorites" >
-                    <FavoriteIcon />
-                  </IconButton>
+                  <LikeButton no={product.no} onClick={ChangeLike} />
                   <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
                     <CopyToClipboard text={url + `/` + product.no}>
                       <ShareIcon />

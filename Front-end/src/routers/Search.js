@@ -28,7 +28,7 @@ function Search() {
       </div>
       <div className="searchcontainer2">
         <Box>
-          <Stack spacing={1} className="searchbox">
+          <Stack direction="row" spacing={1} className="searchbox">
             <a href="/#"><Chip label="Extra Soft" /></a>
             <a href="/#"><Chip label="Soft" /></a>
             <a href="/#"><Chip label="Medium" /></a>

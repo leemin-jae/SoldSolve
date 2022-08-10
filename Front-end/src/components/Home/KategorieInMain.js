@@ -40,7 +40,7 @@ function KategorieInMain() {
     return (
       <>
         <Swiper spaceBetween={0}
-          scrollbar={{ draggable: true }}
+          // scrollbar={{ draggable: true }}
           breakpoints={{
             1200: {
               slidesPerView: 6,

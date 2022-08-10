@@ -233,6 +233,11 @@ class LivePage extends Component {
       console.error(e);
     }
   }
+  
+
+
+  
+
 
   render() {
     if (this.state.session === undefined) {
@@ -290,16 +295,12 @@ class LivePage extends Component {
                   <p style={{ margin: '1em' }}> ~~~~ 팝니다!</p>
                   <hr style={{ width: '100%' }} />
                 </div>
+
                 <div>
-                  <div className='chatbox'><h3>채팅방
-                    </h3>
-                    <LiveChat props={this.state} />
-                    </div>
-                  <div>
-                    <input className='inputform3' type="text" />
-                    <button className='inputsubmitbutton'>입력</button>
-                  </div>
+                  <LiveChat props={this.state} />
                 </div>
+
+
               </div>
             </div>
           ) : null}

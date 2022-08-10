@@ -60,10 +60,8 @@ const LiveChat = (props) => {
   
     return (
       <>
-        <div className=''>
-          <div className=''>
-            <span>채팅창</span>
-          </div>
+        <div className='chatbox'>
+          <h3>채팅방</h3>
           <div className=''>
             {messageList.map((data, i) => (
               <div
@@ -89,8 +87,10 @@ const LiveChat = (props) => {
             ))}
           </div>
   
-          <div>
+        </div>
+        <div>
             <input
+              className="inputform3"
               placeholder="메세지를 입력하세요"
               id="chatInput"
               value={message}
@@ -98,11 +98,8 @@ const LiveChat = (props) => {
               onKeyPress={handlePressKey}
               autoComplete="off"
             />
-            <div>
-              <button onClick={sendMessage} >전송</button>
-            </div>
+            <button className="inputsubmitbutton" onClick={sendMessage} >전송</button>
           </div>
-        </div>
       </>
     );
     

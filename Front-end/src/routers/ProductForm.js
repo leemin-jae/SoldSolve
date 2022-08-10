@@ -95,7 +95,7 @@ function CreateProduct() {
     else {
       
       axios({
-        url: '/api/product/'+ url,
+        url: '/api/product'+ url,
         method: method,
         data: productData,
         headers: { Authorization: `Bearer ${localStorage.token}` }

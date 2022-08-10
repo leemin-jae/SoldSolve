@@ -6,6 +6,8 @@ import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.db.entity.Product;
+import com.ssafy.soldsolve.db.entity.User;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,29 @@ public class ProductController {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private UserService userService;
+
+
+    @GetMapping("/me")  // 판매 물건 확인
+    public ResponseEntity<?> getSellList(Authentication authentication){
+        SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+        String userId = userDetails.getUsername();
+        User user = userService.getUserByUserId(userId);
+        try {
+            List<Product> p = productService.getSellProduct(user);
+            if (p == null) {
+                return new ResponseEntity<String>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
+            } else if (p.size() == 0) {
+                return new ResponseEntity<String>("조회된 내용이 없습니다.", HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<List<Product>>(p, HttpStatus.OK);
+            }
+        }catch  (Exception e) {
+            return new ResponseEntity<String>("조회 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
     @GetMapping("")
     public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category, @RequestParam(required = false) String region) {
 

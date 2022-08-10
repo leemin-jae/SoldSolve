@@ -22,18 +22,7 @@ button {
 }
 
 .account_container {
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid rgb(107, 106, 106);
-  margin-top: 2em;
-  width: auto;
-  max-width: 400px;
-  min-height: 100px;
-  padding: 40px;
-  border-radius: 10px;
-  background-color: white;
-  position: relative;
-  display: flex;
+  margin-top: 200px;
 }
 
 .livebox {
@@ -79,7 +68,7 @@ button {
 }
 
 .column {
-  width: 50%;
+  width: 100%;
 }
 
 .test {
@@ -312,6 +301,10 @@ input::placeholder {
     font-size: 12px;
   }
 
+  .account_info{
+    margin-right: -20px;
+  }
+
 }
 
 @media (min-width: 414px) and (max-width: 767px) {
@@ -366,6 +359,10 @@ input::placeholder {
   .notice_list {
     font-size: large;
   }
+
+  .account_info{
+    margin-right: -40px;
+  }
 }
 
 
@@ -411,6 +408,10 @@ input::placeholder {
 
   .notice_list {
     font-size: x-large;
+  }
+
+  .account_info{
+    margin-right: -40px;
   }
 }
 
@@ -458,6 +459,10 @@ input::placeholder {
 
   .notice_list {
     font-size: x-large;
+  }
+
+  .account_info{
+    margin-right: -40px;
   }
 }
 
@@ -519,6 +524,11 @@ input::placeholder {
   .notice_list {
     font-size: x-large;
   }
+
+  .account_info{
+    margin-right: -40px;
+  }
+
 }
 
 .notice_list {
@@ -644,3 +654,4 @@ input::placeholder {
     position: relative;
   
 }
+

@@ -7,10 +7,6 @@ import '../components.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux'
 
-
-
-
-
 function Chat() {
   const [roomList, setRoomList] = useState([])
   let store = useSelector((state) => { return state })

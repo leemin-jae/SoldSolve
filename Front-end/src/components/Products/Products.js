@@ -10,7 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import LikeButton from './LikeButton';
 import LiveButton from './LiveButton';
-
+import NoItem from '../NoItem'
 
 function Products() {
   const [data, setData] = useState([]);
@@ -28,7 +28,10 @@ function Products() {
       );
       setData(result.data);
       setLoading(false)
-      const updatedList = result.data.filter((x) => x.category === location)
+      let updatedList=null;
+      if (result.data && result.data.length > 0){
+        updatedList = result.data.filter((x) => x.category === location)
+      }
       setFilter(updatedList);
     }
     fetchData();
@@ -48,6 +51,8 @@ function Products() {
   const ShowProducts = () => {
     return (
       <>
+        { filter && filter.length > 0 ?
+        <>
         {filter.map((product) => {
           let mainImg = null;
           if (product.productImg.length>0) {
@@ -77,11 +82,14 @@ function Products() {
                   </IconButton>
                 </CardActions>
               </div>
-
             </li>
-
-          );
-        })}
+            );
+          })}
+        </>
+        :
+        <NoItem></NoItem>
+        }
+        
       </>
     );
   };

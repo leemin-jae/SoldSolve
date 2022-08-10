@@ -57,23 +57,27 @@ function KategorieInMain() {
           }}
           pagination={{ clickable: true }}
           className='cards' id='maincontent'>
-          {data.map((product) => {
-            return (
-              <SwiperSlide className='cards_item' key={product.no}>
-                <a href={`/product/${product.no}`} className='card'>
-                  <img className='card_image'
-                    src={product.image}
-                    alt={product.title}
-                  />
-                  <div className='card_content'>
-                    <h5 className='card_title'>{product.title}</h5>
-                    <p className='card_text'>{product.price}</p>
-                  </div>
-                </a>
-              </SwiperSlide>
-
-            );
-          })}
+          {data.length > 0 ? 
+            <>
+            {data.map((product) => {
+              return (
+                <SwiperSlide className='cards_item' key={product.no}>
+                  <a href={`/product/${product.no}`} className='card'>
+                    <img className='card_image'
+                      src={product.image}
+                      alt={product.title}
+                    />
+                    <div className='card_content'>
+                      <h5 className='card_title'>{product.title}</h5>
+                      <p className='card_text'>{product.price}</p>
+                    </div>
+                  </a>
+                </SwiperSlide>
+  
+              );
+            })}
+            </>
+          : null}
         </Swiper>
       </>
     );

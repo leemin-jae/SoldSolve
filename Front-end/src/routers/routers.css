@@ -42,6 +42,7 @@ button {
   min-height: 500px;
   border-radius: 10px;
   margin: 2em;
+  overflow-y: auto;
 }
 
 .container {
@@ -259,6 +260,7 @@ input::placeholder {
   }
 
   .chatbox {
+    overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
   }
@@ -312,6 +314,7 @@ input::placeholder {
   }
 
   .chatbox {
+    overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
   }
@@ -370,6 +373,7 @@ input::placeholder {
   }
 
   .chatbox {
+    overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
   }
@@ -420,6 +424,7 @@ input::placeholder {
   }
 
   .chatbox {
+    overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
   }
@@ -472,6 +477,7 @@ input::placeholder {
   }
 
   .chatbox {
+    overflow-y: auto;
     width: 86%;
     height: 500px;
 

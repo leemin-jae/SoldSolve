@@ -38,6 +38,14 @@ public class AdminServiceImpl implements AdminService {
     public void suspendUser(int userId) {
         User user = userRepository.findById(userId).orElseGet(null);
         user.setRole("ROLE_SUSPENDED");
+        userRepository.save(user);
+    }
+
+    @Override
+    public void recoverUser(int userId) {
+        User user = userRepository.findById(userId).orElseGet(null);
+        user.setRole("ROLE_USER");
+        userRepository.save(user);
     }
     // 유저 관련
     @Override

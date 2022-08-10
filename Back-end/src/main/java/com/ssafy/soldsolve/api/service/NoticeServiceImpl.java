@@ -26,25 +26,4 @@ public class NoticeServiceImpl implements NoticeService {
     public Page<Notice> findAll(int page) {
         return noticeRepository.findAll(PageRequest.of(page, 10, Sort.by("writtenTimes").descending()));
     }
-
-    @Override
-    public Notice createNotice(NoticePostReq registerInfo) {
-        Notice notice = new Notice();
-        notice.setTitle(registerInfo.getTitle());
-        notice.setContent(registerInfo.getContent());
-        return noticeRepository.save(notice);
-    }
-
-    @Override
-    public void updateNotice(NoticePostReq noticePostReq, int noticeId) {
-        Notice notice = noticeRepository.findById(noticeId);
-        notice.setTitle(noticePostReq.getTitle());
-        notice.setContent(noticePostReq.getContent());
-        noticeRepository.save(notice);
-    }
-
-    @Override
-    public void deleteNotice(int noticeId) {
-        noticeRepository.delete(noticeRepository.getOne(noticeId));
-    }
 }

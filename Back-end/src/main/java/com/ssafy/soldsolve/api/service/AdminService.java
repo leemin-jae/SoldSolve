@@ -10,6 +10,7 @@ public interface AdminService {
     Page<User> findAllUser(int page);
     User getUserByUserId(String userId);
     void suspendUser(int userId);
+    void recoverUser(int userId);
     void deleteUser(int userId);
 
     // 공지사항 관련

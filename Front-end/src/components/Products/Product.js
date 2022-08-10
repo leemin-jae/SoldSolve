@@ -131,7 +131,11 @@ function Product() {
         })
     }
   }
-
+  const imglist = []
+  for (let i=0; i<productData.productImg.length; i++) {
+    console.log(productData.productImg[i].path)
+    imglist.push(<div id="slide-1"><img className='carousel_img' src={'https://i7c110.p.ssafy.io'+productData.productImg[i].path} alt=""></img></div>)
+  }
   return (
     <>
       {productData ?
@@ -140,10 +144,7 @@ function Product() {
           <div className='carousel_box'>
             <div className="slider">
               <div className="slides">
-                <div id="slide-1"><img className='carousel_img' src="https://images.mypetlife.co.kr/content/uploads/2019/09/09152804/ricky-kharawala-adK3Vu70DEQ-unsplash.jpg" alt=""></img></div>
-                <div id="slide-2"><img className='carousel_img' src="https://cdn.famtimes.co.kr/news/photo/202012/502141_3167_2850.png" alt=""></img></div>
-                <div id="slide-3"><img className='carousel_img' src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/PhodopusSungorus_2.jpg/640px-PhodopusSungorus_2.jpg" alt=""></img></div>
-                <div id="slide-4"><img className='carousel_img' src="https://t1.daumcdn.net/cfile/tistory/994AA8335DBBD34404?original" alt=""></img></div>
+                {imglist}
               </div>
 
               {/* <a href="#slide-1"></a>

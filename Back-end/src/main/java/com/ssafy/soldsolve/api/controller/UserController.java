@@ -156,12 +156,16 @@ public class UserController {
 	public ResponseEntity<? extends BaseResponseBody> updateProfile(
 			@RequestPart MultipartFile files,
 			Authentication authentication)  throws Exception {
+		try {
+			SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+			String userId = userDetails.getUsername();
 
-		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-		String userId = userDetails.getUsername();
+			String profileUrl = fileService.ImageDir(files , "profile");
+			userService.updateUserProfile(userId , profileUrl);
 
-		String profileUrl = fileService.ImageDir(files , "profile");
-		userService.updateUserProfile(userId , profileUrl);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 
 
 		return ResponseEntity.status(200).body(BaseResponseBody.of(200, SUCCESS));

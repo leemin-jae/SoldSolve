@@ -49,12 +49,16 @@ function Products() {
     return (
       <>
         {filter.map((product) => {
+          let mainImg = null;
+          if (product.productImg.length>0) {
+            mainImg = 'https://i7c110.p.ssafy.io'+product.productImg[0].path
+          }
           return (
             <li className='cards_item' key={product.no}>
               <div className='card'>
                 <a href={`/product/${product.no}`}>
                   <img className='card_image'
-                    src={product.image}
+                    src={mainImg}
                     alt={product.title}
                   />
                   <div className='card_content'>

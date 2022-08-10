@@ -5,18 +5,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import './routers.css';
-import { useSelector,useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { getInfo } from '../store.js'
 
-import Paper from '@mui/material/Paper';
 import '../components/Products/products.css';
 
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
 
 
 function MyPage() {
@@ -33,8 +38,9 @@ function MyPage() {
         `/api/wishes`,
         {
           headers: {
-          Authorization: `Bearer ${localStorage.token}`
-        }}
+            Authorization: `Bearer ${localStorage.token}`
+          }
+        }
       );
       setWish(result.data);
     }
@@ -43,45 +49,9 @@ function MyPage() {
 
   }, []);
 
-  const ShowWishProducts = (data) => {
-    console.log(data.data)
-    return (
-      <>
-        {data.data.map((products) => {
-          return (
-            <li className='heart_item' key={products.product.no}>
-                <a href={`/product/${products.product.no}`}>
-                <Paper>
-                  <img className='card_image'
-                    src={products.product.image}
-                    alt={products.product.title}
-                  />
-                  <div className='card_content'>
-                    <h5 className='card_title'>{products.product.title}</h5>
-                    <p className='card_text'>{products.product.price}</p>
-                  </div>
-                  </Paper>
-                </a>
-            </li>
-          );
-        })}
-      </>
-    );
-    
-  };
-
   const profile = store.info.info
   const [buyModalOpen, setBuyModalOpen] = useState(false);
   const [sellModalOpen, setSellModalOpen] = useState(false);
-  // const [modalOpen, setModalOpen] = useState(false);
-
-  // const openModal = () => {
-  //   console.log(modalOpen)
-  //   setModalOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setModalOpen(false);
-  // };
 
   const openBuyModal = () => {
     setBuyModalOpen(true);
@@ -98,7 +68,7 @@ function MyPage() {
   };
 
 
-  function profileUpdate(){
+  function profileUpdate() {
     axios({
       url: '/api/users/me',
       method: 'get',
@@ -114,26 +84,24 @@ function MyPage() {
       })
   }
 
-  function WishBox(props){
+  function WishBox(props) {
     console.log(props.props)
     return (
-      <ImageList sx={{ width: 500, height: 450 }}>
-        <ImageListItem key="Subheader" cols={2}>
-        </ImageListItem>
+      <ImageList sx={{ width: 500, height: 450 }} cols={2} rowHeight={200}>
         {props.props.map((item) => (
           <a href={`/product/${item.product.no}`}>
-          <ImageListItem key={item.product.no}>
-            <img
-              src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
-              srcSet={`${item.product.productImg[0]}`}
-              alt={item.product.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={item.product.title}
-              subtitle={item.product.price}
-            />
-          </ImageListItem>
+            <ImageListItem key={item.product.no}>
+              <img
+                src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
+                srcSet={`${item.product.productImg[0]}`}
+                alt={item.product.title}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                title={item.product.title}
+                subtitle={item.product.price}
+              />
+            </ImageListItem>
           </a>
         ))}
       </ImageList>
@@ -163,22 +131,45 @@ function MyPage() {
       })
   }
 
+  function ProfileCard() {
+
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+
+      >
+        <Card sx={{ display: 'flex' }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <CardContent sx={{ flex: '1 0 auto' }}>
+              <Typography component="div" variant="h5">
+                {profile.nickName}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" component="div">
+                <a href='/editaccount'><ManageAccountsIcon color="secondary" /></a>
+                <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
+                <label htmlFor="imgChange"><PhotoCameraIcon /></label>
+              </Typography>
+            </CardContent>
+          </Box>
+          <CardMedia
+            component="img"
+            sx={{ width: 151 }}
+            image={'https://i7c110.p.ssafy.io' + profile.profileUrl}
+            alt="Live from space album cover"
+          />
+        </Card>
+      </Box>
+    );
+  }
+
   return (
     <>
       <NavBar />
-      <div className='mypage' style={{ margin: 30 }}>
-        <h3>MY PAGE</h3>
-        <div className='account_container'>
-          <div className='column'>
-            <img className='profile_img' src={'https://i7c110.p.ssafy.io' + profile.profileUrl} alt="#"></img>
-            <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
-            <label className="uploadlabel" htmlFor="imgChange">사진 변경</label>
-          </div>
-          <div className='column'>
-            <div className=''>{profile.nickName}</div>
-            <div className=''><a href='/editaccount'>회원정보 수정 자리</a></div>
-          </div>
-        </div>
+      <div className='mypage' style={{ margin: 50 }}>
+        <h3 style={{ margin: 50 }}>MY PAGE</h3>
+        <ProfileCard className='account_container' />
         <div className='history_container'>
           <div className='column'>
             <button className='dot' onClick={openBuyModal}>
@@ -204,15 +195,10 @@ function MyPage() {
           <div className='column'>
             찜한상품
           </div>
-          {/* <div className='column'>
-            <button className='' onClick={openModal}>
-              <div>더보기</div>
-            </button>
-          </div> */}
         </div>
         <br />
         <div className='hearts'>
-            <WishBox props={wish} />
+          <WishBox props={wish} />
         </div>
         <hr />
       </div>

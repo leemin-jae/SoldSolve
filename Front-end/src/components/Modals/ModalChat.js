@@ -13,10 +13,11 @@ import { useSelector } from 'react-redux'
 const ModalChat = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
-  const { open, close,stompClient,header } = props;
+  const { open, close, stompClient, header } = props;
   let store = useSelector((state) => { return state })
   console.log(header)
   const [chats, setChats] = useState([])
+  const [you, setYou] = useState(null)
   // const [privateChats, setPrivateChats] = useState(new Map())
   // const [tab, setTab] = useState("CHAT ROOM")
   const [userData, setUserData] = useState()
@@ -26,6 +27,7 @@ const ModalChat = (props) => {
     setUserData({ ...userData, "": true })
     console.log('???')
     console.log(stompClient)
+    console.log(1234)
     stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
       let payloadData = JSON.parse(payload.body);
       chats.push(payloadData);
@@ -33,16 +35,36 @@ const ModalChat = (props) => {
       console.log(chats)
     })
   }
-  useEffect(()=> {
+
+
+  function test222() {
+    console.log('test222')
+    stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
+      let payloadData = JSON.parse(payload.body);
+      chats.push(payloadData);
+      setChats([...chats]);
+    })
+    console.log(chats)
+  }
+
+
+
+  useEffect(() => {
     if (header) {
       setUserData({
-      username: store.info.info.userId,
-      receivername: header.buyer.nickname,
-      connected: false,
-      message: ''
-    })
+        username: store.info.info.userId,
+        receivername: header.buyer.nickname,
+        connected: false,
+        message: ''
+      })
+
+      if (store.info.info.userId === header.buyer.userid) {
+        setYou(header.seller.nickname)
+      } else {
+        setYou(header.buyer.nickname)
+      }
     }
-  },[header])
+  }, [header])
   useEffect(() => {
     // let Sock = new SockJS("/ws-stomp")
     // // console.log(Sock)
@@ -50,7 +72,7 @@ const ModalChat = (props) => {
     if (stompClient) {
       stompClient.connect({}, onConnected)
     }
-    
+
     // const userJoin = () => {
     //   // let chatMessage = {
     //   //   senderName: userData.username,
@@ -70,18 +92,20 @@ const ModalChat = (props) => {
       let chatMessage = {
         sender: store.info.info.userId,
         message: userData.message,
-        roomId: header.buyer.nickname,
-        type: 'MESSAGE'
+        roomId: header.roomId,
+        type: 'TALK'
       }
       console.log(stompClient)
 
       stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
       setUserData({ ...userData, "message": "" })
       console.log(userData)
+      test222()
     }
   }
 
-  console.log(userData)
+
+  console.log(chats)
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
@@ -90,11 +114,17 @@ const ModalChat = (props) => {
           <main>
             <div className='chat_box'>
               <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px' }} onClick={close} />
-              <h3 className='buyer_nickname'>{header.buyer.nickname}</h3>
+              <h3 className='buyer_nickname'>{you}</h3>
               <div className='chat_background'>
                 <div className='chat_div' >
                   <ul className='li_box_container'>
                     {chats.map(chat => {
+                      // let ChatMessage = null;
+                      // if (chat.sender === store.info.info.userId) {
+                      //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
+                      // } else {
+                      //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
+                      // }
                       return (
                         <span className='li_box_me' key={userData.userId}>{chat.message}</span>
                       )

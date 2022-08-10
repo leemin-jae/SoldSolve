@@ -3,6 +3,7 @@ package com.ssafy.soldsolve.api.service;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.db.entity.Product;
 import com.ssafy.soldsolve.db.entity.User;
+import com.ssafy.soldsolve.db.repository.ProductImgRepository;
 import com.ssafy.soldsolve.db.repository.ProductRepository;
 import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductRepository productRepository;
+    @Autowired
+    ProductImgRepository productImgRepository;
 
 
 
@@ -29,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
         p.setCategory(product.getCategory());
         p.setContent(product.getContent());
         p.setPrice(product.getPrice());
-        p.setProductImg(product.getProductImg());
+
         p.setRegion(product.getRegion());
         p.setTitle(product.getTitle());
         User user = userRepository.findByUserid(product.getUserId());
@@ -46,7 +49,7 @@ public class ProductServiceImpl implements ProductService {
             p.setCategory(product.getCategory());
             p.setContent(product.getContent());
             p.setPrice(product.getPrice());
-            p.setProductImg(product.getProductImg());
+
             p.setRegion(product.getRegion());
             p.setTitle(product.getTitle());
             productRepository.save(p);
@@ -65,8 +68,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(String no) {
         Product p = productRepository.getOne(Integer.parseInt(no));
-        p.setViewCount(p.getViewCount()+1);
-        productRepository.save(p);
+        p.setProductImg(productImgRepository.findByNo(p));
         return p;
     }
 

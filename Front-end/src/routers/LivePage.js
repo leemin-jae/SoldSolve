@@ -7,6 +7,7 @@ import './routers.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
+import LiveChat from './Live/LiveChat';
 
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
@@ -290,7 +291,10 @@ class LivePage extends Component {
                   <hr style={{ width: '100%' }} />
                 </div>
                 <div>
-                  <div className='chatbox'><h3>채팅방</h3></div>
+                  <div className='chatbox'><h3>채팅방
+                    </h3>
+                    <LiveChat props={this.state} />
+                    </div>
                   <div>
                     <input className='inputform3' type="text" />
                     <button className='inputsubmitbutton'>입력</button>

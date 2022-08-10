@@ -19,7 +19,6 @@ function MyPage() {
   let dispatch = useDispatch()
 
   const [wish, setWish] = useState([]);
-  const [allwish, setAllWish] = useState([]);
 
   useEffect(() => {
     profileUpdate()
@@ -31,8 +30,7 @@ function MyPage() {
           Authorization: `Bearer ${localStorage.token}`
         }}
       );
-      setWish(result.data.slice(0, 6));
-      setAllWish(result.data)
+      setWish(result.data);
     }
     wishData();
     console.log(wish)
@@ -162,11 +160,6 @@ function MyPage() {
             <button className='' onClick={openModal}>
               <div>더보기</div>
             </button>
-            <Modal open={modalOpen} close={closeModal} header="찜한상품">
-            <ul className='hearts'>
-            <ShowWishProducts data={allwish} />
-          </ul>
-            </Modal>
           </div>
         </div>
         <br />

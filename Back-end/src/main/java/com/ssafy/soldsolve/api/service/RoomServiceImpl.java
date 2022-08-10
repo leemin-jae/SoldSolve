@@ -48,4 +48,19 @@ public class RoomServiceImpl implements RoomService{
         List<Room> room = roomRepository.findByBuyerIdOrSellerId(user.getId(),user.getId());
         return room;
     }
+
+    @Override
+    public void deleteRoom(String no) {
+        roomRepository.deleteById(Integer.parseInt(no));
+    }
+
+    @Override
+    public int findDuplicate(User buyerUser, User sellerUser) {
+        Room r = roomRepository.findByBuyerIdAndSellerId(buyerUser,sellerUser);
+        if(r == null){
+            return -1;
+        }else{
+            return r.getRoomId();
+        }
+    }
 }

@@ -2,14 +2,18 @@ package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.db.entity.Product;
+import com.ssafy.soldsolve.db.entity.ProductImg;
 import com.ssafy.soldsolve.db.entity.User;
 import com.ssafy.soldsolve.db.repository.ProductImgRepository;
 import com.ssafy.soldsolve.db.repository.ProductRepository;
 import com.ssafy.soldsolve.db.repository.UserRepository;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -23,6 +27,9 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
     @Autowired
     ProductImgRepository productImgRepository;
+
+    @Autowired
+    FileService fileService;
 
 
 
@@ -42,16 +49,26 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int updateProduct(String no , ProductPostReq product) {
+    public int updateProduct(String no , ProductPostReq product, List<MultipartFile> files) throws IOException {
         Product p = productRepository.findByNo(Integer.parseInt(no));
 
         if(p != null){
+            if(files != null){
+                for(ProductImg del : productImgRepository.findByNo(p)) {
+                    productImgRepository.delete(del);
+                }
+
+                fileService.ListImageDir(files,p.getNo(), "productImg");
+            }
             p.setCategory(product.getCategory());
             p.setContent(product.getContent());
             p.setPrice(product.getPrice());
-
             p.setRegion(product.getRegion());
             p.setTitle(product.getTitle());
+
+
+
+
             productRepository.save(p);
             return 1;
         }else{

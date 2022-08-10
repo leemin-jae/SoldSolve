@@ -57,7 +57,7 @@ public class ProductController {
 
 
     @PostMapping("")
-    public ResponseEntity<?> testregistProduct(@RequestPart("files") List<MultipartFile> file, @RequestPart("data") ProductPostReq product, Authentication authentication) {
+    public ResponseEntity<?> registProduct(@RequestPart("files") List<MultipartFile> file, @RequestPart("data") ProductPostReq product, Authentication authentication) {
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();
         product.setUserId(userId);
@@ -96,14 +96,16 @@ public class ProductController {
     }
 
     @PatchMapping("/{no}")
-    public ResponseEntity<?> updateProduct(@PathVariable("no") String no, @RequestBody ProductPostReq product, Authentication authentication) {
+    public ResponseEntity<?> updateProduct(@RequestPart(name = "files" , required = false) List<MultipartFile> file , @PathVariable("no") String no, @RequestPart ProductPostReq product, Authentication authentication) {
 
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();
         product.setUserId(userId);
 
         try {
-            if(productService.updateProduct(no,product) == 1) {
+
+
+            if(productService.updateProduct(no,product,file) == 1) {
                 return new ResponseEntity<Product>(productService.getProduct(no), HttpStatus.OK);
             }else{
                 return new ResponseEntity<String>("수정 실패", HttpStatus.NO_CONTENT);

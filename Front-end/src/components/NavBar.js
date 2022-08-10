@@ -19,14 +19,7 @@ function NavBar() {
     document.location.href = '/'
   }
 
-  let NavAcouuntTab1 = <li><a href='/login'><h5>로그인</h5></a></li>
-  let NavAcouuntTab2 = <li><a href='/signup'><h5>회원가입</h5></a></li>
 
-
-  if (storeToken.token.token) {
-    NavAcouuntTab1 = <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
-    NavAcouuntTab2 = <li><a href='/mypage'><h5>마이페이지</h5></a></li>
-  }
 
   const Token = storeToken.token.token
   return (
@@ -40,8 +33,8 @@ function NavBar() {
           <ul className="screen_menu">
             <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
             <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
-            {NavAcouuntTab1}
-            {NavAcouuntTab2}
+            <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
+            <li><a href='/mypage'><h5>마이페이지</h5></a></li>
           </ul>
 
           <label className="account_toggle" htmlFor="account">
@@ -55,8 +48,8 @@ function NavBar() {
         <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
         <ul className="screen_menu">
           <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
-          {NavAcouuntTab1}
-          {NavAcouuntTab2}
+          <li><a href='/login'><h5>로그인</h5></a></li>
+          <li><a href='/signup'><h5>회원가입</h5></a></li>
         </ul>
 
         <label className="account_toggle" htmlFor="account">
@@ -89,15 +82,15 @@ function NavBar() {
           <ul className="mobile_menu">
             <li><a href='/notice'><h5>알림함</h5></a></li>
             <li><a href='/search'><h5>검색</h5></a></li>
-            {NavAcouuntTab1}
-            {NavAcouuntTab2}
+            <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
+            <li><a href='/mypage'><h5>마이페이지</h5></a></li>
           </ul>
         </div>
       ) : <div id="right_toggle">
         <ul className="mobile_menu">
           <li><a href='/search'><h5>검색</h5></a></li>
-          {NavAcouuntTab1}
-          {NavAcouuntTab2}
+          <li><a href='/login'><h5>로그인</h5></a></li>
+          <li><a href='/signup'><h5>회원가입</h5></a></li>
         </ul>
       </div>}
     </>

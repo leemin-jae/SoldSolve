@@ -623,6 +623,7 @@ input::placeholder {
   max-width: 400px;
   height: 600px;
   justify-content: space-around;
+  margin-top: -80px
   /* width: auto; */
 }
 

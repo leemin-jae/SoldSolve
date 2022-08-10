@@ -12,6 +12,12 @@ import { getInfo } from '../store.js'
 import Paper from '@mui/material/Paper';
 import '../components/Products/products.css';
 
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import IconButton from '@mui/material/IconButton';
+import InfoIcon from '@mui/icons-material/Info';
+
 
 function MyPage() {
 
@@ -108,6 +114,32 @@ function MyPage() {
       })
   }
 
+  function WishBox(props){
+    console.log(props.props)
+    return (
+      <ImageList sx={{ width: 500, height: 450 }}>
+        <ImageListItem key="Subheader" cols={2}>
+        </ImageListItem>
+        {props.props.map((item) => (
+          <a href={`/product/${item.product.no}`}>
+          <ImageListItem key={item.product.no}>
+            <img
+              src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
+              srcSet={`${item.product.productImg[0]}`}
+              alt={item.product.title}
+              loading="lazy"
+            />
+            <ImageListItemBar
+              title={item.product.title}
+              subtitle={item.product.price}
+            />
+          </ImageListItem>
+          </a>
+        ))}
+      </ImageList>
+    );
+  }
+
 
   function imgupdate(e) {
     e.preventDefault();
@@ -172,17 +204,15 @@ function MyPage() {
           <div className='column'>
             찜한상품
           </div>
-          <div className='column'>
-            {/* <button className='' onClick={openModal}>
+          {/* <div className='column'>
+            <button className='' onClick={openModal}>
               <div>더보기</div>
-            </button> */}
-          </div>
+            </button>
+          </div> */}
         </div>
         <br />
-        <div>
-          <ul className='hearts'>
-            <ShowWishProducts data={wish} />
-          </ul>
+        <div className='hearts'>
+            <WishBox props={wish} />
         </div>
         <hr />
       </div>

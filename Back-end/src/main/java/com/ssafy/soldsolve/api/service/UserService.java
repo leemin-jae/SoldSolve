@@ -2,9 +2,10 @@ package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.api.request.UserRegisterPostReq;
 import com.ssafy.soldsolve.db.entity.User;
+import org.springframework.data.domain.Page;
 
 public interface UserService {
-	
+
 	User getUserByUserId(String userId);
 
 	User createUser(UserRegisterPostReq registerInfo);

@@ -8,6 +8,8 @@ import com.ssafy.soldsolve.api.request.UserRegisterPostReq;
 import com.ssafy.soldsolve.db.entity.User;
 import com.ssafy.soldsolve.db.repository.UserRepository;
 
+import static org.hibernate.cfg.AvailableSettings.USER;
+
 @Service("userService")
 public class UserServiceImpl implements UserService{
 	

@@ -132,10 +132,14 @@ function Product() {
     }
   }
   const imglist = []
-  for (let i=0; i<productData.productImg.length; i++) {
+  if (productData && productData.productImg.length > 0) {
+    console.log(1234)
+    for (let i=0; i<productData.productImg.length; i++) {
     console.log(productData.productImg[i].path)
     imglist.push(<div id="slide-1"><img className='carousel_img' src={'https://i7c110.p.ssafy.io'+productData.productImg[i].path} alt=""></img></div>)
+    }
   }
+  
   return (
     <>
       {productData ?

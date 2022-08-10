@@ -13,10 +13,11 @@ import { useSelector } from 'react-redux'
 const ModalChat = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
-  const { open, close,stompClient,header } = props;
+  const { open, close, stompClient, header } = props;
   let store = useSelector((state) => { return state })
   console.log(header)
   const [chats, setChats] = useState([])
+  const [you, setYou] = useState(null)
   // const [privateChats, setPrivateChats] = useState(new Map())
   // const [tab, setTab] = useState("CHAT ROOM")
   const [userData, setUserData] = useState()
@@ -33,16 +34,22 @@ const ModalChat = (props) => {
       console.log(chats)
     })
   }
-  useEffect(()=> {
+  useEffect(() => {
     if (header) {
       setUserData({
-      username: store.info.info.userId,
-      receivername: header.buyer.nickname,
-      connected: false,
-      message: ''
-    })
+        username: store.info.info.userId,
+        receivername: header.buyer.nickname,
+        connected: false,
+        message: ''
+      })
+
+      if (store.info.info.userId === header.buyer.userid) {
+        setYou(header.seller.nickname)
+      } else {
+        setYou(header.buyer.nickname)
+      }
     }
-  },[header])
+  }, [header])
   useEffect(() => {
     // let Sock = new SockJS("/ws-stomp")
     // // console.log(Sock)
@@ -50,7 +57,7 @@ const ModalChat = (props) => {
     if (stompClient) {
       stompClient.connect({}, onConnected)
     }
-    
+
     // const userJoin = () => {
     //   // let chatMessage = {
     //   //   senderName: userData.username,
@@ -81,7 +88,7 @@ const ModalChat = (props) => {
     }
   }
 
-  console.log(userData)
+
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
@@ -90,7 +97,7 @@ const ModalChat = (props) => {
           <main>
             <div className='chat_box'>
               <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px' }} onClick={close} />
-              <h3 className='buyer_nickname'>{header.buyer.nickname}</h3>
+              <h3 className='buyer_nickname'>{you}</h3>
               <div className='chat_background'>
                 <div className='chat_div' >
                   <ul className='li_box_container'>

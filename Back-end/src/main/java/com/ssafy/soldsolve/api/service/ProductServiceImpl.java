@@ -95,4 +95,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByTitleContainingAndCategoryContainingAndRegionContaining(t,c,r);
     }
 
+    @Override
+    public List<Product> getSellProduct(User user) {
+        return productRepository.findByUser(user);
+    }
+
+
 }

@@ -27,6 +27,7 @@ const ModalChat = (props) => {
     setUserData({ ...userData, "": true })
     console.log('???')
     console.log(stompClient)
+    console.log(1234)
     stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
       let payloadData = JSON.parse(payload.body);
       chats.push(payloadData);
@@ -34,6 +35,20 @@ const ModalChat = (props) => {
       console.log(chats)
     })
   }
+
+
+  function test222() {
+    console.log('test222')
+    stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
+      let payloadData = JSON.parse(payload.body);
+      chats.push(payloadData);
+      setChats([...chats]);
+    })
+    console.log(chats)
+  }
+
+
+
   useEffect(() => {
     if (header) {
       setUserData({
@@ -77,18 +92,20 @@ const ModalChat = (props) => {
       let chatMessage = {
         sender: store.info.info.userId,
         message: userData.message,
-        roomId: header.buyer.nickname,
-        type: 'MESSAGE'
+        roomId: header.roomId,
+        type: 'TALK'
       }
       console.log(stompClient)
 
       stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
       setUserData({ ...userData, "message": "" })
       console.log(userData)
+      test222()
     }
   }
 
 
+  console.log(chats)
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
@@ -102,6 +119,12 @@ const ModalChat = (props) => {
                 <div className='chat_div' >
                   <ul className='li_box_container'>
                     {chats.map(chat => {
+                      // let ChatMessage = null;
+                      // if (chat.sender === store.info.info.userId) {
+                      //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
+                      // } else {
+                      //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
+                      // }
                       return (
                         <span className='li_box_me' key={userData.userId}>{chat.message}</span>
                       )

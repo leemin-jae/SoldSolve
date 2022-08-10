@@ -21,6 +21,7 @@ public class ChatController {
 
     private final SimpMessageSendingOperations messagingTemplate;
 
+
     @Autowired
     ChatRepository MessageRepository;
 

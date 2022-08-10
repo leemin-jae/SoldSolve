@@ -1,7 +1,9 @@
 package com.ssafy.soldsolve.api.controller;
 
 import com.ssafy.soldsolve.api.request.ProductPostReq;
+import com.ssafy.soldsolve.api.service.FileService;
 import com.ssafy.soldsolve.api.service.ProductService;
+import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.db.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private FileService fileService;
 
     @GetMapping("")
     public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category, @RequestParam(required = false) String region) {
@@ -47,23 +54,28 @@ public class ProductController {
 
     }
 
-    @PostMapping("")
-    public ResponseEntity<?> registProduct(@RequestBody ProductPostReq product, Authentication authentication) {
 
+
+    @PostMapping("")
+    public ResponseEntity<?> registProduct(@RequestPart("files") List<MultipartFile> file, @RequestPart("data") ProductPostReq product, Authentication authentication) {
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();
         product.setUserId(userId);
 
-        System.out.println("등록 : " + product);
         try {
+            int number = productService.registProduct(product);
+            fileService.ListImageDir(file,number, "productImg");
 
+            return new ResponseEntity<Product>(productService.getProduct(Integer.toString(number)), HttpStatus.OK);
 
-            return new ResponseEntity<Product>(productService.getProduct(Integer.toString(productService.registProduct(product))), HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<String>("등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+
 
     @GetMapping("/{no}")
     public ResponseEntity<?> getProduct(@PathVariable("no") String no){
@@ -84,14 +96,16 @@ public class ProductController {
     }
 
     @PatchMapping("/{no}")
-    public ResponseEntity<?> updateProduct(@PathVariable("no") String no, @RequestBody ProductPostReq product, Authentication authentication) {
+    public ResponseEntity<?> updateProduct(@RequestPart(name = "files" , required = false) List<MultipartFile> file , @PathVariable("no") String no, @RequestPart ProductPostReq product, Authentication authentication) {
 
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();
         product.setUserId(userId);
 
         try {
-            if(productService.updateProduct(no,product) == 1) {
+
+
+            if(productService.updateProduct(no,product,file) == 1) {
                 return new ResponseEntity<Product>(productService.getProduct(no), HttpStatus.OK);
             }else{
                 return new ResponseEntity<String>("수정 실패", HttpStatus.NO_CONTENT);

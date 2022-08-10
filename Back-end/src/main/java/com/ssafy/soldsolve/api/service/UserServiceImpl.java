@@ -121,6 +121,8 @@ public class UserServiceImpl implements UserService{
 	public void updateUserProfile(String userId, String profileUrl) {
 		User user = getUserByUserId(userId);
 		user.setProfileUrl(profileUrl);
+
+		userRepository.save(user);
 	}
 
 

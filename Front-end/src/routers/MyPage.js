@@ -65,16 +65,32 @@ function MyPage() {
   };
 
   const profile = store.info.info
-  const [modalOpen, setModalOpen] = useState(false);
+  const [buyModalOpen, setBuyModalOpen] = useState(false);
+  const [sellModalOpen, setSellModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = () => {
-    console.log(modalOpen)
-    setModalOpen(true);
+  // const openModal = () => {
+  //   console.log(modalOpen)
+  //   setModalOpen(true);
+  // };
+  // const closeModal = () => {
+  //   setModalOpen(false);
+  // };
+
+  const openBuyModal = () => {
+    setBuyModalOpen(true);
   };
-  const closeModal = () => {
-    console.log(modalOpen)
-    setModalOpen(false);
+  const closeBuyModal = () => {
+    setBuyModalOpen(false);
   };
+
+  const openSellModal = () => {
+    setSellModalOpen(true);
+  };
+  const closeSellModal = () => {
+    setSellModalOpen(false);
+  };
+
 
   function profileUpdate(){
     axios({
@@ -133,20 +149,20 @@ function MyPage() {
         </div>
         <div className='history_container'>
           <div className='column'>
-            <button className='dot' onClick={openModal}>
+            <button className='dot' onClick={openBuyModal}>
               <FontAwesomeIcon className='icon' icon={faCartArrowDown} size="2x" />
               <div>구매내역</div>
             </button>
-            <Modal open={modalOpen} close={closeModal} header="구매내역">
+            <Modal open={buyModalOpen} close={closeBuyModal} header="구매내역">
               구매내역리스트
             </Modal>
           </div>
           <div className='column'>
-            <button className='dot' onClick={openModal}>
+            <button className='dot' onClick={openSellModal}>
               <FontAwesomeIcon className='icon' icon={faReceipt} size="2x" />
               <div>판매내역</div>
             </button>
-            <Modal open={modalOpen} close={closeModal} header="판매내역">
+            <Modal open={sellModalOpen} close={closeSellModal} header="판매내역">
               판매내역리스트
             </Modal>
           </div>
@@ -157,9 +173,9 @@ function MyPage() {
             찜한상품
           </div>
           <div className='column'>
-            <button className='' onClick={openModal}>
+            {/* <button className='' onClick={openModal}>
               <div>더보기</div>
-            </button>
+            </button> */}
           </div>
         </div>
         <br />

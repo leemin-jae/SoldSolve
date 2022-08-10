@@ -69,8 +69,8 @@ const ModalChat = (props) => {
     return () => {
       if (stompClient.connected) stompClient.disconnect();
     };
-  }, [])
-  // }, [header])
+  // }, [])
+  }, [header])
 
   const handleValue = (e) => {
     const { value, name } = e.target

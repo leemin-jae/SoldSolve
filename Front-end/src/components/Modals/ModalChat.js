@@ -27,8 +27,8 @@ const ModalChat = (props) => {
   const [newchats, setNewchats] = useState([])
 
 
-  useEffect(()=>{
-    
+  useEffect(() => {
+
   })
 
   const onConnected = () => {
@@ -36,7 +36,7 @@ const ModalChat = (props) => {
     setUserData({ ...userData, "": true })
     console.log(stompClient)
     console.log(header, '!~!~!')
-    
+
     stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
       let payloadData = JSON.parse(payload.body);
       chats.push(payloadData);
@@ -68,60 +68,60 @@ const ModalChat = (props) => {
   //   }
   // }, [header])
 
-  useEffect(()=> {
+  useEffect(() => {
     if (header) {
-    const roomChats = () => {
-      axios({
-        url: `/api/room/${header.roomId}`,
-        method: 'get',
-      })
-        .then(res => {
-          const copyDbChats = res.data.reverse().slice(0, 51)
-          console.log(copyDbChats)
-          const copyChats = []
-          copyDbChats.reverse().map(chat => {
-            console.log(chat.chatContent)
-            copyChats.push(chat.chatContent)
+      const roomChats = () => {
+        axios({
+          url: `/api/room/${header.roomId}`,
+          method: 'get',
+        })
+          .then(res => {
+            const copyDbChats = res.data.reverse().slice(0, 51)
+            console.log(copyDbChats)
+            const copyChats = []
+            copyDbChats.reverse().map(chat => {
+              console.log(chat.chatContent)
+              copyChats.push(chat.chatContent)
+            })
+            console.log(copyChats, '+')
+            setDbChats(copyChats)
           })
-          console.log(copyChats, '+')
-          setDbChats(copyChats)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+      roomChats()
     }
-    roomChats()
-  }
   }, [])
 
   useEffect(() => {
     console.log('연결중')
-    if (stompClient&&stompClient.connected) stompClient.disconnect();
+    if (stompClient && stompClient.connected) stompClient.disconnect();
     let Sock = new SockJS('/ws-stomp');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
-    
+
     // return () => {
     //   if (stompClient.connected) stompClient.disconnect();
     // };
-    
-  // }, [])
+
+    // }, [])
   }, [header])
 
-//   useEffect(()=>{
-//     if (header) {
+  //   useEffect(()=>{
+  //     if (header) {
 
-//   }
-// }, [])
+  //   }
+  // }, [])
 
   const handleValue = (e) => {
-    
+
     const { value, name } = e.target
     setUserData({ ...userData, [name]: value })
   }
   // const onPublicMessageReceived = 
 
-  
+
 
   const sendPublicMessage = (e) => {
     e.preventDefault();
@@ -135,14 +135,14 @@ const ModalChat = (props) => {
       console.log(stompClient)
       console.log(chatMessage.message, '12!@#!@#')
       if (chatMessage.message == '' || chatMessage.message == null || chatMessage.message == ' ') {
-      alert('메세지를 입력하세요')
-    } else {
-      stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
-      setUserData({ ...userData, "message": "" })
-      console.log(userData.message,'유저데이터')
-      setNewchats([...newchats, userData.message])
+        alert('메세지를 입력하세요')
+      } else {
+        stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+        setUserData({ ...userData, "message": "" })
+        console.log(userData.message, '유저데이터')
+        setNewchats([...newchats, userData.message])
 
-    }
+      }
     }
   }
 
@@ -209,9 +209,9 @@ const ModalChat = (props) => {
               </div>
             </div>
             <div className='input_box'>
-              <form onSubmit={e => sendPublicMessage(e)} style={{display:'flex', width:'100%'}}>
+              <form onSubmit={e => sendPublicMessage(e)} style={{ display: 'flex', width: '100%' }}>
                 <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message} onChange={handleValue} />
-                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e=>sendPublicMessage(e)} />
+                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e => sendPublicMessage(e)} />
               </form>
             </div>
           </main>

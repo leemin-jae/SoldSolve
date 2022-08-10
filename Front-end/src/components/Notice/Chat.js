@@ -34,7 +34,7 @@ function Chat() {
 
   // let navigate = useNavigate()
   const [modalOpen, setModalOpen] = useState(false);
-  const [selectChat,setSelectChat] = useState(null);
+  const [selectChat, setSelectChat] = useState(null);
   const openModal = (room) => {
     setSelectChat(room)
     setModalOpen(true);
@@ -46,6 +46,30 @@ function Chat() {
 
   };
 
+  const exitRoom = (you, other) => {
+    let exitRoomId = null
+    roomList.map((room) => {
+      if (room.buyer.nickname == you && room.seller.nickname == other) {
+        exitRoomId = room.roomId
+      } else if (room.buyer.nickname == other && room.seller.nickname == you) {
+        exitRoomId = room.roomId
+      }
+    })
+    console.log(exitRoomId, '!@!!ASDFASD')
+    if (window.confirm("대화방을 나가시겠습니까?")) {
+      axios({
+        url: `/api/room/${exitRoomId}`,
+        method: 'delete',
+
+      })
+        .then(res => {
+          console.log(res.data.message)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
 
   // const data = [
   //   { id: 1, buyer: 'buyer 1', thumbnail: 'https://images.mypetlife.co.kr/content/uploads/2019/09/09152804/ricky-kharawala-adK3Vu70DEQ-unsplash.jpg', text: '안녕하세유', time: '22/08/03 pm 09:56' },
@@ -65,25 +89,28 @@ function Chat() {
           let you = null;
           let yourImg = null;
           let yourEmail = null;
+          let other = null
 
           if (store.info.info.userId === room.buyer.userid) {
             you = room.seller.nickname
             yourImg = room.seller.profileUrl
             yourEmail = room.seller.email
+            other = room.buyer.nickname
           } else {
             you = room.buyer.nickname
             yourImg = room.buyer.profileUrl
             yourEmail = room.buyer.email
+            other = room.seller.nickname
           }
 
-          return (  
+          return (
             <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
               <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
                 // setBuyerName()
                 openModal(room)
               }}>
                 <div className="profile_box" style={{ background: '#BDBDBD' }}>
-                  <img className="profile_img" src={'https://i7c110.p.ssafy.io'+yourImg} alt='profileImg' />
+                  <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
                 </div>
 
                 <div>
@@ -94,8 +121,11 @@ function Chat() {
               <div>
                 <div className='message_info'>
                   {/* <p className='message_time'>{room.time}</p> */}
-                  <div className='unread_message'>
-                    <p>2</p>
+                  <div style={{ display: 'flex' }}>
+                    <div className='unread_message'>
+                      <p>2</p>
+                    </div>
+                    <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, other) }}>방 나가기</button>
                   </div>
                 </div>
               </div>

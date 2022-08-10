@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { over } from 'stompjs'
 import SockJS from 'sockjs-client';
-import axios from 'axios'
+// import axios from 'axios'
 import './modal.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
@@ -9,13 +9,14 @@ import { useSelector } from 'react-redux'
 // import '../../routers/routers.css'
 // import { useNavigate } from 'react-router-dom';
 
+let stompClient = null;
 
 const ModalChat = (props) => {
+
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
-  const { open, close, stompClient, header } = props;
+  const { open, close, header } = props;
   let store = useSelector((state) => { return state })
-  console.log(header)
   const [chats, setChats] = useState([])
   const [you, setYou] = useState(null)
   // const [privateChats, setPrivateChats] = useState(new Map())
@@ -25,9 +26,9 @@ const ModalChat = (props) => {
   const onConnected = () => {
     // console.log(payload)
     setUserData({ ...userData, "": true })
-    console.log('???')
     console.log(stompClient)
-    console.log(1234)
+    console.log(header, '!~!~!')
+
     stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
       let payloadData = JSON.parse(payload.body);
       chats.push(payloadData);
@@ -36,18 +37,10 @@ const ModalChat = (props) => {
     })
   }
 
-
-  function test222() {
-    console.log('test222')
-    stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
-      let payloadData = JSON.parse(payload.body);
-      chats.push(payloadData);
-      setChats([...chats]);
-    })
-    console.log(chats)
-  }
-
-
+  const onError = err => {
+    console.log(err);
+    throw err;
+  };
 
   useEffect(() => {
     if (header) {
@@ -65,23 +58,20 @@ const ModalChat = (props) => {
       }
     }
   }, [header])
-  useEffect(() => {
-    // let Sock = new SockJS("/ws-stomp")
-    // // console.log(Sock)
-    // stompClient = over(Sock)
-    if (stompClient) {
-      stompClient.connect({}, onConnected)
-    }
 
-    // const userJoin = () => {
-    //   // let chatMessage = {
-    //   //   senderName: userData.username,
-    //   //   status: 'JOIN'
-    //   }
-    //   // stompClient.send('/sub/chat/room/1', {}, JSON.stringify(chatMessage))
-    //   console.log('!@#!@#!@#')
-    // }
+  useEffect(() => {
+    console.log('연결중')
+    // if (stompClient&&stompClient.connected) stompClient.disconnect();
+    let Sock = new SockJS('/ws-stomp');
+    stompClient = over(Sock);
+    stompClient.connect({}, onConnected, onError);
+
+    return () => {
+      if (stompClient.connected) stompClient.disconnect();
+    };
   }, [])
+  // }, [header])
+
   const handleValue = (e) => {
     const { value, name } = e.target
     setUserData({ ...userData, [name]: value })
@@ -99,13 +89,10 @@ const ModalChat = (props) => {
 
       stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
       setUserData({ ...userData, "message": "" })
-      console.log(userData)
-      test222()
     }
   }
 
-
-  console.log(chats)
+  
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>

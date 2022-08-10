@@ -5,41 +5,16 @@ import { useState } from "react"
 import ModalChat from '../Modals/ModalChat';
 import '../components.css'
 import axios from 'axios';
-import SockJS from 'sockjs-client';
-import { over } from 'stompjs';
 import { useSelector } from 'react-redux'
 
 
 
-let stompClient = null;
+
 
 function Chat() {
   const [roomList, setRoomList] = useState([])
   let store = useSelector((state) => { return state })
   console.log(store.info.info.nickName, '사용자이름')
-  useEffect(() => {
-    console.log('연결중')
-    let Sock = new SockJS('/ws-stomp');
-    stompClient = over(Sock);
-    stompClient.connect({}, onConnected, onError);
-
-    return () => {
-      if (stompClient.connected) stompClient.disconnect();
-    };
-  }, [roomList])
-
-  const onError = err => {
-    console.log(err);
-    throw err;
-  };
-
-  const onConnected = () => {
-    roomList.map((room, idx) => {
-      console.log(idx, '연결완료')
-      stompClient.subscribe(`/topic/chat/room/${room.roomId}`);
-
-    })
-  };
 
   useEffect(() => {
     // const currentUserName = store.info.info.nickname
@@ -58,11 +33,8 @@ function Chat() {
           console.log(err)
         })
     }
-
     getRoomList()
   }, [])
-
-
 
   // let navigate = useNavigate()
   const [modalOpen, setModalOpen] = useState(false);
@@ -91,8 +63,6 @@ function Chat() {
 
   const ShowChat = () => {
     // filterProduct("women's clothing")
-
-    console.log(stompClient)
     return (
       <>
         {roomList.map((room, idx) => {
@@ -110,7 +80,7 @@ function Chat() {
             yourEmail = room.buyer.email
           }
 
-          return (
+          return (  
             <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
               <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
                 // setBuyerName()
@@ -133,7 +103,6 @@ function Chat() {
                   </div>
                 </div>
               </div>
-              {console.log(room.roomId)}
             </span>
           );
         })}
@@ -149,7 +118,7 @@ function Chat() {
       <ul style={{ padding: '0' }}>
         {<ShowChat />}
       </ul>
-      <ModalChat open={modalOpen} close={closeModal} header={selectChat} stompClient={stompClient}></ModalChat>
+      <ModalChat open={modalOpen} close={closeModal} header={selectChat}></ModalChat>
     </>
   );
 }

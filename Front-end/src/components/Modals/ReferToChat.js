@@ -38,7 +38,7 @@ const ChatRoom = () => {
         roomId: roomId,
         message,
       };
-      stompClient.send(/app/chat / message, {}, JSON.stringify(chatMessage));
+      stompClient.send('/app/chat/message', {}, JSON.stringify(chatMessage));
     }
     setMessage('');
     inputRef.current.focus();

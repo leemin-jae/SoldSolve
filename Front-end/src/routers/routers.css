@@ -662,3 +662,39 @@ input::placeholder {
   
 }
 
+.liveChatItem{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.liveChatItem2{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.livechatimg{
+  width: 40px;
+  height: 40px;
+  object-fit: fill;
+  border-radius: 15px;
+  margin-inline: 10px 10px;
+}
+.livechatbox{
+  background-color: rgb(255, 251, 0);
+  border-radius: 10px;
+  padding: 5%;
+}
+
+.livechatcontent{
+  max-width: 50%;
+  word-break: break-all;
+}
+
+.chatnickname{
+  margin-bottom: 0;
+}
+
+.livechatInput{
+  margin-left: 20px;
+}

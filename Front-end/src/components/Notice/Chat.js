@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux'
 function Chat() {
   const [roomList, setRoomList] = useState([])
   let store = useSelector((state) => { return state })
-  console.log(store.info.info.nickName, '사용자이름')
+  // console.log(store.info.info.nickName, '사용자이름')
 
   useEffect(() => {
     // const currentUserName = store.info.info.nickname
@@ -60,6 +60,7 @@ function Chat() {
       axios({
         url: `/api/room/${exitRoomId}`,
         method: 'delete',
+        headers:{ Authorization: `Bearer ${localStorage.token}` }
 
       })
         .then(res => {

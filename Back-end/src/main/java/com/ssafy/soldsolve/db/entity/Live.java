@@ -18,8 +18,17 @@ Live {
     @Column(name = "live_id")
     public int id;
 
-    @Column(length = 50)
+    private String sessionId;
+
     private String title;
 
     private String content;
+
+    @OneToOne
+    @JoinColumn(name = "product_id")
+    Product product;
+
+
+
+
 }

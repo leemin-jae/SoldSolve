@@ -22,7 +22,7 @@ function Chat() {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          // console.log(res, '!!!')
+          console.log(res, '!!!')
           setRoomList(res.data)
         })
         .catch(err => {
@@ -49,6 +49,8 @@ function Chat() {
   const exitRoom = (you, other) => {
     let exitRoomId = null
     roomList.map((room) => {
+      console.log(room)
+
       if (room.buyer.nickname == you && room.seller.nickname == other) {
         exitRoomId = room.roomId
       } else if (room.buyer.nickname == other && room.seller.nickname == you) {

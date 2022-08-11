@@ -27,7 +27,7 @@ const ModalChat = (props) => {
 
   const onConnected = () => {
     // console.log(payload)
-    if (stompClient&&stompClient.connected) {
+    if (stompClient&&stompClient.connected && header) {
     setUserData({ ...userData, "": true })
     console.log(stompClient)
     console.log(header, '!~!~!')
@@ -44,23 +44,23 @@ const ModalChat = (props) => {
     throw err;
   };
 
-  // useEffect(() => {
-  //   if (header) {
-  //     setUserData({
-  //       username: store.info.info.userId,
-  //       receivername: header.buyer.nickname,
-  //       connected: false,
-  //       message: ''
-  //     })
+  useEffect(() => {
+    if (header) {
+      setUserData({
+        username: store.info.info.userId,
+        receivername: header.buyer.nickname,
+        connected: false,
+        message: ''
+      })
 
-  //     if (store.info.info.userId === header.buyer.userid) {
-  //       setYou(header.seller.nickname)
-  //     } else {
-  //       setYou(header.buyer.nickname)
-  //     }
+      if (store.info.info.userId === header.buyer.userid) {
+        setYou(header.seller.nickname)
+      } else {
+        setYou(header.buyer.nickname)
+      }
 
-  //   }
-  // }, [header])
+    }
+  }, [header])
 
   useEffect(()=> {
     if (header) {
@@ -91,7 +91,7 @@ const ModalChat = (props) => {
 
   useEffect(() => {
     console.log('연결중')
-    // if (stompClient&&stompClient.connected) stompClient.disconnect();
+    if (stompClient&&stompClient.connected) stompClient.disconnect();
     let Sock = new SockJS('/ws-stomp');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
@@ -120,7 +120,7 @@ const ModalChat = (props) => {
       }
       console.log(stompClient)
       console.log(chatMessage.message, '12!@#!@#')
-      if (chatMessage.message == '' || chatMessage.message == null || chatMessage.message == ' ') {
+      if (chatMessage.message === '' || chatMessage.message == null || chatMessage.message === ' ') {
       alert('메세지를 입력하세요')
     } else {
       stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
@@ -128,7 +128,6 @@ const ModalChat = (props) => {
     }
     }
   }
-  console.log(chats)
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>

@@ -28,7 +28,6 @@ public class Room {
     User seller;
 
 
-
 //    @OneToMany(orphanRemoval = true, mappedBy = "chatId")
 //    @JsonIgnore
 //    List<Chat> chatList = new ArrayList<>();

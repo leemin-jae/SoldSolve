@@ -14,6 +14,8 @@ public interface UserService {
 
 	User getUserByUserNameAndUserEmail(String userName, String userEmail);
 
+	User getUserByUserPk(int userPk);
+
 	void deleteUser(int id);
 
 

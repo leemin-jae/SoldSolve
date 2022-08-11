@@ -10,6 +10,11 @@ import './products.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import NotFound from '../../routers/PageNotFound'
+import LikeButton from './LikeButton';
+import LiveButton from './LiveButton';
+
+import { IconButton } from '@mui/material';
+import ChatIcon from '@mui/icons-material/Chat';
 
 function Product() {
   const [products, setProducts] = useState([])
@@ -144,7 +149,9 @@ function Product() {
     <>
       {productData ?
         <div>
+          <div className='fixnav'>
           <NavBar />
+          </div>
           <div className='carousel_box'>
             <div className="slider">
               <div className="slides">
@@ -190,9 +197,13 @@ function Product() {
                   <>
                     <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
                     <div>
-                      <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} />
-                      <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} onClick={createRoom}>채팅하기</button>
-                      <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 10px 0 10px' }}>Live 요청</button>
+                      {/* <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} /> */}
+                      <LikeButton no={productData.no} />
+                      {/* <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} onClick={createRoom}>채팅하기</button> */}
+                      <IconButton aria-label="add to favorites" onClick={createRoom}>
+                        <ChatIcon />
+                      </IconButton>
+                      <LiveButton no={productData.no} />
                     </div>
                   </>
                 }

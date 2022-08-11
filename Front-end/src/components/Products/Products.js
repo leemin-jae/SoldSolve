@@ -96,7 +96,9 @@ function Products() {
 
   return (
     <>
+    <div className='fixnav'>
       <NavBar />
+      </div>
       <div className='content'>
         <h1>{location}</h1>
         <ul className='cards' id='maincontent'>

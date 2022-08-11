@@ -233,10 +233,10 @@ class LivePage extends Component {
       console.error(e);
     }
   }
-  
 
 
-  
+
+
 
 
   render() {
@@ -253,31 +253,30 @@ class LivePage extends Component {
             <div id="session">
               <div className='liveTitle my-3'>
                 <h3 id="session-title">{localStorage.LiveRoom}</h3>
-                {this.state.params[2] === this.state.myId ?
-                  <>
-                    <div>
-                  <input
-                    className="btn btn-large btn-danger mx-1 video_button"
-                    type="button"
-                    id="buttonLeaveSession"
-                    onClick={this.leaveSession}
-                    value="나가기"
-                  />
-                  <input
-                    className="btn btn-large btn-success mx-1 video_button"
-                    type="button"
-                    id="buttonSwitchCamera"
-                    onClick={this.switchCamera}
-                    value="카메라변경"
-                  />
-                </div>
-                  </>
-                  : null}
               </div>
 
               <div className='live_container'>
-
                 <div>
+                  {this.state.params[2] === this.state.myId ?
+                    <>
+                      <div className='my-2' style={{ marginInline: '2rem' }}>
+                        <input
+                          className="btn btn-large btn-danger mx-1 video_button"
+                          type="button"
+                          id="buttonLeaveSession"
+                          onClick={this.leaveSession}
+                          value="나가기"
+                        />
+                        <input
+                          className="btn btn-large btn-success mx-1 video_button"
+                          type="button"
+                          id="buttonSwitchCamera"
+                          onClick={this.switchCamera}
+                          value="카메라변경"
+                        />
+                      </div>
+                    </>
+                    : null}
                   <div>
                     {this.state.myId === this.state.params[2] ? (
                       <div className='livebox'>

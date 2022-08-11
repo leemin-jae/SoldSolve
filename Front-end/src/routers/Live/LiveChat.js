@@ -58,12 +58,12 @@ const LiveChat = (props) => {
   };
 
 
-  console.log(store.info.info.nickName)
+  console.log(messageList)
 
   return (
     <>
+      <h3 style={{ marginInline: '1rem' }}>채팅방</h3>
       <div className='chatbox'>
-        <h3>채팅방</h3>
         <div className=''>
           {messageList.map((data, i) => (
             <div

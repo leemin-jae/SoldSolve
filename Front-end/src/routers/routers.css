@@ -43,15 +43,6 @@ button {
   text-align: center;
 }
 
-.chatbox {
-  border: 1px solid black;
-  max-width: 300px;
-  min-height: 500px;
-  border-radius: 10px;
-  margin: 2em;
-  overflow-y: auto;
-}
-
 .container {
   border: 10px solid rgba(black, .1);
   border-radius: 10px;
@@ -236,12 +227,17 @@ input::placeholder {
   border-radius: 10px;
   border: 1px solid;
   padding: 0 55px 0 10px;
+  outline: none;
 }
 
 .chatbox {
   border: 1px solid black;
   border-radius: 10px;
   margin: 0 1em 1em 1em;
+  overflow-y: auto;
+  height: 500px;
+  display: flex;
+  flex-direction: column-reverse
 }
 
 .inputsubmitbutton {
@@ -270,11 +266,15 @@ input::placeholder {
     overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse
   }
 
 
   .inputform3 {
     width: 91%;
+    outline: none;
   }
 
   .category_reco_box {
@@ -308,7 +308,7 @@ input::placeholder {
     font-size: 12px;
   }
 
-  .account_info{
+  .account_info {
     margin-right: -20px;
   }
 
@@ -324,11 +324,15 @@ input::placeholder {
     overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse
   }
 
   .inputform3 {
     width: 94%;
     height: 30px;
+    outline: none;
   }
 
   .category_reco_box {
@@ -367,7 +371,7 @@ input::placeholder {
     font-size: large;
   }
 
-  .account_info{
+  .account_info {
     margin-right: -40px;
   }
 }
@@ -384,11 +388,15 @@ input::placeholder {
     max-width: 950px;
     min-height: 200px;
     width: 96%;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse
   }
 
   .inputform3 {
     width: 96%;
     height: 30px;
+    outline: none;
   }
 
   .category_reco_box {
@@ -418,7 +426,7 @@ input::placeholder {
     font-size: x-large;
   }
 
-  .account_info{
+  .account_info {
     margin-right: -40px;
   }
 }
@@ -435,10 +443,14 @@ input::placeholder {
     overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse
   }
 
   .inputform3 {
     width: 950px;
+    outline: none;
   }
 
   .category_reco_box {
@@ -469,7 +481,7 @@ input::placeholder {
     font-size: x-large;
   }
 
-  .account_info{
+  .account_info {
     margin-right: -40px;
   }
 }
@@ -488,7 +500,8 @@ input::placeholder {
     overflow-y: auto;
     width: 86%;
     height: 500px;
-
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .live_container {
@@ -500,6 +513,7 @@ input::placeholder {
 
   .inputform3 {
     width: 86%;
+    outline: none;
   }
 
   /* .inputbox {
@@ -533,9 +547,10 @@ input::placeholder {
     font-size: x-large;
   }
 
-  .account_info{
+  .account_info {
     margin-right: -40px;
   }
+
   .liveTitle {
     max-height: 50px;
     margin-inline: 2em;
@@ -648,57 +663,75 @@ input::placeholder {
   height: 600px;
   justify-content: space-around;
   margin-top: -80px
-  /* width: auto; */
+    /* width: auto; */
 }
 
 
-.heart_item{
-    width: 50%;
-    /* display: flex; */
-    margin-left: -30px;
-    padding: 2rem;
-    justify-content: space-around;
-    list-style: none;
-    position: relative;
-  
+.heart_item {
+  width: 50%;
+  /* display: flex; */
+  margin-left: -30px;
+  padding: 2rem;
+  justify-content: space-around;
+  list-style: none;
+  position: relative;
+
 }
 
-.liveChatItem{
+.liveChatItem {
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-inline: 10px;
 }
-.liveChatItem2{
+
+.liveChatItem2 {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
   margin-inline: 10px;
 }
 
-.livechatimg{
+.livechatimg {
   width: 40px;
   height: 40px;
   object-fit: fill;
   border-radius: 15px;
-  margin-inline: 10px 10px;
 }
-.livechatbox{
+
+.livechatbox {
   background-color: rgb(255, 251, 0);
   border-radius: 10px;
   padding: 5%;
 }
 
-.livechatcontent{
+.livechatcontent {
   max-width: 50%;
   word-break: break-all;
 }
 
-.chatnickname{
+.chatnickname {
   margin-bottom: 0;
 }
 
 .liveTitle {
   max-height: 150px;
   margin-inline: 2em;
+}
+
+
+
+.chatbox::-webkit-scrollbar {
+    width: 10px;
+}
+
+.chatbox::-webkit-scrollbar-thumb {
+    height: 30%;
+    background: #6667abad;
+    
+    border-radius: 10px;
+}
+
+.chatbox::-webkit-scrollbar-track {
+    background: rgba(196, 217, 248, 0.1);
 }

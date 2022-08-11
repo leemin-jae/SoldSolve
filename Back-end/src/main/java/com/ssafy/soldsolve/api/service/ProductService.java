@@ -2,6 +2,7 @@ package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.db.entity.Product;
+import com.ssafy.soldsolve.db.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -20,4 +21,6 @@ public interface ProductService {
     Product getProduct(String no);
 
     List<Product> searchProduct(String t, String c, String r);
+
+    List<Product> getSellProduct(User user);
 }

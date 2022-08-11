@@ -1,19 +1,16 @@
 package com.ssafy.soldsolve.api.controller;
 
 
-import com.ssafy.soldsolve.api.response.UserLoginPostRes;
 import com.ssafy.soldsolve.api.service.ChatService;
 import com.ssafy.soldsolve.api.service.RoomService;
 import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
 import com.ssafy.soldsolve.db.entity.Chat;
-import com.ssafy.soldsolve.db.entity.Room;
 import com.ssafy.soldsolve.db.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +39,14 @@ public class RoomController {
             return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "없는 유저"));
         }
 
-        return ResponseEntity.status(200).body(roomService.createRoom(sellerUser, buyerUser));
+        int num = roomService.findDuplicate(buyerUser, sellerUser);
+        if(num == -1){
+            return ResponseEntity.status(200).body(roomService.createRoom(sellerUser, buyerUser));
+        }else{
+            return ResponseEntity.status(200).body(num);
+        }
+
+
     }
 
     @GetMapping("")
@@ -63,9 +67,21 @@ public class RoomController {
     }
 
     @DeleteMapping("/{no}")
-    public ResponseEntity<?> deleteRoom(){
+    public ResponseEntity<?> deleteRoom(@PathVariable("no") String no, Authentication authentication){
 
-        return null;
+
+
+        try{
+            SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+            String userId = userDetails.getUsername();
+            User user = userService.getUserByUserId(userId);
+
+
+            roomService.deleteRoom(no, user);
+        }catch (Exception e){
+            return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "삭제 실패"));
+        }
+        return  ResponseEntity.status(200).body(BaseResponseBody.of(200, "삭제 성공"));
     }
 
 }

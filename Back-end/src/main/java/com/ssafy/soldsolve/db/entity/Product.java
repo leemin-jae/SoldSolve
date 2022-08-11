@@ -2,6 +2,7 @@ package com.ssafy.soldsolve.db.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -27,6 +28,9 @@ public class Product {
     private String category; // 카테고리 -> table 생성 후 외래키
 
     //private String productImg; // 상품 사진 여러개
+    @ColumnDefault("0")
+    private int state;       // 상품 상태 0 : 판매중, 1 : 거래 완료
+
 
     @OneToMany(mappedBy = "no")
     List<ProductImg> productImg = new ArrayList<>();
@@ -36,6 +40,8 @@ public class Product {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_pk")
     private User user;
+
+
 
 
 

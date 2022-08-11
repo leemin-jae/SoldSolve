@@ -4,8 +4,6 @@ import React, { Component } from 'react';
 import UserVideoComponent from './Live/UserVideoComponent';
 import NavBar from '../components/NavBar';
 import './routers.css';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { connect } from 'react-redux'
 import LiveChat from './Live/LiveChat';
 
@@ -20,7 +18,25 @@ class LivePage extends Component {
 
     const params = window.location.pathname.split('/')
 
-    console.log(props.storeInfo)
+    axios({
+      url: 'https://i7c110.p.ssafy.io/api/live',
+      method: 'get',
+      params: { sessionId: params[3] }
+    })
+      .then((res) => {
+        console.log(res.data)
+        if (res.data) {
+          this.setState({
+            sellerInfo: res.data.product.user,
+            price: res.data.product.price,
+            region: res.data.product.region,
+            RoomTitle: res.data.title,
+            RoomContent: res.data.content,
+            productID : res.data.product.no
+          })
+        }
+      })
+
 
     this.state = {
       myId: props.storeInfo.userId,
@@ -32,7 +48,7 @@ class LivePage extends Component {
       publisher: undefined,
       subscribers: [],
     };
-    console.log(this.state.params)
+
 
     this.state.myId = props.storeInfo.userId
     this.state.myUserName = props.storeInfo.nickName
@@ -89,6 +105,8 @@ class LivePage extends Component {
       });
     }
   }
+
+
 
   joinSession() {
 
@@ -182,6 +200,7 @@ class LivePage extends Component {
     );
   }
 
+
   leaveSession() {
 
     const mySession = this.state.session;
@@ -238,12 +257,39 @@ class LivePage extends Component {
 
 
 
-
   render() {
+    console.log(this.state)
+    const mySessionId = this.state.mySessionId
+    const productId = this.state.productID
+    function sellerExit() {
+      axios({
+        url: '/api/live',
+        method: 'delete',
+        params: { sessionId: mySessionId }
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+  
+      axios
+        .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+productId, {
+          headers: {
+            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+          },
+        })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
     if (this.state.session === undefined) {
       this.joinSession()
     }
-    console.log(this.state.subscribers)
     return (
       <div>
         <NavBar></NavBar>
@@ -252,19 +298,19 @@ class LivePage extends Component {
 
             <div id="session">
               <div className='liveTitle my-3'>
-                <h3 id="session-title">{localStorage.LiveRoom}</h3>
+                <h3 id="session-title">{this.state.RoomTitle}</h3>
               </div>
 
               <div className='live_container'>
                 <div>
                   {this.state.params[2] === this.state.myId ?
-                    <>
-                      <div className='my-2' style={{ marginInline: '2rem' }}>
+                    <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
+                      <div  >
                         <input
                           className="btn btn-large btn-danger mx-1 video_button"
                           type="button"
                           id="buttonLeaveSession"
-                          onClick={this.leaveSession}
+                          onClick={e => sellerExit()}
                           value="나가기"
                         />
                         <input
@@ -275,7 +321,8 @@ class LivePage extends Component {
                           value="카메라변경"
                         />
                       </div>
-                    </>
+                      <h3>시청자 : {this.state.subscribers.length}</h3>
+                    </div>
                     : null}
                   <div>
                     {this.state.myId === this.state.params[2] ? (
@@ -289,10 +336,17 @@ class LivePage extends Component {
                     )}
 
                   </div>
-                  <p style={{ margin: '1em' }}><FontAwesomeIcon icon={faUser} size="2x" style={{ marginRight: '10px' }} />
-                    닉네임 (본인이 설정한 지역), 평점</p>
-                  <p style={{ margin: '1em' }}> ~~~~ 팝니다!</p>
-                  <hr style={{ width: '100%' }} />
+                  {this.state.sellerInfo ?
+                    <>
+                      <p style={{ margin: '1em' }}>
+                        <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
+                        {this.state.sellerInfo.nickname} ({this.state.region}), 평점</p>
+                      <p style={{ margin: '1em' }}> {this.state.RoomContent}</p>
+                      <hr style={{ width: '100%' }} />
+                    </>
+
+                    : null}
+
                 </div>
 
                 <div>

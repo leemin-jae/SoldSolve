@@ -255,6 +255,11 @@ input::placeholder {
 } */
 
 @media (max-width: 414px) {
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
 
   /* 모바일 iphone, Galaxy */
   .livebox {
@@ -315,6 +320,11 @@ input::placeholder {
 }
 
 @media (min-width: 414px) and (max-width: 767px) {
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
   .livebox {
     max-width: 950px;
     min-height: 500px;
@@ -378,6 +388,12 @@ input::placeholder {
 
 
 @media (min-width: 767px) and (max-width: 991px) {
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
+
   .livebox {
     max-width: 950px;
     min-height: 500px;
@@ -432,6 +448,11 @@ input::placeholder {
 }
 
 @media (min-width: 991px) and (max-width: 1199px) {
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
 
   /* 태블릿 가로 */
   .livebox {
@@ -702,12 +723,11 @@ input::placeholder {
 .livechatbox {
   background-color: rgb(255, 251, 0);
   border-radius: 10px;
-  padding: 5%;
+  padding: 10%;
 }
 
 .livechatcontent {
-  max-width: 50%;
-  word-break: break-all;
+  word-break:break-all;
 }
 
 .chatnickname {

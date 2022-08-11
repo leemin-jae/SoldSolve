@@ -92,6 +92,11 @@ function Products() {
           } else {
             pTitle = product.title
           }
+          
+          let price = product.price
+          const productPrice = price.toLocaleString('ko-KR');
+
+
           return (
             <li className='cards_item' key={product.no}>
               <div className='card'>
@@ -102,7 +107,7 @@ function Products() {
                   />
                   <div className='card_content'>
                     <h5 className='card_title'>{pTitle}</h5>
-                    <p className='card_text'>{product.price} 원</p>
+                    <p className='card_text'>{productPrice} 원</p>
                   </div>
 
                 </a>

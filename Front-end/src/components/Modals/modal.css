@@ -205,11 +205,11 @@
 
 
 .managementMain{
-  height: 500px;
+  height: 400px;
   border: 1px solid rgba(139, 138, 138, 0.651);
-  margin-inline: 10%;
+  margin-inline: 5%;
   border-radius: 20px;
-  padding-inline: 20px;
+  padding-inline: 5px;
   padding-block: 10px;
 
   overflow-y: auto;
@@ -217,11 +217,30 @@
 
 .managementUser{
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   background-color: beige;
-  margin-inline: 5%;
+  margin-inline: 1%;
   border-radius: 10px;
   margin-block: 10px;
+  padding-inline: 10px;
+}
+.managementUserBan{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(253, 138, 138, 0.5);
+  margin-inline: 1%;
+  border-radius: 10px;
+  margin-block: 10px;
+  padding-inline: 10px;
+}
+.managementUserAdmin{
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(156, 140, 243, 0.644);
+  margin-inline: 1%;
+  border-radius: 10px;
+  margin-block: 10px;
+  padding-inline: 10px;
 }
 
 .managementButton{
@@ -229,4 +248,19 @@
   border-radius: 10px;
   background-color: #dee2e6;
   margin-left: 10px;
+}
+
+.reloadButton{
+  width: 60%;
+  min-height: 50px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  max-width: 400px;
+  margin-inline: 20%;
+  margin-top: 30px;
+}
+
+.deleted {
+  text-decoration:line-through;
 }

@@ -9,7 +9,7 @@ const ManagementModal = (props) => {
 
   useEffect(() => {
     axios({
-      url: 'http://i7c110.p.ssafy.io:8080/admin/users/0',
+      url: '/admin/users/0',
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
@@ -21,7 +21,119 @@ const ManagementModal = (props) => {
       })
   }, [open])
 
-  console.log(userList)
+
+  function userCheck(e) {
+    console.log(e)
+    if (e.role === 'ROLE_USER') {
+      userBan(e)
+    } else if (e.role === 'ROLE_SUSPENDED') {
+      BanCancle(e)
+    }
+  }
+  function userBan(e) {
+    if (e.role === 'ROLE_USER') {
+      axios({
+        url: '/admin/users/suspend/' + e.id,
+        method: 'patch',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          console.log(res)
+          document.getElementById(e.id).className='managementUserBan'
+          console.log(document.getElementById(e.id).div)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+  function reLoad(e){
+    e.preventDefault();
+    axios({
+      url: '/admin/users/0',
+      method: 'get',
+      headers: { Authorization: `Bearer ${localStorage.token}` }
+    })
+      .then(res => {
+        setUserList(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    
+  }
+  function BanCancle(e) {
+    console.log(e)
+    if (e.role === 'ROLE_SUSPENDED') {
+      axios({
+        url: '/admin/users/recover/' + e.id,
+        method: 'patch',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          console.log(res)
+          document.getElementById(e.id).className = 'managementUser'
+          console.log(document.getElementById(e.id))
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+  const userTag = [];
+  if (userList && userList.content.length > 0) {
+    console.log(userList.content)
+    for (let i = 0; i < userList.content.length; i++) {
+      let user = null
+      const t = userList.content[i]
+      let Banbutton = null;
+      if (t.role === 'ROLE_USER') {
+        Banbutton = <button className='managementButton' onClick={e => userCheck(t)}>정지</button>
+        user = <li className='managementUser' id={t.id}>
+                <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
+                <div className='d-flex'>
+                  {Banbutton}
+                  <button className='managementButton' onClick={e=>deleteUser(t)}>탈퇴</button>
+                </div>
+                
+              </li>
+      } else if (t.role === 'ROLE_SUSPENDED'){
+        Banbutton = <button className='managementButton' onClick={e => userCheck(t)}>해제</button>
+        user = <li className='managementUserBan' id={t.id}>
+                <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
+                <div className='d-flex'>
+                  {Banbutton}
+                  <button className='managementButton' onClick={e=>deleteUser(t)}>탈퇴</button>
+                </div>
+              </li>
+      } else if (t.role === 'ROLE_ADMIN'){
+        user = <li className='managementUserAdmin' id={t.id}>
+                <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
+                <p style={{ marginBottom: '0' }}>관리자</p>
+              </li>
+      }
+      userTag.push(user)
+    }
+  }
+
+  function deleteUser(e){
+    console.log(e)
+    if (window.confirm(`정말로 ${e.userid}(${e.username})님의 계정을 삭제하시겠습니까?`)){
+      axios({
+        url: '/admin/users/'+e.id,
+        method: 'patch',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          console.log(res)
+          document.getElementById(e.id).className = 'deleted'
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
@@ -33,17 +145,9 @@ const ManagementModal = (props) => {
             <button className="close closeButton" onClick={close}>&times;</button>
           </div>
           <div className='managementMain'>
-            {userList && userList.content.map((user) => {
-              return (
-                <li className='managementUser'>
-                  <p style={{ marginBottom: '0' }}>{user.username}</p>
-                  <button className='managementButton'>정지&해제</button>
-                  <button className='managementButton'>탈퇴</button>
-                </li>
-              )
-
-            })}
+            {userTag}
           </div>
+          <button className="submitbutton-able reloadButton" onClick={e=> reLoad(e)}>새로 고침</button>
         </div>
       ) : null}
     </div>

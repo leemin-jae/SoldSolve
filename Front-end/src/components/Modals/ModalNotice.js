@@ -35,9 +35,10 @@ const ModalNotice = (props) => {
     e.preventDefault();
     if (header !== 0) {
       axios({
-        url:'/api/notices/'+header ,
+        url:'/admin/notices/'+header ,
         method: 'patch',
-        data : { title:title, content:content}
+        data : { title:title, content:content},
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
       .then(res => {
         console.log(res)
@@ -48,9 +49,10 @@ const ModalNotice = (props) => {
       })
     } else {
       axios({
-        url:'/api/notices' ,
+        url:'/admin/notices' ,
         method: 'post',
-        data : { title:title, content:content}
+        data : { title:title, content:content},
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
       .then(res => {
         console.log(res)

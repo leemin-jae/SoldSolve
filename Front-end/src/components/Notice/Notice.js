@@ -2,11 +2,14 @@ import '../components.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import ModalNotice from '../Modals/ModalNotice'
+import { useSelector } from 'react-redux'
 
 
 function Notice() {
   const lis = []
   const [noticeData, setNoticeData] = useState('')
+  let storeToken = useSelector((state) => { return state })
+
   useEffect(() => {
     axios({
       url: '/api/notices',
@@ -32,7 +35,7 @@ function Notice() {
     })
       .then(res => {
         console.log(res)
-        window.location.href='/notice'
+        window.location.href = '/notice'
       })
       .catch(err => {
         console.log(err)
@@ -47,16 +50,20 @@ function Notice() {
     let noticeTag =
       <li className='Article' id={t.id} onClick={e => clickNotice(e)} key={t.id}>
         <div className='noticeTitle'>
-        <h6>{t.title}</h6>
+          <h6>{t.title}</h6>
           <span className='articleSpan'>{t.writtenTimes}</span>
         </div>
         <div className='hide' id={'ArticleContent' + t.id}>
           <p className='article_line'>{t.content}</p>
-          
-          <div className='d-flex justify-content-end'>
-            <button onClick={e => updateButton(t.id)} className='noticeButton'>UPDATE</button>
-            <button onClick={e => deleteArticle(t.id)} className='noticeButton'>DLETE</button>
-          </div>
+
+
+          {storeToken.info.info.role === 'ROLE_ADMIN' ?
+            <div className='d-flex justify-content-end'>
+              <button onClick={e => updateButton(t.id)} className='noticeButton'>UPDATE</button>
+              <button onClick={e => deleteArticle(t.id)} className='noticeButton'>DLETE</button>
+            </div>
+            : null}
+
         </div>
       </li>
     lis.push(noticeTag)
@@ -72,7 +79,7 @@ function Notice() {
   }
 
   const [modalOpen, setModalOpen] = useState(false);
-  const [modalMode,setModalMode] = useState(0)
+  const [modalMode, setModalMode] = useState(0)
 
 
   const openModal = () => {
@@ -81,7 +88,7 @@ function Notice() {
   const closeModal = () => {
     setModalOpen(false);
     console.log(1234)
-    window.location.href='/notice'
+    window.location.href = '/notice'
   };
 
   function createButton(e) {
@@ -93,11 +100,11 @@ function Notice() {
     setModalMode(e)
     openModal()
   }
-
   return (
     <div>
       <div className="articles">
-        <button className='noticeButton my-1 d-flex justify-content-end' onClick={e=>createButton(e)}>공지사항 작성하기</button>
+        {storeToken.info.info.role === 'ROLE_ADMIN' ?
+          <button className='noticeButton my-1 d-flex justify-content-end' onClick={e => createButton(e)}>공지사항 작성하기</button> : null}
         {lis}
       </div>
       <ModalNotice open={modalOpen} close={closeModal} header={modalMode}>

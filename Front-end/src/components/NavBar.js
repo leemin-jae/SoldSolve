@@ -40,9 +40,7 @@ function NavBar() {
           <ul className="screen_menu">
             {storeToken.info.info.role === 'ROLE_ADMIN' ? 
             <li><a className="icon_sort" href='#!' onClick={openModal}><FontAwesomeIcon className='icon' icon={faGear} size="2x" /></a></li>
-            :
-            null
-          }
+            :null}
             <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
             <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
@@ -89,9 +87,13 @@ function NavBar() {
       </div>
       <input id="account" type="checkbox"></input>
 
+
+
+      
       {Token ? (
         <div id="right_toggle">
           <ul className="mobile_menu">
+            <li><a href='#!' onClick={openModal}><h5>유저관리</h5></a></li>
             <li><a href='/notice'><h5>알림함</h5></a></li>
             <li><a href='/search'><h5>검색</h5></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>

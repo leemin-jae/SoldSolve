@@ -73,6 +73,10 @@ function KategorieInMain() {
                 } else {
                   pTitle = product.title
                 }
+
+                let price = product.price
+                const productPrice = price.toLocaleString('ko-KR');
+
                 return (
                   <SwiperSlide className='cards_item' key={product.no}>
                     <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
@@ -82,7 +86,7 @@ function KategorieInMain() {
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>
-                        <p className='card_text'>{product.price} 원</p>
+                        <p className='card_text'>{productPrice} 원</p>
                       </div>
                     </a>
                   </SwiperSlide>

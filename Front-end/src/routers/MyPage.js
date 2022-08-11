@@ -86,9 +86,18 @@ function MyPage() {
 
   function WishBox(props) {
     console.log(props.props)
+    
+  
     return (
       <ImageList sx={{ width: 500, height: 450 }} cols={2} rowHeight={200}>
-        {props.props.map((item) => (
+        {props.props.map((item) => {
+
+
+           let price = item.product.price
+           const productPrice = price.toLocaleString('ko-KR');
+       
+      
+          return (
           <a href={`/product/${item.product.no}`}>
             <ImageListItem key={item.product.no}>
               <img
@@ -99,11 +108,11 @@ function MyPage() {
               />
               <ImageListItemBar
                 title={item.product.title}
-                subtitle={item.product.price}
+                subtitle={productPrice}
               />
             </ImageListItem>
           </a>
-        ))}
+        )})}
       </ImageList>
     );
   }

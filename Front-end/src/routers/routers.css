@@ -327,7 +327,7 @@ input::placeholder {
   }
 
   .inputform3 {
-    width: 96%;
+    width: 94%;
     height: 30px;
   }
 
@@ -383,6 +383,7 @@ input::placeholder {
     overflow-y: auto;
     max-width: 950px;
     min-height: 200px;
+    width: 96%;
   }
 
   .inputform3 {
@@ -535,7 +536,12 @@ input::placeholder {
   .account_info{
     margin-right: -40px;
   }
-
+  .liveTitle {
+    max-height: 50px;
+    margin-inline: 2em;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .notice_list {
@@ -631,11 +637,6 @@ input::placeholder {
   object-fit: fill;
 }
 
-.liveTitle {
-  max-height: 50px;
-  margin-inline: 2em;
-}
-
 .hearts {
   display: flex;
   position: relative;
@@ -666,11 +667,13 @@ input::placeholder {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-inline: 10px;
 }
 .liveChatItem2{
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
+  margin-inline: 10px;
 }
 
 .livechatimg{
@@ -695,6 +698,7 @@ input::placeholder {
   margin-bottom: 0;
 }
 
-.livechatInput{
-  margin-left: 20px;
+.liveTitle {
+  max-height: 150px;
+  margin-inline: 2em;
 }

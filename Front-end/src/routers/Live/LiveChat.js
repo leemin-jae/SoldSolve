@@ -71,12 +71,6 @@ const LiveChat = (props) => {
               id="remoteUsers"
               className=''
             >
-              <canvas
-                id={"userImg-" + i}
-                width="60"
-                height="60"
-                className=''
-              />
               {store.info.info.nickName === data.nickname ?
                 <div className='liveChatItem2'>
                   <div className='livechatcontent'>

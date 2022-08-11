@@ -16,6 +16,10 @@ import LiveButton from './LiveButton';
 import { IconButton } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 
+
+const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
+const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
+
 function Product() {
   const [recproducts, setRecProducts] = useState([])
   const [loading, setLoading] = useState(false);
@@ -136,7 +140,7 @@ function Product() {
   function goLive(e) {
     e.preventDefault();
     console.log(productData.user.userid)
-    document.location.href = `/live/${productData.user.userid}/sell${productid}`
+    SessionCheck()
   }
 
   const createRoom = () => {
@@ -162,6 +166,21 @@ function Product() {
       console.log(productData.productImg[i].path)
       imglist.push(<div id="slide-1"><img className='carousel_img' src={'https://i7c110.p.ssafy.io' + productData.productImg[i].path} alt=""></img></div>)
     }
+  }
+
+  function SessionCheck(){
+    axios
+      .get(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+productid, {
+        headers: {
+          Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+        },
+      })
+      .then(() => {
+        document.location.href = `/live/${productData.user.userid}/sell${productid}`
+      })
+      .catch(() => {
+        alert("아직 라이브방이 생성되지 않았습니다.")
+      })
   }
 
   return (

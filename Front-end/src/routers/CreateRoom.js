@@ -84,6 +84,7 @@ function CreateRoom() {
             .then((response) => {
                 console.log('CREATE SESION', response);
                 console.log(response.data.id)
+                createSessionDB()
                 document.location.href = `/live/${productData.user.userid}/sell${productid}`
             })
             .catch(err=>{
@@ -91,6 +92,27 @@ function CreateRoom() {
                 document.location.href = `/live/${productData.user.userid}/sell${productid}`
               }
             })
+  }
+
+  function createSessionDB() {
+    const sessionData={
+      sessionId: 'sell'+productid,
+      title : roomName,
+      content :description,
+      productNo: productid,
+    }
+    axios({
+      url: '/api/live',
+      method: 'post',
+      data: sessionData,
+      headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   function goLive(e) {

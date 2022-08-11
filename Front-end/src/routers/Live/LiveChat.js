@@ -11,7 +11,6 @@ const LiveChat = (props) => {
     setMessage(event.target.value);
   };
   useEffect(() => {
-    console.log("here");
     props.props.session.on("signal:chat", (event) => {
       const data = JSON.parse(event.data);
       console.log(event);
@@ -26,6 +25,7 @@ const LiveChat = (props) => {
       console.log(messageList);
     });
   }, []);
+
 
   useEffect(() => {
     // console.log(messageList);
@@ -58,7 +58,6 @@ const LiveChat = (props) => {
   };
 
 
-  console.log(messageList)
 
   return (
     <>
@@ -74,7 +73,7 @@ const LiveChat = (props) => {
               {store.info.info.nickName === data.nickname ?
                 <div className='liveChatItem2'>
                   <div className='livechatcontent'>
-                    <p className='chatnickname'>{data.nickname}</p>
+                    <p className='chatnickname d-flex flex-row-reverse '>{data.nickname}</p>
                     <p className='livechatbox'>{data.message}</p>
                   </div>
                 </div>

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faMagnifyingGlass, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
 import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux'
-import { getToken,getInfo } from '../store.js'
+import { getToken, getInfo } from '../store.js'
 import { Link, useNavigate } from 'react-router-dom';
 
 function NavBar() {
@@ -19,32 +19,43 @@ function NavBar() {
     document.location.href = '/'
   }
 
-  let NavAcouuntTab1 = <li><a href='/login'><h5>로그인</h5></a></li>
-  let NavAcouuntTab2 = <li><a href='/signup'><h5>회원가입</h5></a></li>
 
-  if (storeToken.token.token) {
-    NavAcouuntTab1 = <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
-    NavAcouuntTab2 = <li><a href='/mypage'><h5>마이페이지</h5></a></li>
-  }
 
+  const Token = storeToken.token.token
   return (
     <>
-      <nav className="navbar">
+      {Token ? (
+        <nav className="navbar">
+          <label className="category_toggle" htmlFor="category">
+            <FontAwesomeIcon className='icon' icon={faBars} size="2x" />
+          </label>
+          <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
+          <ul className="screen_menu">
+            <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
+            <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
+            <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
+            <li><a href='/mypage'><h5>마이페이지</h5></a></li>
+          </ul>
+
+          <label className="account_toggle" htmlFor="account">
+            <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
+          </label>
+        </nav>
+      ) : <nav className="navbar">
         <label className="category_toggle" htmlFor="category">
           <FontAwesomeIcon className='icon' icon={faBars} size="2x" />
         </label>
         <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
         <ul className="screen_menu">
-          <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
           <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
-          {NavAcouuntTab1}
-          {NavAcouuntTab2}
+          <li><a href='/login'><h5>로그인</h5></a></li>
+          <li><a href='/signup'><h5>회원가입</h5></a></li>
         </ul>
 
         <label className="account_toggle" htmlFor="account">
           <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
         </label>
-      </nav>
+      </nav>}
 
       <input id="category" type="checkbox"></input>
       <div id="left_toggle">
@@ -65,15 +76,23 @@ function NavBar() {
         </ul>
       </div>
       <input id="account" type="checkbox"></input>
-      <div id="right_toggle">
-        <ul className="mobile_menu">
-          <li><a href='/notice'><h5>알림함</h5></a></li>
-          <li><a href='/search'><h5>검색</h5></a></li>
 
-          {NavAcouuntTab1}
-          {NavAcouuntTab2}
+      {Token ? (
+        <div id="right_toggle">
+          <ul className="mobile_menu">
+            <li><a href='/notice'><h5>알림함</h5></a></li>
+            <li><a href='/search'><h5>검색</h5></a></li>
+            <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
+            <li><a href='/mypage'><h5>마이페이지</h5></a></li>
+          </ul>
+        </div>
+      ) : <div id="right_toggle">
+        <ul className="mobile_menu">
+          <li><a href='/search'><h5>검색</h5></a></li>
+          <li><a href='/login'><h5>로그인</h5></a></li>
+          <li><a href='/signup'><h5>회원가입</h5></a></li>
         </ul>
-      </div>
+      </div>}
     </>
   );
 }

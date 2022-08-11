@@ -13,7 +13,7 @@ public interface RoomService {
 
     List<Room> roomList(User user);
 
-    void deleteRoom(String no);
+    void deleteRoom(String no, User user);
 
     int findDuplicate(User buyerUser, User sellerUser);
 }

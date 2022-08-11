@@ -121,7 +121,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{no}")
-    public ResponseEntity<?> updateProduct(@RequestPart(name = "files" , required = false) List<MultipartFile> file , @PathVariable("no") String no, @RequestPart ProductPostReq product, Authentication authentication) {
+    public ResponseEntity<?> updateProduct(@RequestPart(name = "files" , required = false) List<MultipartFile> file , @PathVariable("no") String no, @RequestPart("data") ProductPostReq product, Authentication authentication) {
 
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
         String userId = userDetails.getUsername();

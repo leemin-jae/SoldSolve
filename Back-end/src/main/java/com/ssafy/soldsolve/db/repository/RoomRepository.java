@@ -16,5 +16,6 @@ public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     List<Room> findByBuyerIdOrSellerId(int id, int id2);
 
-    Room findByBuyerIdAndSellerId(User buyerUser, User sellerUser);
+
+    Room findByBuyerAndSeller(User buyerUser, User sellerUser);
 }

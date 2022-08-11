@@ -50,13 +50,32 @@ public class RoomServiceImpl implements RoomService{
     }
 
     @Override
-    public void deleteRoom(String no) {
-        roomRepository.deleteById(Integer.parseInt(no));
+    public void deleteRoom(String no, User user) {
+        Room r = roomRepository.getOne(Integer.parseInt(no));
+        int pk = user.getId();
+
+        if(r.getBuyer() != null){
+            if(r.getBuyer().getId() == pk){
+                r.setBuyer(null);
+            }
+        }
+        if(r.getSeller() != null){
+            if(r.getSeller().getId() == pk){
+                r.setSeller(null);
+            }
+        }
+
+        if(r.getSeller() == null && r.getBuyer() == null){
+            roomRepository.deleteById(Integer.parseInt(no));
+        }else{
+            roomRepository.save(r);
+        }
+
     }
 
     @Override
     public int findDuplicate(User buyerUser, User sellerUser) {
-        Room r = roomRepository.findByBuyerIdAndSellerId(buyerUser,sellerUser);
+        Room r = roomRepository.findByBuyerAndSeller(buyerUser,sellerUser);
         if(r == null){
             return -1;
         }else{

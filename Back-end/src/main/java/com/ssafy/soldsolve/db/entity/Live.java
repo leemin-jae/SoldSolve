@@ -10,7 +10,8 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Data
-public class Live {
+public class
+Live {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,14 +22,4 @@ public class Live {
     private String title;
 
     private String content;
-
-    @Column(columnDefinition = "bit default 0")
-    private Boolean status;
-
-    private Timestamp startTime;
-
-    @ManyToOne(fetch = LAZY)
-    @JoinColumn(name = "user_pk")
-    private User user;
-
 }

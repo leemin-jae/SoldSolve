@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import axios from "axios"
 import NavBar from '../../components/NavBar';
 import SearchBar from './SearchBar';
-import NoItem from '../../components/NoItem';
 
 import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
@@ -15,6 +14,7 @@ import LikeButton from '../Products/LikeButton';
 
 function SearchProduct() {
     const [searchData, setSearchData] = useState([]);
+    const [oksearch, setOkSearch] = useState(false);
     const params = useParams();
     // console.log(params)
 
@@ -30,6 +30,7 @@ function SearchProduct() {
             );
             if (result.data.length > 0) {
                 setSearchData(result.data)
+                setOkSearch(true)
             } else {
                 const allData = await axios.get(`/api/product`);
                 // console.log(allData)
@@ -42,18 +43,16 @@ function SearchProduct() {
     const ShowProducts = () => {
         return (
             <>
-        {searchData ?
-                    <>
                 {searchData.map((product) => {
                     let mainImg = null;
-                    if (product.productImg.length>0) {
-                      mainImg = 'https://i7c110.p.ssafy.io'+product.productImg[0].path
+                    if (product.productImg.length > 0) {
+                        mainImg = 'https://i7c110.p.ssafy.io' + product.productImg[0].path
                     }
                     let pTitle = null;
-                    if (product.title.length > 8){
-                      pTitle = product.title.substr(0,8)+"...";
+                    if (product.title.length > 8) {
+                        pTitle = product.title.substr(0, 8) + "...";
                     } else {
-                      pTitle = product.title
+                        pTitle = product.title
                     }
                     return (
 
@@ -82,27 +81,27 @@ function SearchProduct() {
                             </div>
 
                         </li>
-
-
                     );
                 })}
-                                    </>
-                    :
-                    <>
-                        <NoItem></NoItem>
-                    </>
-                }
             </>
         );
     };
+    const NoSearchItem = () => {
+        return (
+            <div style={{textAlign: 'center'}}>
+                <h5>검색결과가 없습니다</h5>
+            </div>
+        )
+    }
 
     return (
         <>
-        <div className='fixnav'>
-            <NavBar />
+            <div className='fixnav'>
+                <NavBar />
             </div>
             <SearchBar></SearchBar>
             <div className='content'>
+            {oksearch ? <></> : <NoSearchItem />}
                 <ul className='cards' id='maincontent'>
                     {<ShowProducts />}
                 </ul>

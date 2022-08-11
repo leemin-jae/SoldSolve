@@ -15,6 +15,7 @@ function CreateProduct() {
   const [detailImgs, setDetailImgs] = useState('')
   const editMode = useParams().id
   const [imgData,setImgData] = useState('')
+  const [editimgData,setEditImgData] = useState('')
 
   useEffect(() => {
     if (editMode) {
@@ -25,7 +26,7 @@ function CreateProduct() {
       "Content-Type": "multipart/form-data"}
       })
       .then(res => {
-        console.log(res)
+        console.log(res.data)
         document.getElementsByName('articlename')[0].value = res.data.title
         document.getElementsByName('price')[0].value = String(res.data.price)
         document.getElementsByName('categorys')[0].value = res.data.category
@@ -36,6 +37,14 @@ function CreateProduct() {
         setPlace(res.data.region)
         setCategory(res.data.category)
         setDescription(res.data.content)
+        
+
+        const imgs2=[]
+        for (let i = 0; i < res.data.productImg.length; i++) {
+          imgs2.push(<img className="createproductimg" src={'https://i7c110.p.ssafy.io'+res.data.productImg[i].path} alt="#"></img>)
+        }
+        console.log(imgs2)
+        setEditImgData(imgs2)
 
       })
       .catch(err => {
@@ -121,7 +130,9 @@ function CreateProduct() {
   }
 
   const handleImageUpload = (e) => {
+    setEditImgData(null)
     const fileArr = e.target.files;
+    console.log(fileArr)
     setImgData(fileArr)
     let fileURLs = [];
     let file;
@@ -141,6 +152,8 @@ function CreateProduct() {
   for (let i = 0; i < detailImgs.length; i++) {
     imgs.push(<img className="createproductimg" src={detailImgs[i]} alt="#"></img>)
   }
+
+  
 
   // if (imgs.length === 0 ) {
   //   console.log(document.getElementById('file'))   //이미지 안올렸을때 빈박스 안보이는거 시도
@@ -170,7 +183,8 @@ function CreateProduct() {
               </div>
               <input onChange={e => { inputForm(e) }} className="inputform" name="articlename" type="text" placeholder="글 제목"></input><br />
               <input onChange={e => { inputForm(e) }} className="inputform" name="price" type="text" id="price" placeholder="판매 가격"></input><br />
-              <div className="inputform d-flex flex-wrap">{imgs}
+              <div className="inputform d-flex flex-wrap">
+                {editimgData ? editimgData : imgs}
                 <input className="file" onChange={handleImageUpload} multiple="multiple" name="productimg[]" id="file" type="file" accept="image/gif, image/jpeg, image/png"></input><br />
               </div>
               <div><label className="uploadlabel" htmlFor="file">사진 업로드</label></div>

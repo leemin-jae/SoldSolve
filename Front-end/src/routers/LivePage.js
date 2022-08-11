@@ -61,6 +61,7 @@ class LivePage extends Component {
     this.handleChangeUserName = this.handleChangeUserName.bind(this);
     this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);
+    this.deleteSession = this.deleteSession.bind(this);
   }
 
   componentDidMount() {
@@ -109,7 +110,6 @@ class LivePage extends Component {
 
 
   joinSession() {
-
     this.OV = new OpenVidu();
     this.setState(
       {
@@ -202,7 +202,6 @@ class LivePage extends Component {
 
 
   leaveSession() {
-
     const mySession = this.state.session;
 
     if (mySession) {
@@ -253,40 +252,32 @@ class LivePage extends Component {
     }
   }
 
+  deleteSession() {
+    axios({
+      url: '/api/live',
+      method: 'delete',
+      params: { sessionId: this.state.mySessionId }
+    })
+      .then((res) => {
+        console.log(res)
+      })
 
+    axios
+      .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+this.state.productID, {
+        headers: {
+          Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+        },
+      })
+      .then((res) => {
+        console.log(res)
+      })
+    console.log(1234)
+  }
 
 
 
   render() {
-    console.log(this.state)
-    const mySessionId = this.state.mySessionId
-    const productId = this.state.productID
-    function sellerExit() {
-      axios({
-        url: '/api/live',
-        method: 'delete',
-        params: { sessionId: mySessionId }
-      })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-  
-      axios
-        .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+productId, {
-          headers: {
-            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-          },
-        })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    }
+
     if (this.state.session === undefined) {
       this.joinSession()
     }
@@ -310,7 +301,7 @@ class LivePage extends Component {
                           className="btn btn-large btn-danger mx-1 video_button"
                           type="button"
                           id="buttonLeaveSession"
-                          onClick={e => sellerExit()}
+                          onClick={this.deleteSession}
                           value="나가기"
                         />
                         <input

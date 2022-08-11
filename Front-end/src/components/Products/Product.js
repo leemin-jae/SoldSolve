@@ -151,12 +151,12 @@ function Product() {
         params: { seller: userId },
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
-        .then(res => {
-          console.log(res.data, '방생성')
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      .then(res => {
+        console.log(res.data, '방생성')
+      })
+      .catch(err => {
+        console.log(err)
+      })
     }
   }
   const imglist = []

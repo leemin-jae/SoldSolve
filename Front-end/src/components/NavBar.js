@@ -1,15 +1,17 @@
 import './components.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faMagnifyingGlass, faEnvelope, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faMagnifyingGlass, faEnvelope, faUser, faGear } from '@fortawesome/free-solid-svg-icons'
 import logo from './logo.png'
 import { useDispatch, useSelector } from 'react-redux'
 import { getToken, getInfo } from '../store.js'
 import { Link, useNavigate } from 'react-router-dom';
-
+import ManagementModal from './Modals/ManagementModal';
+import { useState } from 'react';
 function NavBar() {
   let navigate = useNavigate()
   let dispatch = useDispatch()
   let storeToken = useSelector((state) => { return state })
+  const [modalOpen, setModalOpen] = useState(false);
 
   function Logout(e) {
     e.preventDefault();
@@ -19,8 +21,13 @@ function NavBar() {
     document.location.href = '/'
   }
 
-
-
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  
   const Token = storeToken.token.token
   return (
     <>
@@ -31,6 +38,11 @@ function NavBar() {
           </label>
           <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
           <ul className="screen_menu">
+            {storeToken.info.info.role === 'ROLE_ADMIN' ? 
+            <li><a className="icon_sort" href='#!' onClick={openModal}><FontAwesomeIcon className='icon' icon={faGear} size="2x" /></a></li>
+            :
+            null
+          }
             <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
             <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
@@ -93,6 +105,7 @@ function NavBar() {
           <li><a href='/signup'><h5>회원가입</h5></a></li>
         </ul>
       </div>}
+      <ManagementModal open={modalOpen} close={closeModal}></ManagementModal>
     </>
   );
 }

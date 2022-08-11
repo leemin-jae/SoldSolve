@@ -9,7 +9,8 @@ import SwiperCore, { Pagination } from "swiper";
 import "swiper/css/pagination";
 
 function KategorieInMain() {
-  const [data, setData] = useState([]);
+  const [newdata, setNewData] = useState([]);
+  const [hotdata, setHotData] = useState([]);
   const [loading, setLoading] = useState(false);
   SwiperCore.use([Pagination]);
 
@@ -18,12 +19,15 @@ function KategorieInMain() {
       const result = await axios.get(
         `/api/product`
       );
-      console.log(result)
-      setData(result.data.slice(0, 10));
+      // console.log(result)
+      setNewData(result.data.reverse().slice(0, 10));
+
+      setHotData( result.data.sort(function(a, b){
+        return b.viewCount - a.viewCount
+      }).slice(0, 10))
       setLoading(false)
     }
     fetchData();
-    console.log(data)
   }, []);
 
 
@@ -36,7 +40,7 @@ function KategorieInMain() {
   };
 
 
-  const ShowNew = () => {
+  const ShowMainItem = (data) => {
     return (
       <>
         <Swiper spaceBetween={-15}
@@ -57,28 +61,34 @@ function KategorieInMain() {
             }
           }}
           pagination={{ clickable: true }}
-          >
-          {data.length > 0 ? 
+        >
+          {data.data.length > 0 ?
             <>
-            {data.map((product) => {
-              const mainImg = 'https://i7c110.p.ssafy.io'+product.productImg[0].path
-              return (
-                <SwiperSlide className='cards_item' key={product.no}>
-                  <a href={`/product/${product.no}`} className='card' style={{height: 250}}>
-                    <img className='card_image'
-                      src={mainImg}
-                      alt={product.title}
-                    />
-                    <div className='card_content'>
-                      <h5 className='card_title'>{product.title}</h5>
-                      <p className='card_text'>{product.price} 원</p>
-                    </div>
-                  </a>
-                </SwiperSlide>
-              );
-            })}
+              {data.data.map((product) => {
+                const mainImg = 'https://i7c110.p.ssafy.io' + product.productImg[0].path
+                let pTitle = null;
+                if (product.title.length > 8) {
+                  pTitle = product.title.substr(0, 8) + "...";
+                } else {
+                  pTitle = product.title
+                }
+                return (
+                  <SwiperSlide className='cards_item' key={product.no}>
+                    <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
+                      <img className='card_image'
+                        src={mainImg}
+                        alt={product.title}
+                      />
+                      <div className='card_content'>
+                        <h5 className='card_title'>{pTitle}</h5>
+                        <p className='card_text'>{product.price} 원</p>
+                      </div>
+                    </a>
+                  </SwiperSlide>
+                );
+              })}
             </>
-          : null}
+            : null}
         </Swiper>
       </>
     );
@@ -89,13 +99,13 @@ function KategorieInMain() {
       <div className="content">
         <div className='hometext'><h4>NEW ARRIVAL</h4></div>
         <ul className='cards' id='maincontent'>
-          {loading ? <Loading /> : <ShowNew />}
+          {loading ? <Loading /> : <ShowMainItem data={newdata} />}
         </ul>
       </div>
       <div className="content">
         <div className='hometext'><h4>HOT ITEMS</h4></div>
         <ul className='cards' id='maincontent'>
-          {loading ? <Loading /> : <ShowNew />}
+          {loading ? <Loading /> : <ShowMainItem data={hotdata} />}
         </ul>
       </div>
     </>

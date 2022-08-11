@@ -86,6 +86,12 @@ function Products() {
           if (product.productImg.length>0) {
             mainImg = 'https://i7c110.p.ssafy.io'+product.productImg[0].path
           }
+          let pTitle = null;
+          if (product.title.length > 8){
+            pTitle = product.title.substr(0,8)+"...";
+          } else {
+            pTitle = product.title
+          }
           return (
             <li className='cards_item' key={product.no}>
               <div className='card'>
@@ -95,12 +101,12 @@ function Products() {
                     alt={product.title}
                   />
                   <div className='card_content'>
-                    <h5 className='card_title'>{product.title}</h5>
-                    <p className='card_text'>{product.price}</p>
+                    <h5 className='card_title'>{pTitle}</h5>
+                    <p className='card_text'>{product.price} 원</p>
                   </div>
 
                 </a>
-                <CardActions disableSpacing sx={{ justifyContent: 'space-around' }}  >
+                <CardActions disableSpacing sx={{ justifyContent: 'space-around', marginTop: "-10px" }}  >
                   <LikeButton no={product.no} />
                   <LiveButton no={product.no} />
                   <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >

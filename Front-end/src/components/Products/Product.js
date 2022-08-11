@@ -17,22 +17,17 @@ import { IconButton } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 
 function Product() {
-  const [products, setProducts] = useState([])
+  const [recproducts, setRecProducts] = useState([])
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState(null);
   const productid = useParams().id;
   const [money, setMoney] = useState('')
   const [userId, setUserId] = useState('')
+  const [cat, setCat] = useState('')
+
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
 
-  useEffect(() => {
-    axios.get('https://fakestoreapi.com/products')
-      .then(res => {
-        setProducts(res.data)
-        setLoading(true)
-      })
-  }, [])
   useEffect(() => {
     axios({
       url: `/api/product/${productid}`,
@@ -47,24 +42,48 @@ function Product() {
         money = Number(String(money).replaceAll(',', ''));
         const formatValue = money.toLocaleString('ko-KR');
         setMoney(formatValue)
+        setCat(res.data.category)
       })
       .catch(err => {
         console.error(err)
       })
+
   }, [productid])
 
-  const ShowProducts = () => {
+  useEffect(() => {
+    setLoading(true)
+    async function fetchRecData() {
+      const result = await axios.get(
+        `/api/product`
+      );
+      setLoading(false)
+      let recList = null;
+      if (result.data && result.data.length > 0) {
+        recList = result.data.filter((x) => x.category === cat)
+      }
+      setRecProducts(recList);
+    }
+    fetchRecData();
+
+  }, []);
+
+
+  const ShowRecProducts = () => {
     return (
       <>{
-        products.map((product) => {
-          let goDetail = '/detail/' + product.id
+        recproducts.map((product) => {
+          let goDetail = '/product/' + product.no
+          let mainImg = null;
+          if (product.productImg.length > 0) {
+            mainImg = 'https://i7c110.p.ssafy.io' + product.productImg[0].path
+          }
           return (
-            <div key={product.id}>
+            <div key={product.no}>
               <div className='category_reco' >
                 <img style={{ cursor: 'pointer' }} onClick={() => {
                   navigate(goDetail)
                 }} className='category_img'
-                  src={product.image}
+                  src={mainImg}
                   alt={product.title}
                 />
                 <div className='category_content'>
@@ -150,7 +169,7 @@ function Product() {
       {productData ?
         <div>
           <div className='fixnav'>
-          <NavBar />
+            <NavBar />
           </div>
           <div className='carousel_box'>
             <div className="slider">
@@ -207,16 +226,13 @@ function Product() {
                     </div>
                   </>
                 }
-
-
-
               </div>
             ) : null}
           </div>
           <hr></hr>
           <h5 style={{ textAlign: "center" }}>카테고리 별 추천 상품</h5>
           <div className='category_reco_box'>
-            {loading ? <ShowProducts /> : <Loading />}
+            {loading ? <Loading /> : <ShowRecProducts />}
           </div>
         </div> : <NotFound />}
 

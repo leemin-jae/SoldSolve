@@ -51,20 +51,21 @@ function KategorieInMain() {
             767: {
               slidesPerView: 3,
             },
-            414: {
+            300: {
               slidesPerView: 2,
             }
           }}
           pagination={{ clickable: true }}
-          className='cards' id='maincontent'>
+          >
           {data.length > 0 ? 
             <>
             {data.map((product) => {
+              const mainImg = 'https://i7c110.p.ssafy.io'+product.productImg[0].path
               return (
                 <SwiperSlide className='cards_item' key={product.no}>
                   <a href={`/product/${product.no}`} className='card'>
                     <img className='card_image'
-                      src={product.image}
+                      src={mainImg}
                       alt={product.title}
                     />
                     <div className='card_content'>

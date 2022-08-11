@@ -69,7 +69,7 @@ function Product() {
     }
     fetchRecData();
 
-  }, []);
+  }, [cat]);
 
 
   const ShowRecProducts = () => {

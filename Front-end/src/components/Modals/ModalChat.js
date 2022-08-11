@@ -23,7 +23,13 @@ const ModalChat = (props) => {
   // const [privateChats, setPrivateChats] = useState(new Map())
   // const [tab, setTab] = useState("CHAT ROOM")
   const [userData, setUserData] = useState()
-  // const [dbChats, setDbChats] = useState()
+  const [dbChats, setDbChats] = useState()
+  const [newchats, setNewchats] = useState([])
+
+
+  useEffect(() => {
+
+  })
 
   const onConnected = () => {
     // console.log(payload)
@@ -62,59 +68,61 @@ const ModalChat = (props) => {
   //   }
   // }, [header])
 
-  // useEffect(()=> {
-  //   if (header) {
-  //   const roomChats = () => {
-  //     axios({
-  //       url: `/api/room/${header.roomId}`,
-  //       method: 'get',
-  //     })
-  //       .then(res => {
-  //         const copyDbChats = res.data.reverse().slice(1, 51)
-  //         console.log(copyDbChats)
-  //         const copyChats = []
-  //         copyDbChats.map(chat => {
-  //           console.log(chat.chatContent)
-  //           copyChats.push(chat.chatContent)
-  //         })
-  //         console.log(copyChats)
-  //         setDbChats(copyChats)
-  //         console.log(dbChats)
-  //       })
-  //       .catch(err => {
-  //         console.log(err)
-  //       })
-  //   }
-  //   roomChats()
-  // }
-  // }, [header])
+  useEffect(() => {
+    if (header) {
+      const roomChats = () => {
+        axios({
+          url: `/api/room/${header.roomId}`,
+          method: 'get',
+        })
+          .then(res => {
+            const copyDbChats = res.data.reverse().slice(0, 51)
+            console.log(copyDbChats)
+            const copyChats = []
+            copyDbChats.reverse().map(chat => {
+              console.log(chat.chatContent)
+              copyChats.push(chat.chatContent)
+            })
+            console.log(copyChats, '+')
+            setDbChats(copyChats)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+      roomChats()
+    }
+  }, [])
 
   useEffect(() => {
     console.log('연결중')
-    // if (stompClient&&stompClient.connected) stompClient.disconnect();
+    if (stompClient && stompClient.connected) stompClient.disconnect();
     let Sock = new SockJS('/ws-stomp');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
-    
-    return () => {
-      if (stompClient.connected) stompClient.disconnect();
-    };
-    
-  // }, [])
+
+    // return () => {
+    //   if (stompClient.connected) stompClient.disconnect();
+    // };
+
+    // }, [])
   }, [header])
 
-  useEffect(()=>{
-    if (header) {
+  //   useEffect(()=>{
+  //     if (header) {
 
-  }
-}, [])
+  //   }
+  // }, [])
 
   const handleValue = (e) => {
-    
+
     const { value, name } = e.target
     setUserData({ ...userData, [name]: value })
   }
   // const onPublicMessageReceived = 
+
+
+
   const sendPublicMessage = (e) => {
     e.preventDefault();
     if (stompClient) {
@@ -127,14 +135,29 @@ const ModalChat = (props) => {
       console.log(stompClient)
       console.log(chatMessage.message, '12!@#!@#')
       if (chatMessage.message == '' || chatMessage.message == null || chatMessage.message == ' ') {
-      alert('메세지를 입력하세요')
-    } else {
-      stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
-      setUserData({ ...userData, "message": "" })
-    }
+        alert('메세지를 입력하세요')
+      } else {
+        stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+        setUserData({ ...userData, "message": "" })
+        console.log(userData.message, '유저데이터')
+        setNewchats([...newchats, userData.message])
+
+      }
     }
   }
-  console.log(chats)
+
+  // const ShowNew = () => {
+  //   return (
+  //     <>{
+  //       newchats.map((c) => {
+  //         return (
+  //           <span className='li_box_me' key={userData.userId}>{c}</span>
+  //         )
+  //       })
+  //     }</>)
+  // }
+
+
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
@@ -158,6 +181,17 @@ const ModalChat = (props) => {
                         <span className='li_box_me' key={userData.userId}>{dbChat.message}</span>
                       )
                     })} */}
+                    {dbChats.map(a => {
+                      // let ChatMessage = null;
+                      // if (chat.sender === store.info.info.userId) {
+                      //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
+                      // } else {
+                      //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
+                      // }
+                      return (
+                        <span className='li_box_me' key={userData.userId}>{a}</span>
+                      )
+                    })}
                     {chats.map(chat => {
                       // let ChatMessage = null;
                       // if (chat.sender === store.info.info.userId) {
@@ -169,14 +203,15 @@ const ModalChat = (props) => {
                         <span className='li_box_me' key={userData.userId}>{chat.message}</span>
                       )
                     })}
+                    {/* <ShowNew /> */}
                   </ul>
                 </div>
               </div>
             </div>
             <div className='input_box'>
-              <form onSubmit={e => sendPublicMessage(e)} style={{display:'flex', width:'100%'}}>
+              <form onSubmit={e => sendPublicMessage(e)} style={{ display: 'flex', width: '100%' }}>
                 <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message} onChange={handleValue} />
-                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e=>sendPublicMessage(e)} />
+                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e => sendPublicMessage(e)} />
               </form>
             </div>
           </main>

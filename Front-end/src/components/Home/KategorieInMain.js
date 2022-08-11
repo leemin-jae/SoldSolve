@@ -39,8 +39,9 @@ function KategorieInMain() {
   const ShowNew = () => {
     return (
       <>
-        <Swiper spaceBetween={0}
+        <Swiper spaceBetween={-15}
           // scrollbar={{ draggable: true }}
+          height={200}
           breakpoints={{
             1200: {
               slidesPerView: 6,
@@ -63,18 +64,17 @@ function KategorieInMain() {
               const mainImg = 'https://i7c110.p.ssafy.io'+product.productImg[0].path
               return (
                 <SwiperSlide className='cards_item' key={product.no}>
-                  <a href={`/product/${product.no}`} className='card'>
+                  <a href={`/product/${product.no}`} className='card' style={{height: 250}}>
                     <img className='card_image'
                       src={mainImg}
                       alt={product.title}
                     />
                     <div className='card_content'>
                       <h5 className='card_title'>{product.title}</h5>
-                      <p className='card_text'>{product.price}</p>
+                      <p className='card_text'>{product.price} 원</p>
                     </div>
                   </a>
                 </SwiperSlide>
-  
               );
             })}
             </>

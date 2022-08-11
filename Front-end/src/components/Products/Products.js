@@ -16,9 +16,34 @@ function Products() {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [title, setTitle] = useState('');
   const location = useLocation().state.category;
 
   const url = window.location.href;
+
+
+  const Title = () => {
+    if (location === 'digital'){
+      setTitle('디지털기기')
+    } else if (location === 'appliances'){
+      setTitle('생활가전')
+    } else if (location === 'furniture'){
+      setTitle('가구')
+    } else if (location === 'fashion'){
+      setTitle('패션/잡화')
+    } else if (location === 'beauty'){
+      setTitle('뷰티/미용')
+    } else if (location === 'sports'){
+      setTitle('스포츠')
+    } else if (location === 'games'){
+      setTitle('취미/게임')
+    } else if (location === 'book'){
+      setTitle('도서')
+    } else {
+      setTitle('기타')
+    }
+  }
+
 
   useEffect(() => {
     setLoading(true)
@@ -35,6 +60,7 @@ function Products() {
       setFilter(updatedList);
     }
     fetchData();
+    Title();
 
   }, [location]);
 
@@ -46,6 +72,8 @@ function Products() {
       </>
     );
   };
+
+
 
 
   const ShowProducts = () => {
@@ -100,7 +128,7 @@ function Products() {
       <NavBar />
       </div>
       <div className='content'>
-        <h1>{location}</h1>
+        <h1>{title}</h1>
         <ul className='cards' id='maincontent'>
           {loading ? <Loading /> : <ShowProducts />}
         </ul>

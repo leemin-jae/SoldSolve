@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import SwiperCore, { Pagination } from "swiper";
+import SwiperCore, { Pagination, Autoplay } from "swiper";
 
 import "swiper/css/pagination";
 
@@ -12,7 +12,7 @@ function KategorieInMain() {
   const [newdata, setNewData] = useState([]);
   const [hotdata, setHotData] = useState([]);
   const [loading, setLoading] = useState(false);
-  SwiperCore.use([Pagination]);
+  SwiperCore.use([Pagination, Autoplay]);
 
   useEffect(() => {
     async function fetchData() {
@@ -61,6 +61,7 @@ function KategorieInMain() {
             }
           }}
           pagination={{ clickable: true }}
+          autoplay={{ delay:3000 }}
         >
           {data.data.length > 0 ?
             <>

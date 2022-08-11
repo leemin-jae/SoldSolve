@@ -67,9 +67,17 @@ public class RoomController {
     }
 
     @DeleteMapping("/{no}")
-    public ResponseEntity<?> deleteRoom(@PathVariable("no") String no){
+    public ResponseEntity<?> deleteRoom(@PathVariable("no") String no, Authentication authentication){
+
+
+
         try{
-            roomService.deleteRoom(no);
+            SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+            String userId = userDetails.getUsername();
+            User user = userService.getUserByUserId(userId);
+
+
+            roomService.deleteRoom(no, user);
         }catch (Exception e){
             return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "삭제 실패"));
         }

@@ -87,7 +87,9 @@ function CreateRoom() {
                 document.location.href = `/live/${productData.user.userid}/sell${productid}`
             })
             .catch(err=>{
-              console.log(err)
+              if (err.response.status) {
+                document.location.href = `/live/${productData.user.userid}/sell${productid}`
+              }
             })
   }
 

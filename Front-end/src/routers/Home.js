@@ -7,7 +7,9 @@ import KategorieInMain from '../components/Home/KategorieInMain';
 function Home() {
   return (
     <div className='App' id="container">
+      <header className='fixnav'>
       <NavBar></NavBar>
+      </header>
       <HomeBanner></HomeBanner>
       <LiveItemInMain></LiveItemInMain>
       <KategorieInMain></KategorieInMain>

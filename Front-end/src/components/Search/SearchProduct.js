@@ -83,7 +83,9 @@ function SearchProduct() {
 
     return (
         <>
+        <div className='fixnav'>
             <NavBar />
+            </div>
             <SearchBar></SearchBar>
             <div className='content'>
                 <ul className='cards' id='maincontent'>

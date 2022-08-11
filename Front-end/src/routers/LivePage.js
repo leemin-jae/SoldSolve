@@ -251,7 +251,7 @@ class LivePage extends Component {
           {this.state.session !== undefined ? (
 
             <div id="session">
-              <div className='d-flex liveTitle my-3 justify-content-between'>
+              <div className='liveTitle my-3'>
                 <h3 id="session-title">{localStorage.LiveRoom}</h3>
                 {this.state.params[2] === this.state.myId ?
                   <>

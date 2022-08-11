@@ -13,7 +13,9 @@ function ChatRoom() {
   let navigate = useNavigate()
   return (
     <div>
+      <div className='fixnav'>
       <NavBar></NavBar>
+      </div>
 
       <div className='user_box'>
         {/* <div className='user_info'>

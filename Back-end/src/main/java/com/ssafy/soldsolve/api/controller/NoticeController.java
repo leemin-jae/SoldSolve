@@ -31,27 +31,4 @@ public class NoticeController {
         Notice notice = noticeService.getNotice(noticeId);
         return ResponseEntity.status(200).body(NoticeRes.of(notice));
     }
-
-    // 공지 생성. title과 content Json형태로 Body에 넣어주기.
-    @PostMapping("")
-    public ResponseEntity<? extends BaseResponseBody> createNotice(@RequestBody NoticePostReq registerInfo) {
-        noticeService.createNotice(registerInfo);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-    }
-
-    // 공지 수정 // api/v1/notices/notice_id를 적으면 notice_id를 기준으로 수정 가능. title과 content Json형태로 Body
-    @PatchMapping("/{noticeId}")
-    public ResponseEntity<?> updateNotice(
-            @PathVariable int noticeId,
-            @RequestBody NoticePostReq noticeInfo){
-        noticeService.updateNotice(noticeInfo,noticeId);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-    }
-
-    // 공지 삭제 // 마찬가지로 notice_id를 기준으로 삭제 가능.
-    @DeleteMapping("/{noticeId}")
-    public ResponseEntity<?> deleteNotice(@PathVariable int noticeId){
-        noticeService.deleteNotice(noticeId);
-        return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-    }
 }

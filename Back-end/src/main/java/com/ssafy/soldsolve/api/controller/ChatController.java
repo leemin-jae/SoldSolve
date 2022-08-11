@@ -17,7 +17,7 @@ import java.security.MessageDigest;
 
 @RequiredArgsConstructor
 @Controller
-public class  ChatController {
+public class ChatController {
 
     private final SimpMessageSendingOperations messagingTemplate;
 

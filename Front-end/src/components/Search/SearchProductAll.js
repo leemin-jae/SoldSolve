@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from "axios"
 import NavBar from '../../components/NavBar';
 import SearchBar from './SearchBar';
+import NoItem from '../../components/NoItem';
 
 import CardActions from '@mui/material/CardActions';
 import IconButton from '@mui/material/IconButton';
@@ -41,6 +42,8 @@ function SearchProduct() {
     const ShowProducts = () => {
         return (
             <>
+        {searchData ?
+                    <>
                 {searchData.map((product) => {
                     let mainImg = null;
                     if (product.productImg.length>0) {
@@ -83,6 +86,12 @@ function SearchProduct() {
 
                     );
                 })}
+                                    </>
+                    :
+                    <>
+                        <NoItem></NoItem>
+                    </>
+                }
             </>
         );
     };

@@ -18,6 +18,7 @@ Live {
     @Column(name = "live_id")
     public int id;
 
+    @Column(unique = true)
     private String sessionId;
 
     private String title;

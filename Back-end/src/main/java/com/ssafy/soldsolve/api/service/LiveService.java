@@ -9,4 +9,6 @@ public interface LiveService {
     String createLive(LiveCreatePostReq req, User user);
 
     Live getLive(String sessionId);
+
+    void deleteLive(String sessionId);
 }

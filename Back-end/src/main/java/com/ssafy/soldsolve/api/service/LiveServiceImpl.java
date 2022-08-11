@@ -25,7 +25,7 @@ public class LiveServiceImpl implements LiveService {
 
         l.setContent(req.getContent());
         l.setSessionId(req.getSessionId());
-        l.setTitle(req.getSessionId());
+        l.setTitle(req.getTitle());
         Product p = productRepository.findByNo(Integer.parseInt(req.getProductNo()));
         if(p.getUser().getId() != user.getId()){
             return null;
@@ -39,5 +39,11 @@ public class LiveServiceImpl implements LiveService {
     @Override
     public Live getLive(String sessionId) {
         return liveRepository.findBySessionId(sessionId);
+    }
+
+    @Override
+    public void deleteLive(String sessionId) {
+        Live l = liveRepository.findBySessionId(sessionId);
+        liveRepository.deleteById(l.getId());
     }
 }

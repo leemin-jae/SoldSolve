@@ -53,6 +53,16 @@ public class LiveController {
             return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "실패"));
         }
     }
+
+    @DeleteMapping("")
+    public ResponseEntity<?> deleteLive(@RequestParam String sessionId){
+        try{
+            liveService.deleteLive(sessionId);
+            return  ResponseEntity.status(200).body(BaseResponseBody.of(200, "삭제 성공"));
+        }catch (Exception e){
+            return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "삭제 실패"));
+        }
+    }
 }
 
 

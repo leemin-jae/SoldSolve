@@ -14,4 +14,5 @@ import java.util.Optional;
 public interface LiveRepository extends JpaRepository<Live, Integer> {
     Live findBySessionId(String SessionId);
 
+    void deleteBySessionId(String sessionId);
 }

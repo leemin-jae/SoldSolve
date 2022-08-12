@@ -330,13 +330,13 @@ function Product() {
                 {store.info.info.userId === productData.user.userid
                   ?
                   <>
-                    <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+                    <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
                     <div>
                       <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매</button>
                       <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
                         <div><SellProduct /></div>
                       </Modal>
-                      <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브요청목록</button>
+                      <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>Live요청목록</button>
                       <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
                         <ul><ShowReq /></ul>
                       </Modal>

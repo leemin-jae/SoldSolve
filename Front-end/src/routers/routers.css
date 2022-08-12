@@ -1,14 +1,15 @@
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
 * {
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
 }
 
 .fixnav {
   position: sticky;
   top: 0px;
   z-index: 99;
-
 }
 
 .stream-container {
@@ -20,7 +21,7 @@
 }
 
 .icon {
-  color: #6667AB;
+  color: #6667ab;
 }
 
 button {
@@ -46,7 +47,7 @@ button {
 }
 
 .container {
-  border: 10px solid rgba(black, .1);
+  border: 10px solid rgba(black, 0.1);
   border-radius: 10px;
   display: grid;
   grid-template-columns: 9fr 3fr;
@@ -133,7 +134,7 @@ button {
 }
 
 .descriptionform::placeholder {
-  font-family: 'ONE-Mobile-Regular';
+  font-family: "ONE-Mobile-Regular";
   text-align: center;
   transform: translateY(250%);
 }
@@ -147,10 +148,10 @@ button {
   margin-top: 20px;
 }
 
-.product_description>.button_box {
+.product_description > .button_box {
   display: flex;
   margin: auto;
-  justify-content: space-between
+  justify-content: space-between;
 }
 
 input[type="text"]:disabled {
@@ -158,7 +159,7 @@ input[type="text"]:disabled {
 }
 
 .submitbutton-disable {
-  background-color: #EAEAF6;
+  background-color: #eaeaf6;
   color: gray;
   max-width: 500px;
 }
@@ -192,22 +193,19 @@ input[type="text"]:disabled {
   margin-inline: 20%;
 }
 
-input[type=password] {
+input[type="password"] {
   font-family: "굴림";
 }
 
 input::placeholder {
-  font-family: 'ONE-Mobile-Regular';
+  font-family: "ONE-Mobile-Regular";
   text-align: center;
 }
 
 .dot {
   height: 100px;
   width: 100px;
-  background-color: #FFFFFF;
-  border-radius: 50%;
   display: inline-block;
-  border-color: #6667AB
 }
 
 .livebox {
@@ -217,7 +215,7 @@ input::placeholder {
 }
 
 .container {
-  border: 10px solid rgba(black, .1);
+  border: 10px solid rgba(black, 0.1);
   border-radius: 10px;
   display: grid;
   grid-template-columns: 12fr;
@@ -239,7 +237,7 @@ input::placeholder {
   overflow-y: auto;
   height: 500px;
   display: flex;
-  flex-direction: column-reverse
+  flex-direction: column-reverse;
 }
 
 .inputsubmitbutton {
@@ -275,9 +273,8 @@ input::placeholder {
     min-height: 200px;
     height: 500px;
     display: flex;
-    flex-direction: column-reverse
+    flex-direction: column-reverse;
   }
-
 
   .inputform3 {
     width: 91%;
@@ -318,7 +315,6 @@ input::placeholder {
   .account_info {
     margin-right: -20px;
   }
-
 }
 
 @media (min-width: 414px) and (max-width: 767px) {
@@ -339,7 +335,7 @@ input::placeholder {
     min-height: 200px;
     height: 500px;
     display: flex;
-    flex-direction: column-reverse
+    flex-direction: column-reverse;
   }
 
   .inputform3 {
@@ -359,7 +355,6 @@ input::placeholder {
     width: 200px;
     border-radius: 10px;
     margin: 20px auto 20px auto;
-
   }
 
   .category_img {
@@ -389,7 +384,6 @@ input::placeholder {
   }
 }
 
-
 @media (min-width: 767px) and (max-width: 991px) {
   .livechatbox {
     background-color: rgb(255, 251, 0);
@@ -409,7 +403,7 @@ input::placeholder {
     width: 96%;
     height: 500px;
     display: flex;
-    flex-direction: column-reverse
+    flex-direction: column-reverse;
   }
 
   .inputform3 {
@@ -429,7 +423,6 @@ input::placeholder {
     width: 200px;
     border-radius: 10px;
     margin: 20px auto 20px auto;
-
   }
 
   .category_img {
@@ -469,7 +462,7 @@ input::placeholder {
     min-height: 200px;
     height: 500px;
     display: flex;
-    flex-direction: column-reverse
+    flex-direction: column-reverse;
   }
 
   .inputform3 {
@@ -489,7 +482,6 @@ input::placeholder {
 
     border-radius: 10px;
     margin: 20px auto 20px auto;
-
   }
 
   .category_img {
@@ -511,7 +503,6 @@ input::placeholder {
 }
 
 @media (min-width: 1199px) {
-
   /* 데스크탑 일반 */
   .livebox {
     max-width: 1500px;
@@ -529,7 +520,7 @@ input::placeholder {
   }
 
   .live_container {
-    border: 10px solid rgba(black, .1);
+    border: 10px solid rgba(black, 0.1);
     border-radius: 10px;
     display: grid;
     grid-template-columns: 9fr 3fr;
@@ -555,7 +546,6 @@ input::placeholder {
     width: 200px;
     border-radius: 10px;
     margin: 20px auto 20px auto;
-
   }
 
   .category_img {
@@ -686,10 +676,9 @@ input::placeholder {
   max-width: 400px;
   height: 600px;
   justify-content: space-around;
-  margin-top: -80px
-    /* width: auto; */
+  margin-top: -80px;
+  /* width: auto; */
 }
-
 
 .heart_item {
   width: 50%;
@@ -699,7 +688,6 @@ input::placeholder {
   justify-content: space-around;
   list-style: none;
   position: relative;
-
 }
 
 .liveChatItem {
@@ -731,7 +719,6 @@ input::placeholder {
   word-break: break-all;
 }
 
-
 .chatnickname {
   margin-bottom: 0;
 }
@@ -740,8 +727,6 @@ input::placeholder {
   max-height: 150px;
   margin-inline: 2em;
 }
-
-
 
 .chatbox::-webkit-scrollbar {
   width: 10px;

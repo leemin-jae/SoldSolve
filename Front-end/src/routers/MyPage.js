@@ -30,6 +30,9 @@ function MyPage() {
   let dispatch = useDispatch()
 
   const [wish, setWish] = useState([]);
+  const [sell, setSell] = useState([]);
+  const [buy, setBuy] = useState([]);
+
 
   useEffect(() => {
     profileUpdate()
@@ -44,7 +47,31 @@ function MyPage() {
       );
       setWish(result.data);
     }
+    async function sellData() {
+      const result = await axios.get(
+        `/api/product/me`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`
+          }
+        }
+      );
+      setSell(result.data);
+    }
+    async function buyData() {
+      const result = await axios.get(
+        `/api/deal/buy`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`
+          }
+        }
+      );
+      setBuy(result.data);
+    }
     wishData();
+    sellData();
+    buyData();
     console.log(wish)
 
   }, []);
@@ -116,6 +143,70 @@ function MyPage() {
       </ImageList>
     );
   }
+  console.log(sell)
+  console.log(buy)
+
+  function SellBox(props) {
+    console.log(props.props)
+    return (
+      <ImageList sx={{ width: 280, height: 400 }} cols={2} rowHeight={150}>
+        {props.props.map((item) => {
+
+
+           let price = item.price
+           const productPrice = price.toLocaleString('ko-KR');
+       
+      
+          return (
+          <a href={`/product/${item.no}`}>
+            <ImageListItem key={item.no}>
+              <img
+                src={`https://i7c110.p.ssafy.io${item.productImg[0].path}`}
+                srcSet={`${item.productImg[0]}`}
+                alt={item.title}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                title={item.title}
+                subtitle={productPrice}
+              />
+            </ImageListItem>
+          </a>
+        )})}
+      </ImageList>
+    );
+  }
+
+  function BuyBox(props) {
+    console.log(props.props)
+    return (
+      <ImageList sx={{ width: 280, height: 400 }} cols={2} rowHeight={150}>
+        {props.props.map((item) => {
+
+
+           let price = item.product.price
+           const productPrice = price.toLocaleString('ko-KR');
+       
+      
+          return (
+          <a href={`/product/${item.product.no}`}>
+            <ImageListItem key={item.product.no}>
+              <img
+                src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
+                srcSet={`${item.product.productImg[0]}`}
+                alt={item.title}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                title={item.product.title}
+                subtitle={productPrice}
+              />
+            </ImageListItem>
+          </a>
+        )})}
+      </ImageList>
+    );
+  }
 
 
   function imgupdate(e) {
@@ -159,6 +250,7 @@ function MyPage() {
                 <a href='/editaccount'><ManageAccountsIcon color="secondary" /></a>
                 <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
                 <label htmlFor="imgChange"><PhotoCameraIcon /></label>
+                <div><a href='/#'>내상품관리</a></div>
               </Typography>
             </CardContent>
           </Box>
@@ -186,7 +278,7 @@ function MyPage() {
               <div>구매내역</div>
             </button>
             <Modal open={buyModalOpen} close={closeBuyModal} header="구매내역">
-              구매내역리스트
+            <BuyBox props={buy} />
             </Modal>
           </div>
           <div className='column'>
@@ -195,7 +287,7 @@ function MyPage() {
               <div>판매내역</div>
             </button>
             <Modal open={sellModalOpen} close={closeSellModal} header="판매내역">
-              판매내역리스트
+            <SellBox props={sell} />
             </Modal>
           </div>
         </div>

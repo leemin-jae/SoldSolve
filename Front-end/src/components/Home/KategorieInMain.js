@@ -103,13 +103,13 @@ function KategorieInMain() {
     <>
       <div className="content">
         <div className='hometext'><h4>NEW ARRIVAL</h4></div>
-        <ul className='cards' id='maincontent'>
+        <ul className='cards' id='maincontent' style={{marginTop:'-10px'}}>
           {loading ? <Loading /> : <ShowMainItem data={newdata} />}
         </ul>
       </div>
       <div className="content">
         <div className='hometext'><h4>HOT ITEMS</h4></div>
-        <ul className='cards' id='maincontent'>
+        <ul className='cards' id='maincontent' style={{marginTop:'-10px'}}>
           {loading ? <Loading /> : <ShowMainItem data={hotdata} />}
         </ul>
       </div>

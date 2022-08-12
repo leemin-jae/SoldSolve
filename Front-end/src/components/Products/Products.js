@@ -11,6 +11,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import LikeButton from './LikeButton';
 import LiveButton from './LiveButton';
 import NoItem from '../NoItem'
+import { CircularProgress, LinearProgress, Stack } from '@mui/material';
 
 function Products() {
   const [data, setData] = useState([]);
@@ -51,7 +52,7 @@ function Products() {
       const result = await axios.get(
         `/api/product`
       );
-      setData(result.data);
+      setData(result.data.reverse());
       setLoading(false)
       let updatedList=null;
       if (result.data && result.data.length > 0){
@@ -67,8 +68,10 @@ function Products() {
 
   const Loading = () => {
     return (
-      <>
-        Loading...
+      < >
+           <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+      <LinearProgress color="secondary" />
+    </Stack>
       </>
     );
   };

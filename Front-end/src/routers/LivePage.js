@@ -315,7 +315,6 @@ class LivePage extends Component {
                           value="카메라변경"
                         />
                       </div>
-                      <h3>시청자 : {this.state.subscribers.length}</h3>
                     </div>
                     : null}
                   <div>

@@ -9,22 +9,20 @@ import SwiperCore, { Pagination, Autoplay } from "swiper";
 import "swiper/css/pagination";
 
 function LiveItemInMain() {
-  const [livedata, setLiveData] = useState([]);
+  const [LiveList, setLiveList] = useState([]);
   const [loading, setLoading] = useState(false);
   SwiperCore.use([Pagination, Autoplay]);
 
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
-        `/api/product`
+        `/api/live/list`
       );
-      // console.log(result)
-      setLiveData(result.data.reverse().slice(0, 10));
+      setLiveList(result.data)
       setLoading(false)
     }
     fetchData();
   }, []);
-
 
   const Loading = () => {
     return (
@@ -34,8 +32,8 @@ function LiveItemInMain() {
     );
   };
 
-
   const ShowMainItem = (data) => {
+    console.log(data.data)
     return (
       <>
         <Swiper spaceBetween={-15}
@@ -61,7 +59,8 @@ function LiveItemInMain() {
           {data.data.length > 0 ?
             <>
               {data.data.map((product) => {
-                const mainImg = 'https://i7c110.p.ssafy.io' + product.productImg[0].path
+                console.log(product)
+                const mainImg = 'https://i7c110.p.ssafy.io' + product.product.productImg[0].path
                 let pTitle = null;
                 if (product.title.length > 8) {
                   pTitle = product.title.substr(0, 8) + "...";
@@ -69,12 +68,12 @@ function LiveItemInMain() {
                   pTitle = product.title
                 }
 
-                let price = product.price
+                let price = product.product.price
                 const productPrice = price.toLocaleString('ko-KR');
 
                 return (
-                  <SwiperSlide className='cards_item' key={product.no}>
-                    <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
+                  <SwiperSlide className='cards_item' key={product.id}>
+                    <a href={`/live/${product.product.user.userid}/${product.sessionId}`} className='card' style={{ height: 250 }}>
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
@@ -94,15 +93,16 @@ function LiveItemInMain() {
     );
   };
 
+
+
+  console.log(LiveList)
   return (
-    <>
-      <div className="content">
-        <div className='hometext'><h4>NOW LIVE</h4></div>
-        <ul className='cards' id='maincontent'>
-          {loading ? <Loading /> : <ShowMainItem data={livedata} />}
-        </ul>
-      </div>
-    </>
+    <div className="content">
+      <div className='hometext'><h4>NOW LIVE</h4></div>
+      {loading ? <Loading /> : <ShowMainItem data={LiveList} />}
+      <ul className='cards' id='maincontent'>
+      </ul>
+    </div>
   )
 }
 

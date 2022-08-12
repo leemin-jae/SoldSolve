@@ -30,7 +30,11 @@ function Product() {
   const [userId, setUserId] = useState('')
   const [cat, setCat] = useState('')
   const [requser, setRequser] = useState([])
+<<<<<<< HEAD
   const [youNick, setYouNick] = useState('')
+=======
+  const [sell, setSell] = useState(0)
+>>>>>>> 4f7b9727328caf6f99037772fdc2f4d6b6a223f1
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -54,6 +58,7 @@ function Product() {
         setMoney(formatValue)
         setCat(res.data.category)
         setRequser(res.data.requestsUser)
+        setSell(res.data.state)
       })
       .catch(err => {
         console.error(err)
@@ -140,6 +145,8 @@ function Product() {
     }
   }
 
+
+
   const [reqModalOpen, setReqModalOpen] = useState(false);
 
   const openReqModal = () => {
@@ -149,11 +156,19 @@ function Product() {
     setReqModalOpen(false);
   };
 
+  const [sellModalOpen, setSellModalOpen] = useState(false);
+
+  const openSellModal = () => {
+    setSellModalOpen(true);
+  };
+  const closeSellModal = () => {
+    setSellModalOpen(false);
+  };
 
   const ShowReq = () => {
     return (
       <>
-        {requser ?
+        {requser.length ?
           <>
             {requser.map((user) => {
               return (
@@ -167,6 +182,60 @@ function Product() {
           <>
             <h5>라이브를 요청한 사람이 없습니다
             </h5>
+          </>
+        }
+      </>
+    );
+  };
+
+  const SellProduct = () => {
+    const [button, setButton] = useState('noInput')
+    const [id, setId] = useState(null)
+
+    function inputId(e) {
+      setId(e.target.value)
+      if (e.target.value) { setButton('input') }
+      else if (e.target.value === '') { setButton('noInput') }
+    }
+
+    let submitButton = null;
+    if (button === 'noInput') {
+      submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
+    } else if (button === 'input') {
+      submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
+    }
+
+    function trySell(e, id) {
+      // console.log(getLoginForm)
+      e.preventDefault()
+      axios({
+        url: '/api/deal',
+        method: 'post',
+        params: { no: productid, buyerId: id },
+      })
+        .then(res => {
+          alert('거래가 완료되었습니다')
+          document.location.href = `/product/${productid}`
+        })
+        .catch(err => {
+          console.error(err.response.data)
+        })
+    }
+    return (
+      <>
+        {sell ?
+          <>
+            <h5>이미 판매된 상품입니다
+            </h5>
+          </>
+          :
+          <>
+
+            <form onSubmit={e => { trySell(e, id) }}>
+              <div>구매하시는분의 ID를 입력해주세요</div>
+              <input className="inputform" onChange={e => { inputId(e) }} type="text" placeholder="ID"></input>
+              {submitButton}
+            </form>
           </>
         }
       </>
@@ -266,12 +335,16 @@ function Product() {
                   <>
                     <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
                     <div>
+                      <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매</button>
+                      <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
+                        <div><SellProduct /></div>
+                      </Modal>
                       <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브요청목록</button>
                       <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
                         <ul><ShowReq /></ul>
                       </Modal>
-                      <button className='submitbutton-able' onClick={e => editProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>수정하기</button>
-                      <button className='submitbutton-able' onClick={e => deleteProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>삭제하기</button>
+                      <button className='submitbutton-able' onClick={e => editProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>수정</button>
+                      <button className='submitbutton-able' onClick={e => deleteProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>삭제</button>
                     </div>
 
                   </>

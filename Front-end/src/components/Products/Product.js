@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../../routers/routers.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import './Carousel.css'
 import NavBar from '../../components/NavBar';
@@ -221,6 +220,7 @@ function Product() {
       })
   }
 
+  console.log(productData.user.profileUrl)
   return (
     <>
       {productData ?
@@ -242,11 +242,11 @@ function Product() {
           </div>
           <div className='user_box'>
             <div className='user_info'>
-              <FontAwesomeIcon icon={faUser} size="2x" style={{ marginRight: '10px', padding: '8px 0 0 8px' }} />
-              <p className='user_name' style={{ margin: '1em 1em 1em 0' }}>
+              <img className="livechatimg" src={'https://i7c110.p.ssafy.io' + productData.user.profileUrl} alt="#"></img>
+              <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0' }}>
                 {productData.user.nickname} ({productData.region})</p>
             </div>
-            <p className='score'>평점</p>
+            <p className='score' style={{ marginTop:'30px'}}>평점</p>
           </div>
 
           <div className='product_description'>

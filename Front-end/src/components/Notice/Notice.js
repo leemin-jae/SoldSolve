@@ -30,7 +30,7 @@ function Notice() {
   function deleteArticle(e) {
     console.log(e)
     axios({
-      url: '/api/notices/' + e,
+      url: '/admin/notices/' + e,
       method: 'delete',
     })
       .then(res => {

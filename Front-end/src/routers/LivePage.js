@@ -19,7 +19,7 @@ class LivePage extends Component {
     const params = window.location.pathname.split('/')
 
     axios({
-      url: 'https://i7c110.p.ssafy.io/api/live',
+      url: '/api/live',
       method: 'get',
       params: { sessionId: params[3] }
     })
@@ -275,9 +275,7 @@ class LivePage extends Component {
   }
 
 
-
   render() {
-
     if (this.state.session === undefined) {
       this.joinSession()
     }
@@ -296,7 +294,7 @@ class LivePage extends Component {
                 <div>
                   {this.state.params[2] === this.state.myId ?
                     <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
-                      <div  >
+                      <div>
                         <input
                           className="btn btn-large btn-danger mx-1 video_button"
                           type="button"

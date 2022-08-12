@@ -14,45 +14,47 @@ function CreateProduct() {
   const [category, setCategory] = useState('')
   const [detailImgs, setDetailImgs] = useState('')
   const editMode = useParams().id
-  const [imgData,setImgData] = useState('')
-  const [editimgData,setEditImgData] = useState('')
+  const [imgData, setImgData] = useState('')
+  const [editimgData, setEditImgData] = useState('')
 
   useEffect(() => {
     if (editMode) {
-    axios({
-      url: `/api/product/${editMode}`,
-      method: 'get',
-      headers :  { Authorization: `Bearer ${localStorage.token}`,
-      "Content-Type": "multipart/form-data"}
-      })
-      .then(res => {
-        console.log(res.data)
-        document.getElementsByName('articlename')[0].value = res.data.title
-        document.getElementsByName('price')[0].value = String(res.data.price)
-        document.getElementsByName('categorys')[0].value = res.data.category
-        document.getElementsByName('place')[0].value = res.data.region
-        document.getElementsByName('content')[0].value = res.data.content
-        setArticleName(res.data.title)
-        setPrice(String(res.data.price))
-        setPlace(res.data.region)
-        setCategory(res.data.category)
-        setDescription(res.data.content)
-        
-
-        const imgs2=[]
-        for (let i = 0; i < res.data.productImg.length; i++) {
-          imgs2.push(<img className="createproductimg" src={'https://i7c110.p.ssafy.io'+res.data.productImg[i].path} alt="#"></img>)
+      axios({
+        url: `/api/product/${editMode}`,
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`,
+          "Content-Type": "multipart/form-data"
         }
-        console.log(imgs2)
-        setEditImgData(imgs2)
+      })
+        .then(res => {
+          console.log(res.data)
+          document.getElementsByName('articlename')[0].value = res.data.title
+          document.getElementsByName('price')[0].value = String(res.data.price)
+          document.getElementsByName('categorys')[0].value = res.data.category
+          document.getElementsByName('place')[0].value = res.data.region
+          document.getElementsByName('content')[0].value = res.data.content
+          setArticleName(res.data.title)
+          setPrice(String(res.data.price))
+          setPlace(res.data.region)
+          setCategory(res.data.category)
+          setDescription(res.data.content)
 
-      })
-      .catch(err => {
-        console.error(err)
-      })
-  }
-  },[editMode])
-  
+
+          const imgs2 = []
+          for (let i = 0; i < res.data.productImg.length; i++) {
+            imgs2.push(<img className="createproductimg" src={'https://i7c110.p.ssafy.io' + res.data.productImg[i].path} alt="#"></img>)
+          }
+          console.log(imgs2)
+          setEditImgData(imgs2)
+
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    }
+  }, [editMode])
+
 
 
   function inputForm(e) {
@@ -75,48 +77,55 @@ function CreateProduct() {
 
   function submitProduct(e) {
     e.preventDefault();
-    const productData = new FormData()
-    console.log(imgData)
-    for (let i=0; i<imgData.length; i++) {
-      console.log(imgData[i])
-      productData.append('files',imgData[i]);
-    }
 
-    let value = price
-    value = Number(value.replaceAll(',', ''))
-    const jsondata = { title:articlename, content:description, price:value, region:place, category:category}
-    
-    productData.append("data", new Blob([JSON.stringify(jsondata)], { type: "application/json" }))
 
-    let method = 'post'
-    let url = ''
-    if (editMode) {
-      method = 'patch'
-      url = '/'+editMode
-    }
-
-    console.log(category, articlename, price, description, place)
     if (category === '') { alert("상품 카테고리를 선택해주세요") }
     else if (articlename === '') { alert("제목을 입력해주세요") }
     else if (price === null) { alert("판매가격을 설정해주세요") }
+    else if (editMode === null && imgData === '') { alert("이미지를 등록해주세요") }
     else if (description === '') { alert("상세 설명을 적어주세요") }
     else if (place === '') { alert("거래하는 지역을 입력해주세요") }
     else {
-      
+      const productData = new FormData()
+      console.log(imgData)
+      for (let i = 0; i < imgData.length; i++) {
+        console.log(imgData[i])
+        productData.append('files', imgData[i]);
+      }
+
+      let value = price
+      value = Number(value.replaceAll(',', ''))
+      const jsondata = { title: articlename, content: description, price: value, region: place, category: category }
+
+      productData.append("data", new Blob([JSON.stringify(jsondata)], { type: "application/json" }))
+
+      let method = 'post'
+      let url = ''
+      if (editMode) {
+        method = 'patch'
+        url = '/' + editMode
+      }
+
       axios({
-        url: '/api/product'+ url,
+        url: '/api/product' + url,
         method: method,
         data: productData,
         headers: { Authorization: `Bearer ${localStorage.token}` }
-        })
+      })
         .then(res => {
           console.log(res.data.no)
-          document.location.href = '/product/'+res.data.no
+          document.location.href = '/product/' + res.data.no
         })
         .catch(err => {
           console.error(err)
         })
     }
+
+
+
+
+
+
   }
 
   function tagForm(e) {
@@ -153,7 +162,7 @@ function CreateProduct() {
     imgs.push(<img className="createproductimg" src={detailImgs[i]} alt="#"></img>)
   }
 
-  
+
 
   // if (imgs.length === 0 ) {
   //   console.log(document.getElementById('file'))   //이미지 안올렸을때 빈박스 안보이는거 시도
@@ -192,12 +201,12 @@ function CreateProduct() {
               <input onChange={e => { inputForm(e) }} className="inputform" name="place" type="text" placeholder="지역"></input><br />
               <input onKeyUp={e => { tagForm(e) }} className="inputform" name="relatedtags" type="text" placeholder="관련 태그"></input><br />
               <div className="tagdiv">{taglist}</div>
-              <button onClick={e => submitProduct(e)} className="inputform submitbutton-able" type="button">{ editMode ? "수정하기" : "SUBMIT"}</button>
+              <button onClick={e => submitProduct(e)} className="inputform submitbutton-able" type="button">{editMode ? "수정하기" : "SUBMIT"}</button>
             </form>
           </div>
         </div>
-      </div> 
-      
+      </div>
+
     </div>
   )
 }

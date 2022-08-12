@@ -34,21 +34,19 @@ const ManagementModal = (props) => {
     if (e.role === 'ROLE_USER') {
       axios({
         url: '/admin/users/suspend/' + e.id,
-        method: 'patch',
+        method: 'patch',  
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res)
-          document.getElementById(e.id).className='managementUserBan'
-          console.log(document.getElementById(e.id).div)
+          reLoad()
         })
         .catch(err => {
           console.log(err)
         })
     }
   }
-  function reLoad(e){
-    e.preventDefault();
+  function reLoad(){
     axios({
       url: '/admin/users/0',
       method: 'get',
@@ -72,8 +70,7 @@ const ManagementModal = (props) => {
       })
         .then(res => {
           console.log(res)
-          document.getElementById(e.id).className = 'managementUser'
-          console.log(document.getElementById(e.id))
+          reLoad()
         })
         .catch(err => {
           console.log(err)
@@ -147,7 +144,6 @@ const ManagementModal = (props) => {
           <div className='managementMain'>
             {userTag}
           </div>
-          <button className="submitbutton-able reloadButton" onClick={e=> reLoad(e)}>새로 고침</button>
         </div>
       ) : null}
     </div>

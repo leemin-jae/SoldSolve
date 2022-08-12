@@ -16,6 +16,7 @@ function CreateRoom() {
   const productid = useParams().id;
   const [productData, setProductData] = useState(null);
   const [money,setMoney] = useState('')
+  const [category, setCategory] = useState('');
   let submitButton = null;
   if (button === 'noInput') {
     submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
@@ -41,12 +42,35 @@ function CreateRoom() {
         setMoney(formatValue)
         setRoomName(res.data.title)
         setDescription(res.data.content)
+        changeCategory(res.data.category)
       })
       .catch(err => {
         console.error(err)
       })
     }
   },[productid])
+
+  function changeCategory(e){
+    if (e === 'digital'){
+      setCategory('디지털기기')
+    } else if (e === 'appliances'){
+      setCategory('생활가전')
+    } else if (e === 'furniture'){
+      setCategory('가구')
+    } else if (e === 'fashion'){
+      setCategory('패션/잡화')
+    } else if (e === 'beauty'){
+      setCategory('뷰티/미용')
+    } else if (e === 'sports'){
+      setCategory('스포츠')
+    } else if (e === 'games'){
+      setCategory('취미/게임')
+    } else if (e === 'book'){
+      setCategory('도서')
+    } else {
+      setCategory('기타')
+    }
+  }
 
   function inputForm(e) {
 
@@ -130,10 +154,10 @@ function CreateRoom() {
             <div className="test3">
               <h1 className="my-5">CREATE ROOM</h1>
               <form onSubmit={e=> goLive(e)}>
-                <div className="pform" name="category" style={{ marginTop: '10px', marginBottom: '15px' }}>
-                  <p style={{ height: '53px', margin: 0, padding: '15px' }}>{productData.category}</p>
+                <div className="pform" name="category" style={{ marginTop: '10px', marginBottom: '15px',backgroundColor:'#cacbdbb2' }}>
+                  <p style={{ height: '53px', margin: 0, padding: '15px' }}>{category}</p>
                 </div>
-                <div className="pform" name="price" style={{ marginTop: '20px', marginBottom: '10px' }}>
+                <div className="pform" name="price" style={{ marginTop: '20px', marginBottom: '10px', backgroundColor:'#cacbdbb2' }}>
                   <p style={{ height: '53px', margin: 0, padding: '15px' }}>{money} 원</p>
                 </div>
                 <input onChange={e => { inputForm(e) }} className="inputform" name="roomTitle" id="roomTitle" type="text" placeholder="방 제목"></input>

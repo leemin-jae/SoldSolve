@@ -58,10 +58,9 @@ const LiveChat = (props) => {
   };
 
 
-
   return (
     <>
-      <h3 style={{ marginInline: '1rem' }}>채팅방</h3>
+      <h3 style={{ marginInline: '1rem' }}>채팅방({props.props.subscribers.length}명)</h3>
       <div className='chatbox'>
         <div className=''>
           {messageList.map((data, i) => (
@@ -79,7 +78,6 @@ const LiveChat = (props) => {
                 </div>
                 :
                 <div className='liveChatItem'>
-                  <img className="livechatimg" src={'https://i7c110.p.ssafy.io' + store.info.info.profileUrl}></img>
                   <div className='livechatcontent'>
                     <p className='chatnickname'>{data.nickname}</p>
                     <p className='livechatbox'>{data.message}</p>

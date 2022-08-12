@@ -205,7 +205,7 @@
 
 
 .managementMain{
-  height: 400px;
+  height: 500px;
   border: 1px solid rgba(139, 138, 138, 0.651);
   margin-inline: 5%;
   border-radius: 20px;
@@ -248,17 +248,6 @@
   border-radius: 10px;
   background-color: #dee2e6;
   margin-left: 10px;
-}
-
-.reloadButton{
-  width: 60%;
-  min-height: 50px;
-  border-radius: 10px;
-  border: 1px solid #6667ab;
-  padding-inline: 20px;
-  max-width: 400px;
-  margin-inline: 20%;
-  margin-top: 30px;
 }
 
 .deleted {

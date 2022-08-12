@@ -148,7 +148,7 @@ button {
   margin-top: 20px;
 }
 
-.product_description > .button_box {
+.product_description>.button_box {
   display: flex;
   margin: auto;
   justify-content: space-between;
@@ -503,6 +503,7 @@ input::placeholder {
 }
 
 @media (min-width: 1199px) {
+
   /* 데스크탑 일반 */
   .livebox {
     max-width: 1500px;
@@ -691,6 +692,7 @@ input::placeholder {
 }
 
 .liveChatItem {
+  /* background: #c1c2f1; */
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -712,15 +714,32 @@ input::placeholder {
 }
 
 .livechatbox {
-  background-color: rgb(255, 251, 0);
+  background: #9a9bdf;
   border-radius: 10px;
   min-width: 100px;
   padding: 10%;
   word-break: break-all;
 }
 
+.livechatbox2 {
+  background: #c1c2f1;
+  border-radius: 10px;
+  min-width: 100px;
+  padding: 10%;
+  word-break: break-all;
+}
+
+/* .livechatbox2 {
+  background: #c1c2f1;
+  border-radius: 10px;
+  min-width: 100px;
+  padding: 10%;
+  word-break: break-all;
+} */
+
 .chatnickname {
   margin-bottom: 0;
+  font-weight: bold;
 }
 
 .liveTitle {

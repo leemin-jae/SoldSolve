@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
-
 function Chat() {
   const [roomOut, setRoomOut] = useState(false)
   const [roomList, setRoomList] = useState([])

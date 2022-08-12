@@ -13,8 +13,6 @@ const LiveChat = (props) => {
   useEffect(() => {
     props.props.session.on("signal:chat", (event) => {
       const data = JSON.parse(event.data);
-      console.log(event);
-      console.log(data);
       let messageListData = messageList;
       messageListData.push({
         connectionId: event.from.connectionId,
@@ -22,7 +20,16 @@ const LiveChat = (props) => {
         message: data.message,
       });
       setMessageList([...messageListData]);
-      console.log(messageList);
+    });
+    const welcome = {
+      message: `${props.props.myUserName}님이 입장하셨습니다.`,
+      nickname: props.props.myUserName,
+      streamId: props.props.streamId,
+    };
+    console.log(welcome)
+    props.props.session.signal({
+      data: JSON.stringify(welcome),
+      type: "chat",
     });
   }, []);
 
@@ -47,7 +54,7 @@ const LiveChat = (props) => {
           nickname: props.props.myUserName,
           streamId: props.props.streamId,
         };
-        console.log("chat" + data);
+        console.log(data)
         props.props.session.signal({
           data: JSON.stringify(data),
           type: "chat",
@@ -60,7 +67,7 @@ const LiveChat = (props) => {
 
   return (
     <>
-      <h3 style={{ marginInline: '1rem' }}>채팅방({props.props.subscribers.length}명)</h3>
+      <h3 style={{ marginInline: '1rem' }}>채팅방</h3>
       <div className='chatbox'>
         <div className=''>
           {messageList.map((data, i) => (

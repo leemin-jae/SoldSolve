@@ -32,15 +32,17 @@ class LivePage extends Component {
             region: res.data.product.region,
             RoomTitle: res.data.title,
             RoomContent: res.data.content,
-            productID : res.data.product.no
+            productID: res.data.product.no,
+            nowCamera: true,
+            nowVoice: true
           })
         }
       })
 
-      window.addEventListener('beforeunload', (event) => {
-        event.preventDefault();
-        event.returnValue = '라이브가 종료됩니다';
-      });
+    window.addEventListener('beforeunload', (event) => {
+      event.preventDefault();
+      event.returnValue = '라이브가 종료됩니다';
+    });
 
 
     this.state = {
@@ -67,6 +69,8 @@ class LivePage extends Component {
     this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
     this.onbeforeunload = this.onbeforeunload.bind(this);
     this.deleteSession = this.deleteSession.bind(this);
+    this.CameraOff = this.CameraOff.bind(this);
+    this.VoiceOff = this.VoiceOff.bind(this);
   }
 
   componentDidMount() {
@@ -78,10 +82,13 @@ class LivePage extends Component {
   }
 
   onbeforeunload(event) {
-    if (this.state.myId === this.state.params[2]){
+    if (this.state.myId === this.state.params[2]) {
       this.deleteSession();
     }
-    this.leaveSession();
+    else {
+      this.leaveSession();
+    }
+
   }
 
   handleChangeSessionId(e) {
@@ -225,18 +232,19 @@ class LivePage extends Component {
       mainStreamManager: undefined,
       publisher: undefined
     });
-    document.location.href = '/'
   }
+
+
+
+
 
   async switchCamera() {
     try {
       const devices = await this.OV.getDevices()
       var videoDevices = devices.filter(device => device.kind === 'videoinput');
-
       if (videoDevices && videoDevices.length > 1) {
 
         var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
-
         if (newVideoDevice.length > 0) {
           var newPublisher = this.OV.initPublisher(undefined, {
             videoSource: newVideoDevice[0].deviceId,
@@ -260,8 +268,50 @@ class LivePage extends Component {
     }
   }
 
-  deleteSession() {
-    if (window.confirm("라이브방을 삭제하시겠습니까?")) {
+
+  async CameraOff() {
+    if (this.state.nowCamera) {
+      this.state.publisher.publishVideo(false);
+      this.setState({
+        nowCamera: false
+      })
+    } else {
+      this.state.publisher.publishVideo(true);
+      this.setState({
+        nowCamera: true
+      })
+    }
+  }
+
+  async VoiceOff() {
+    console.log(this.state)
+    if (this.state.nowVoice) {
+      this.state.publisher.publishAudio(false);
+      this.setState({
+        nowVoice: false
+      })
+    } else {
+      this.state.publisher.publishAudio(true);
+      this.setState({
+        nowVoice: true
+      })
+    }
+  }
+
+
+    deleteSession() {
+      this.leaveSession()
+
+      axios
+        .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell' + this.state.productID, {
+          headers: {
+            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+          },
+        })
+        .then((res) => {
+          console.log(res)
+        })
+
       axios({
         url: '/api/live',
         method: 'delete',
@@ -270,122 +320,124 @@ class LivePage extends Component {
         .then((res) => {
           console.log(res)
         })
-  
-      axios
-        .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+this.state.productID, {
-          headers: {
-            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-          },
-        })
-        .then((res) => {
-          console.log(res)
-          window.location.href='/'
-        })
     }
-  }
+    render() {
+      if (this.state.session === undefined) {
+        this.joinSession()
+      }
+      return (
+        <div>
+          <NavBar></NavBar>
+          <div className="test">
+            {this.state.session !== undefined ? (
 
-  render() {
-    if (this.state.session === undefined) {
-      this.joinSession()
-    }
-    return (
-      <div>
-        <NavBar></NavBar>
-        <div className="test">
-          {this.state.session !== undefined ? (
+              <div id="session">
+                <div className='liveTitle my-3'>
+                  <h3 id="session-title">{this.state.RoomTitle}</h3>
+                </div>
 
-            <div id="session">
-              <div className='liveTitle my-3'>
-                <h3 id="session-title">{this.state.RoomTitle}</h3>
-              </div>
-
-              <div className='live_container'>
-                <div>
-                  {this.state.params[2] === this.state.myId ?
-                    <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
-                      <div>
-                        <input
-                          className="btn btn-large btn-danger mx-1 video_button"
-                          type="button"
-                          id="buttonLeaveSession"
-                          onClick={this.deleteSession}
-                          value="나가기"
-                        />
-                        <input
-                          className="btn btn-large btn-success mx-1 video_button"
-                          type="button"
-                          id="buttonSwitchCamera"
-                          onClick={this.switchCamera}
-                          value="카메라변경"
-                        />
-                      </div>
-                    </div>
-                    : null}
+                <div className='live_container'>
                   <div>
-                    {this.state.myId === this.state.params[2] ? (
-                      <div className='livebox'>
-                        <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
+                    {this.state.params[2] === this.state.myId ?
+                      <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
+                        <div>
+                          <input
+                            className="btn btn-large btn-danger mx-1 video_button"
+                            type="button"
+                            id="buttonLeaveSession"
+                            onClick={this.deleteSession}
+                            value="방 삭제하기"
+                          />
+                          <input
+                            className="btn btn-large btn-success mx-1 video_button"
+                            type="button"
+                            id="buttonSwitchCamera"
+                            onClick={this.switchCamera}
+                            value="카메라변경"
+                          />
+                          <input
+                            className="btn btn-large btn-success mx-1 video_button"
+                            type="button"
+                            id="buttonSwitchCamera"
+                            onClick={this.CameraOff}
+                            value="카메라ON/OFF"
+                          />
+                          <input
+                            className="btn btn-large btn-success mx-1 video_button"
+                            type="button"
+                            id="buttonSwitchCamera"
+                            onClick={this.VoiceOff}
+                            value="마이크ON/OFF"
+                          />
+                          <div>현재 접속인원 : {this.state.subscribers.length}</div>
+                        </div>
                       </div>
-                    ) : (
-                      <div className='livebox'>
-                        <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
-                      </div>
-                    )}
+                      : null}
+                    <div>
+                      {this.state.myId === this.state.params[2] ? (
+                        <div className='livebox'>
+                          <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
+                        </div>
+                      ) : (
+                        <div className='livebox'>
+                          <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
+                        </div>
+                      )}
+
+                    </div>
+                    {this.state.sellerInfo ?
+                      <>
+                        <p style={{ margin: '1em' }}>
+                          <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
+                          {this.state.sellerInfo.nickname} ({this.state.region}), 평점</p>
+                        <p style={{ margin: '1em' }}> {this.state.RoomContent}</p>
+                        <hr style={{ width: '100%' }} />
+                      </>
+
+                      : null}
 
                   </div>
-                  {this.state.sellerInfo ?
-                    <>
-                      <p style={{ margin: '1em' }}>
-                        <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
-                        {this.state.sellerInfo.nickname} ({this.state.region}), 평점</p>
-                      <p style={{ margin: '1em' }}> {this.state.RoomContent}</p>
-                      <hr style={{ width: '100%' }} />
-                    </>
 
-                    : null}
+                  <div>
+                    <LiveChat props={this.state} />
+                  </div>
+
 
                 </div>
-
-                <div>
-                  <LiveChat props={this.state} />
-                </div>
-
-
               </div>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
-      </div>
 
-    );
+      );
+    }
+
+
+    getToken(sessionId) {
+      return new Promise((resolve, reject) => {
+        var data = {};
+        axios
+          .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection", data, {
+            headers: {
+              Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+              'Content-Type': 'application/json',
+            },
+          })
+          .then((response) => {
+            console.log('TOKEN', response);
+            resolve(response.data.token);
+          })
+          .catch((error) => {
+            alert("아직 라이브방이 개설되지 않았습니다.")
+            document.location.href = '/'
+          });
+      });
+    }
+
   }
 
-
-  getToken(sessionId) {
-    return new Promise((resolve, reject) => {
-      var data = {};
-      axios
-        .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection", data, {
-          headers: {
-            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-            'Content-Type': 'application/json',
-          },
-        })
-        .then((response) => {
-          console.log('TOKEN', response);
-          resolve(response.data.token);
-        })
-        .catch((error) => {
-          alert("아직 라이브방이 개설되지 않았습니다.")
-          document.location.href = '/'
-        });
-    });
-  }
-
-}
-
-const mapStateToProps = (state) => ({
-  storeInfo: state.info.info
-});
+  const mapStateToProps = (state) => ({
+    storeInfo: state.info.info
+  });
 
 export default connect(mapStateToProps)(LivePage);

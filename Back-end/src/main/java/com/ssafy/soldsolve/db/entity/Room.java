@@ -28,15 +28,10 @@ public class Room {
     @JoinColumn(name="seller_id")
     User seller;
 
-
-<<<<<<< HEAD
-=======
     @OneToMany(mappedBy = "room" , orphanRemoval = true , cascade = CascadeType.ALL)
     List<Chat> chat = new ArrayList<>();
 
 
-
->>>>>>> 49d3c6d5b7e6b003a2ae320d8f051c3fe1c0b7e6
 //    @OneToMany(orphanRemoval = true, mappedBy = "chatId")
 //    @JsonIgnore
 //    List<Chat> chatList = new ArrayList<>();

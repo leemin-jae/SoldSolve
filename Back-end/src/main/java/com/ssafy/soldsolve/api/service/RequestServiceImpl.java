@@ -49,4 +49,9 @@ public class RequestServiceImpl implements RequestService {
         Request request = requestRepository.findByUserAndProduct(user, requestedProduct).orElse(null);
         requestRepository.delete(request);
     }
+
+    @Override
+    public List<Request> getUserList(Product p) {
+        return requestRepository.findAllByProduct(p).orElseGet(null);
+    }
 }

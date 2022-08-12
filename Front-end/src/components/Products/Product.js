@@ -15,6 +15,8 @@ import LiveButton from './LiveButton';
 
 import { IconButton } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
+import Modal from '../Modals/Modal';
+import '../Modals/modal.css';
 
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
@@ -28,6 +30,7 @@ function Product() {
   const [money, setMoney] = useState('')
   const [userId, setUserId] = useState('')
   const [cat, setCat] = useState('')
+  const [requser, setRequser] = useState([])
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -47,6 +50,7 @@ function Product() {
         const formatValue = money.toLocaleString('ko-KR');
         setMoney(formatValue)
         setCat(res.data.category)
+        setRequser(res.data.requestsUser)
       })
       .catch(err => {
         console.error(err)
@@ -109,7 +113,6 @@ function Product() {
       </>
     );
   };
-  console.log(loading)
 
   function editProduct(e) {
     e.preventDefault();
@@ -133,6 +136,40 @@ function Product() {
         })
     }
   }
+
+  const [reqModalOpen, setReqModalOpen] = useState(false);
+
+  const openReqModal = () => {
+    setReqModalOpen(true);
+  };
+  const closeReqModal = () => {
+    setReqModalOpen(false);
+  };
+
+
+  const ShowReq = () => {
+    return (
+      <>
+        {requser ?
+          <>
+            {requser.map((user) => {
+              return (
+                <li key={user.id}>
+                  {user.nickname}
+                </li>
+              );
+            })}
+          </>
+          :
+          <>
+            <h5>라이브를 요청한 사람이 없습니다
+            </h5>
+          </>
+        }
+      </>
+    );
+  };
+
   function createLive(e) {
     e.preventDefault();
     document.location.href = `/createroom/${productid}`
@@ -226,6 +263,10 @@ function Product() {
                   <>
                     <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
                     <div>
+                      <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브요청목록</button>
+                      <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
+                        <ul><ShowReq /></ul>
+                      </Modal>
                       <button className='submitbutton-able' onClick={e => editProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>수정하기</button>
                       <button className='submitbutton-able' onClick={e => deleteProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>삭제하기</button>
                     </div>
@@ -254,7 +295,8 @@ function Product() {
           <div className='category_reco_box'>
             {loading ? <Loading /> : <ShowRecProducts />}
           </div>
-        </div> : <NotFound />}
+        </div> : <NotFound />
+      }
 
     </>
   )

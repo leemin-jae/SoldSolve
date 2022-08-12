@@ -37,7 +37,7 @@ function Login() {
   // console.log(url.login)
 
   function tryLogin(getLoginForm) {
-    console.log(getLoginForm)
+    // console.log(getLoginForm)
     axios({
       url: '/api/auth/login',
       method: 'post',
@@ -50,7 +50,8 @@ function Login() {
         getMyInfo()
       })
       .catch(err => {
-        console.error(err.response.data)
+        // console.error(err.response.data)
+        alert("아이디와 비밀번호를 확인해주세요")
       })
   }
   function getMyInfo(){

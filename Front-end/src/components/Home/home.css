@@ -84,7 +84,7 @@ h1 {
 
 
 .card_image {
-    height: 10rem;
+    /* height: 10rem; */
     max-width: 100%;
     vertical-align: middle;
 }

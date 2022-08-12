@@ -36,21 +36,21 @@ function LiveItemInMain() {
     console.log(data.data)
     return (
       <>
-        <Swiper spaceBetween={-15}
+        <Swiper spaceBetween={-50}
           // scrollbar={{ draggable: true }}
-          height={200}
+          // height={1000}
           breakpoints={{
             1200: {
-              slidesPerView: 6,
-            },
-            991: {
               slidesPerView: 4,
             },
-            767: {
+            991: {
               slidesPerView: 3,
             },
-            300: {
+            768: {
               slidesPerView: 2,
+            },
+            300: {
+              slidesPerView: 1,
             }
           }}
           pagination={{ clickable: true }}
@@ -68,19 +68,28 @@ function LiveItemInMain() {
                   pTitle = product.title
                 }
 
+                let pName = null;
+                if (product.product.user.nickname.length > 6) {
+                  pName = product.product.user.nickname.substr(0, 6) + "...";
+                } else {
+                  pName = product.product.user.nickname
+                }
+
                 let price = product.product.price
                 const productPrice = price.toLocaleString('ko-KR');
 
                 return (
                   <SwiperSlide className='cards_item' key={product.id}>
-                    <a href={`/live/${product.product.user.userid}/${product.sessionId}`} className='card' style={{ height: 250 }}>
+                    <a href={`/live/${product.product.user.userid}/${product.sessionId}`} className='card' style={{ height: 300 }} >
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
+                        style={{ height: 250 }}
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>
                         <p className='card_text'>{productPrice} 원</p>
+                        <h6>{pName}님이 라이브중입니다</h6>
                       </div>
                     </a>
                   </SwiperSlide>

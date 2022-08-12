@@ -323,7 +323,7 @@ div#left_toggle ul li {
 
 .profile_text {
   margin: 10px 0 0 20px;
-  width: 150px;
+  width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -452,7 +452,9 @@ div#left_toggle ul li {
 
   line-height: 34px;
   padding: 0 10px 0 10px;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .li_box_me:after {
@@ -482,6 +484,9 @@ div#left_toggle ul li {
   margin-right: auto;
   line-height: 34px;
   padding: 0 10px 0 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 
@@ -505,7 +510,8 @@ div#left_toggle ul li {
   margin: 0 auto auto auto;
   height: 439px;
   overflow-y: auto;
-
+  display: flex;
+  flex-direction: column-reverse
 }
 
 .chat_list {
@@ -513,7 +519,7 @@ div#left_toggle ul li {
   flex-direction: column;
   padding: 50px 20px 7px 20px;
   align-items: flex-end;
-  flex : 1
+  flex: 1
 }
 
 .chat_list_other {
@@ -523,7 +529,7 @@ div#left_toggle ul li {
   align-items: flex-start;
 }
 
-.article_line{
+.article_line {
   white-space: pre-wrap;
 }
 
@@ -533,8 +539,26 @@ div#left_toggle ul li {
   background-color: #6667AB;
 
 }
+
 .noticeButtons {
   display: flex;
   flex-direction: column-reverse;
 
+}
+
+
+.chat_div:-webkit-scrollbar {
+  display: none;
+  width: 10px;
+}
+
+.li_box_container:-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+
+  border-radius: 10px;
+}
+
+.li_box_container:-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
 }

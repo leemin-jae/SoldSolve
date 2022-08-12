@@ -20,6 +20,8 @@ public interface ProductService {
 
     Product getProduct(String no);
 
+    Product getProductByNo(int no);
+
     List<Product> searchProduct(String t, String c, String r);
 
     List<Product> getSellProduct(User user);

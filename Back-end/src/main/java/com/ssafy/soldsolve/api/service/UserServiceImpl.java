@@ -31,7 +31,16 @@ public class UserServiceImpl implements UserService{
 		}else {
 			return null;
 		}
-		
+	}
+
+	@Override
+	public User getUserByUserPk(int userPk) {
+		User user = userRepository.findById(userPk).orElseGet(null);
+		if (user!=null) {
+			return user;
+		} else {
+			return null;
+		}
 	}
 
 	@Override

@@ -39,6 +39,8 @@ public class User {
 	@CreationTimestamp
 	private Timestamp createDate;
 
+	private double score;
+
 	@OneToMany(mappedBy = "user")
 	@JsonIgnore
 	private List<Message> messages = new ArrayList<>();
@@ -46,6 +48,10 @@ public class User {
 	@OneToMany(orphanRemoval = true, mappedBy = "roomId")
 	@JsonIgnore
 	List<Room> roomList = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewId")
+	@JsonIgnore
+	List<Review> reviews = new ArrayList<>();
 
 
 	@Builder

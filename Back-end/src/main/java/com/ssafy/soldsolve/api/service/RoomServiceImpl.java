@@ -7,6 +7,7 @@ import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service()
@@ -45,7 +46,10 @@ public class RoomServiceImpl implements RoomService{
 
     @Override
     public List<Room> roomList(User user) {
-        List<Room> room = roomRepository.findByBuyerIdOrSellerId(user.getId(),user.getId());
+        List<Room> room = new ArrayList<>();
+        room.addAll(roomRepository.findByBuyerId(user));
+        room.addAll(roomRepository.findBySellerId(user));
+
         return room;
     }
 
@@ -54,18 +58,15 @@ public class RoomServiceImpl implements RoomService{
         Room r = roomRepository.getOne(Integer.parseInt(no));
         int pk = user.getId();
 
-        if(r.getBuyer() != null){
-            if(r.getBuyer().getId() == pk){
-                r.setBuyer(null);
-            }
+        if(r.getBuyer().getId() == pk && r.getBuyerOut() == 0) {
+            r.setBuyerOut(1);
         }
-        if(r.getSeller() != null){
-            if(r.getSeller().getId() == pk){
-                r.setSeller(null);
-            }
+        if(r.getSeller().getId() == pk && r.getSellerOut() == 0) {
+            r.setSellerOut(1);
         }
 
-        if(r.getSeller() == null && r.getBuyer() == null){
+
+        if(r.getSellerOut() == 1 && r.getBuyerOut() == 1){
             roomRepository.deleteById(Integer.parseInt(no));
         }else{
             roomRepository.save(r);

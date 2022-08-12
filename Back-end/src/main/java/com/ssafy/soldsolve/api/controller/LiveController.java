@@ -28,7 +28,14 @@ public class LiveController {
     @Autowired
     LiveService liveService;
 
-
+    @GetMapping("/list")
+    public ResponseEntity<?> liveList(){
+        try{
+            return  ResponseEntity.status(200).body(liveService.getList());
+        }catch (Exception e){
+            return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "실패"));
+        }
+    }
 
     @PostMapping("")
     public ResponseEntity<?> createLive(@RequestBody LiveCreatePostReq req, Authentication authentication){
@@ -46,7 +53,7 @@ public class LiveController {
     }
 
     @GetMapping("")
-    public ResponseEntity<?> createLive(@RequestParam String sessionId){
+    public ResponseEntity<?> getLive(@RequestParam String sessionId){
         try{
             return  ResponseEntity.status(200).body(liveService.getLive(sessionId));
         }catch (Exception e){

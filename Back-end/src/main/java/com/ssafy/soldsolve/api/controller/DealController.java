@@ -52,12 +52,10 @@ public class DealController {
 
 
     @PostMapping("")  // 구매 확정
-    public ResponseEntity<?> createDeal(Authentication authentication,@RequestParam String no){
-        SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
-        String userId = userDetails.getUsername();
+    public ResponseEntity<?> createDeal(@RequestParam String no, @RequestParam String buyerId){
 
         try {
-            User buy = userService.getUserByUserId(userId);
+            User buy = userService.getUserByUserId(buyerId);
             Product p = productService.getProduct(no);
 
             if(buy == null){

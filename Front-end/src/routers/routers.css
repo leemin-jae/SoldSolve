@@ -757,18 +757,3 @@ input::placeholder {
 .chatbox::-webkit-scrollbar-track {
   background: rgba(196, 217, 248, 0.1);
 }
-
-.li_box_container:-webkit-scrollbar {
-  width: 10px;
-}
-
-.li_box_container:-webkit-scrollbar-thumb {
-  height: 30%;
-  background: #6667abad;
-
-  border-radius: 10px;
-}
-
-.li_box_container:-webkit-scrollbar-track {
-  background: rgba(196, 217, 248, 0.1);
-}

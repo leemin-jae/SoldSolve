@@ -189,7 +189,7 @@ function Product() {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          // navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: userId, meId: store.info.info.userId } })
+          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: userId, meId: store.info.info.userId } })
         })
         .catch(err => {
           console.log(err)

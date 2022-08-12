@@ -23,7 +23,7 @@ function ChatRoomCompo() {
   const [other, setOther] = useState('')
 
   useEffect(() => {
-    let Sock = new SockJS('/ws-stomp');
+    let Sock = new SockJS('https://i7c110.p.ssafy.io/ws-stomp');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
 
@@ -59,8 +59,17 @@ function ChatRoomCompo() {
   }, [chats])
 
   const onConnected = () => {
+    const chatMessage = {
+      sender: store.info.info.userId,
+      message: message,
+      roomId: state.roomId,
+      type: 'TALK'
+    };
     console.log('연결완료');
     stompClient.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
+    chatMessage['type'] = 'JOIN'
+    stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+    console.log(stompClient, '1111')
   };
 
   const onMessageReceived = payload => {
@@ -98,14 +107,8 @@ function ChatRoomCompo() {
         <h3 className='buyer_nickname'>{state.you}</h3>
         <div className='chat_background'>
           <div className='chat_div' >
-            <ul className='li_box_container'>
+            <div className='li_box_container'>
               {dbChats && dbChats.map(dbChat => {
-                // let ChatMessage = null;
-                // if (chat.sender === store.info.info.userId) {
-                //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
-                // } else {
-                //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
-                // }
                 console.log(dbChat.writeUser.nickname, store.info.info.nickName)
                 if (dbChat.writeUser.nickname === store.info.info.nickName) {
                   return (
@@ -117,19 +120,7 @@ function ChatRoomCompo() {
                   )
                 }
               })}
-              {/* {chats.map(chat => {
-                // if (state.meId ==)
-                // let ChatMessage = null;
-                // if (chat.sender === store.info.info.userId) {
-                //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
-                // } else {
-                //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
-                // }
-                return (
-                  <span className='li_box_me' key={uuid()}>{chat.message}</span>
-                )
-              })} */}
-            </ul>
+            </div>
           </div>
         </div>
       </div>

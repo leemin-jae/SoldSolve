@@ -78,8 +78,10 @@ class LivePage extends Component {
   }
 
   onbeforeunload(event) {
+    if (this.state.myId === this.state.params[2]){
+      this.deleteSession();
+    }
     this.leaveSession();
-    this.deleteSession();
   }
 
   handleChangeSessionId(e) {
@@ -259,25 +261,27 @@ class LivePage extends Component {
   }
 
   deleteSession() {
-    axios({
-      url: '/api/live',
-      method: 'delete',
-      params: { sessionId: this.state.mySessionId }
-    })
-      .then((res) => {
-        console.log(res)
+    if (window.confirm("라이브방을 삭제하시겠습니까?")) {
+      axios({
+        url: '/api/live',
+        method: 'delete',
+        params: { sessionId: this.state.mySessionId }
       })
-
-    axios
-      .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+this.state.productID, {
-        headers: {
-          Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-        },
-      })
-      .then((res) => {
-        console.log(res)
-      })
-    console.log(1234)
+        .then((res) => {
+          console.log(res)
+        })
+  
+      axios
+        .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+this.state.productID, {
+          headers: {
+            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+          },
+        })
+        .then((res) => {
+          console.log(res)
+          window.location.href='/'
+        })
+    }
   }
 
   render() {

@@ -13,13 +13,11 @@ function Notice() {
   useEffect(() => {
     axios({
       url: '/api/notices',
-      method: 'get',
-      params: { page: 0 }
+      method: 'get'
     })
       .then(res => {
         console.log(res)
-        console.log(res.data.content)
-        setNoticeData(res.data.content)
+        setNoticeData(res.data)
       })
       .catch(err => {
         console.log(err)

@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Chat() {
-
+  const [roomOut, setRoomOut] = useState(false)
   const [roomList, setRoomList] = useState([])
   let store = useSelector((state) => { return state })
   // console.log(store.info.info.nickName, '사용자이름')
@@ -32,7 +32,7 @@ function Chat() {
         })
     }
     getRoomList()
-  }, [])
+  }, [roomOut])
 
   // let navigate = useNavigate()
 
@@ -56,6 +56,7 @@ function Chat() {
 
       })
         .then(res => {
+          setRoomOut(!roomOut)
           console.log(res.data.message)
         })
         .catch(err => {
@@ -84,34 +85,65 @@ function Chat() {
             yourEmail = room.buyer.email
             me = room.seller.nickname
           }
+          console.log(room, '룸룸')
+          console.log('room.buyerOut:' + room.buyerOut, 'room.sellerOut:' + room.sellerOut)
+          if (room.buyerOut == 1 || room.sellerOut == 1) {
+            return (
+              <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
+                <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you, meId: store.info.info.userId } })
+                }}>
+                  <div className="profile_box" style={{ background: '#BDBDBD' }}>
+                    <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
+                  </div>
 
-          return (
-            <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
-              <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
-                navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you, meId: store.info.info.userId } })
-              }}>
-                <div className="profile_box" style={{ background: '#BDBDBD' }}>
-                  <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
-                </div>
-
-                <div>
-                  <h6 className='profile_text'>{you}</h6><br />
-                  <div className='profile_text'>{yourEmail}</div>
-                </div>
-              </div>
-              <div>
-                <div className='message_info'>
-                  {/* <p className='message_time'>{room.time}</p> */}
-                  <div style={{ display: 'flex' }}>
-                    <div className='unread_message'>
-                      <p>2</p>
-                    </div>
-                    <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button>
+                  <div>
+                    <h6 className='profile_text'>{you}</h6><br />
+                    <div className='profile_text'>상대방이 대화방을 나갔습니다</div>
                   </div>
                 </div>
-              </div>
-            </span>
-          );
+                <div>
+                  <div className='message_info'>
+                    {/* <p className='message_time'>{room.time}</p> */}
+                    <div style={{ display: 'flex' }}>
+                      <div className='unread_message'>
+                        <p>2</p>
+                      </div>
+                      <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button>
+                    </div>
+                  </div>
+                </div>
+              </span>
+            );
+          } else if (room.buyerOut == 0 && room.sellerOut == 0) {
+            return (
+              <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
+                <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you, meId: store.info.info.userId } })
+                }}>
+                  <div className="profile_box" style={{ background: '#BDBDBD' }}>
+                    <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
+                  </div>
+
+                  <div>
+                    <h6 className='profile_text'>{you}</h6><br />
+                    <div className='profile_text'>{yourEmail}.</div>
+                  </div>
+                </div>
+                <div>
+                  <div className='message_info'>
+                    {/* <p className='message_time'>{room.time}</p> */}
+                    <div style={{ display: 'flex' }}>
+                      <div className='unread_message'>
+                        <p>2</p>
+                      </div>
+                      <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button>
+                    </div>
+                  </div>
+                </div>
+              </span>)
+          }
+
         })}
       </>
     );

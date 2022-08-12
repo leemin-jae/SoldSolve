@@ -35,6 +35,7 @@ public class RoomController {
         String userId = userDetails.getUsername();
         User buyerUser = userService.getUserByUserId(userId);
         User sellerUser = userService.getUserByUserId(seller);
+
         if(sellerUser == null){
             return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "없는 유저"));
         }
@@ -55,8 +56,6 @@ public class RoomController {
         String userId = userDetails.getUsername();
         User user = userService.getUserByUserId(userId);
 
-
-
         return ResponseEntity.status(200).body(roomService.roomList(user));
     }
 
@@ -68,8 +67,6 @@ public class RoomController {
 
     @DeleteMapping("/{no}")
     public ResponseEntity<?> deleteRoom(@PathVariable("no") String no, Authentication authentication){
-
-
 
         try{
             SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();

@@ -32,7 +32,7 @@ public class Product {
     private int state;       // 상품 상태 0 : 판매중, 1 : 거래 완료
 
 
-    @OneToMany(mappedBy = "no")
+    @OneToMany(mappedBy = "no",cascade = CascadeType.ALL)
     List<ProductImg> productImg = new ArrayList<>();
 
     private int viewCount;

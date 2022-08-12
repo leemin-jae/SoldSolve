@@ -2,6 +2,7 @@ package com.ssafy.soldsolve.db.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -12,8 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 
 public class Room {
     @Id
@@ -28,17 +28,11 @@ public class Room {
     @JoinColumn(name="seller_id")
     User seller;
 
-
-<<<<<<< HEAD
-=======
     @OneToMany(mappedBy = "room" , orphanRemoval = true , cascade = CascadeType.ALL)
     List<Chat> chat = new ArrayList<>();
 
+    int buyerOut;
 
-
->>>>>>> 49d3c6d5b7e6b003a2ae320d8f051c3fe1c0b7e6
-//    @OneToMany(orphanRemoval = true, mappedBy = "chatId")
-//    @JsonIgnore
-//    List<Chat> chatList = new ArrayList<>();
+    int sellerOut;
 
 }

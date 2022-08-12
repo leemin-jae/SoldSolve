@@ -8,6 +8,8 @@ import com.ssafy.soldsolve.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class LiveServiceImpl implements LiveService {
 
@@ -45,5 +47,10 @@ public class LiveServiceImpl implements LiveService {
     public void deleteLive(String sessionId) {
         Live l = liveRepository.findBySessionId(sessionId);
         liveRepository.deleteById(l.getId());
+    }
+
+    @Override
+    public List<Live> getList() {
+        return liveRepository.findAll();
     }
 }

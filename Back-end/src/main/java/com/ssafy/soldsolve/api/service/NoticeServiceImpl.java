@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +24,7 @@ public class NoticeServiceImpl implements NoticeService {
     }
 
     @Override
-    public Page<Notice> findAll(int page) {
-        return noticeRepository.findAll(PageRequest.of(page, 10, Sort.by("writtenTimes").descending()));
+    public List<Notice> findAll() {
+        return noticeRepository.findAll(Sort.by("writtenTimes").descending());
     }
 }

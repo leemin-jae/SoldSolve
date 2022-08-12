@@ -11,6 +11,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -20,8 +22,8 @@ public class AdminServiceImpl implements AdminService {
     NoticeRepository noticeRepository;
 
     @Override
-    public Page<User> findAllUser(int page) {
-        return userRepository.findAll(PageRequest.of(page, 10));
+    public List<User> findAllUser() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -61,8 +63,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Page<Notice> findAll(int page) {
-        return noticeRepository.findAll(PageRequest.of(page, 10, Sort.by("writtenTimes").descending()));
+    public List<Notice> findAll() {
+        return noticeRepository.findAll(Sort.by("writtenTimes").descending());
     }
 
     @Override

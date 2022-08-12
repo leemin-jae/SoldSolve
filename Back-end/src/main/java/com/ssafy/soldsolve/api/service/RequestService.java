@@ -1,5 +1,6 @@
 package com.ssafy.soldsolve.api.service;
 
+import com.ssafy.soldsolve.db.entity.Product;
 import com.ssafy.soldsolve.db.entity.Request;
 import com.ssafy.soldsolve.db.entity.User;
 
@@ -10,4 +11,5 @@ public interface RequestService {
     void createRequest(User user, int product);
     boolean checkRequest(User user, int product);
     void deleteRequest(User user, int product);
+    List<Request> getUserList(Product p);
 }

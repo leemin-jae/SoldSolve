@@ -23,12 +23,11 @@ public class MessageController {
 
     // 자기 메시지 조회
     @GetMapping("")
-    public ResponseEntity<?> selectMessage(Authentication authentication,
-                                           @RequestParam(name = "page") int page) {
+    public ResponseEntity<?> selectMessage(Authentication authentication) {
         SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
         String userId = userDetails.getUsername();
         User user = userService.getUserByUserId(userId);
-        return ResponseEntity.status(200).body(messageService.findAll(user, page));
+        return ResponseEntity.status(200).body(messageService.findAll(user));
     }
     // 메시지 생성
     @PostMapping("")

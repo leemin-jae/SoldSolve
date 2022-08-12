@@ -1,10 +1,12 @@
 package com.ssafy.soldsolve.api.controller;
 
 
+import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.api.service.RequestService;
 import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
+import com.ssafy.soldsolve.db.entity.Product;
 import com.ssafy.soldsolve.db.entity.Request;
 import com.ssafy.soldsolve.db.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,12 @@ public class RequestController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    ProductService productService;
+
     // 로그인한 유저 라이브 요청 추가
-    @PostMapping("")
-    public ResponseEntity<? extends BaseResponseBody> createRequest(Authentication authentication, @RequestParam(name = "product") int product) {
+    @PostMapping("/{product}")
+    public ResponseEntity<? extends BaseResponseBody> createRequest(Authentication authentication, @PathVariable int product) {
         try {
             SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
             String userId = userDetails.getUsername();
@@ -51,8 +56,10 @@ public class RequestController {
     }
 
     // 로그인한 유저의 라이브 요청 삭제
-    @DeleteMapping("")
-    public ResponseEntity<? extends BaseResponseBody> deleteRequest(Authentication authentication, @RequestParam(name = "product") int product) {
+    @DeleteMapping("{product}")
+    public ResponseEntity<? extends BaseResponseBody> deleteRequest(
+            Authentication authentication,
+            @PathVariable int product) {
         SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
         String userId = userDetails.getUsername();
         User user = userService.getUserByUserId(userId);
@@ -69,6 +76,14 @@ public class RequestController {
         Boolean flag = false;
         flag = requestService.checkRequest(user, product);
         return ResponseEntity.status(200).body(flag);
+    }
+
+    // 상품 id를 기준으로 라이브 요청 유저들 가져오기
+    @GetMapping("{product}")
+    public ResponseEntity<?> getRequestList(@PathVariable int product) {
+        Product p = productService.getProductByNo(product);
+        List<Request> request = requestService.getUserList(p);
+        return ResponseEntity.status(200).body(request);
     }
 }
 

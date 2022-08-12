@@ -1,9 +1,7 @@
 package com.ssafy.soldsolve.api.controller;
 
-import com.ssafy.soldsolve.api.request.NoticePostReq;
 import com.ssafy.soldsolve.api.response.NoticeRes;
 import com.ssafy.soldsolve.api.service.NoticeService;
-import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
 import com.ssafy.soldsolve.db.entity.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +19,8 @@ public class NoticeController {
 
     // 공지 조회
     @GetMapping("")
-    public ResponseEntity<?> selectNotice(@RequestParam(name="page") int page) {
-        return ResponseEntity.status(200).body(noticeService.findAll(page));
+    public ResponseEntity<?> selectNotice() {
+        return ResponseEntity.status(200).body(noticeService.findAll());
     }
 
     // 특정 공지 조회

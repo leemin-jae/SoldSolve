@@ -107,6 +107,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product getProductByNo(int no) {
+        Product product = productRepository.findById(no).orElseGet(null);
+        return product;
+    }
+
+    @Override
     public List<Product> searchProduct(String t, String c, String r) {
 
         return productRepository.findByTitleContainingAndCategoryContainingAndRegionContaining(t,c,r);

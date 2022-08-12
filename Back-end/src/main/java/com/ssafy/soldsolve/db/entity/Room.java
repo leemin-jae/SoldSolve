@@ -33,6 +33,9 @@ public class Room {
 
     int buyerOut;
 
+//    @OneToMany(orphanRemoval = true, mappedBy = "chatId")
+//    @JsonIgnore
+//    List<Chat> chatList = new ArrayList<>();
     int sellerOut;
 
 }

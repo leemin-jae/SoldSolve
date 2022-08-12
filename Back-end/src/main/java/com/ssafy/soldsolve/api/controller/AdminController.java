@@ -21,9 +21,9 @@ public class AdminController {
     AdminService adminService;
 
     // 전체 유저 리스트
-    @GetMapping("/users/{page}")
-    public ResponseEntity<?> getUserList(@PathVariable int page) {
-        return ResponseEntity.status(200).body(adminService.findAllUser(page));
+    @GetMapping("/users")
+    public ResponseEntity<?> getUserList() {
+        return ResponseEntity.status(200).body(adminService.findAllUser());
     }
 
     // 유저 아이디로 유저 정지
@@ -48,8 +48,8 @@ public class AdminController {
 
     // 공지 조회
     @GetMapping("/notices")
-    public ResponseEntity<?> selectNotice(@RequestParam("page") int page) {
-        return ResponseEntity.status(200).body(adminService.findAll(page));
+    public ResponseEntity<?> selectNotice() {
+        return ResponseEntity.status(200).body(adminService.findAll());
     }
 
     // 특정 공지 조회

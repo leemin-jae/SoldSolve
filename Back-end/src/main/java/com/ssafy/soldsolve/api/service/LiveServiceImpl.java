@@ -1,9 +1,7 @@
 package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.api.request.LiveCreatePostReq;
-import com.ssafy.soldsolve.db.entity.Live;
-import com.ssafy.soldsolve.db.entity.Product;
-import com.ssafy.soldsolve.db.entity.User;
+import com.ssafy.soldsolve.db.entity.*;
 import com.ssafy.soldsolve.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,10 @@ public class LiveServiceImpl implements LiveService {
     LiveRepository liveRepository;
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    RequestRepository requestRepository;
+    @Autowired
+    MessageRepository messageRepository;
 
     @Override
     public String createLive(LiveCreatePostReq req, User user) {
@@ -34,6 +36,21 @@ public class LiveServiceImpl implements LiveService {
         }
         l.setProduct(p);
 
+        List<Request> requestList = requestRepository.findAllByProduct(p).orElseGet(null);
+        if (requestList!=null) {
+            String productTitle = p.getTitle();
+            String requestedNickname = p.getUser().getNickname();
+            for (int i=0; i<requestList.size(); i++) {
+                Message m = new Message();
+                User requester = requestList.get(i).getUser();
+                String log = String.format("%s님이 %s 상품 라이브를 시작했습니다!", requestedNickname, productTitle);
+                // requestList 내 유저들을 대상으로 message 발송
+                m.setUser(requester);
+                m.setContent(log);
+                m.setIsRead(false);
+                messageRepository.save(m);
+            }
+        }
 
         return liveRepository.save(l).getSessionId();
     }

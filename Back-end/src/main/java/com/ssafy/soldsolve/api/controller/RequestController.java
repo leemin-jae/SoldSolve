@@ -1,6 +1,7 @@
 package com.ssafy.soldsolve.api.controller;
 
 
+import com.ssafy.soldsolve.api.service.MessageService;
 import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.api.service.RequestService;
 import com.ssafy.soldsolve.api.service.UserService;
@@ -29,6 +30,9 @@ public class RequestController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    MessageService messageService;
+
     // 로그인한 유저 라이브 요청 추가
     @PostMapping("/{product}")
     public ResponseEntity<? extends BaseResponseBody> createRequest(Authentication authentication, @PathVariable int product) {
@@ -37,6 +41,9 @@ public class RequestController {
             String userId = userDetails.getUsername();
             User user = userService.getUserByUserId(userId);
             requestService.createRequest(user, product);
+            // 상품
+            Product p = productService.getProductByNo(product);
+            messageService.createLog(user, p);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         } catch (Exception e){
             e.printStackTrace();

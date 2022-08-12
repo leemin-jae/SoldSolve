@@ -2,6 +2,7 @@ package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.api.request.MessagePostReq;
 import com.ssafy.soldsolve.db.entity.Message;
+import com.ssafy.soldsolve.db.entity.Product;
 import com.ssafy.soldsolve.db.entity.User;
 import com.ssafy.soldsolve.db.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +54,18 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public void deleteMessage(int messageId){
         messageRepository.delete(messageRepository.getOne(messageId));
+    }
+
+    @Override
+    public void createLog(User requester, Product p) {
+        Message message = new Message();
+        String requesterNickname = requester.getNickname();
+        String productTitle = p.getTitle();
+        String log = String.format("%s님이 %s 상품에 라이브를 요청했습니다.", requesterNickname, productTitle);
+        User requestedUser = p.getUser();
+        message.setUser(requestedUser);
+        message.setContent(log);
+        message.setIsRead(false);
+        messageRepository.save(message);
     }
 }

@@ -31,7 +31,7 @@ function Product() {
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
-
+  console.log(store)
   useEffect(() => {
     axios({
       url: `/api/product/${productid}`,
@@ -151,12 +151,13 @@ function Product() {
         params: { seller: userId },
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
-      .then(res => {
-        console.log(res.data, '방생성')
-      })
-      .catch(err => {
-        console.log(err)
-      })
+        .then(res => {
+          console.log(res.data, '방생성')
+          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: userId, meId: store.info.info.userId } })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
   const imglist = []
@@ -168,9 +169,9 @@ function Product() {
     }
   }
 
-  function SessionCheck(){
+  function SessionCheck() {
     axios
-      .get(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell'+productid, {
+      .get(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell' + productid, {
         headers: {
           Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
         },

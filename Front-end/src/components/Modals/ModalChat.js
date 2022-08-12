@@ -27,17 +27,18 @@ const ModalChat = (props) => {
 
   const onConnected = () => {
     // console.log(payload)
-    if (stompClient&&stompClient.connected && header) {
-    setUserData({ ...userData, "": true })
-    console.log(stompClient)
-    console.log(header, '!~!~!')
-    stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
-      let payloadData = JSON.parse(payload.body);
-      chats.push(payloadData);
-      setChats([...chats]);
-      console.log(chats)
-    })
-  }}
+    if (stompClient && stompClient.connected && header) {
+      setUserData({ ...userData, "": true })
+      console.log(stompClient)
+      console.log(header, '!~!~!')
+      stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
+        let payloadData = JSON.parse(payload.body);
+        chats.push(payloadData);
+        setChats([...chats]);
+        console.log(chats)
+      })
+    }
+  }
 
   const onError = err => {
     console.log(err);
@@ -62,45 +63,45 @@ const ModalChat = (props) => {
     }
   }, [header])
 
-  useEffect(()=> {
+  useEffect(() => {
     if (header) {
-    const roomChats = () => {
-      axios({
-        url: `/api/room/${header.roomId}`,
-        method: 'get',
-      })
-        .then(res => {
-          const copyDbChats = res.data.reverse().slice(0, 50)
-          console.log(copyDbChats)
-          const copyChats = []
-          copyDbChats.reverse().map(chat => {
-            console.log(chat.chatContent)
-            copyChats.push(chat.chatContent)
+      const roomChats = () => {
+        axios({
+          url: `/api/room/${header.roomId}`,
+          method: 'get',
+        })
+          .then(res => {
+            const copyDbChats = res.data.reverse().slice(0, 50)
+            console.log(copyDbChats)
+            const copyChats = []
+            copyDbChats.reverse().map(chat => {
+              console.log(chat.chatContent)
+              copyChats.push(chat.chatContent)
+            })
+            console.log(copyChats)
+            setDbChats(copyChats)
+            console.log(dbChats)
           })
-          console.log(copyChats)
-          setDbChats(copyChats)
-          console.log(dbChats)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+      roomChats()
     }
-    roomChats()
-  }
   }, [])
 
   useEffect(() => {
     console.log('연결중')
-    if (stompClient&&stompClient.connected) stompClient.disconnect();
+    // if (stompClient && stompClient.connected) stompClient.disconnect();
     let Sock = new SockJS('/ws-stomp');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
 
-    // return () => {
-    //   if (stompClient.connected) stompClient.disconnect();
-    // };
+    return () => {
+      if (stompClient.connected) stompClient.disconnect();
+    };
 
-  // }, [])
+    // }, [])
   }, [header])
 
   const handleValue = (e) => {
@@ -121,11 +122,11 @@ const ModalChat = (props) => {
       console.log(stompClient)
       console.log(chatMessage.message, '12!@#!@#')
       if (chatMessage.message === '' || chatMessage.message == null || chatMessage.message === ' ') {
-      alert('메세지를 입력하세요')
-    } else {
-      stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
-      setUserData({ ...userData, "message": "" })
-    }
+        alert('메세지를 입력하세요')
+      } else {
+        stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+        setUserData({ ...userData, "message": "" })
+      }
     }
   }
   return (
@@ -140,7 +141,7 @@ const ModalChat = (props) => {
               <div className='chat_background'>
                 <div className='chat_div' >
                   <ul className='li_box_container'>
-                    { dbChats && dbChats.map(dbChat => {
+                    {dbChats && dbChats.map(dbChat => {
                       // let ChatMessage = null;
                       // if (chat.sender === store.info.info.userId) {
                       //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
@@ -167,9 +168,9 @@ const ModalChat = (props) => {
               </div>
             </div>
             <div className='input_box'>
-              <form onSubmit={e => sendPublicMessage(e)} style={{display:'flex', width:'100%'}}>
-                <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message} onChange={handleValue} />
-                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e=>sendPublicMessage(e)} />
+              <form onSubmit={e => sendPublicMessage(e)} style={{ display: 'flex', width: '100%' }}>
+                <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message || ''} onChange={handleValue} />
+                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e => sendPublicMessage(e)} />
               </form>
             </div>
           </main>

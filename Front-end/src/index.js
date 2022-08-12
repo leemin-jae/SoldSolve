@@ -18,6 +18,7 @@ import LiveDetail from './routers/LiveDetail';
 import CreateProduct from './routers/ProductForm';
 import ChatRoom from './components/Modals/ChatRoom';
 import ChatTest from './components/Notice/ChatTest';
+import ChatRoomCompo from './routers/ChatRoomCompo';
 //
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
@@ -39,35 +40,36 @@ root.render(
   <div className='background'>
 
     {/* <React.StrictMode> */}
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/find" element={<FindAccount />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/mypage" element={<MyPage />} />
-              <Route path="/editaccount" element={<EditAccount />} />
-              <Route path="/notice" element={<NoticePage />} />
-              <Route path='/createroom/:id' element={<CreateRoom />}></Route>
-              <Route path='/live/:user/:title' element={<LivePage />}></Route>
-              <Route path='/livedetail' element={<LiveDetail />}></Route>
-              <Route path='/product/:id' element={<Product />}></Route>
-              <Route path='/product' element={<Products />}></Route>
-              <Route path='/createproduct' element={<CreateProduct />}></Route>
-              <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
-              <Route path='/chatroom' element={<ChatRoom />}></Route>
-              <Route path='/search/:category/:title' element={<SearchProduct />}></Route>
-              <Route path='/chattest' element={<ChatTest />}></Route>
-              <Route path='/search/:title' element={<SearchProductAll />}></Route>
-              
-              <Route path="/*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/find" element={<FindAccount />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/editaccount" element={<EditAccount />} />
+            <Route path="/notice" element={<NoticePage />} />
+            <Route path='/createroom/:id' element={<CreateRoom />}></Route>
+            <Route path='/live/:user/:title' element={<LivePage />}></Route>
+            <Route path='/livedetail' element={<LiveDetail />}></Route>
+            <Route path='/product/:id' element={<Product />}></Route>
+            <Route path='/product' element={<Products />}></Route>
+            <Route path='/createproduct' element={<CreateProduct />}></Route>
+            <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
+            <Route path='/chatroom' element={<ChatRoom />}></Route>
+            <Route path='/search/:category/:title' element={<SearchProduct />}></Route>
+            <Route path='/chattest' element={<ChatTest />}></Route>
+            <Route path='/search/:title' element={<SearchProductAll />}></Route>
+            <Route path='/chatroom/:id' element={<ChatRoomCompo />}></Route>
+
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
     {/* </React.StrictMode> */}
   </div>
 

@@ -30,11 +30,8 @@ function Product() {
   const [userId, setUserId] = useState('')
   const [cat, setCat] = useState('')
   const [requser, setRequser] = useState([])
-<<<<<<< HEAD
   const [youNick, setYouNick] = useState('')
-=======
   const [sell, setSell] = useState(0)
->>>>>>> 4f7b9727328caf6f99037772fdc2f4d6b6a223f1
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()

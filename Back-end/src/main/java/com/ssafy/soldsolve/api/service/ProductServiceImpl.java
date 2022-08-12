@@ -3,9 +3,11 @@ package com.ssafy.soldsolve.api.service;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.db.entity.Product;
 import com.ssafy.soldsolve.db.entity.ProductImg;
+import com.ssafy.soldsolve.db.entity.Request;
 import com.ssafy.soldsolve.db.entity.User;
 import com.ssafy.soldsolve.db.repository.ProductImgRepository;
 import com.ssafy.soldsolve.db.repository.ProductRepository;
+import com.ssafy.soldsolve.db.repository.RequestRepository;
 import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +33,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     FileService fileService;
+
+    @Autowired
+    RequestRepository requestRepository;
 
 
 
@@ -85,7 +91,18 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProduct(String no) {
         Product p = productRepository.getOne(Integer.parseInt(no));
+        p.setViewCount(p.getViewCount()+1);
+        productRepository.save(p);
+
+
         p.setProductImg(productImgRepository.findByNo(p));
+
+        List<Request> r = requestRepository.findByProduct(p);
+        List<User> requestUser = new ArrayList<>();
+        for(Request now : r){
+            requestUser.add(now.getUser());
+        }
+        p.setRequestsUser(requestUser);
         return p;
     }
 

@@ -36,7 +36,7 @@ function LiveItemInMain() {
     console.log(data.data)
     return (
       <>
-        <Swiper spaceBetween={-100}
+        <Swiper spaceBetween={-50}
           // scrollbar={{ draggable: true }}
           // height={1000}
           breakpoints={{
@@ -46,11 +46,11 @@ function LiveItemInMain() {
             991: {
               slidesPerView: 3,
             },
-            767: {
-              slidesPerView: 3,
+            768: {
+              slidesPerView: 2,
             },
             300: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             }
           }}
           pagination={{ clickable: true }}
@@ -80,7 +80,7 @@ function LiveItemInMain() {
 
                 return (
                   <SwiperSlide className='cards_item' key={product.id}>
-                    <a href={`/live/${product.product.user.userid}/${product.sessionId}`} className='card' style={{ height: 300 }}>
+                    <a href={`/live/${product.product.user.userid}/${product.sessionId}`} className='card' style={{ height: 300 }} >
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}

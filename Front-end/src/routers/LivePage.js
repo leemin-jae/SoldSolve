@@ -37,6 +37,11 @@ class LivePage extends Component {
         }
       })
 
+      window.addEventListener('beforeunload', (event) => {
+        event.preventDefault();
+        event.returnValue = '라이브가 종료됩니다';
+      });
+
 
     this.state = {
       myId: props.storeInfo.userId,
@@ -77,6 +82,7 @@ class LivePage extends Component {
       this.deleteSession();
     }
     this.leaveSession();
+    this.deleteSession();
   }
 
   handleChangeSessionId(e) {
@@ -276,7 +282,6 @@ class LivePage extends Component {
         window.location.href='/'
       })
   }
-
 
   render() {
     if (this.state.session === undefined) {

@@ -16,14 +16,14 @@ function ChatRoomCompo() {
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const { state } = useLocation();
-  const [roomId, setRoomId] = useState(state.roomId);
+  const [roomId] = useState(state.roomId);
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState('');
   const [dbChats, setDbChats] = useState()
-  const [other, setOther] = useState('')
 
   useEffect(() => {
-    let Sock = new SockJS('https://i7c110.p.ssafy.io/ws-stomp');
+    let Sock = new SockJS('/ws-stomp');
+    console.log(Sock)
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);
 
@@ -47,9 +47,7 @@ function ChatRoomCompo() {
             console.log(chat.chatContent)
             copyChats.push(chat)
           })
-          console.log(copyChats)
           setDbChats(copyChats)
-          console.log(dbChats)
         })
         .catch(err => {
           console.log(err)
@@ -69,7 +67,6 @@ function ChatRoomCompo() {
     stompClient.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
     chatMessage['type'] = 'JOIN'
     stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
-    console.log(stompClient, '1111')
   };
 
   const onMessageReceived = payload => {
@@ -81,13 +78,19 @@ function ChatRoomCompo() {
   const sendChatHandler = (e) => {
     e.preventDefault();
     if (stompClient) {
-      const chatMessage = {
-        sender: store.info.info.userId,
-        message: message,
-        roomId: state.roomId,
-        type: 'TALK'
-      };
-      stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage));
+      if (store.info.info.userId && message) {
+
+        let messageData = message.replace(/ +(?= )/g, "");
+        if (messageData !== "" && messageData !== " ") {
+          const chatMessage = {
+            sender: store.info.info.userId,
+            message: message,
+            roomId: state.roomId,
+            type: 'TALK'
+          };
+          stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage));
+        }
+      }
     }
     setMessage('');
     inputRef.current.focus();
@@ -109,7 +112,6 @@ function ChatRoomCompo() {
           <div className='chat_div' >
             <div className='li_box_container'>
               {dbChats && dbChats.map(dbChat => {
-                console.log(dbChat.writeUser.nickname, store.info.info.nickName)
                 if (dbChat.writeUser.nickname === store.info.info.nickName) {
                   return (
                     <span className='li_box_me' key={uuid()}>{dbChat.chatContent}</span>

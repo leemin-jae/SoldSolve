@@ -30,6 +30,7 @@ function Product() {
   const [userId, setUserId] = useState('')
   const [cat, setCat] = useState('')
   const [requser, setRequser] = useState([])
+  const [youNick, setYouNick] = useState('')
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -42,9 +43,12 @@ function Product() {
       .then(res => {
         console.log(res)
         setProductData(res.data)
+        console.log(res.data.user, '이름찾자')
+        setYouNick(res.data.user.nickname)
+        console.log(youNick, '상대 닉넴')
         setUserId(res.data.user.userid)
         let money = res.data.price;
-        console.log(money)
+        // console.log(money)
         money = Number(String(money).replaceAll(',', ''));
         const formatValue = money.toLocaleString('ko-KR');
         setMoney(formatValue)
@@ -189,7 +193,7 @@ function Product() {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: userId, meId: store.info.info.userId } })
+          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, meId: store.info.info.userId } })
         })
         .catch(err => {
           console.log(err)

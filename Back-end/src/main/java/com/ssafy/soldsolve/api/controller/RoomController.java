@@ -60,10 +60,15 @@ public class RoomController {
     }
 
     @GetMapping("/{no}")
-    public ResponseEntity<?> getChat(@PathVariable("no") String no){
-        List<Chat> chat = chatService.getChat(Integer.parseInt(no));
+    public ResponseEntity<?> getChat(@PathVariable("no") String no , Authentication authentication){
+        SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+        String userId = userDetails.getUsername();
+
+        List<Chat> chat = chatService.getChat(Integer.parseInt(no),userId);
         return ResponseEntity.status(200).body(chat);
     }
+
+
 
     @DeleteMapping("/{no}")
     public ResponseEntity<?> deleteRoom(@PathVariable("no") String no, Authentication authentication){

@@ -22,20 +22,29 @@ public class Room {
 
     @ManyToOne
     @JoinColumn(name="buyer_id")
-    User buyer;
+    private User buyer;
 
     @ManyToOne
     @JoinColumn(name="seller_id")
-    User seller;
+    private User seller;
+
+    private int isRead;
 
     @OneToMany(mappedBy = "room" , orphanRemoval = true , cascade = CascadeType.ALL)
-    List<Chat> chat = new ArrayList<>();
+    @JsonIgnore
+    private List<Chat> chat = new ArrayList<>();
 
-    int buyerOut;
+    @JsonIgnore
+    private int buyerOut;
 
-//    @OneToMany(orphanRemoval = true, mappedBy = "chatId")
-//    @JsonIgnore
-//    List<Chat> chatList = new ArrayList<>();
-    int sellerOut;
+    @JsonIgnore
+    private int sellerOut;
+
+    @JsonIgnore
+    private int inUser;   // 0, 1, 2 현재 채팅방에 들어와 있는 유저 수
+
+    @OneToOne(mappedBy = "room" , cascade = CascadeType.ALL)
+    @JsonIgnore
+    private RoomRead roomRead;
 
 }

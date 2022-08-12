@@ -31,7 +31,7 @@ public class Chat {
     @JoinColumn(name = "user_pk")
     private User writeUser;
 
-    private boolean isRead;
+    //private int isRead;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "roomId")

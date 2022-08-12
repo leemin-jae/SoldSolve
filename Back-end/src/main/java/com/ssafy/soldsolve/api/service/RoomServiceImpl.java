@@ -1,7 +1,9 @@
 package com.ssafy.soldsolve.api.service;
 
 import com.ssafy.soldsolve.db.entity.Room;
+import com.ssafy.soldsolve.db.entity.RoomRead;
 import com.ssafy.soldsolve.db.entity.User;
+import com.ssafy.soldsolve.db.repository.RoomReadRepository;
 import com.ssafy.soldsolve.db.repository.RoomRepository;
 import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class RoomServiceImpl implements RoomService{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    RoomReadRepository roomReadRepository;
+
     @Override
     public int createRoom(User sellerUser, User buyerUser) {
         Room room = new Room();
@@ -28,17 +33,9 @@ public class RoomServiceImpl implements RoomService{
 
         Room r = roomRepository.getOne(no);
 
-        List<Room> sellerList = sellerUser.getRoomList();
-        sellerList.add(r);
-        sellerUser.setRoomList(sellerList);
-
-        List<Room> buyerList = buyerUser.getRoomList();
-        buyerList.add(r);
-        buyerUser.setRoomList(buyerList);
-
-        userRepository.save(sellerUser);
-        userRepository.save(buyerUser);
-
+        RoomRead roomRead = new RoomRead();
+        roomRead.setRoom(r);
+        roomReadRepository.save(roomRead);
 
 
         return no;
@@ -47,8 +44,30 @@ public class RoomServiceImpl implements RoomService{
     @Override
     public List<Room> roomList(User user) {
         List<Room> room = new ArrayList<>();
-        room.addAll(roomRepository.findByBuyerId(user));
-        room.addAll(roomRepository.findBySellerId(user));
+        List<Room> roomBuy = roomRepository.findByBuyerId(user);
+        List<Room> roomSell = roomRepository.findBySellerId(user);
+        RoomRead rr = null;
+        Room cnt = null;
+        for(int i = 0 ; i < roomBuy.size(); i++){
+            cnt = roomBuy.get(i);
+            rr = roomReadRepository.findByRoom(cnt);
+            if(rr.getTotalChat() != rr.getBuyerChat()){
+                cnt.setIsRead(1);
+                System.out.println("buy");
+            }
+            room.add(cnt);
+
+        }
+        for(int i = 0 ; i < roomSell.size(); i++){
+            cnt = roomSell.get(i);
+            rr = roomReadRepository.findByRoom(cnt);
+            if(rr.getTotalChat() != rr.getSellerChat()){
+                cnt.setIsRead(1);
+                System.out.println("sell");
+            }
+            room.add(cnt);
+        }
+
 
         return room;
     }

@@ -37,7 +37,9 @@ function ChatRoomCompo() {
         };
         stompClient.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
         chatMessage['type'] = 'EXIT'
-        stompClient.disconnect();
+        stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+        stompClient.unsubscribe(`/sub/chat/room/${roomId}`)
+
       }
     };
   }, []);
@@ -47,6 +49,7 @@ function ChatRoomCompo() {
       axios({
         url: `/api/room/${roomId}`,
         method: 'get',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res.data)

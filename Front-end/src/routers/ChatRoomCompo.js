@@ -7,7 +7,7 @@ import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import { faPaperPlane, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
-
+import NavBar from '../components/NavBar'
 
 
 let stompClient = null;
@@ -28,7 +28,19 @@ function ChatRoomCompo() {
     stompClient.connect({}, onConnected, onError);
 
     return () => {
-      if (stompClient.connected) stompClient.disconnect();
+      if (stompClient.connected) {
+        const chatMessage = {
+          sender: store.info.info.userId,
+          message: message,
+          roomId: state.roomId,
+          type: 'TALK'
+        };
+        stompClient.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
+        chatMessage['type'] = 'EXIT'
+        stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+        stompClient.unsubscribe(`/sub/chat/room/${roomId}`)
+
+      }
     };
   }, []);
 
@@ -37,6 +49,7 @@ function ChatRoomCompo() {
       axios({
         url: `/api/room/${roomId}`,
         method: 'get',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res.data)
@@ -105,6 +118,7 @@ function ChatRoomCompo() {
   console.log(message, chats)
   return (
     <div>
+      <NavBar></NavBar>
       <div className='chat_box'>
         <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px', cursor: 'pointer' }} onClick={() => { navigate(-1) }} />
         <h3 className='buyer_nickname'>{state.you}</h3>
@@ -114,11 +128,11 @@ function ChatRoomCompo() {
               {dbChats && dbChats.map(dbChat => {
                 if (dbChat.writeUser.nickname === store.info.info.nickName) {
                   return (
-                    <span className='li_box_me' key={uuid()}>{dbChat.chatContent}</span>
+                    <p className='li_box_me' key={uuid()}>{dbChat.chatContent}</p>
                   )
                 } else {
                   return (
-                    <span className='li_box_other' key={uuid()}>{dbChat.chatContent}</span>
+                    <p className='li_box_other' key={uuid()}>{dbChat.chatContent}</p>
                   )
                 }
               })}

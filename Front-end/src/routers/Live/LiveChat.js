@@ -87,7 +87,7 @@ const LiveChat = (props) => {
                 <div className='liveChatItem'>
                   <div className='livechatcontent'>
                     <p className='chatnickname'>{data.nickname}</p>
-                    <p className='livechatbox'>{data.message}</p>
+                    <p className='livechatbox2'>{data.message}</p>
                   </div>
                 </div>
               }

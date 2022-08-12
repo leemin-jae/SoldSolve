@@ -394,8 +394,11 @@ div#left_toggle ul li {
   display: flex;
   position: relative;
   align-items: center;
-  /* margin: auto; */
+  margin: auto;
   flex-direction: column;
+  top: 45px;
+  max-width: 380px;
+  height: 500px;
 }
 
 .chat_background {
@@ -411,9 +414,13 @@ div#left_toggle ul li {
 }
 
 .input_box {
+  position: relative;
   display: flex;
   width: 100%;
-  margin-top: 10px;
+  margin: 10px auto auto auto;
+  top: 45px;
+  max-width: 380px;
+  /* height: 500px; */
 }
 
 .chat_input {
@@ -441,14 +448,14 @@ div#left_toggle ul li {
 .li_box_me {
   position: relative;
   /* display: inline-block; */
-  height: 35px;
+  /* height: 35px; */
   padding: 0px;
   background: #9a9bdf;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   border-radius: 7px;
   margin-top: 5px;
-  margin-right: 5%;
+  margin-right: 3%;
   margin-left: auto;
 
   line-height: 34px;
@@ -456,53 +463,29 @@ div#left_toggle ul li {
   display: flex;
   flex-direction: row;
   align-items: center;
+  max-width: 290px;
 }
 
-.li_box_me:after {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 8px 0 8px 15px;
-  border-color: transparent #9a9bdf;
-  display: block;
-  width: 0;
-  z-index: 1;
-  right: -14px;
-  top: 6px;
-}
+
 
 .li_box_other {
   position: relative;
   /* display: inline-block; */
-  height: 35px;
+  /* height: 35px; */
   padding: 0px;
   background: #c1c2f1;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
   border-radius: 7px;
   margin-top: 5px;
-  margin-left: 5%;
+  margin-left: 3%;
   margin-right: auto;
   line-height: 34px;
   padding: 0 10px 0 10px;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-
-
-.li_box_other:after {
-  content: '';
-  position: absolute;
-  border-style: solid;
-  border-width: 8px 15px 8px 0;
-  border-color: transparent #c1c2f1;
-  display: block;
-  width: 0;
-  z-index: 1;
-  left: -14px;
-  top: 6px;
+  max-width: 290px;
 }
 
 .chat_div {

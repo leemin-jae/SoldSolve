@@ -73,6 +73,9 @@ class LivePage extends Component {
   }
 
   onbeforeunload(event) {
+    if (this.state.myId === this.state.params[2]){
+      this.deleteSession();
+    }
     this.leaveSession();
   }
 
@@ -270,8 +273,8 @@ class LivePage extends Component {
       })
       .then((res) => {
         console.log(res)
+        window.location.href='/'
       })
-    console.log(1234)
   }
 
 

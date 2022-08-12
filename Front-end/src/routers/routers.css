@@ -327,6 +327,7 @@ input::placeholder {
     border-radius: 10px;
     padding: 5%;
   }
+
   .livebox {
     max-width: 950px;
     min-height: 500px;
@@ -727,7 +728,7 @@ input::placeholder {
   border-radius: 10px;
   min-width: 100px;
   padding: 10%;
-  word-break:break-all;
+  word-break: break-all;
 }
 
 
@@ -743,17 +744,31 @@ input::placeholder {
 
 
 .chatbox::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 .chatbox::-webkit-scrollbar-thumb {
-    height: 30%;
-    background: #6667abad;
-    
-    border-radius: 10px;
+  height: 30%;
+  background: #6667abad;
+
+  border-radius: 10px;
 }
 
 .chatbox::-webkit-scrollbar-track {
-    background: rgba(196, 217, 248, 0.1);
+  background: rgba(196, 217, 248, 0.1);
 }
 
+.li_box_container:-webkit-scrollbar {
+  width: 10px;
+}
+
+.li_box_container:-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+
+  border-radius: 10px;
+}
+
+.li_box_container:-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
+}

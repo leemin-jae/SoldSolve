@@ -6,10 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { v4 as uuid } from 'uuid';
 import axios from 'axios';
 import { faPaperPlane, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+
 
 
 let stompClient = null;
 function ChatRoomCompo() {
+  let store = useSelector((state) => { return state })
   const navigate = useNavigate();
   const inputRef = useRef(null);
   const { state } = useLocation();
@@ -53,7 +56,7 @@ function ChatRoomCompo() {
         })
     }
     roomChats()
-  }, [])
+  }, [chats])
 
   const onConnected = () => {
     console.log('연결완료');
@@ -68,10 +71,9 @@ function ChatRoomCompo() {
 
   const sendChatHandler = (e) => {
     e.preventDefault();
-    console.log('채팅전송개발중');
     if (stompClient) {
       const chatMessage = {
-        sender: state.me,
+        sender: store.info.info.userId,
         message: message,
         roomId: state.roomId,
         type: 'TALK'
@@ -97,14 +99,15 @@ function ChatRoomCompo() {
         <div className='chat_background'>
           <div className='chat_div' >
             <ul className='li_box_container'>
-              {/* {dbChats && dbChats.map(dbChat => {
+              {dbChats && dbChats.map(dbChat => {
                 // let ChatMessage = null;
                 // if (chat.sender === store.info.info.userId) {
                 //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
                 // } else {
                 //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
                 // }
-                if (dbChat.writeUser.id === state.meId) {
+                console.log(dbChat.writeUser.nickname, store.info.info.nickName)
+                if (dbChat.writeUser.nickname === store.info.info.nickName) {
                   return (
                     <span className='li_box_me' key={uuid()}>{dbChat.chatContent}</span>
                   )
@@ -113,8 +116,8 @@ function ChatRoomCompo() {
                     <span className='li_box_other' key={uuid()}>{dbChat.chatContent}</span>
                   )
                 }
-              })} */}
-              {chats.map(chat => {
+              })}
+              {/* {chats.map(chat => {
                 // if (state.meId ==)
                 // let ChatMessage = null;
                 // if (chat.sender === store.info.info.userId) {
@@ -125,7 +128,7 @@ function ChatRoomCompo() {
                 return (
                   <span className='li_box_me' key={uuid()}>{chat.message}</span>
                 )
-              })}
+              })} */}
             </ul>
           </div>
         </div>

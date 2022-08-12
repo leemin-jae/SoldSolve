@@ -189,7 +189,7 @@ function Product() {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: userId, meId: store.info.info.userId } })
+          // navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: userId, meId: store.info.info.userId } })
         })
         .catch(err => {
           console.log(err)
@@ -220,7 +220,7 @@ function Product() {
       })
   }
 
-  console.log(productData.user.profileUrl)
+  // console.log(productData.user.profileUrl)
   return (
     <>
       {productData ?
@@ -246,7 +246,7 @@ function Product() {
               <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0' }}>
                 {productData.user.nickname} ({productData.region})</p>
             </div>
-            <p className='score' style={{ marginTop:'30px'}}>평점</p>
+            <p className='score' style={{ marginTop: '30px' }}>평점</p>
           </div>
 
           <div className='product_description'>

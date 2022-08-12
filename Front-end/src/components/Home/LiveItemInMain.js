@@ -26,9 +26,11 @@ function LiveItemInMain() {
 
   const Loading = () => {
     return (
-      <>
-        Loading...
-      </>
+      <div style={{textAlign:'center', marginTop:'2em'}}>
+        <h5>진행중인 라이브가 없습니다</h5>
+        <h6>판매중인 상품에</h6>
+          <h6>실시간 소통을 더해보세요</h6>
+      </div>
     );
   };
 
@@ -108,7 +110,7 @@ function LiveItemInMain() {
   return (
     <div className="content">
       <div className='hometext'><h4>NOW LIVE</h4></div>
-      {loading ? <Loading /> : <ShowMainItem data={LiveList} />}
+      {LiveList.length ? <ShowMainItem data={LiveList} /> : <Loading />}
       <ul className='cards' id='maincontent'>
       </ul>
     </div>

@@ -133,16 +133,29 @@ function Chat() {
                   </div>
                 </div>
                 <div>
-                  <div className='message_info'>
+                  {room.isRead == 1 ? <div className='message_info'>
                     {/* <p className='message_time'>{room.time}</p> */}
                     <div style={{ display: 'flex' }}>
                       <div className='unread_message'>
-                        <p>2</p>
+                        <p>!</p>
                       </div>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
                       {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
                     </div>
                   </div>
+                    :
+                    <div className='message_info'>
+                      {/* <p className='message_time'>{room.time}</p> */}
+                      <div style={{ display: 'flex' }}>
+                        {/* <div className='unread_message'> */}
+                        {/* <p></p> */}
+                        {/* </div> */}
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
+                        {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
+                      </div>
+                    </div>
+                  }
+
                 </div>
               </span>)
           }

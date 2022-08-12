@@ -94,7 +94,9 @@ function NavBar() {
       {Token ? (
         <div id="right_toggle">
           <ul className="mobile_menu">
+            {storeToken.info.info.role === 'ROLE_ADMIN' ? 
             <li><a href='#!' onClick={openModal}><h5>유저관리</h5></a></li>
+            :null}
             <li><a href='/notice'><h5>알림함</h5></a></li>
             <li><a href='/search'><h5>검색</h5></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>

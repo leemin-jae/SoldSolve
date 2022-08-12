@@ -247,9 +247,10 @@ div#left_toggle ul li {
 
 .articles {
   margin: 1%;
-  min-height: 1000px;
+  height: 1000px;
   padding-inline: 0%;
   padding-block: 3%;
+  overflow-y: auto;
 }
 
 .Article {

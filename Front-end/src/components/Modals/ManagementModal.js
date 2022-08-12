@@ -9,7 +9,7 @@ const ManagementModal = (props) => {
 
   useEffect(() => {
     axios({
-      url: '/admin/users/0',
+      url: '/admin/users/',
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
@@ -48,7 +48,7 @@ const ManagementModal = (props) => {
   }
   function reLoad(){
     axios({
-      url: '/admin/users/0',
+      url: '/admin/users/',
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
@@ -78,11 +78,10 @@ const ManagementModal = (props) => {
     }
   }
   const userTag = [];
-  if (userList && userList.content.length > 0) {
-    console.log(userList.content)
-    for (let i = 0; i < userList.content.length; i++) {
+  if (userList && userList.length > 0) {
+    for (let i = 0; i < userList.length; i++) {
       let user = null
-      const t = userList.content[i]
+      const t = userList[i]
       let Banbutton = null;
       if (t.role === 'ROLE_USER') {
         Banbutton = <button className='managementButton' onClick={e => userCheck(t)}>정지</button>

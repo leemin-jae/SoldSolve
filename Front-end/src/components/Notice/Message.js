@@ -11,13 +11,11 @@ function Message() {
       axios({
         url: '/api/messages',
         method: 'get',
-        params: { page: 0 },
         headers : { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res)
-          console.log(res.data.content)
-          setMessagedata(res.data.content)
+          setMessagedata(res.data)
         })
         .catch(err => {
           console.log(err)

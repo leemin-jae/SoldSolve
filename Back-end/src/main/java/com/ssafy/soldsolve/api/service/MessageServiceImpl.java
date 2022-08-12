@@ -19,8 +19,8 @@ public class MessageServiceImpl implements MessageService {
     MessageRepository messageRepository;
 
     @Override
-    public Page<Message> findAll(User user, int page) {
-        return messageRepository.findAllByUser(user, (PageRequest.of(page, 10, Sort.by("writtenTimes").descending())));
+    public List<Message> findAll(User user) {
+        return messageRepository.findAllByUser(user, Sort.by("writtenTimes").descending());
     }
 
     @Override

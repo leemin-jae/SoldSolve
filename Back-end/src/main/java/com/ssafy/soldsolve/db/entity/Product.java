@@ -41,9 +41,8 @@ public class Product {
     @JoinColumn(name = "user_pk")
     private User user;
 
-
-
-
+    @OneToMany(mappedBy = "userid")
+    List<User> requestsUser = new ArrayList<>();
 
 
 

@@ -220,7 +220,6 @@ function Product() {
       })
   }
 
-  console.log(productData.user.profileUrl)
   return (
     <>
       {productData ?

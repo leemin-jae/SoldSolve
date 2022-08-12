@@ -368,7 +368,7 @@ div#left_toggle ul li {
 
   .profile_text {
     font-size: 13px;
-    width: 50px;
+    width: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;

@@ -6,6 +6,8 @@ import '../components.css'
 import axios from 'axios';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 
 function Chat() {
@@ -39,11 +41,10 @@ function Chat() {
   const exitRoom = (you, me) => {
     let exitRoomId = null
     roomList.map((room) => {
-      console.log(room)
 
-      if (room.buyer.nickname == you && room.seller.nickname == me) {
+      if (room.buyer.nickname === you && room.seller.nickname === me) {
         exitRoomId = room.roomId
-      } else if (room.buyer.nickname == me && room.seller.nickname == you) {
+      } else if (room.buyer.nickname === me && room.seller.nickname === you) {
         exitRoomId = room.roomId
       }
     })
@@ -87,7 +88,7 @@ function Chat() {
           }
           console.log(room, '룸룸')
           console.log('room.buyerOut:' + room.buyerOut, 'room.sellerOut:' + room.sellerOut)
-          if (room.buyerOut == 1 || room.sellerOut == 1) {
+          if (room.buyerOut === 1 || room.sellerOut === 1) {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
                 <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
@@ -109,13 +110,15 @@ function Chat() {
                       <div className='unread_message'>
                         <p>2</p>
                       </div>
-                      <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button>
+                      <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
+
+                      {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
                     </div>
                   </div>
                 </div>
               </span>
             );
-          } else if (room.buyerOut == 0 && room.sellerOut == 0) {
+          } else if (room.buyerOut === 0 && room.sellerOut === 0) {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
                 <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
@@ -137,7 +140,8 @@ function Chat() {
                       <div className='unread_message'>
                         <p>2</p>
                       </div>
-                      <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button>
+                      <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
+                      {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
                     </div>
                   </div>
                 </div>

@@ -3,40 +3,46 @@ import { useSelector } from 'react-redux'
 
 
 const LiveChat = (props) => {
+  console.log(props)
   const [messageList, setMessageList] = useState([]);
   const [message, setMessage] = useState("");
+  const [come, setCome] = useState(null);
   let store = useSelector((state) => { return state })
 
   const handleChange = (event) => {
     setMessage(event.target.value);
   };
+
   useEffect(() => {
     props.props.session.on("signal:chat", (event) => {
       const data = JSON.parse(event.data);
-      let messageListData = messageList;
-      messageListData.push({
-        connectionId: event.from.connectionId,
-        nickname: data.nickname,
-        message: data.message,
+      if (come === null) {
+        let messageListData = messageList;
+        messageListData.push({
+          connectionId: event.from.connectionId,
+          nickname: data.nickname,
+          message: data.message,
+        });
+        setMessageList([...messageListData]);
+      }
+    });
+    setCome(1)
+    if (props.props && come === 1) {
+      const welcome = {
+        message: `${props.props.myUserName}님이 입장하셨습니다.`,
+        nickname: props.props.myUserName,
+        streamId: props.props.streamId,
+      };
+      console.log(welcome)
+      props.props.session.signal({
+        data: JSON.stringify(welcome),
+        type: "chat",
       });
-      setMessageList([...messageListData]);
-    });
-    const welcome = {
-      message: `${props.props.myUserName}님이 입장하셨습니다.`,
-      nickname: props.props.myUserName,
-      streamId: props.props.streamId,
-    };
-    console.log(welcome)
-    props.props.session.signal({
-      data: JSON.stringify(welcome),
-      type: "chat",
-    });
-  }, []);
+      setCome(null)
+    }
+  }, [props]);
 
 
-  useEffect(() => {
-    // console.log(messageList);
-  }, [messageList]);
 
   const handlePressKey = (event) => {
     if (event.key === "Enter") {

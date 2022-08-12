@@ -109,10 +109,10 @@ function CreateRoom() {
                 console.log('CREATE SESION', response);
                 console.log(response.data.id)
                 createSessionDB()
-                document.location.href = `/live/${productData.user.userid}/sell${productid}`
+                
             })
             .catch(err=>{
-              if (err.response.status) {
+              if (err.response.status === 409) {
                 document.location.href = `/live/${productData.user.userid}/sell${productid}`
               }
             })
@@ -133,6 +133,7 @@ function CreateRoom() {
       })
       .then((res) => {
         console.log(res)
+        document.location.href = `/live/${productData.user.userid}/sell${productid}`
       })
       .catch((err) => {
         console.log(err)

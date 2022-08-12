@@ -6,7 +6,8 @@ import NavBar from '../components/NavBar';
 import './routers.css';
 import { connect } from 'react-redux'
 import LiveChat from './Live/LiveChat';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMicrophone,faMicrophoneSlash,faVideo,faVideoSlash,faArrowRightFromBracket,faRepeat } from '@fortawesome/free-solid-svg-icons'
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
 const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
@@ -27,6 +28,7 @@ class LivePage extends Component {
         console.log(res.data)
         if (res.data) {
           this.setState({
+            chatOn:true,
             sellerInfo: res.data.product.user,
             price: res.data.product.price,
             region: res.data.product.region,
@@ -341,35 +343,12 @@ class LivePage extends Component {
                     {this.state.params[2] === this.state.myId ?
                       <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
                         <div>
-                          <input
-                            className="btn btn-large btn-danger mx-1 video_button"
-                            type="button"
-                            id="buttonLeaveSession"
-                            onClick={this.deleteSession}
-                            value="방 삭제하기"
-                          />
-                          <input
-                            className="btn btn-large btn-success mx-1 video_button"
-                            type="button"
-                            id="buttonSwitchCamera"
-                            onClick={this.switchCamera}
-                            value="카메라변경"
-                          />
-                          <input
-                            className="btn btn-large btn-success mx-1 video_button"
-                            type="button"
-                            id="buttonSwitchCamera"
-                            onClick={this.CameraOff}
-                            value="카메라ON/OFF"
-                          />
-                          <input
-                            className="btn btn-large btn-success mx-1 video_button"
-                            type="button"
-                            id="buttonSwitchCamera"
-                            onClick={this.VoiceOff}
-                            value="마이크ON/OFF"
-                          />
-                          <div>현재 접속인원 : {this.state.subscribers.length}</div>
+                          <FontAwesomeIcon className='exiticon mx-2 iconsize' style={{ color:'rgba(238, 81, 81, 0.918)'}} onClick={this.switchCamera} icon={faRepeat} size="1x" />
+                          {this.state.nowCamera ? <FontAwesomeIcon style={{ color:'rgba(58, 153, 74, 0.918)'}} className='exiticon mx-3 iconsize' onClick={this.CameraOff} icon={faVideo} size="1x" /> :
+                          <FontAwesomeIcon className='exiticon mx-2 iconsize' style={{ color:'rgba(238, 81, 81, 0.918)'}} onClick={this.CameraOff} icon={faVideoSlash} size="1x" />}
+                          {this.state.nowVoice ? <FontAwesomeIcon style={{ color:'rgba(58, 153, 74, 0.918)'}} className='exiticon mx-3 iconsize' onClick={this.VoiceOff} icon={faMicrophone} size="1x" /> :
+                          <FontAwesomeIcon className='exiticon mx-2 iconsize' style={{ color:'rgba(238, 81, 81, 0.918)'}} onClick={this.VoiceOff} icon={faMicrophoneSlash} size="1x" />}
+                          <FontAwesomeIcon className='exiticon mx-2 iconsize' style={{ color:'rgba(238, 81, 81, 0.918)'}} onClick={this.deleteSession} icon={faArrowRightFromBracket} />
                         </div>
                       </div>
                       : null}
@@ -399,7 +378,7 @@ class LivePage extends Component {
                   </div>
 
                   <div>
-                    <LiveChat props={this.state} />
+                    {this.state.chatOn ? <LiveChat props={this.state} /> : null}
                   </div>
 
 

@@ -187,7 +187,6 @@ function TimeSet(props) {
   } else {
     return <input onInput={e => { props.inputForm(e) }} className="inputform inputform2" name="time" type="datetime-local" placeholder="방송 시작 시간"></input>
   }
-
 }
 
 export default CreateRoom

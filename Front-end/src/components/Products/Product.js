@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../routers/routers.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import './Carousel.css'
 import NavBar from '../../components/NavBar';
 import axios from 'axios';
@@ -32,6 +32,8 @@ function Product() {
   const [requser, setRequser] = useState([])
   const [youNick, setYouNick] = useState('')
   const [sell, setSell] = useState(0)
+  const [timeState, setTimeState] = useState(0)
+  const [time, setTime] = useState('')
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -289,6 +291,31 @@ function Product() {
         alert("아직 라이브방이 생성되지 않았습니다.")
       })
   }
+  function timebutton(e) {
+    e.preventDefault();
+    setTimeState(1)
+    if (timeState) {
+      console.log(document.getElementById('LiveTime').value)
+      setTimeState(0)
+    } else {
+      setTimeState(1)
+    }
+  }
+
+  function setLiveTime(e) {
+
+  }
+
+  function TimeSet(props) {
+    if (props.timeState === 0) {
+      return <button className='submitbutton-able' onClick={e => timebutton(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 시간설정</button>
+    } else {
+      return <>
+        <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간"></input>
+        <button className='submitbutton-able' onClick={e => timebutton(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>설정하기</button>
+      </>
+    }
+  }
 
   return (
     <>
@@ -319,31 +346,41 @@ function Product() {
           </div>
 
           <div className='product_description'>
-            <h3 style={{ margin: '0 10px 20px 10px' }}>{productData.title}</h3>
+            <div className='d-flex justify-content-between align-items-center'>
+              <h1 className='titletext' style={{ margin: '0 10px 0px 10px' }}>{productData.title}</h1>
+              {store.info.info.userId === productData.user.userid ?
+                <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료하기</button> : null}
+            </div>
             <hr></hr>
-            <h5 style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
+            <h5 className='pricetext' style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
             <br></br>
             <p style={{ margin: '0 10px 0 10px' }}>{productData.content}</p>
+            {store.info.info.userId === productData.user.userid ?
+              <div className='d-flex justify-content-end'>
+                <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)}  icon={faPenToSquare} />
+                <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
+              </div>
+              : null}
             <hr></hr>
             {localStorage.token ? (
               <div className='button_box'>
                 {store.info.info.userId === productData.user.userid
                   ?
                   <>
-                    <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
-                    <div>
-                      <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매</button>
-                      <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
-                        <div><SellProduct /></div>
-                      </Modal>
-                      <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>Live요청목록</button>
+                    <div className='d-flex'>
+                      <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
+                      <TimeSet timeState={timeState}></TimeSet>
+                      <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
                       <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
                         <ul><ShowReq /></ul>
                       </Modal>
-                      <button className='submitbutton-able' onClick={e => editProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>수정</button>
-                      <button className='submitbutton-able' onClick={e => deleteProduct(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>삭제</button>
                     </div>
+                    <div>
+                      <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
+                        <div><SellProduct /></div>
+                      </Modal>
 
+                    </div>
                   </>
 
                   :

@@ -31,14 +31,14 @@ function ChatRoomCompo() {
       if (stompClient.connected) {
         const chatMessage = {
           sender: store.info.info.userId,
-          message: message,
+          message: '상대방이 대화를 나갔습니다.',
           roomId: state.roomId,
           type: 'TALK'
         };
         stompClient.subscribe(`/sub/chat/room/${roomId}`, onMessageReceived);
         chatMessage['type'] = 'EXIT'
         stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
-        stompClient.unsubscribe(`/sub/chat/room/${roomId}`)
+        stompClient.disconnect(`/sub/chat/room/${roomId}`)
 
       }
     };

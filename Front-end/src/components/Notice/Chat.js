@@ -107,7 +107,7 @@ function Chat() {
                     {/* <p className='message_time'>{room.time}</p> */}
                     <div style={{ display: 'flex' }}>
                       <div className='unread_message'>
-                        <p>2</p>
+                        <p>X</p>
                       </div>
                       <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
 

@@ -6,12 +6,42 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getToken, getInfo } from '../store.js'
 import { Link, useNavigate } from 'react-router-dom';
 import ManagementModal from './Modals/ManagementModal';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import SockJS from 'sockjs-client';
+import { over } from 'stompjs';
+
+let stompClient = null;
 function NavBar() {
   let navigate = useNavigate()
   let dispatch = useDispatch()
   let storeToken = useSelector((state) => { return state })
+
   const [modalOpen, setModalOpen] = useState(false);
+
+  const onConnected = () => {
+    console.log(storeToken.token.token, '토큰확인')
+    const chatMessage = {
+      sender: storeToken.info.info.userId,
+      message: '',
+      roomId: 'join' + storeToken.info.info.userId,
+      type: 'TALK'
+    };
+    console.log('연결완료');
+    stompClient.subscribe(`/sub/chat/room/join${storeToken.info.info.userId}`);
+    chatMessage['type'] = 'JOIN'
+    stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+
+  };
+
+  useEffect(() => {
+    console.log(storeToken.token.token, '토큰확인')
+    if (storeToken.token.token) {
+      let Sock = new SockJS('/ws-stomp');
+      console.log(Sock)
+      stompClient = over(Sock);
+      stompClient.connect({}, onConnected);
+    }
+  }, []);
 
   function Logout(e) {
     e.preventDefault();
@@ -20,6 +50,8 @@ function NavBar() {
     dispatch(getToken(null))
     dispatch(getInfo(null))
     document.location.href = '/'
+    stompClient.disconnect(`/sub/chat/room/join${storeToken.info.info.userId}`)
+
   }
 
   const openModal = () => {
@@ -28,7 +60,7 @@ function NavBar() {
   const closeModal = () => {
     setModalOpen(false);
   };
-  
+
   const Token = storeToken.token.token
   return (
     <>
@@ -39,9 +71,9 @@ function NavBar() {
           </label>
           <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
           <ul className="screen_menu">
-            {storeToken.info.info.role === 'ROLE_ADMIN' ? 
-            <li><a className="icon_sort" href='#!' onClick={openModal}><FontAwesomeIcon className='icon' icon={faGear} size="2x" /></a></li>
-            :null}
+            {storeToken.info.info.role === 'ROLE_ADMIN' ?
+              <li><a className="icon_sort" href='#!' onClick={openModal}><FontAwesomeIcon className='icon' icon={faGear} size="2x" /></a></li>
+              : null}
             <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" /></a></li>
             <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
@@ -90,13 +122,13 @@ function NavBar() {
 
 
 
-      
+
       {Token ? (
         <div id="right_toggle">
           <ul className="mobile_menu">
-            {storeToken.info.info.role === 'ROLE_ADMIN' ? 
-            <li><a href='#!' onClick={openModal}><h5>유저관리</h5></a></li>
-            :null}
+            {storeToken.info.info.role === 'ROLE_ADMIN' ?
+              <li><a href='#!' onClick={openModal}><h5>유저관리</h5></a></li>
+              : null}
             <li><a href='/notice'><h5>알림함</h5></a></li>
             <li><a href='/search'><h5>검색</h5></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>

@@ -34,6 +34,7 @@ function Product() {
   const [sell, setSell] = useState(0)
   const [timeState, setTimeState] = useState(1)
   const [time, setTime] = useState('')
+  const [load, setLoad] = useState(0)
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -58,9 +59,11 @@ function Product() {
         setCat(res.data.category)
         setRequser(res.data.requestsUser)
         setSell(res.data.state)
+        setLoad(1)
       })
       .catch(err => {
         console.error(err)
+        setLoad(1)
       })
 
   }, [productid])
@@ -87,12 +90,16 @@ function Product() {
     return (
       <>{
         recproducts.map((product) => {
+          console.log(product)
           let goDetail = '/product/' + product.no
           let mainImg = null;
           if (product.productImg.length > 0) {
             mainImg = 'https://i7c110.p.ssafy.io' + product.productImg[0].path
           }
-          return (
+          let price = product.price
+          const productPrice = price.toLocaleString('ko-KR');
+          if (product.state === 0) {
+            return (
             <div key={product.no}>
               <div className='category_reco' >
                 <img style={{ cursor: 'pointer' }} onClick={() => {
@@ -101,14 +108,16 @@ function Product() {
                   src={mainImg}
                   alt={product.title}
                 />
-                <div className='category_content'>
+                <div className='category_content d-flex flex-column justify-content-center align-items-center'>
                   <h6 className='category_title' style={{ marginTop: '15px', fontSize: '12px' }}>{product.title}</h6>
-                  <p className='category_text' style={{ fontSize: '11px' }}>{product.price}</p>
+                  <p className='category_text' style={{ fontSize: '11px' }}>{productPrice}원</p>
                 </div>
               </div>
 
             </div>
           )
+          }
+          
         })
       }</>)
   }
@@ -301,9 +310,6 @@ function Product() {
     }
   }
 
-  function setLiveTime(e) {
-
-  }
 
   function TimeSet(props) {
     if (props.timeState === 1) {
@@ -315,100 +321,108 @@ function Product() {
     }
   }
 
+  console.log(productData)
   return (
     <>
-      {productData ?
-        <div>
-          <div className='fixnav'>
-            <NavBar />
-          </div>
-          <div className='carousel_box'>
-            <div className="slider">
-              <div className="slides">
-                {imglist}
+      {load ?
+        <>
+          {productData ?
+            <div>
+              <div className='fixnav'>
+                <NavBar />
               </div>
+              <div className='carousel_box'>
+                <div className="slider">
+                  <div className="slides">
+                    {imglist}
+                  </div>
 
-              {/* <a href="#slide-1"></a>
+                  {/* <a href="#slide-1"></a>
             <a href="#slide-2"></a>
             <a href="#slide-3"></a>
             <a href="#slide-4"></a> */}
-            </div>
-          </div>
-          <div className='user_box'>
-            <div className='user_info'>
-              <img className="livechatimg" src={'https://i7c110.p.ssafy.io' + productData.user.profileUrl} alt="#"></img>
-              <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0' }}>
-                {productData.user.nickname} ({productData.region})</p>
-            </div>
-            <p className='score' style={{ marginTop: '30px' }}>평점</p>
-          </div>
-
-          <div className='product_description'>
-            <div className='d-flex justify-content-between align-items-center'>
-              <h1 className='titletext' style={{ margin: '0 10px 0px 10px' }}>{productData.title}</h1>
-              {store.info.info.userId === productData.user.userid ?
-                <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료하기</button> : null}
-            </div>
-            <hr></hr>
-            <h5 className='pricetext' style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
-            <br></br>
-            <p style={{ margin: '0 10px 0 10px' }}>{productData.content}</p>
-            {store.info.info.userId === productData.user.userid ?
-              <div className='d-flex justify-content-end'>
-                <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
-                <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
+                </div>
               </div>
-              : null}
-            <hr></hr>
-            {localStorage.token ? (
-              <>
-              <div className='button_box'>
-                {store.info.info.userId === productData.user.userid
-                  ?
-                  <>
-                    <div className='d-flex'>
-                      <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
-                      <TimeSet timeState={timeState}></TimeSet>
-                      <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
-                      <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
-                        <ul><ShowReq /></ul>
-                      </Modal>
-                    </div>
-                    <br />
-                    <div>
-                      <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
-                        <div><SellProduct /></div>
-                      </Modal>
-
-                    </div>
-                  </>
-
-                  :
-                  <>
-                    <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
-                    <div>
-                      {/* <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} /> */}
-                      <LikeButton no={productData.no} />
-                      {/* <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} onClick={createRoom}>채팅하기</button> */}
-                      <IconButton aria-label="add to favorites" onClick={createRoom}>
-                        <ChatIcon />
-                      </IconButton>
-                      <LiveButton no={productData.no} />
-                    </div>
-                  </>
-                }
+              <div className='user_box'>
+                <div className='user_info'>
+                  <img className="livechatimg" src={'https://i7c110.p.ssafy.io' + productData.user.profileUrl} alt="#"></img>
+                  <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0' }}>
+                    {productData.user.nickname} ({productData.region})</p>
+                </div>
+                <p className='score' style={{ marginTop: '30px' }}>평점</p>
               </div>
-              <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간" hidden={timeState}></input>
-              </>
-            ) : null}
-          </div>
-          <hr></hr>
-          <h5 style={{ textAlign: "center" }}>카테고리 별 추천 상품</h5>
-          <div className='category_reco_box'>
-            {loading ? <Loading /> : <ShowRecProducts />}
-          </div>
-        </div> : <NotFound />
-      }
+
+              <div className='product_description'>
+                <div className='d-flex justify-content-between align-items-center'>
+                  <h1 className='titletext' style={{ margin: '0 10px 0px 10px' }}>{productData.title}</h1>
+                  {store.info.info && productData.state === 0 && store.info.info.userId === productData.user.userid ?
+                    <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료하기</button> : null}
+                  {store.info.info && productData.state ? 
+                  <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
+                  }
+                </div>
+                <hr></hr>
+                <h5 className='pricetext' style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
+                <br></br>
+                <p style={{ margin: '0 10px 0 10px' }}>{productData.content}</p>
+                {store.info.info && store.info.info.userId === productData.user.userid ?
+                  <div className='d-flex justify-content-end'>
+                    <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
+                    <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
+                  </div>
+                  : null}
+                <hr></hr>
+                {localStorage.token && productData.state === 0 ? (
+                  <>
+                    <div className='button_box'>
+                      {store.info.info.userId === productData.user.userid
+                        ?
+                        <>
+                          <div className='d-flex'>
+                            <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
+                            <TimeSet timeState={timeState}></TimeSet>
+                            <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
+                            <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
+                              <ul><ShowReq /></ul>
+                            </Modal>
+                          </div>
+                          <br />
+                          <div>
+                            <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
+                              <div><SellProduct /></div>
+                            </Modal>
+
+                          </div>
+                        </>
+
+                        :
+                        <>
+                          <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+                          <div>
+                            {/* <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} /> */}
+                            <LikeButton no={productData.no} />
+                            {/* <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} onClick={createRoom}>채팅하기</button> */}
+                            <IconButton aria-label="add to favorites" onClick={createRoom}>
+                              <ChatIcon />
+                            </IconButton>
+                            <LiveButton no={productData.no} />
+                          </div>
+                        </>
+                      }
+                    </div>
+                    <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간" hidden={timeState}></input>
+                  </>
+                ) : null}
+              </div>
+              <hr></hr>
+              <h5 style={{ textAlign: "center" }}>카테고리 별 추천 상품</h5>
+              <div className='category_reco_box'>
+                {loading ? <Loading /> : <ShowRecProducts />}
+              </div>
+            </div> : <NotFound />
+          }
+        </>
+        : null}
 
     </>
   )

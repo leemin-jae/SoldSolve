@@ -11,7 +11,7 @@ import NavBar from '../components/NavBar'
 
 
 let stompClient = null;
-function ChatRoomCompo() {
+function ChatRoom() {
   let store = useSelector((state) => { return state })
   const navigate = useNavigate();
   const inputRef = useRef(null);
@@ -155,4 +155,4 @@ function ChatRoomCompo() {
   );
 }
 
-export default ChatRoomCompo;
+export default ChatRoom;

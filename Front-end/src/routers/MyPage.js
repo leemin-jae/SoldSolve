@@ -134,6 +134,7 @@ function MyPage() {
                 srcSet={`${item.product.productImg[0]}`}
                 alt={item.product.title}
                 loading="lazy"
+                style={{height:'200px'}}
               />
               <ImageListItemBar
                 title={item.product.title}

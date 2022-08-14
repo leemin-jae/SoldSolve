@@ -27,5 +27,5 @@ public interface ProductService {
 
     List<Product> getSellProduct(User user);
 
-    void setLiveTime(Timestamp time, String no);
+    String setLiveTime(Timestamp time, String no);
 }

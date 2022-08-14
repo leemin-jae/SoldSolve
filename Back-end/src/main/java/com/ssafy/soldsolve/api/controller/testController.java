@@ -3,6 +3,7 @@ package com.ssafy.soldsolve.api.controller;
 import com.ssafy.soldsolve.api.request.ChatMessage;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.api.service.FileService;
+import com.ssafy.soldsolve.api.service.MessageService;
 import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.db.entity.Chat;
@@ -22,10 +23,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @RestController
-@RequestMapping("/soldsolve")
+@RequestMapping("/api/test")
 public class testController {
 
 
@@ -49,6 +51,9 @@ public class testController {
 
 	@Autowired
 	RoomReadRepository roomReadRepository;
+
+	@Autowired
+	MessageService messageService;
 
 	//      /pub/chat/message/
 	@PostMapping("/chat/message/")
@@ -111,5 +116,26 @@ public class testController {
 		} catch (Exception e) {
 			return new ResponseEntity<String>("등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@GetMapping("")
+	public ResponseEntity<?> testTimeProduct(@RequestBody ChatMessage message) {
+
+		Product p = productService.getProduct("1");
+
+		System.out.println("1 : " + p.getLiveTime());
+		System.out.println("2 : " + p.getLiveTime().toString());
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+		String time = simpleDateFormat.format(p.getLiveTime());
+
+		System.out.println("3 : " + time );
+
+		System.out.println(		messageService.liveTimeLog(p));
+
+
+
+		return new ResponseEntity<Product>(p, HttpStatus.OK);
+
 	}
 }

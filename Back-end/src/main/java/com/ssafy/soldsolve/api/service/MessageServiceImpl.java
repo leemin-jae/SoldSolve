@@ -101,8 +101,10 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public String liveTimeLog(Product product) {
+
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String time = simpleDateFormat.format(product.getLiveTime());
+
         String log = "라이브 요청 상품 " + product.getTitle() + "의 라이브가 " + time + "에 시작합니다." ;
         return log;
     }

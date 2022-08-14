@@ -1,5 +1,6 @@
 package com.ssafy.soldsolve.api.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.api.request.ProductTimePostReq;
 import com.ssafy.soldsolve.api.service.FileService;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.sql.Time;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +62,8 @@ public class ProductController {
     public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category, @RequestParam(required = false) String region) {
 
 
+
+
         try {
             List<Product> result=null;
             String t = title==null?"":title;
@@ -97,6 +102,7 @@ public class ProductController {
 
 
         } catch (Exception e) {
+            e.printStackTrace();
             return new ResponseEntity<String>("등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -155,11 +161,16 @@ public class ProductController {
 
     @PostMapping("/time")
     public ResponseEntity<?> setLiveTime(@RequestBody ProductTimePostReq req) {
+
+        System.out.println(req.getTime());
         try {
-            productService.setLiveTime(req.getTime(), req.getNo());
+
+            Timestamp localToTime = Timestamp.valueOf(req.getTime());
+            System.out.println(localToTime);
+            String time = productService.setLiveTime(localToTime, req.getNo());
 
 
-            return new ResponseEntity<String>(productService.getProduct(req.getNo()).getLiveTime().toString(), HttpStatus.OK);
+            return new ResponseEntity<String>(time, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<String>("시간 설정 실패", HttpStatus.INTERNAL_SERVER_ERROR);

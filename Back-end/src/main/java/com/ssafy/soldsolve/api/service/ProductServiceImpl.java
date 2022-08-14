@@ -10,7 +10,6 @@ import com.ssafy.soldsolve.db.repository.ProductImgRepository;
 import com.ssafy.soldsolve.db.repository.ProductRepository;
 import com.ssafy.soldsolve.db.repository.RequestRepository;
 import com.ssafy.soldsolve.db.repository.UserRepository;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,8 +129,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void setLiveTime(@JsonFormat(timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm") Timestamp time, String no) {
+    public String setLiveTime(Timestamp time, String no) {
+
         Product p = productRepository.findByNo(Integer.parseInt(no));
+        System.out.println(time);
         p.setLiveTime(time);
         productRepository.save(p);
 
@@ -141,6 +143,10 @@ public class ProductServiceImpl implements ProductService {
                 messageService.createLog(r.getUser(), log);
             }
         }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+
+        return simpleDateFormat.format(p.getLiveTime());
     }
 
 

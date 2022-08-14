@@ -1,31 +1,41 @@
 import NavBar from "../components/NavBar"
 import axios from "axios"
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import './routers.css'
 import { getToken } from '../store.js'
 import { useDispatch } from 'react-redux'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 function EditAccount() {
   let dispatch = useDispatch()
-  const [nickname,setNickname] = useState(null)
-  const [password,setPassword] = useState(null)
-  const [pwConfirm,setPwConfirm] = useState(null)
-  const [button,setButton] = useState('noInput')
+  const navigate = useNavigate();
+  const [nickname, setNickname] = useState(null)
+  const [password, setPassword] = useState(null)
+  const [pwConfirm, setPwConfirm] = useState(null)
+  const [button, setButton] = useState('noInput')
 
-  const editAccountForm = {nickName:nickname,password:password}
+  const editAccountForm = { nickName: nickname, password: password }
 
   function inputForm(e) {
-    if (e.target.name === 'nickname') {setNickname(e.target.value) 
-      if (e.target.value && password && pwConfirm) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}} 
+    if (e.target.name === 'nickname') {
+      setNickname(e.target.value)
+      if (e.target.value && password && pwConfirm) { setButton('input') }
+      else if (e.target.value === '') { setButton('noInput') }
+    }
 
-    else if (e.target.name === 'password') {setPassword(e.target.value)
-      if (e.target.value && pwConfirm && nickname) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}}
+    else if (e.target.name === 'password') {
+      setPassword(e.target.value)
+      if (e.target.value && pwConfirm && nickname) { setButton('input') }
+      else if (e.target.value === '') { setButton('noInput') }
+    }
 
-    else if (e.target.name === 'pwconfirm') {setPwConfirm(e.target.value) 
-      if (e.target.value && password && nickname) {setButton('input')}
-      else if (e.target.value ==='') {setButton('noInput')}}
+    else if (e.target.name === 'pwconfirm') {
+      setPwConfirm(e.target.value)
+      if (e.target.value && password && nickname) { setButton('input') }
+      else if (e.target.value === '') { setButton('noInput') }
+    }
   }
 
   let submitButton = null;
@@ -37,35 +47,35 @@ function EditAccount() {
 
   function editAccount(e) {
     e.preventDefault();
-    if (password === pwConfirm){
+    if (password === pwConfirm) {
       console.log(editAccountForm)
       axios({
-      url: '/api/users/update/userinfo',
-      method: 'Patch',
-      data: editAccountForm,
-      headers: { Authorization: `Bearer ${localStorage.token}` }
-    })
-      .then(res => {
-        console.log(res)
-        alert("회원정보가 수정되었습니다.")
-        document.location.href = '/mypage'
+        url: '/api/users/update/userinfo',
+        method: 'Patch',
+        data: editAccountForm,
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          console.log(res)
+          alert("회원정보가 수정되었습니다.")
+          document.location.href = '/mypage'
 
-      })
-      .catch(err => {
-        console.error(err.response.data)
-      })
+        })
+        .catch(err => {
+          console.error(err.response.data)
+        })
     } else {
       alert("비밀번호가 맞지 않습니다.")
     }
   }
 
-  function deleteAccount(e){
+  function deleteAccount(e) {
     e.preventDefault();
     if (window.confirm("정말 회원을 탈퇴 하시겠습니까?")) {
       axios({
         url: '/api/users',
         method: 'delete',
-        headers : { Authorization: `Bearer ${localStorage.token}` }
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res)
@@ -87,17 +97,18 @@ function EditAccount() {
       <div>
         <div className="test">
           <div className="test3">
+            <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px', cursor: 'pointer', position: 'relative' }} onClick={() => { navigate(-1) }} />
             <h1 className="my-5">회원정보수정</h1>
             <div className="form">
-                <form onSubmit={e => editAccount(e)}>
-                  <input className="inputform" name="nickname" onKeyUp={e =>{inputForm(e)}} type="text" placeholder="NICKNAME"></input><br />
-                  <input className="inputform" name="password" onKeyUp={e =>{inputForm(e)}} type="password" placeholder="PASSWORD"></input><br />
-                  <input className="inputform" name="pwconfirm" onKeyUp={e =>{inputForm(e)}} type="password" placeholder="PASSWORD CONFIRM"></input><br />
-                  <a className="atag" onClick={e => deleteAccount(e)} href="#!">회원 탈퇴하기</a><br />
-                  {submitButton}
-                </form>
+              <form onSubmit={e => editAccount(e)}>
+                <input className="inputform" name="nickname" onKeyUp={e => { inputForm(e) }} type="text" placeholder="NICKNAME"></input><br />
+                <input className="inputform" name="password" onKeyUp={e => { inputForm(e) }} type="password" placeholder="PASSWORD"></input><br />
+                <input className="inputform" name="pwconfirm" onKeyUp={e => { inputForm(e) }} type="password" placeholder="PASSWORD CONFIRM"></input><br />
+                <a className="atag" onClick={e => deleteAccount(e)} href="#!">회원 탈퇴하기</a><br />
+                {submitButton}
+              </form>
             </div>
-          </div>   
+          </div>
         </div>
       </div>
     </div>

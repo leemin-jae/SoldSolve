@@ -11,7 +11,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import LikeButton from './LikeButton';
 import LiveButton from './LiveButton';
 import NoItem from '../NoItem'
-import { CircularProgress, LinearProgress, Stack } from '@mui/material';
+import { LinearProgress, Stack } from '@mui/material';
 
 function Products() {
   const [data, setData] = useState([]);

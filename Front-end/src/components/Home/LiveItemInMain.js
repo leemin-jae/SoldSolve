@@ -111,8 +111,6 @@ function LiveItemInMain() {
     <div className="content">
       <div className='hometext'><h4>NOW LIVE</h4></div>
       {LiveList.length ? <ShowMainItem data={LiveList} /> : <Loading />}
-      <ul className='cards' id='maincontent'>
-      </ul>
     </div>
   )
 }

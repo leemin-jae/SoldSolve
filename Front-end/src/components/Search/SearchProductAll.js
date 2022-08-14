@@ -29,12 +29,12 @@ function SearchProduct() {
                 }
             );
             if (result.data.length > 0) {
-                setSearchData(result.data)
+                setSearchData(result.data.reverse())
                 setOkSearch(true)
             } else {
                 const allData = await axios.get(`/api/product`);
                 // console.log(allData)
-                setSearchData(allData.data)
+                setSearchData(allData.data.reverse())
             }
         }
         fetchData();

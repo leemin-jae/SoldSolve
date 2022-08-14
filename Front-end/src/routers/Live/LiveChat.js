@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux'
-
+import OfferBuyerModal from "../../components/Modals/OfferBuyerModal";
+import OfferSellerModal from "../../components/Modals/OfferSellerModal";
 
 const LiveChat = (props) => {
   console.log(props)
@@ -70,10 +71,61 @@ const LiveChat = (props) => {
     setMessage("");
   };
 
+  const OfferBuyer = () => {
+    const [buyofferModalOpen, setBuyOfferModalOpen] = useState(false);
+
+    const openBuyOfferModal = () => {
+      setBuyOfferModalOpen(true);
+    };
+    const closeBuyOfferModal = () => {
+      setBuyOfferModalOpen(false);
+    };
+
+
+    return (
+      <>
+      <button onClick={openBuyOfferModal}>
+              <p>가격제안</p>
+            </button>
+            <OfferBuyerModal open={buyofferModalOpen} close={closeBuyOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
+            </>
+    )
+
+  }
+
+  const OfferSeller = () => {
+    const [sellofferModalOpen, setSellOfferModalOpen] = useState(false);
+
+    const openSellOfferModal = () => {
+      setSellOfferModalOpen(true);
+    };
+    const closeSellOfferModal = () => {
+      setSellOfferModalOpen(false);
+    };
+
+
+    return (
+      <>
+      <button onClick={openSellOfferModal}>
+              <p>제안목록</p>
+            </button>
+            <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} />
+            </>
+    )
+
+  }
+
+
 
   return (
     <>
-      <h3 style={{ marginInline: '1rem' }}>채팅방</h3>
+      <div style={{
+        position: 'relative',
+        display: 'flex', justifyContent: 'space-between'
+      }}>
+        <div><h3 style={{ marginInline: '1rem' }}>채팅방</h3></div>
+        <div>{store.info.info.userId === props.props.sellerInfo.userid ? <OfferSeller /> : <OfferBuyer />}</div>
+      </div>
       <div className='chatbox'>
         <div className=''>
           {messageList.map((data, i) => (

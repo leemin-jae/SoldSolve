@@ -29,9 +29,9 @@ function LiveButton(no) {
 
     if (live === true) {
       axios({
-        url: `/api/requests`,
+        url: `/api/requests/` + no.no,
         method: 'delete',
-        params: { product: no.no },
+        // params: { product: no.no },
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
@@ -43,9 +43,9 @@ function LiveButton(no) {
         })
     } else {
       axios({
-        url: `/api/requests`,
+        url: `/api/requests/` + no.no,
         method: 'post',
-        params: { product: no.no },
+        // params: { product: no.no },
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {

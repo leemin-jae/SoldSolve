@@ -28,7 +28,7 @@ function SearchProduct() {
                     }
                 }
             );
-            setSearchData(result.data)
+            setSearchData(result.data.reverse())
             console.log(searchData);
             console.log(result.data)
         }

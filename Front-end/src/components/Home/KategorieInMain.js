@@ -83,6 +83,7 @@ function KategorieInMain() {
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
+                        style={{ minHeight: 180, width: '100%' }}
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>

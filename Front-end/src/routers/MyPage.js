@@ -24,6 +24,8 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 
 
+
+
 function MyPage() {
 
   let store = useSelector((state) => { return state })

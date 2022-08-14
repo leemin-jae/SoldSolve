@@ -71,18 +71,15 @@ function Chat() {
         {roomList.map((room, idx) => {
           let you = null;
           let yourImg = null;
-          let yourEmail = null;
           let me = null
 
           if (store.info.info.userId === room.buyer.userid) {
             you = room.seller.nickname
             yourImg = room.seller.profileUrl
-            yourEmail = room.seller.email
             me = room.buyer.nickname
           } else {
             you = room.buyer.nickname
             yourImg = room.buyer.profileUrl
-            yourEmail = room.buyer.email
             me = room.seller.nickname
           }
           console.log(room, '룸룸')
@@ -129,7 +126,7 @@ function Chat() {
 
                   <div>
                     <h6 className='profile_text'>{you}</h6><br />
-                    <div className='profile_text'>{yourEmail}.</div>
+                    <div className='profile_text'>{room.lastMessage}.</div>
                   </div>
                 </div>
                 <div>

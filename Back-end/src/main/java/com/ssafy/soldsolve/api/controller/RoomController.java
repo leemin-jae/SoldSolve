@@ -2,6 +2,7 @@ package com.ssafy.soldsolve.api.controller;
 
 
 import com.ssafy.soldsolve.api.service.ChatService;
+import com.ssafy.soldsolve.api.service.MessageService;
 import com.ssafy.soldsolve.api.service.RoomService;
 import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
@@ -27,6 +28,9 @@ public class RoomController {
     @Autowired
     ChatService chatService;
 
+    @Autowired
+    MessageService messageService;
+
 
     @PostMapping("")
     public ResponseEntity<?> createRoom(@RequestParam String seller, Authentication authentication){
@@ -42,6 +46,8 @@ public class RoomController {
 
         int num = roomService.findDuplicate(buyerUser, sellerUser);
         if(num == -1){
+            String log = messageService.roomLog(buyerUser);
+            messageService.createLog(sellerUser, log);
             return ResponseEntity.status(200).body(roomService.createRoom(sellerUser, buyerUser));
         }else{
             return ResponseEntity.status(200).body(num);

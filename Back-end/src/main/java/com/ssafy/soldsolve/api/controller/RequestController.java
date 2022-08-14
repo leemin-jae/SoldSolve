@@ -43,7 +43,9 @@ public class RequestController {
             requestService.createRequest(user, product);
             // 상품
             Product p = productService.getProductByNo(product);
-            messageService.createLog(user, p);
+
+            String log = messageService.requestLog(user, p);
+            messageService.createLog(p.getUser(), log);
             return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
         } catch (Exception e){
             e.printStackTrace();

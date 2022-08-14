@@ -13,10 +13,18 @@ public interface MessageService {
     Message getMessage(int messageId);
     Message createMessage(MessagePostReq registerInfo);
 
-    void createLog(User requester, Product p);
+    void createLog(User user , String log);
     void readMessage(MessagePostReq messagePostReq, Message message);
 
     void updateMessage(MessagePostReq messagePostReq, Message message);
 
     void deleteMessage(int messageId);
+
+    String requestLog(User user, Product p);
+
+    String roomLog(User user);
+
+    String liveLog(Product product);
+
+    int CountIsReadMessage(User user);
 }

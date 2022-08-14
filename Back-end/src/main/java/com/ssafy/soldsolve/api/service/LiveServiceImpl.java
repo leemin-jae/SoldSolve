@@ -36,22 +36,6 @@ public class LiveServiceImpl implements LiveService {
         }
         l.setProduct(p);
 
-        List<Request> requestList = requestRepository.findAllByProduct(p).orElseGet(null);
-        if (requestList!=null) {
-            String productTitle = p.getTitle();
-            String requestedNickname = p.getUser().getNickname();
-            for (int i=0; i<requestList.size(); i++) {
-                Message m = new Message();
-                User requester = requestList.get(i).getUser();
-                String log = String.format("%s님이 %s 상품 라이브를 시작했습니다!", requestedNickname, productTitle);
-                // requestList 내 유저들을 대상으로 message 발송
-                m.setUser(requester);
-                m.setContent(log);
-                m.setIsRead(false);
-                messageRepository.save(m);
-            }
-        }
-
         return liveRepository.save(l).getSessionId();
     }
 

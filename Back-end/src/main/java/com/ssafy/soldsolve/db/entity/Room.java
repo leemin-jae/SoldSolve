@@ -42,7 +42,6 @@ public class Room {
     @Column(columnDefinition = "int default 0")
     private int sellerOut;
 
-    @ColumnDefault("")
     private String lastMessage;
 
     @JsonIgnore

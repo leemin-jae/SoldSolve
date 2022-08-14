@@ -21,6 +21,23 @@ public class MessageController {
     @Autowired
     MessageService messageService;
 
+    // 안 읽은 메세지 갯수
+    @GetMapping("/count")
+    public ResponseEntity<?> getIsReadMessage(Authentication authentication) {
+        try{
+            SsafyUserDetails userDetails = (SsafyUserDetails) authentication.getDetails();
+            String userId = userDetails.getUsername();
+            User user = userService.getUserByUserId(userId);
+
+            int isReadMessage = messageService.CountIsReadMessage(user);
+
+            return ResponseEntity.status(200).body(isReadMessage);
+        }catch (Exception e){
+            return ResponseEntity.status(200).body(BaseResponseBody.of(400, "에러 발생"));
+        }
+
+    }
+
     // 자기 메시지 조회
     @GetMapping("")
     public ResponseEntity<?> selectMessage(Authentication authentication) {

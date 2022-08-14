@@ -29,6 +29,7 @@ public class RoomServiceImpl implements RoomService{
         Room room = new Room();
         room.setSeller(sellerUser);
         room.setBuyer(buyerUser);
+        room.setLastMessage("");
         int no = roomRepository.save(room).getRoomId();
 
         Room r = roomRepository.getOne(no);

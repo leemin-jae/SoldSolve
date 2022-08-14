@@ -48,4 +48,11 @@ public class WishServiceImpl implements WishService {
         wishRepository.delete(wish);
     }
 
+    @Override
+    public List<Wish> getWishUser(int product) {
+        Product wishedProduct = productRepository.findByNo(product);
+        List<Wish> l = wishRepository.findByProduct(wishedProduct);
+        return l;
+    }
+
 }

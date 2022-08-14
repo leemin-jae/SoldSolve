@@ -2,6 +2,7 @@ package com.ssafy.soldsolve.api.controller;
 
 
 import com.ssafy.soldsolve.api.service.DealService;
+import com.ssafy.soldsolve.api.service.MessageService;
 import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
@@ -29,6 +30,9 @@ public class DealController {
     @Autowired
     ProductService productService;
 
+    @Autowired
+    MessageService messageService;
+
     @GetMapping("/buy")  // 구매 물건 확인
     public ResponseEntity<?> getBuyList(Authentication authentication){
         SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
@@ -41,6 +45,8 @@ public class DealController {
             } else if (p.size() == 0) {
                 return new ResponseEntity<String>("조회된 내용이 없습니다.", HttpStatus.NO_CONTENT);
             } else {
+
+
                 return new ResponseEntity<List<Deal>>(p, HttpStatus.OK);
             }
         }catch  (Exception e) {
@@ -64,6 +70,13 @@ public class DealController {
                 return new ResponseEntity<String>("물품을 찾을 수 없습니다", HttpStatus.BAD_REQUEST);
             }else{
                 dealService.createDeal(buy,p);
+
+                String log = p.getTitle() + "(" + p.getNo() + ") 의 거래가 완료되었습니다";
+                messageService.createLog(buy,log);
+                messageService.createLog(buy,log);
+
+
+
                 return new ResponseEntity<String>("거래가 완료되었습니다", HttpStatus.OK);
 
             }

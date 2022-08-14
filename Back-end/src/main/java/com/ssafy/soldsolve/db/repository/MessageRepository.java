@@ -14,4 +14,8 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 
     @Query(value = "SELECT m FROM Message m WHERE m.user = :user")
     List<Message> findAllByUser(User user, Sort sort);
+
+
+    long countByIsReadAndUser(boolean b, User user);
 }
+    

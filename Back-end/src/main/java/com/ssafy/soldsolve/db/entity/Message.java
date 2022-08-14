@@ -1,5 +1,6 @@
 package com.ssafy.soldsolve.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -21,6 +22,7 @@ public class Message {
     private String content;
 
     @CreationTimestamp
+    @JsonFormat(timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm")
     private Timestamp writtenTimes;
 
     private Boolean isRead;

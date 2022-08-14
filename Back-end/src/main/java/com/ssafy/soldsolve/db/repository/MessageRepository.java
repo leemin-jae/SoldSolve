@@ -18,4 +18,3 @@ public interface MessageRepository extends JpaRepository<Message, Integer> {
 
     long countByIsReadAndUser(boolean b, User user);
 }
-    

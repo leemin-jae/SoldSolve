@@ -1,6 +1,7 @@
 package com.ssafy.soldsolve.api.controller;
 
 import com.ssafy.soldsolve.api.request.ProductPostReq;
+import com.ssafy.soldsolve.api.request.ProductTimePostReq;
 import com.ssafy.soldsolve.api.service.FileService;
 import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.api.service.UserService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -148,6 +150,19 @@ public class ProductController {
 
         } catch (Exception e) {
             return new ResponseEntity<String>("삭제 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/time")
+    public ResponseEntity<?> setLiveTime(@RequestBody ProductTimePostReq req) {
+        try {
+            productService.setLiveTime(req.getTime(), req.getNo());
+
+
+            return new ResponseEntity<Timestamp>(productService.getProduct(req.getNo()).getLiveTime(), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>("시간 설정 실패", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

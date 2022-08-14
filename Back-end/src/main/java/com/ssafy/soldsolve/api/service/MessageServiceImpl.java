@@ -98,6 +98,11 @@ public class MessageServiceImpl implements MessageService {
         return log;
     }
 
+    @Override
+    public String liveTimeLog(Product product) {
+        String log = "라이브 요청 상품 " + product.getTitle() + "의 라이브가 " + product.getLiveTime().toString() + "에 시작합니다." ;
+        return null;
+    }
 
 
 }

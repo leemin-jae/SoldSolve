@@ -27,4 +27,6 @@ public interface MessageService {
     String liveLog(Product product);
 
     int CountIsReadMessage(User user);
+
+    String liveTimeLog(Product product);
 }

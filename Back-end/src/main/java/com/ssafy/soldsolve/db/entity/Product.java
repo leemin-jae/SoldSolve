@@ -1,11 +1,13 @@
 package com.ssafy.soldsolve.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,12 +39,17 @@ public class Product {
 
     private int viewCount;
 
+    @JsonFormat(timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm")
+    private Timestamp liveTime;
+
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "user_pk")
     private User user;
 
     @OneToMany(mappedBy = "userid")
     List<User> requestsUser = new ArrayList<>();
+
+
 
 
 

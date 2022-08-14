@@ -5,9 +5,7 @@ import com.ssafy.soldsolve.api.request.LiveCreatePostReq;
 import com.ssafy.soldsolve.api.service.*;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
 import com.ssafy.soldsolve.common.model.response.BaseResponseBody;
-import com.ssafy.soldsolve.db.entity.Chat;
-import com.ssafy.soldsolve.db.entity.User;
-import com.ssafy.soldsolve.db.entity.Wish;
+import com.ssafy.soldsolve.db.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -27,10 +25,13 @@ public class LiveController {
     LiveService liveService;
 
     @Autowired
-    WishService wishService;
+    RequestService requestService;
 
     @Autowired
     MessageService messageService;
+
+    @Autowired
+    ProductService productService;
 
 
 
@@ -53,11 +54,12 @@ public class LiveController {
         try{
             String sessionId = liveService.createLive(req,user);
 
-            List<Wish> l = wishService.getWishUser(Integer.parseInt(req.getProductNo()));
+
+            List<Request> l = requestService.getUserList(productService.getProduct(req.getProductNo()));
             if(l != null) {
-                for (Wish w : l) {
-                    String log = messageService.liveLog(w.getProduct());
-                    messageService.createLog(w.getUser(), log);
+                for (Request r : l) {
+                    String log = messageService.liveLog(r.getProduct());
+                    messageService.createLog(r.getUser(), log);
                 }
             }
 

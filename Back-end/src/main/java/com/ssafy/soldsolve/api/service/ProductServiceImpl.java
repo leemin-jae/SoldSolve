@@ -1,5 +1,6 @@
 package com.ssafy.soldsolve.api.service;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.db.entity.Product;
 import com.ssafy.soldsolve.db.entity.ProductImg;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +38,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     RequestRepository requestRepository;
+
+    @Autowired
+    MessageService messageService;
 
 
 
@@ -121,6 +126,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getSellProduct(User user) {
         return productRepository.findByUser(user);
+    }
+
+    @Override
+    public void setLiveTime(@JsonFormat(timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm") Timestamp time, String no) {
+        Product p = productRepository.findByNo(Integer.parseInt(no));
+        p.setLiveTime(time);
+        productRepository.save(p);
+
+        List<Request> l = requestRepository.findByProduct(p);
+        if(l != null) {
+            for (Request r : l) {
+                String log = messageService.liveTimeLog(r.getProduct());
+                messageService.createLog(r.getUser(), log);
+            }
+        }
     }
 
 

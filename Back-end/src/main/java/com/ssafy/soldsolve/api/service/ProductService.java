@@ -6,6 +6,7 @@ import com.ssafy.soldsolve.db.entity.User;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface ProductService {
@@ -25,4 +26,6 @@ public interface ProductService {
     List<Product> searchProduct(String t, String c, String r);
 
     List<Product> getSellProduct(User user);
+
+    void setLiveTime(Timestamp time, String no);
 }

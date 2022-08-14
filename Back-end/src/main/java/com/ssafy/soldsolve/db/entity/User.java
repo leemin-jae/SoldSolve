@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.nashorn.internal.ir.annotations.Ignore;
 import org.hibernate.annotations.CreationTimestamp;
@@ -37,6 +38,7 @@ public class User {
 	private String profileUrl;
 	
 	@CreationTimestamp
+	@JsonFormat(timezone = "Asia/Seoul", pattern = "yyyy-MM-dd HH:mm")
 	private Timestamp createDate;
 
 	private double score;

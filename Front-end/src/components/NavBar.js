@@ -9,6 +9,7 @@ import ManagementModal from './Modals/ManagementModal';
 import React, { useState, useEffect } from 'react';
 import SockJS from 'sockjs-client';
 import { over } from 'stompjs';
+import axios from 'axios';
 
 let stompClient = null;
 function NavBar() {
@@ -16,6 +17,7 @@ function NavBar() {
   let dispatch = useDispatch()
   let storeToken = useSelector((state) => { return state })
 
+  const [noticeCount, setNoticeCount] = useState(0)
   const [modalOpen, setModalOpen] = useState(false);
 
   const onConnected = () => {
@@ -42,6 +44,22 @@ function NavBar() {
       stompClient.connect({}, onConnected);
     }
   }, []);
+
+  useEffect(()=> {
+    axios({
+      url: `api/messages/count`,
+      method: 'get',
+      headers: { Authorization: `Bearer ${localStorage.token}` }
+    })
+      .then(res => {
+        console.log(res.data)
+        setNoticeCount(res.data)
+        console.log(noticeCount, '남은 알림 개수')
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }, [noticeCount])
 
   function Logout(e) {
     e.preventDefault();

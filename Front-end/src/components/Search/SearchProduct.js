@@ -65,7 +65,7 @@ function SearchProduct() {
                                                     <img className='card_image'
                                                         src={mainImg}
                                                         alt={product.title}
-                                                        style={{ opacity: '70%', width: '100%' }}
+                                                        style={{ opacity: '70%', width: '100%', height: '170px' }}
                                                     />
                                                     <h1 style={{ marginTop: '-100px', color: '#6667ab' }}>판매 완료</h1>
                                                 </div>

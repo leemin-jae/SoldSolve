@@ -33,8 +33,9 @@ function Product() {
   const [youNick, setYouNick] = useState('')
   const [sell, setSell] = useState(0)
   const [timeState, setTimeState] = useState(1)
-  const [time, setTime] = useState('')
+  const [livetime, setLiveTime] = useState(null)
   const [load, setLoad] = useState(0)
+  
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -60,6 +61,7 @@ function Product() {
         setRequser(res.data.requestsUser)
         setSell(res.data.state)
         setLoad(1)
+        setLiveTime(res.data.liveTime)
       })
       .catch(err => {
         console.error(err)
@@ -311,8 +313,6 @@ function Product() {
       setTimeState(0)
     } else {
       setTimeState(1)
-      console.log('설정하기 눌렀을때2')
-      console.log(document.getElementById('LiveTime').value)
       const selectTime =document.getElementById('LiveTime').value
 
       console.log(selectTime)
@@ -421,7 +421,11 @@ function Product() {
 
                         :
                         <>
-                          <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+                          <div>
+                            <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+                            {productData.liveTime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{productData.liveTime}</button> : null}
+                          </div>
+                          
                           <div>
                             {/* <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} /> */}
                             <LikeButton no={productData.no} />
@@ -429,7 +433,7 @@ function Product() {
                             <IconButton aria-label="add to favorites" onClick={createRoom}>
                               <ChatIcon />
                             </IconButton>
-                            <LiveButton no={productData.no} />
+                            {livetime ? null : <LiveButton no={productData.no} />}
                           </div>
                         </>
                       }

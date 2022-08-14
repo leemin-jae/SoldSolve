@@ -33,7 +33,7 @@ function ChatRoom() {
     openModal()
   }
 
-  console.log(state.productId)
+  console.log(state)
   useEffect(() => {
     let Sock = new SockJS('/ws-stomp');
     console.log(Sock)
@@ -126,7 +126,6 @@ function ChatRoom() {
     console.log(err);
     throw err;
   };
-  console.log(state)
   const scoreheader = {
     you:state.you,
     seller : state.sellerId,

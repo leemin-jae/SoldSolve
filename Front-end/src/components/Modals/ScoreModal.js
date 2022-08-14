@@ -69,7 +69,7 @@ const ScoreModal = (props) => {
 
           <div className='scoreMain'>
             <div className='scoreTitle'>
-              <p className='titleText'>거래 했던 상대방을</p>
+              <p className='titleText'>상대방을</p>
               <p className='titleText'>평가해주세요!</p>
             </div>
             

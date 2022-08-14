@@ -100,24 +100,24 @@ function Product() {
           const productPrice = price.toLocaleString('ko-KR');
           if (product.state === 0) {
             return (
-            <div key={product.no}>
-              <div className='category_reco' >
-                <img style={{ cursor: 'pointer' }} onClick={() => {
-                  navigate(goDetail)
-                }} className='category_img'
-                  src={mainImg}
-                  alt={product.title}
-                />
-                <div className='category_content d-flex flex-column justify-content-center align-items-center'>
-                  <h6 className='category_title' style={{ marginTop: '15px', fontSize: '12px' }}>{product.title}</h6>
-                  <p className='category_text' style={{ fontSize: '11px' }}>{productPrice}원</p>
+              <div key={product.no}>
+                <div className='category_reco' >
+                  <img style={{ cursor: 'pointer' }} onClick={() => {
+                    navigate(goDetail)
+                  }} className='category_img'
+                    src={mainImg}
+                    alt={product.title}
+                  />
+                  <div className='category_content d-flex flex-column justify-content-center align-items-center'>
+                    <h6 className='category_title' style={{ marginTop: '15px', fontSize: '12px' }}>{product.title}</h6>
+                    <p className='category_text' style={{ fontSize: '11px' }}>{productPrice}원</p>
+                  </div>
                 </div>
-              </div>
 
-            </div>
-          )
+              </div>
+            )
           }
-          
+
         })
       }</>)
   }
@@ -263,6 +263,10 @@ function Product() {
 
   const createRoom = () => {
     if (window.confirm("판매자와 연락하시겠습니까?")) {
+      let buyerId = null
+      if (store.info.info.userId !== productData.user.userid) {
+        buyerId = store.info.info.userId
+      }
       axios({
         url: '/api/room',
         method: 'post',
@@ -271,7 +275,7 @@ function Product() {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, meId: store.info.info.userId } })
+          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, meId: store.info.info.userId, productId: productid, sellerId: productData.user.userid, buyerId: buyerId } })
         })
         .catch(err => {
           console.log(err)
@@ -307,7 +311,25 @@ function Product() {
       setTimeState(0)
     } else {
       setTimeState(1)
+      console.log('설정하기 눌렀을때2')
       console.log(document.getElementById('LiveTime').value)
+      const selectTime =document.getElementById('LiveTime').value
+
+      console.log(selectTime)
+      axios({
+        url: `http://i7c110.p.ssafy.io:8080/api/product/time`,
+        method: 'post',
+        data: {
+          no:productid,
+          time: document.getElementById('LiveTime').value},
+      })
+        .then(res => {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+
     }
   }
 
@@ -358,8 +380,8 @@ function Product() {
                   <h1 className='titletext' style={{ margin: '0 10px 0px 10px' }}>{productData.title}</h1>
                   {store.info.info && productData.state === 0 && store.info.info.userId === productData.user.userid ?
                     <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료하기</button> : null}
-                  {store.info.info && productData.state ? 
-                  <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
+                  {store.info.info && productData.state ?
+                    <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
                   }
                 </div>
                 <hr></hr>
@@ -381,8 +403,9 @@ function Product() {
                         <>
                           <div className='d-flex'>
                             <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
-                            <TimeSet timeState={timeState}></TimeSet>
                             <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
+                            {productData.liveTime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{productData.liveTime}</button> : <TimeSet timeState={timeState}></TimeSet>}
+                            
                             <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
                               <ul><ShowReq /></ul>
                             </Modal>

@@ -100,10 +100,16 @@ function Notice() {
   }
   return (
     <div>
-      <div className="articles">
+      <div className="noticeTab">
         {storeToken.info.info.role === 'ROLE_ADMIN' ?
-          <button className='noticeButton my-1 d-flex justify-content-end' onClick={e => createButton(e)}>공지사항 작성하기</button> : null}
-        {lis}
+          <div className='d-flex justify-content-end'>
+            <button className='noticeButton my-1 d-flex justify-content-end' onClick={e => createButton(e)}>공지사항 작성하기</button>
+          </div>
+           : null}
+          <div className='articles'>
+            {lis}
+          </div>
+        
       </div>
       <ModalNotice open={modalOpen} close={closeModal} header={modalMode}>
         판매내역리스트

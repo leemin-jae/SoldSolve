@@ -8,7 +8,7 @@ import axios from 'axios';
 import { faPaperPlane, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
 import NavBar from '../components/NavBar'
-
+import ScoreModal from '../components/Modals/ScoreModal'
 
 let stompClient = null;
 function ChatRoom() {
@@ -20,7 +20,20 @@ function ChatRoom() {
   const [chats, setChats] = useState([]);
   const [message, setMessage] = useState('');
   const [dbChats, setDbChats] = useState()
+  const [modalOpen, setModalOpen] = useState(false);
 
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+  function scoreButton(e) {
+    e.preventDefault();
+    openModal()
+  }
+
+  console.log(state.productId)
   useEffect(() => {
     let Sock = new SockJS('/ws-stomp');
     console.log(Sock)
@@ -109,12 +122,18 @@ function ChatRoom() {
     inputRef.current.focus();
   };
 
-
   const onError = err => {
     console.log(err);
     throw err;
   };
-
+  console.log(state)
+  const scoreheader = {
+    you:state.you,
+    seller : state.sellerId,
+    me : state.meId,
+    productId : state.productId,
+    buyerId : state.buyerId
+  }
   console.log(message, chats)
   return (
     <div>
@@ -140,8 +159,8 @@ function ChatRoom() {
           </div>
         </div>
       </div>
-      <div className='input_box'>
-        <form onSubmit={e => sendChatHandler(e)} style={{ display: 'flex', width: '100%' }}>
+      <div>
+        <form className='input_box' onSubmit={e => sendChatHandler(e)} style={{ display: 'flex', width: '100%' }}>
           <input className='chat_input' ref={inputRef}
             value={message}
             onChange={e => setMessage(e.target.value)}
@@ -149,7 +168,12 @@ function ChatRoom() {
             placeholder="메시지를 입력하세요"></input>
           <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e => sendChatHandler(e)} />
         </form>
+        {state.sellerId === store.info.info.userId ?
+         <button className='sellbutton' onClick={e=>scoreButton(e)}>이사람에게 판매했습니다!</button>
+        :
+        <button className='sellbutton' onClick={e=>scoreButton(e)}>이사람에게 구매했습니다!</button>}
       </div>
+      <ScoreModal open={modalOpen} close={closeModal} header={scoreheader}></ScoreModal>
     </div >
 
   );

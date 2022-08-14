@@ -81,11 +81,11 @@ function KategorieInMain() {
                   <SwiperSlide className='cards_item' key={product.no}>
                     <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
                       {product.state ? 
-                      <div style={{height:'170px'}}>
+                      <div style={{height: '169px'}}>
                         <img className='card_image'
                         src={mainImg}
                         alt={product.title}
-                        style={{opacity:'70%', width:'100%'}}
+                        style={{opacity:'70%',height: '169px',objectFit:'fill'}}
                         />
                         <h1 style={{marginTop:'-100px', color:'#6667ab'}}>판매 완료</h1> 
                       </div>
@@ -93,14 +93,10 @@ function KategorieInMain() {
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
-// <<<<<<< HEAD
-                        style={{ minHeight: 180, width: '100%' }}
+                        style={{ height: '169px', width: '100%' }}
                       />
-// =======
-//                         style={{height:'170px',width:'100%'}}
-//                         />
+
                       }
-{/* // >>>>>>> 50f36b241503b821f4bf18f58f2796b3def88703 */}
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>
                         <p className='card_text'>{productPrice} 원</p>

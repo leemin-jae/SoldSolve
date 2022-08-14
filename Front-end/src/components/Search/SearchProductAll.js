@@ -62,10 +62,23 @@ function SearchProduct() {
                         <li className='cards_item' key={product.no}>
                             <div className='card'>
                                 <a href={`/product/${product.no}`}>
-                                    <img className='card_image'
-                                        src={mainImg}
-                                        alt={product.title}
-                                    />
+                                    {product.state ?
+                                        <div style={{ height: '170px' }}>
+                                            <img className='card_image'
+                                                src={mainImg}
+                                                alt={product.title}
+                                                style={{ opacity: '70%', width: '100%' }}
+                                            />
+                                            <h1 style={{ marginTop: '-100px', color: '#6667ab' }}>판매 완료</h1>
+                                        </div>
+                                        :
+                                        <img className='card_image'
+                                            src={mainImg}
+                                            alt={product.title}
+                                            style={{ height: '170px', width: '100%' }}
+                                        />
+                                    }
+
                                     <div className='card_content'>
                                         <h5 className='card_title'>{pTitle}</h5>
                                         <p className='card_text'>{productPrice} 원</p>
@@ -91,7 +104,7 @@ function SearchProduct() {
     };
     const NoSearchItem = () => {
         return (
-            <div style={{textAlign: 'center'}}>
+            <div style={{ textAlign: 'center' }}>
                 <h5>검색결과가 없습니다</h5>
             </div>
         )
@@ -104,7 +117,7 @@ function SearchProduct() {
             </div>
             <SearchBar></SearchBar>
             <div className='content'>
-            {oksearch ? <></> : <NoSearchItem />}
+                {oksearch ? <></> : <NoSearchItem />}
                 <ul className='cards' id='maincontent'>
                     {<ShowProducts />}
                 </ul>

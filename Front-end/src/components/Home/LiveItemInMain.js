@@ -86,7 +86,7 @@ function LiveItemInMain() {
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
-                        style={{ height: 250 }}
+                        style={{ height: 190 }}
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>

@@ -62,7 +62,7 @@ function LikeButton(no) {
     return (
       <>
         {like ?
-          <IconButton aria-label="add to favorites" onClick={LikeChange}>
+          <IconButton style={{color:'red'}} aria-label="add to favorites" onClick={LikeChange}>
             <FavoriteIcon />
           </IconButton>
           :

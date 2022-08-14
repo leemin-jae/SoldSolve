@@ -32,7 +32,7 @@ function Product() {
   const [requser, setRequser] = useState([])
   const [youNick, setYouNick] = useState('')
   const [sell, setSell] = useState(0)
-  const [timeState, setTimeState] = useState(0)
+  const [timeState, setTimeState] = useState(1)
   const [time, setTime] = useState('')
 
   let store = useSelector((state) => { return state })
@@ -293,12 +293,11 @@ function Product() {
   }
   function timebutton(e) {
     e.preventDefault();
-    setTimeState(1)
     if (timeState) {
-      console.log(document.getElementById('LiveTime').value)
       setTimeState(0)
     } else {
       setTimeState(1)
+      console.log(document.getElementById('LiveTime').value)
     }
   }
 
@@ -307,11 +306,10 @@ function Product() {
   }
 
   function TimeSet(props) {
-    if (props.timeState === 0) {
+    if (props.timeState === 1) {
       return <button className='submitbutton-able' onClick={e => timebutton(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 시간설정</button>
     } else {
       return <>
-        <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간"></input>
         <button className='submitbutton-able' onClick={e => timebutton(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>설정하기</button>
       </>
     }
@@ -357,12 +355,13 @@ function Product() {
             <p style={{ margin: '0 10px 0 10px' }}>{productData.content}</p>
             {store.info.info.userId === productData.user.userid ?
               <div className='d-flex justify-content-end'>
-                <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)}  icon={faPenToSquare} />
+                <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
                 <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
               </div>
               : null}
             <hr></hr>
             {localStorage.token ? (
+              <>
               <div className='button_box'>
                 {store.info.info.userId === productData.user.userid
                   ?
@@ -375,6 +374,7 @@ function Product() {
                         <ul><ShowReq /></ul>
                       </Modal>
                     </div>
+                    <br />
                     <div>
                       <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
                         <div><SellProduct /></div>
@@ -398,6 +398,8 @@ function Product() {
                   </>
                 }
               </div>
+              <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간" hidden={timeState}></input>
+              </>
             ) : null}
           </div>
           <hr></hr>

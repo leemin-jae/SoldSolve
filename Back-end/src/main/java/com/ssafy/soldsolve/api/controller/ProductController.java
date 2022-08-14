@@ -159,7 +159,7 @@ public class ProductController {
             productService.setLiveTime(req.getTime(), req.getNo());
 
 
-            return new ResponseEntity<Timestamp>(productService.getProduct(req.getNo()).getLiveTime(), HttpStatus.OK);
+            return new ResponseEntity<String>(productService.getProduct(req.getNo()).getLiveTime().toString(), HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<String>("시간 설정 실패", HttpStatus.INTERNAL_SERVER_ERROR);

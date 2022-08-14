@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -25,7 +26,7 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> findAll(User user) {
-        return messageRepository.findAllByUser(user, Sort.by("writtenTimes").descending());
+        return messageRepository.findAllByUser(user, Sort.by("writtenTimes").ascending());
     }
 
     @Override
@@ -100,8 +101,10 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public String liveTimeLog(Product product) {
-        String log = "라이브 요청 상품 " + product.getTitle() + "의 라이브가 " + product.getLiveTime().toString() + "에 시작합니다." ;
-        return null;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String time = simpleDateFormat.format(product.getLiveTime());
+        String log = "라이브 요청 상품 " + product.getTitle() + "의 라이브가 " + time + "에 시작합니다." ;
+        return log;
     }
 
 

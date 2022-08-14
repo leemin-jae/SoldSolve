@@ -16,9 +16,7 @@ import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
 import LiveDetail from './routers/LiveDetail';
 import CreateProduct from './routers/ProductForm';
-import ChatRoom from './components/Modals/ChatRoom';
-import ChatTest from './components/Notice/ChatTest';
-import ChatRoomCompo from './routers/ChatRoomCompo';
+import ChatRoom from './routers/ChatRoom';
 //
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
@@ -59,11 +57,9 @@ root.render(
             <Route path='/product' element={<Products />}></Route>
             <Route path='/createproduct' element={<CreateProduct />}></Route>
             <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
-            <Route path='/chatroom' element={<ChatRoom />}></Route>
             <Route path='/search/:category/:title' element={<SearchProduct />}></Route>
-            <Route path='/chattest' element={<ChatTest />}></Route>
             <Route path='/search/:title' element={<SearchProductAll />}></Route>
-            <Route path='/chatroom/:id' element={<ChatRoomCompo />}></Route>
+            <Route path='/chatroom/:id' element={<ChatRoom />}></Route>
 
             <Route path="/*" element={<NotFound />} />
           </Routes>

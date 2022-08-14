@@ -3,7 +3,6 @@ import './modal.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons'
 import RequestedPrice from './RequestedPrice';
 
 
@@ -12,6 +11,7 @@ const OfferBuyerModal = (props) => {
   const { open, close, header, productid } = props;
   const [button, setButton] = useState('noInput')
     const [money, setMoney] = useState(null)
+    const [changedata, setChangeData] = useState(false)
 
     function inputMoney(e) {
       setMoney(e.target.value)
@@ -21,21 +21,26 @@ const OfferBuyerModal = (props) => {
 
     let submitButton = null;
     if (button === 'noInput') {
-      submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
+      submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true} style={{width: 100}}>SUBMIT</button>
     } else if (button === 'input') {
-      submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
+      submitButton = <button className="inputform submitbutton-able" type="submit" style={{width: 100}}>SUBMIT</button>
+
     }
 
-    function Offer(e) {
-      // console.log(getLoginForm)
+    function Offer(e, money) {
       e.preventDefault()
+      console.log(money)
       axios({
         url: '/api/offers/' + productid,
         method: 'post',
-        headers: { Authorization: `Bearer ${localStorage.token}` }
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+        data: {price: money}
       })
         .then(res => {
           alert('가격 제안 성공')
+          setMoney('')
+          setChangeData(true)
+
         })
         .catch(err => {
           console.error(err.response.data)
@@ -52,22 +57,21 @@ const OfferBuyerModal = (props) => {
             <button className="close closeButton" onClick={close}>&times;</button>
           </div>
 
-          <div className='scoreMain'>
-            <div className='scoreTitle'>
-              <p className='titleText'>원하는 가격을</p>
-              <p className='titleText'>제안해주세요!</p>
+          <div className='offerMain'>
+            <div className='offerTitle' style={{marginTop: -10}}>
+              <p className='titleText'>원하는 가격을 제안해주세요!</p>
             </div>
             
-            <div className='scoreCheckBox'>
-              <RequestedPrice />
+            <div className='offerBox' style={{marginTop: 20, marginBottom: -20, display: 'flex', justifyContent: 'center', marginLeft: '-10%'}}>
+              <RequestedPrice productid={productid} changedata={changedata}/>
             
             </div>
           </div>
-          <div className='scoreBottom'>
-          <form onSubmit={e => { Offer(e) }} className='d-flex align-items-center my-2'>
-              <input className="inputform" onChange={e => { inputMoney(e) }} type="text" placeholder="가격을 입력해주세요"></input>
-            </form>
+          <div className='offerBottom'>
+          <form onSubmit={e => { Offer(e, money) }} className='d-flex align-items-center my-2 justify-content-between'>
+              <input className="inputform" onChange={e => { inputMoney(e) }} type="number" placeholder="가격을 입력해주세요" value={money}></input>
             {submitButton}
+            </form>
           </div>
         </div>
       ) : null}

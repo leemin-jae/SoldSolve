@@ -1,6 +1,5 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,113 +7,94 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
+import axios from 'axios';
+import { IconButton } from '@mui/material';
+import ChatIcon from '@mui/icons-material/Chat';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
-function createData(name, calories) {
-  return {
-    name,
-    calories,
-  };
-}
-
-const rows = [
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Donut', 452, 25.0, 51, 4.9),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-  createData('Honeycomb', 408, 3.2, 87, 6.5),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Jelly Bean', 375, 0.0, 94, 0.0),
-  createData('KitKat', 518, 26.0, 65, 7.0),
-  createData('Lollipop', 392, 0.2, 98, 0.0),
-  createData('Marshmallow', 318, 0, 81, 2.0),
-  createData('Nougat', 360, 19.0, 9, 37.0),
-  createData('Oreo', 437, 18.0, 63, 4.0),
-];
-
-
-
-
-
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
-const headCells = [
-  {
-    id: 'name',
-    numeric: false,
-    disablePadding: true,
-    label: 'Dessert (100g serving)',
-  },
-  {
-    id: 'calories',
-    numeric: true,
-    disablePadding: false,
-    label: 'Calories',
-  },
-];
-
-
-
-const EnhancedTableToolbar = (props) => {
-
-  return (
-        <Typography
-          sx={{ flex: '1 1 100%' }}
-          variant="h6"
-          id="tableTitle"
-          component="div"
-        >
-          가격 제안 목록
-        </Typography>
-  );
-};
-
-
-export default function RequestedPrice() {
+export default function RequestedPrice(props) {
+  let store = useSelector((state) => { return state })
+  let navigate = useNavigate()
+  const { productid, changedata } = props;
+  console.log(changedata)
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 5;
+  const [rows, setRows] = React.useState([]);
+  const [youNick, setYouNick] = React.useState('')
+
+
+  React.useEffect(() => {
+    async function offerData() {
+      const result = await axios.get(
+        `/api/offers/pricelist/` + productid,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.token}`
+          }
+        }
+      );
+      console.log(result)
+      setRows(result.data.sort(function(a, b){
+        return b.price - a.price
+      }))
+    }
+    offerData()
+    console.log(rows)
+
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
+  const createRoom = (row) => {
+    if (window.confirm("구매자와 연락하시겠습니까?")) {
+      setYouNick(row.user.nickname)
+      axios({
+        url: '/api/room',
+        method: 'post',
+        params: { seller: row.user.userid },
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          console.log(res.data, '방생성')
+          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, meId: store.info.info.userId } })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
+
 
   return (
     <Box sx={{ width: '80%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
-        <EnhancedTableToolbar />
         <TableContainer>
           <Table
-            sx={{ maxWidth: 200 }}
           >
-            <TableBody sx={{ height: 10 }}>
+            <TableBody >
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
 
                   return (
-                    <TableRow 
+                    <TableRow sx={{ height: 10 }}
                     >
                       <TableCell
                         component="th"
                         scope="row"
-                        padding="none"
                       >
-                        {row.name}
+                        {row.user.nickname}
                       </TableCell>
-                      <TableCell align="right">{row.calories}</TableCell>
+                      <TableCell align="right">{row.price}</TableCell>
+                      {changedata === 'seller' ? <TableCell align="right">
+                      <IconButton aria-label="add to favorites" onClick={() => createRoom(row)}>
+                        <ChatIcon />
+                      </IconButton>
+                      </TableCell> : null }
                     </TableRow>
                   );
                 })}

@@ -109,7 +109,7 @@ const LiveChat = (props) => {
       <button onClick={openSellOfferModal}>
               <p>제안목록</p>
             </button>
-            <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} />
+            <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
             </>
     )
 

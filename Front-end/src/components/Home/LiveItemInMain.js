@@ -86,12 +86,12 @@ function LiveItemInMain() {
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
-                        style={{ height: 250 }}
+                        style={{ minHeight: 200 }}
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>
                         <p className='card_text'>{productPrice} 원</p>
-                        <h6>{pName}님이 라이브중입니다</h6>
+                        <h6 className='flicker'>{pName}님이 라이브중입니다</h6>
                       </div>
                     </a>
                   </SwiperSlide>

@@ -111,10 +111,20 @@ h1 {
     font-family: Pretendard;
 }
 
-.hometext {
-    margin: 70px 0px 0px 20px;
-}
+
 
 .carousel-item > img {
     min-height: 200px;
   } 
+
+  @keyframes flash { 0%, 20%, 40%, to { opacity: 1; } 10%, 30% { opacity: 0; } }
+
+
+  .hometext {
+    margin: 70px 0px 0px 20px;
+}
+
+.flicker {
+    animation: flash 3s infinite;
+    color: #6667AB;
+}

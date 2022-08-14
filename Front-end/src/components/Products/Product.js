@@ -227,6 +227,7 @@ function Product() {
         })
         .catch(err => {
           console.error(err.response.data)
+          alert('ID를 다시 확인해주세요')
         })
     }
     return (

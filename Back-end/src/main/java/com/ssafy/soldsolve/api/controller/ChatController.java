@@ -15,6 +15,7 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
 
+import javax.transaction.Transactional;
 import java.security.MessageDigest;
 
 @RequiredArgsConstructor
@@ -38,6 +39,7 @@ public class ChatController {
 
 
 //      /pub/chat/message/
+    @Transactional
     @MessageMapping("/chat/message/")
     public void message(ChatMessage message) {
 
@@ -46,11 +48,11 @@ public class ChatController {
         if(message.getType().equals("JOIN")){
             r.setInUser(r.getInUser() + 1);
             roomRepository.save(r);
-            //message.setMessage(message.getSender() + "님이 입장하셨습니다.");
+            message.setMessage(message.getSender() + "님이 입장하셨습니다.");
         }else if(message.getType().equals("EXIT")){
             r.setInUser(r.getInUser() - 1);
             roomRepository.save(r);
-            //message.setMessage(message.getSender() + "님이 입장하셨습니다.");
+            message.setMessage(message.getSender() + "님이 퇴장하셨습니다.");
         }else if(message.getType().equals("TALK")){
             Chat chat = new Chat();
             chat.setChatContent(message.getMessage());
@@ -71,13 +73,12 @@ public class ChatController {
                 if(r.getSeller().getUserid().equals(message.getSender())){
                     read.setSellerChat(no);
                 }
-
             }
-
             roomReadRepository.save(read);
-
-            messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+            r.setLastMessage(message.getMessage());
+            roomRepository.save(r);
         }
+        messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
 
 

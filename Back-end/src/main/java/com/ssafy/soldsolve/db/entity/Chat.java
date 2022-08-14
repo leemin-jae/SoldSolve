@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.sql.Timestamp;
 
 import static javax.persistence.FetchType.LAZY;
@@ -16,6 +17,7 @@ import static javax.persistence.FetchType.LAZY;
  */
 @Entity
 @Data
+//@Transactional
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +33,6 @@ public class Chat {
     @JoinColumn(name = "user_pk")
     private User writeUser;
 
-    //private int isRead;
 
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "roomId")

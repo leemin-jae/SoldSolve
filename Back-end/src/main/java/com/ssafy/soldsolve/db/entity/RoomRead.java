@@ -20,10 +20,11 @@ public class RoomRead {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int readId;
 
+    @Column(columnDefinition = "int default 0")
     private int buyerChat;
-
+    @Column(columnDefinition = "int default 0")
     private int sellerChat;
-
+    @Column(columnDefinition = "int default 0")
     private int totalChat;
 
     @OneToOne

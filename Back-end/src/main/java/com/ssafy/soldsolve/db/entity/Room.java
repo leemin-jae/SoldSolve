@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.checkerframework.checker.units.qual.A;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -28,19 +29,24 @@ public class Room {
     @JoinColumn(name="seller_id")
     private User seller;
 
+    @Column(columnDefinition = "int default 0")
     private int isRead;
 
     @OneToMany(mappedBy = "room" , orphanRemoval = true , cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Chat> chat = new ArrayList<>();
 
-    @JsonIgnore
+    @Column(columnDefinition = "int default 0")
     private int buyerOut;
 
-    @JsonIgnore
+    @Column(columnDefinition = "int default 0")
     private int sellerOut;
 
+    @ColumnDefault("")
+    private String lastMessage;
+
     @JsonIgnore
+    @Column(columnDefinition = "int default 0")
     private int inUser;   // 0, 1, 2 현재 채팅방에 들어와 있는 유저 수
 
     @OneToOne(mappedBy = "room" , cascade = CascadeType.ALL)

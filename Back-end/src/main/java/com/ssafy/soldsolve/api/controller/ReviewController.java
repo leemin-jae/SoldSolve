@@ -42,9 +42,14 @@ public class ReviewController {
         String userId = userDetails.getUsername();
         User reviewer = userService.getUserByUserId(userId);
         User reviewee = userService.getUserByUserPk(userPk);
-        if (reviewService.createReview(reviewer, reviewee, Info)==true) {
-            return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
-        } return ResponseEntity.status(200).body(BaseResponseBody.of(400, "이미 등록된 리뷰입니다"));
+        // 만약 채팅 내역이 없다면, 만들 수 없음. => 각각 채팅 최소 1회 이상일시만 평가 가능.
+        if (reviewService.checkChat(reviewer, reviewee)==true) {
+            // 만약, 기존 작성한 리뷰가 있다면 만들 수 없음. -> 리뷰 수정으로
+            if (reviewService.checkReview(reviewer, reviewee)==false) {
+                reviewService.createReview(reviewer, reviewee, Info);
+                return ResponseEntity.status(200).body(BaseResponseBody.of(200, "Success"));
+            } return ResponseEntity.status(200).body(BaseResponseBody.of(400, "이미 등록된 리뷰입니다"));
+        } return ResponseEntity.status(200).body(BaseResponseBody.of(400, "채팅이 없습니다"));
     }
 
     // 리뷰 수정

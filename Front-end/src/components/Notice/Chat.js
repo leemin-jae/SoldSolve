@@ -71,16 +71,26 @@ function Chat() {
         {roomList.map((room, idx) => {
           let you = null;
           let yourImg = null;
-          let me = null
+          let me = null;
+          let yourId = null;
+          let myId =null;
+          let yourPk =null;
 
+          console.log(room)
           if (store.info.info.userId === room.buyer.userid) {
             you = room.seller.nickname
             yourImg = room.seller.profileUrl
             me = room.buyer.nickname
+            yourId = room.seller.userid
+            yourPk = room.seller.id
+            myId = room.buyer.userid
           } else {
             you = room.buyer.nickname
             yourImg = room.buyer.profileUrl
             me = room.seller.nickname
+            yourId = room.buyer.userid
+            myId = room.seller.userid
+            yourPk = room.buyer.id
           }
           console.log(room, '룸룸')
           console.log('room.buyerOut:' + room.buyerOut, 'room.sellerOut:' + room.sellerOut)
@@ -88,7 +98,7 @@ function Chat() {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
                 <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
-                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you, meId: store.info.info.userId } })
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you,yourId:yourId,myId:myId,sellerid:room.seller.userid,yourPk:yourPk} })
                 }}>
                   <div className="profile_box" style={{ background: '#BDBDBD' }}>
                     <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
@@ -118,7 +128,7 @@ function Chat() {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
                 <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
-                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you, meId: store.info.info.userId } })
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you,yourId:yourId,myId:myId,sellerid:room.seller.userid,yourPk:yourPk } })
                 }}>
                   <div className="profile_box" style={{ background: '#BDBDBD' }}>
                     <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />

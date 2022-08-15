@@ -135,7 +135,7 @@
 .scoreModal{
   width: 90%;
   max-width: 450px;
-  height: 600px;
+  height: 750px;
   margin: 0 auto;
   border-radius: 30px;
 
@@ -155,6 +155,7 @@
 .scoreMain {
   padding-left: 20%;
   margin-top: 10%;
+  height: 550px;
 }
 
 .scoreBottom{
@@ -271,4 +272,12 @@
 
 .deleted {
   text-decoration:line-through;
+}
+
+.optionfont{
+  font-size: large;
+  text-align: center;
+}
+.optionscroll{
+  width: 280px;
 }

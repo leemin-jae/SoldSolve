@@ -133,7 +133,6 @@ function CreateRoom() {
 
   function goLive(e) {
     e.preventDefault();
-    localStorage.setItem('LiveRoom', roomName)
     createSession(productid)
   }
 

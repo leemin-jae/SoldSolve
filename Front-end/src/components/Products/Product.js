@@ -40,6 +40,7 @@ function Product() {
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
   console.log(store)
+
   useEffect(() => {
     axios({
       url: `/api/product/${productid}`,
@@ -317,7 +318,7 @@ function Product() {
 
       console.log(selectTime)
       axios({
-        url: `http://i7c110.p.ssafy.io:8080/api/product/time`,
+        url: `/api/product/time`,
         method: 'post',
         data: {
           no:productid,

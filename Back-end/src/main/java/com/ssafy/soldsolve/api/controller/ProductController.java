@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
 import com.ssafy.soldsolve.api.request.ProductTimePostReq;
 import com.ssafy.soldsolve.api.service.FileService;
+import com.ssafy.soldsolve.api.service.PopWordService;
 import com.ssafy.soldsolve.api.service.ProductService;
 import com.ssafy.soldsolve.api.service.UserService;
 import com.ssafy.soldsolve.common.auth.SsafyUserDetails;
@@ -38,6 +39,9 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PopWordService popWordService;
+
 
     @GetMapping("/me")  // 판매 물건 확인
     public ResponseEntity<?> getSellList(Authentication authentication){
@@ -63,12 +67,15 @@ public class ProductController {
 
 
 
-
         try {
             List<Product> result=null;
             String t = title==null?"":title;
             String c = category==null?"":category;
             String r = region==null?"":region;
+
+            if(title != null){
+                popWordService.registWord(title);
+            }
 
             result = productService.searchProduct(t,c,r);
 

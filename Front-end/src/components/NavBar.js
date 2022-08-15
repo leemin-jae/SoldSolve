@@ -133,7 +133,7 @@ function NavBar() {
         <label className="account_toggle" htmlFor="account">
           <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
         </label>
-        {storeToken.noticeCount.noticeCount !== 0 ?
+        {storeToken.noticeCount.noticeCount !== 0 && Token ?
           <div className='unread_message' style={{ position: 'absolute', top: '12px', right: '233px', width: '20px', height: '20px', fontSize: '15px', lineHeight: '18px' }}>{storeToken.noticeCount.noticeCount}</div>
           :
           null

@@ -221,7 +221,7 @@ class LivePage extends Component {
     }
 
     this.OV = null;
-    this.setSate({
+    this.setState({
       session: undefined,
       subscribers: [],
       mySessionId: this.state.params[3],
@@ -340,16 +340,11 @@ class LivePage extends Component {
                   <div>
                     {this.state.myId === this.state.params[2] ? (
                       <div className='livebox'>
-                        {this.state.mainStreamManager ? 
                         <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
-                        : null}
-                        
                       </div>
                     ) : (
                       <div className='livebox'>
-                        {this.state.mainStreamManager ? 
                         <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
-                        : null}
                       </div>
                     )}
 

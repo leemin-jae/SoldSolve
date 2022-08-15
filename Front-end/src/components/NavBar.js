@@ -143,9 +143,14 @@ function NavBar() {
 
       <input id="category" type="checkbox"></input>
       <div id="left_toggle">
-        <button onClick={() => {
+        {storeToken.token.token ? <button onClick={() => {
           navigate('/createproduct')
         }} style={{ backgroundColor: '#6667ab', color: 'white', width: '132px', height: '40px', textAlign: 'center', border: '0', borderRadius: '10px', alignContent: 'center', margin: '20px auto auto auto' }} >상품 등록하기</button>
+          : <button onClick={() => {
+            alert('로그인 후 이용해주세요!')
+            navigate('/login')
+          }} style={{ backgroundColor: '#6667ab', color: 'white', width: '132px', height: '40px', textAlign: 'center', border: '0', borderRadius: '10px', alignContent: 'center', margin: '20px auto auto auto' }} >상품 등록하기</button>}
+
         <h3 style={{ textAlign: 'center', margin: '20px 0 0 0', color: '#6667ab' }}>Category</h3><hr />
         <ul>
           <li><Link to={`/product`} state={{ category: "digital" }}><h5>디지털기기</h5></Link></li>

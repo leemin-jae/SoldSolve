@@ -104,7 +104,7 @@ function CreateRoom() {
       })
       .catch(err => {
         if (err.response.status === 409) {
-          document.location.href = `/live/${productData.user.userid}/sell${productid}`
+          createSessionDB()
         }
       })
   }

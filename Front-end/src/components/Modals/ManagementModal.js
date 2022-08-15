@@ -2,23 +2,27 @@ import React, { useEffect } from 'react';
 import './modal.css';
 import axios from 'axios';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 const ManagementModal = (props) => {
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   const { open, close } = props;
   const [userList, setUserList] = useState(null);
-
+  const store = useSelector((state) => { return state })
   useEffect(() => {
-    axios({
-      url: '/admin/users/',
-      method: 'get',
-      headers: { Authorization: `Bearer ${localStorage.token}` }
-    })
-      .then(res => {
-        setUserList(res.data)
+    if (store.info.info && store.info.info.role === 'ROLE_ADMIN') {
+      axios({
+        url: '/admin/users/',
+        method: 'get',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
-      .catch(err => {
-        console.log(err)
-      })
+        .then(res => {
+          setUserList(res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+
   }, [open])
 
 
@@ -34,7 +38,7 @@ const ManagementModal = (props) => {
     if (e.role === 'ROLE_USER') {
       axios({
         url: '/admin/users/suspend/' + e.id,
-        method: 'patch',  
+        method: 'patch',
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
@@ -46,7 +50,7 @@ const ManagementModal = (props) => {
         })
     }
   }
-  function reLoad(){
+  function reLoad() {
     axios({
       url: '/admin/users/',
       method: 'get',
@@ -58,7 +62,7 @@ const ManagementModal = (props) => {
       .catch(err => {
         console.log(err)
       })
-    
+
   }
   function BanCancle(e) {
     console.log(e)
@@ -86,37 +90,37 @@ const ManagementModal = (props) => {
       if (t.role === 'ROLE_USER') {
         Banbutton = <button className='managementButton' onClick={e => userCheck(t)}>정지</button>
         user = <li className='managementUser' id={t.id}>
-                <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
-                <div className='d-flex'>
-                  {Banbutton}
-                  <button className='managementButton' onClick={e=>deleteUser(t)}>탈퇴</button>
-                </div>
-                
-              </li>
-      } else if (t.role === 'ROLE_SUSPENDED'){
+          <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
+          <div className='d-flex'>
+            {Banbutton}
+            <button className='managementButton' onClick={e => deleteUser(t)}>탈퇴</button>
+          </div>
+
+        </li>
+      } else if (t.role === 'ROLE_SUSPENDED') {
         Banbutton = <button className='managementButton' onClick={e => userCheck(t)}>해제</button>
         user = <li className='managementUserBan' id={t.id}>
-                <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
-                <div className='d-flex'>
-                  {Banbutton}
-                  <button className='managementButton' onClick={e=>deleteUser(t)}>탈퇴</button>
-                </div>
-              </li>
-      } else if (t.role === 'ROLE_ADMIN'){
+          <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
+          <div className='d-flex'>
+            {Banbutton}
+            <button className='managementButton' onClick={e => deleteUser(t)}>탈퇴</button>
+          </div>
+        </li>
+      } else if (t.role === 'ROLE_ADMIN') {
         user = <li className='managementUserAdmin' id={t.id}>
-                <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
-                <p style={{ marginBottom: '0' }}>관리자</p>
-              </li>
+          <p style={{ marginBottom: '0' }}>{t.userid}({t.username})</p>
+          <p style={{ marginBottom: '0' }}>관리자</p>
+        </li>
       }
       userTag.push(user)
     }
   }
 
-  function deleteUser(e){
+  function deleteUser(e) {
     console.log(e)
-    if (window.confirm(`정말로 ${e.userid}(${e.username})님의 계정을 삭제하시겠습니까?`)){
+    if (window.confirm(`정말로 ${e.userid}(${e.username})님의 계정을 삭제하시겠습니까?`)) {
       axios({
-        url: '/admin/users/'+e.id,
+        url: '/admin/users/' + e.id,
         method: 'patch',
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })

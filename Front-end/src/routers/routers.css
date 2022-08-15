@@ -42,9 +42,9 @@ button {
   display: flex;
   grid-template-columns: auto auto auto auto;
   list-style: none;
-
   justify-content: center;
   align-items: center;
+  background-image: '../../public/NoLive.png';
 }
 
 .container {
@@ -214,6 +214,7 @@ input::placeholder {
   max-width: 950px;
   min-height: 350px;
   display: grid;
+  background-image: '../../public/NoLive.png';
 }
 
 .container {
@@ -285,6 +286,7 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 350px;
+    background-image: '../../public/NoLive.png';
   }
   .videosize {
     display: block;
@@ -293,6 +295,7 @@ input::placeholder {
     height: 350px;
     object-fit: fill;
     z-index: 1;
+
   }
 
   .chatbox {
@@ -372,6 +375,7 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 500px;
+    background-image: '../../public/NoLive.png';
   }
 
   .videosize {
@@ -475,6 +479,7 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 500px;
+    background-image: '../../public/NoLive.png';
   }
   .videosize {
     display: block;
@@ -568,6 +573,7 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 500px;
+    background-image: '../../public/NoLive.png';
   }
   .videosize {
     display: block;
@@ -652,6 +658,7 @@ input::placeholder {
     min-height: 500px;
     display: grid;
     grid-template-columns: auto auto auto auto;
+    background-image: '../../public/NoLive.png';
   }
   .livevolume{
     position: absolute;
@@ -667,6 +674,7 @@ input::placeholder {
     height: 500px;
     object-fit: fill;
     z-index: 98;
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/E1wMMC7S8Kj9JepFChxNNYpgJj0Um190.jpe');
   }
 
   .chatbox {

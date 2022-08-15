@@ -19,7 +19,6 @@ function KategorieInMain() {
       const result = await axios.get(
         `/api/product`
       );
-      // console.log(result)
       setNewData(result.data.reverse().slice(0, 10));
 
       setHotData(result.data.sort(function (a, b) {
@@ -76,9 +75,7 @@ function KategorieInMain() {
 
                 let price = product.price
                 const productPrice = price.toLocaleString('ko-KR');
-                console.log(data)
-                console.log(hotdata)
-                console.log(newdata)
+
                 if ((data.data === hotdata && product.state === 0) || data.data === newdata) {
                   return (
                     <SwiperSlide className='cards_item' key={product.no}>

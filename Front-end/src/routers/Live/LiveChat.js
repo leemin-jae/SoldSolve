@@ -6,7 +6,6 @@ import OfferSellerModal from "../../components/Modals/OfferSellerModal";
 const LiveChat = (props) => {
   const [messageList, setMessageList] = useState([]);
   const [message, setMessage] = useState("");
-  const [come, setCome] = useState(null);
   let store = useSelector((state) => { return state })
 
   const handleChange = (event) => {
@@ -24,7 +23,8 @@ const LiveChat = (props) => {
         });
         setMessageList([...messageListData]);
     });
-    const welcome = {
+    if (props.props.myUserName){
+      const welcome = {
       message: `${props.props.myUserName}님이 입장하셨습니다.`,
       nickname: props.props.myUserName,
       streamId: props.props.streamId,
@@ -33,6 +33,8 @@ const LiveChat = (props) => {
       data: JSON.stringify(welcome),
       type: "chat",
     });
+    }
+    
   }, []);
 
   

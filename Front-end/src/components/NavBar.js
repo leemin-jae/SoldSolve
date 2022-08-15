@@ -46,7 +46,7 @@ function NavBar() {
     }
   }, []);
 
-  useEffect(()=> {
+  useEffect(() => {
     axios({
       url: `api/messages/count`,
       method: 'get',
@@ -93,31 +93,31 @@ function NavBar() {
             {storeToken.info.info.role === 'ROLE_ADMIN' ?
               <li><a className="icon_sort" href='#!' onClick={openModal}><FontAwesomeIcon className='icon' icon={faGear} size="2x" /></a></li>
               : null}
-            {noticeCount !== 0 ? 
-            <li>
-              <a className="icon_sort" href='/notice' style={{position:'relative'}}><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x"  ></FontAwesomeIcon>
-                <div className='unread_message' style={{position:'absolute', top:'-18px', left:'22px', width:'20px', height:'20px', fontSize:'15px', lineHeight:'18px'}}>{noticeCount}</div>
-              </a>
-            </li>
-          :
-          <div>
-            <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" style={{position:'relative'}} /></a></li>
-          </div>}  
-            
+            {noticeCount !== 0 ?
+              <li>
+                <a className="icon_sort" href='/notice' style={{ position: 'relative' }}><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x"  ></FontAwesomeIcon>
+                  <div className='unread_message' style={{ position: 'absolute', top: '-18px', left: '22px', width: '20px', height: '20px', fontSize: '15px', lineHeight: '18px' }}>{noticeCount}</div>
+                </a>
+              </li>
+              :
+              <div>
+                <li><a className="icon_sort" href='/notice'><FontAwesomeIcon className='icon' icon={faEnvelope} size="2x" style={{ position: 'relative' }} /></a></li>
+              </div>}
+
             <li><a className="icon_sort" href='/search'><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></a></li>
             <li><a href='#!' onClick={(e) => Logout(e)}><h5>로그아웃</h5></a></li>
             <li><a href='/mypage'><h5>마이페이지</h5></a></li>
           </ul>
-          {noticeCount !== 0 ? 
+          {noticeCount !== 0 ?
 
-          <label className="account_toggle" htmlFor="account" style={{position:'relative'}}>
-            <FontAwesomeIcon className='icon' icon={faUser} size="2x"  />
-            <div className='unread_message' style={{position:'absolute', top:'-12px', left:'22px', width:'20px', height:'20px', fontSize:'15px', lineHeight:'18px'}}>{noticeCount}</div>
-          </label>
-          :
-          <label className="account_toggle" htmlFor="account">
-          <FontAwesomeIcon className='icon' icon={faUser} size="2x"  />
-        </label>}
+            <label className="account_toggle" htmlFor="account" style={{ position: 'relative' }}>
+              <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
+              <div className='unread_message' style={{ position: 'absolute', top: '-12px', left: '22px', width: '20px', height: '20px', fontSize: '15px', lineHeight: '18px' }}>{noticeCount}</div>
+            </label>
+            :
+            <label className="account_toggle" htmlFor="account">
+              <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
+            </label>}
 
         </nav>
       ) : <nav className="navbar">
@@ -134,8 +134,11 @@ function NavBar() {
         <label className="account_toggle" htmlFor="account">
           <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
         </label>
-        
-        <div className='unread_message' style={{position:'absolute', top:'12px', right:'233px', width:'20px', height:'20px', fontSize:'15px', lineHeight:'18px'}}>{noticeCount}</div>
+        {noticeCount !== 0 ?
+          <div className='unread_message' style={{ position: 'absolute', top: '12px', right: '233px', width: '20px', height: '20px', fontSize: '15px', lineHeight: '18px' }}>{noticeCount}</div>
+          :
+          null
+        }
       </nav>}
 
       <input id="category" type="checkbox"></input>
@@ -168,17 +171,17 @@ function NavBar() {
               <li><a href='#!' onClick={openModal}><h5>유저관리</h5></a></li>
               : null}
             <div>
-            <li>
-              <a href='/notice' >
-                <h5 style={{position:'relative', display:'inline'}}>
-                알림함
-                {noticeCount !== 0 ? 
+              <li>
+                <a href='/notice' >
+                  <h5 style={{ position: 'relative', display: 'inline' }}>
+                    알림함
+                    {noticeCount !== 0 ?
 
-                <div className='unread_message' style={{position:'absolute', top:'1px', left:'60px', width:'20px', height:'20px', fontSize:'15px', lineHeight:'18px'}}>{noticeCount}</div>:
-                null}
-                </h5>
+                      <div className='unread_message' style={{ position: 'absolute', top: '1px', left: '60px', width: '20px', height: '20px', fontSize: '15px', lineHeight: '18px' }}>{noticeCount}</div> :
+                      null}
+                  </h5>
 
-            </a></li>
+                </a></li>
 
             </div>
             <li><a href='/search'><h5>검색</h5></a></li>

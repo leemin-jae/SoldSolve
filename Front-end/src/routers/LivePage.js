@@ -221,7 +221,7 @@ class LivePage extends Component {
     }
 
     this.OV = null;
-    this.settSate({
+    this.setSate({
       session: undefined,
       subscribers: [],
       mySessionId: this.state.params[3],

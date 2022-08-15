@@ -44,7 +44,6 @@ button {
   list-style: none;
   justify-content: center;
   align-items: center;
-  background-image: '../../public/NoLive.png';
 }
 
 .container {
@@ -214,7 +213,8 @@ input::placeholder {
   max-width: 950px;
   min-height: 350px;
   display: grid;
-  background-image: '../../public/NoLive.png';
+  background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+  background-size: 100% 100%;
 }
 
 .container {
@@ -286,7 +286,8 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 350px;
-    background-image: '../../public/NoLive.png';
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
   }
   .videosize {
     display: block;
@@ -294,7 +295,7 @@ input::placeholder {
     width: 300px;
     height: 350px;
     object-fit: fill;
-    z-index: 1;
+    z-index: 99;
 
   }
 
@@ -375,7 +376,8 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 500px;
-    background-image: '../../public/NoLive.png';
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
   }
 
   .videosize {
@@ -479,7 +481,8 @@ input::placeholder {
     position: relative;
     max-width: 950px;
     min-height: 500px;
-    background-image: '../../public/NoLive.png';
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
   }
   .videosize {
     display: block;
@@ -571,9 +574,10 @@ input::placeholder {
   /* 태블릿 가로 */
   .livebox {
     position: relative;
-    max-width: 950px;
+    max-width: 820px;
     min-height: 500px;
-    background-image: '../../public/NoLive.png';
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
   }
   .videosize {
     display: block;
@@ -658,7 +662,8 @@ input::placeholder {
     min-height: 500px;
     display: grid;
     grid-template-columns: auto auto auto auto;
-    background-image: '../../public/NoLive.png';
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
   }
   .livevolume{
     position: absolute;
@@ -673,8 +678,7 @@ input::placeholder {
     width: 776px;
     height: 500px;
     object-fit: fill;
-    z-index: 98;
-    background-image: url('https://i7c110.p.ssafy.io/images/profile/E1wMMC7S8Kj9JepFChxNNYpgJj0Um190.jpe');
+    z-index: 999;
   }
 
   .chatbox {
@@ -954,7 +958,7 @@ input::placeholder {
 .offerButton {
   background-color: #6667ab;
   color: white;
-  width: 60px;
+  width: 80px;
   height: 20px;
   border: 0;
   border-radius: 10px;

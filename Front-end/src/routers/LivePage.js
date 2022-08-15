@@ -18,14 +18,13 @@ class LivePage extends Component {
     super(props);
 
     const params = window.location.pathname.split('/')
-
+    params[2] = decodeURI(params[2])
     axios({
       url: '/api/live',
       method: 'get',
       params: { sessionId: params[3] }
     })
       .then((res) => {
-        console.log(res.data)
         if (res.data) {
           this.setState({
             chatOn: true,
@@ -150,7 +149,6 @@ class LivePage extends Component {
         });
 
         mySession.on('exception', (exception) => {
-          console.warn(exception);
         });
         this.getToken(this.state.mySessionId).then((token) => {
           mySession
@@ -174,7 +172,6 @@ class LivePage extends Component {
                   mirror: true,
                 });
 
-                console.log(publisher)
                 mySession.publish(publisher);
 
                 this.setState({
@@ -187,17 +184,16 @@ class LivePage extends Component {
                 var videoDevices2 = devices2.filter(device => device.kind === 'videoinput');
 
                 var publisher2 = this.OV.initPublisher(undefined, {
-                  audioSource: undefined,
+                  audioSource: false,
                   videoSource: false,
-                  publishAudio: false,
-                  publishVideo: false,
+                  publishAudio: true,
+                  publishVideo: true,
                   resolution: '800x500',
                   frameRate: 30,
                   insertMode: 'APPEND',
                   mirror: true,
                 });
 
-                console.log(publisher2)
                 mySession.publish(publisher2);
 
                 this.setState({
@@ -207,7 +203,6 @@ class LivePage extends Component {
                 });
 
               }
-              console.log(publisher)
             })
             .catch((error) => {
               console.log('There was an error connecting to the session:', error.code, error.message);
@@ -226,7 +221,7 @@ class LivePage extends Component {
     }
 
     this.OV = null;
-    this.setState({
+    this.settSate({
       session: undefined,
       subscribers: [],
       mySessionId: this.state.params[3],
@@ -264,7 +259,6 @@ class LivePage extends Component {
         }
       }
     } catch (e) {
-      console.error(e);
     }
   }
 
@@ -284,7 +278,6 @@ class LivePage extends Component {
   }
 
   async VoiceOff() {
-    console.log(this.state)
     if (this.state.nowVoice) {
       this.state.publisher.publishAudio(false);
       this.setState({
@@ -306,19 +299,14 @@ class LivePage extends Component {
           Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
         },
       })
-      .then((res) => {
-        console.log(res)
-      })
 
     axios({
       url: '/api/live',
       method: 'delete',
       params: { sessionId: this.state.mySessionId }
     })
-      .then((res) => {
-        console.log(res)
-      })
-    this.leaveSession()
+
+    window.location.href = '/'
   }
   render() {
     if (this.state.session === undefined) {
@@ -363,10 +351,17 @@ class LivePage extends Component {
                   </div>
                   {this.state.sellerInfo ?
                     <>
-                      <p style={{ margin: '1em' }}>
+                      <div className='sellerInfo my-2'>
                         <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
-                        {this.state.sellerInfo.nickname} ({this.state.region}), 평점</p>
-                      <p style={{ margin: '1em' }}> {this.state.RoomContent}</p>
+                        <div className='mx-2 d-flex flex-column'>
+                          <p style={{ marginBottom: '0' }}>{this.state.sellerInfo.nickname} ({this.state.region})</p>
+                          <p style={{ marginBottom: '0' }}>거래만족도{this.state.sellerInfo.score}점</p>
+                        </div>
+
+
+                      </div>
+                      <hr></hr>
+                      <p style={{ margin: '2rem' }}> {this.state.RoomContent}</p>
                       <hr style={{ width: '100%' }} />
                     </>
 
@@ -375,7 +370,7 @@ class LivePage extends Component {
                 </div>
 
                 <div>
-                  {this.state.chatOn ? <LiveChat props={this.state} /> : null}
+                  {this.state.chatOn && this.state.mainStreamManager ? <LiveChat props={this.state} /> : null}
                 </div>
 
 
@@ -400,7 +395,6 @@ class LivePage extends Component {
           },
         })
         .then((response) => {
-          console.log('TOKEN', response);
           resolve(response.data.token);
         })
         .catch((error) => {

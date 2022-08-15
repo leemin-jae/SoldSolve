@@ -8,6 +8,7 @@ import com.ssafy.soldsolve.db.entity.User;
 import com.ssafy.soldsolve.db.repository.ChatRepository;
 import com.ssafy.soldsolve.db.repository.ReviewRepository;
 import com.ssafy.soldsolve.db.repository.RoomRepository;
+import com.ssafy.soldsolve.db.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,11 +27,19 @@ public class ReviewServiceImpl implements ReviewService {
     @Autowired
     ChatRepository chatRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public boolean checkReview(User reviewer, User reviewee) {
         Review review = reviewRepository.findByReviewerAndReviewee(reviewer, reviewee);
         if (review!=null) return true;
         return false;
+    }
+
+    @Override
+    public Review getReview(User reviewer, User reviewee) {
+        return reviewRepository.findByReviewerAndReviewee(reviewer, reviewee);
     }
 
     // 채팅 기록이 있는지 확인하기
@@ -57,17 +66,40 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public boolean createReview(User reviewer, User reviewee, ReviewPostReq Info) {
+        // review 생성
         Review review = new Review();
         review.setReviewer(reviewer);
         review.setReviewee(reviewee);
         review.setScore(Info.getScore());
         review.setContent(Info.getContent());
         reviewRepository.save(review);
+        // user score 수정
+        List<Review> reviewList = reviewRepository.findAllByReviewee(reviewee);
+        double sumV = 0.0;
+        for (int i=0; i<reviewList.size(); i++) {
+            sumV += reviewList.get(i).getScore()-3.0;
+        }
+        reviewee.setScore(30.0+sumV/reviewList.size());
+        userRepository.save(reviewee);
         return true;
     }
 
-//    @Override
-//    public void deleteReview(int reviewId) {
-//        reviewRepository.delete(reviewRepository.getOne(reviewId));
-//    }
+    @Override
+    public void updateReview(ReviewPostReq Info, Review review, User reviewee) {
+        review.setScore(Info.getScore());
+        review.setContent(Info.getContent());
+        reviewRepository.save(review);
+        List<Review> reviewList = reviewRepository.findAllByReviewee(reviewee);
+        double sumV = 0.0;
+        for (int i=0; i<reviewList.size(); i++) {
+            sumV += reviewList.get(i).getScore()-3.0;
+        }
+        reviewee.setScore(30.0+sumV/reviewList.size());
+        userRepository.save(reviewee);
+    }
+
+    @Override
+    public void deleteReview(int reviewId) {
+        reviewRepository.delete(reviewRepository.getOne(reviewId));
+    }
 }

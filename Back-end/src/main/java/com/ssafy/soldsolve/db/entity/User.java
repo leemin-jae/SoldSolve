@@ -9,6 +9,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Builder;

@@ -104,7 +104,7 @@
   }
 }
 
-.NoticeModal_title{
+.NoticeModal_title {
   min-height: 50px;
   width: 100%;
   border-radius: 5px;
@@ -112,7 +112,7 @@
   border: 1px solid gray;
 }
 
-.NoticeModal_content{
+.NoticeModal_content {
   min-height: 300px;
   width: 100%;
   border-radius: 5px;
@@ -122,7 +122,7 @@
 }
 
 
-.userListModal{
+.userListModal {
   width: 90%;
   max-width: 450px;
   height: 600px;
@@ -135,26 +135,26 @@
 }
 
 
-.scoreSelect{
+.scoreSelect {
   text-align: center;
   margin-bottom: 0;
   margin-inline: 10px;
   font-size: large;
 }
 
-.scoreModal{
+.scoreModal {
   width: 90%;
-  max-width: 450px;
-  height: 750px;
+  max-width: 360px;
+  height: 490px;
   margin: 0 auto;
-  border-radius: 30px;
+  border-radius: 20px;
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
   overflow: hidden;
 }
 
-.scoreTop{
+.scoreTop {
   position: relative;
   padding: 16px 64px 16px 16px;
   font-weight: 700;
@@ -164,13 +164,14 @@
 .scoreMain {
   padding-left: 20%;
   margin-top: 10%;
-  height: 550px;
+  height: 380px;
 }
 
-.scoreBottom{
+.scoreBottom {
   padding: 16px;
 }
-.scoreTitle{
+
+.scoreTitle {
   font-size: x-large;
 }
 
@@ -183,15 +184,16 @@
   align-items: center;
 }
 
-.offerBottom{
+.offerBottom {
   padding: 16px;
 }
-.offerTitle{
+
+.offerTitle {
   font-size: x-large;
 }
 
 
-.closeButton{
+.closeButton {
   position: absolute;
   top: 15px;
   right: 15px;
@@ -203,14 +205,25 @@
   background-color: transparent;
 }
 
-.scoreCheckBox{
-  margin-top: 15%;
-  margin-bottom: 30%;
+.scoreCheckBox {
+  margin-bottom: 41px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+.checkBox {
+  display: flex;
+  justify-content: center;
+}
 
-.titleText{
-  margin-bottom: 0;
+.titleText {
+  /* margin-bottom: 0; */
+  margin: auto;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 30px;
 
 }
 
@@ -219,10 +232,10 @@
 }
 
 .scorecheckedcolor {
-  color: rgb(36, 255, 72);
+  color: #9899d3;
 }
 
-.scoreSubmit{
+.scoreSubmit {
   display: block;
   width: 100%;
   min-height: 65px;
@@ -233,7 +246,7 @@
 }
 
 
-.managementMain{
+.managementMain {
   height: 500px;
   border: 1px solid rgba(139, 138, 138, 0.651);
   margin-inline: 5%;
@@ -242,14 +255,17 @@
   padding-block: 10px;
   overflow-y: auto;
 }
+
 .managementMain::-webkit-scrollbar {
   width: 10px;
 }
+
 .managementMain::-webkit-scrollbar-thumb {
   height: 30%;
   background: #6667abad;
   border-radius: 10px;
 }
+
 .managementMain::-webkit-scrollbar-track {
   background: rgba(196, 217, 248, 0.1);
 }
@@ -257,7 +273,7 @@
 
 
 
-.managementUser{
+.managementUser {
   display: flex;
   justify-content: space-between;
   background-color: beige;
@@ -266,7 +282,8 @@
   margin-block: 10px;
   padding-inline: 10px;
 }
-.managementUserBan{
+
+.managementUserBan {
   display: flex;
   justify-content: space-between;
   background-color: rgba(253, 138, 138, 0.5);
@@ -275,7 +292,8 @@
   margin-block: 10px;
   padding-inline: 10px;
 }
-.managementUserAdmin{
+
+.managementUserAdmin {
   display: flex;
   justify-content: space-between;
   background-color: rgba(156, 140, 243, 0.644);
@@ -285,7 +303,7 @@
   padding-inline: 10px;
 }
 
-.managementButton{
+.managementButton {
   border: none;
   border-radius: 10px;
   background-color: #dee2e6;
@@ -293,13 +311,14 @@
 }
 
 .deleted {
-  text-decoration:line-through;
+  text-decoration: line-through;
 }
 
-.optionfont{
+.optionfont {
   font-size: large;
   text-align: center;
 }
-.optionscroll{
+
+.optionscroll {
   width: 280px;
 }

@@ -33,7 +33,7 @@ const ScoreModal = (props) => {
         })
 
       axios({
-        url: '/api/reviews/check/'+header.yourPk,
+        url: '/api/reviews/check/' + header.yourPk,
         method: 'get',
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
@@ -80,7 +80,7 @@ const ScoreModal = (props) => {
       .then(res => {
         alert("평가가 완료되었습니다")
         close()
-        window.location.href='/'
+        window.location.href = '/'
       })
       .catch(err => {
         console.error(err.response.data)
@@ -91,24 +91,24 @@ const ScoreModal = (props) => {
     if (header.myId === header.seller) {
       if (sellItem) {
         axios({
-        url: '/api/deal',
-        method: 'post',
-        params: { no: sellItem, buyerId: header.yourId },
-      })
-        .then(res => {
-          console.log(res)
+          url: '/api/deal',
+          method: 'post',
+          params: { no: sellItem, buyerId: header.yourId },
         })
-        .catch(err => {
-          console.error(err.response.data)
-        })
-      evaluation()
-      } else{
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => {
+            console.error(err.response.data)
+          })
+        evaluation()
+      } else {
         alert("판매하는 상품을 골라주세요.")
       }
-      
+
     } else {
       evaluation()
-    } 
+    }
   }
 
   return (
@@ -118,13 +118,13 @@ const ScoreModal = (props) => {
         <div className='scoreModal'>
 
           <div className='scoreTop'>
-            <button className="close closeButton" onClick={close}>&times;</button>
+            <button className="close closeButton" onClick={close} style={{ width: '20px' }}>&times;</button>
           </div>
 
-          <div className='scoreMain'>
+          <div >
             <div className='scoreTitle'>
-              <p className='titleText'>상대방을</p>
-              <p className='titleText'>평가해주세요!</p><br />
+              <p className='titleText'>상대방을 <span style={{ color: '#6667ab' }}>평가</span>해주세요 <span style={{ color: '#6667ab' }}>:D</span></p>
+
               {header.myId === header.seller && myItem ?
                 <div>
                   <p>판매하는 상품을 골라주세요</p>
@@ -133,9 +133,9 @@ const ScoreModal = (props) => {
                     {myItem.map((pruduct) => {
                       if (pruduct.state === 0) {
                         return (
-                        <option className='optionfont' key={pruduct.no} value={pruduct.no}>{pruduct.title}</option>
-                      )
-                    }
+                          <option className='optionfont' key={pruduct.no} value={pruduct.no}>{pruduct.title}</option>
+                        )
+                      }
                     })}
                   </select>
                 </div>
@@ -144,15 +144,15 @@ const ScoreModal = (props) => {
 
             <div className='scoreCheckBox'>
               <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="5" name="테스트" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>매우 착해요!</p></div>
-              <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="4" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>착해요!</p></div>
-              <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="3" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>평범했어요!</p></div>
+              <div className='d-flex align-items-center my-2' style={{ position: 'relative' }}><FontAwesomeIcon className='scoreCheck' style={{ marginRight: '106px', }} id="4" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect' style={{ position: 'absolute', right: '19px' }}>착해요!</p></div>
+              <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="3" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>평범 했어요!</p></div>
               <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="2" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>살짝 나빠요!</p></div>
               <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="1" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>매우 나빠요!</p></div>
             </div>
           </div>
 
           <div className='scoreBottom'>
-            <button className="submitbutton-able scoreSubmit" onClick={e => submitScore(e)}>SUBMIT</button>
+            <button className="submitbutton-able scoreSubmit" onClick={e => submitScore(e)} style={{ fontWeight: 'bold', fontSize: '18px' }}>평가하기</button>
           </div>
         </div>
       ) : null}

@@ -48,7 +48,7 @@ function NavBar() {
 
   useEffect(() => {
     axios({
-      url: `api/messages/count`,
+      url: `https://i7c110.p.ssafy.io/api/messages/count`,
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })

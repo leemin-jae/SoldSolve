@@ -26,10 +26,10 @@ function LiveItemInMain() {
 
   const Loading = () => {
     return (
-      <div style={{textAlign:'center', marginTop:'2em'}}>
+      <div style={{ textAlign: 'center', marginTop: '2em' }}>
         <h5>진행중인 라이브가 없습니다</h5>
         <h6>판매중인 상품에</h6>
-          <h6>실시간 소통을 더해보세요</h6>
+        <h6>실시간 소통을 더해보세요</h6>
       </div>
     );
   };
@@ -56,7 +56,7 @@ function LiveItemInMain() {
             }
           }}
           pagination={{ clickable: true }}
-          autoplay={{ delay:3000 }}
+          autoplay={{ delay: 3000 }}
         >
           {data.data.length > 0 ?
             <>
@@ -86,11 +86,11 @@ function LiveItemInMain() {
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
-// <<<<<<< HEAD
+                        // <<<<<<< HEAD
                         style={{ minHeight: 200 }}
-// =======
-//                         style={{ height: 190 }}
-// >>>>>>> 50f36b241503b821f4bf18f58f2796b3def88703
+                      // =======
+                      //                         style={{ height: 190 }}
+                      // >>>>>>> 50f36b241503b821f4bf18f58f2796b3def88703
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>
@@ -113,7 +113,7 @@ function LiveItemInMain() {
   console.log(LiveList)
   return (
     <div className="content">
-      <div className='hometext'><h4>NOW LIVE</h4></div>
+      <div className='hometext'><h4 style={{ textAlign: 'center' }}>NOW LIVE</h4></div>
       {LiveList.length ? <ShowMainItem data={LiveList} /> : <Loading />}
     </div>
   )

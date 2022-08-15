@@ -4,7 +4,6 @@ import OfferBuyerModal from "../../components/Modals/OfferBuyerModal";
 import OfferSellerModal from "../../components/Modals/OfferSellerModal";
 
 const LiveChat = (props) => {
-  console.log(props)
   const [messageList, setMessageList] = useState([]);
   const [message, setMessage] = useState("");
   const [come, setCome] = useState(null);
@@ -17,7 +16,6 @@ const LiveChat = (props) => {
   useEffect(() => {
     props.props.session.on("signal:chat", (event) => {
       const data = JSON.parse(event.data);
-      if (come === null) {
         let messageListData = messageList;
         messageListData.push({
           connectionId: event.from.connectionId,
@@ -25,27 +23,19 @@ const LiveChat = (props) => {
           message: data.message,
         });
         setMessageList([...messageListData]);
-      }
     });
-  }, [props]);
+    const welcome = {
+      message: `${props.props.myUserName}님이 입장하셨습니다.`,
+      nickname: props.props.myUserName,
+      streamId: props.props.streamId,
+    };
+    props.props.session.signal({
+      data: JSON.stringify(welcome),
+      type: "chat",
+    });
+  }, []);
 
-  useEffect(()=>{
-    setCome(1)
-    if (props.props && come === 1) {
-      const welcome = {
-        message: `${props.props.myUserName}님이 입장하셨습니다.`,
-        nickname: props.props.myUserName,
-        streamId: props.props.streamId,
-      };
-      console.log(welcome)
-      props.props.session.signal({
-        data: JSON.stringify(welcome),
-        type: "chat",
-      });
-      setCome(null)
-    }
-  },[])
-
+  
 
   const handlePressKey = (event) => {
     if (event.key === "Enter") {
@@ -54,7 +44,6 @@ const LiveChat = (props) => {
   };
 
   const sendMessage = () => {
-    console.log("chat" + message);
     if (props.props.myUserName && message) {
       let messageData = message.replace(/ +(?= )/g, "");
       if (messageData !== "" && messageData !== " ") {
@@ -63,7 +52,6 @@ const LiveChat = (props) => {
           nickname: props.props.myUserName,
           streamId: props.props.streamId,
         };
-        console.log(data)
         props.props.session.signal({
           data: JSON.stringify(data),
           type: "chat",
@@ -86,11 +74,9 @@ const LiveChat = (props) => {
 
     return (
       <>
-      <button onClick={openBuyOfferModal}>
-              <p>가격제안</p>
-            </button>
-            <OfferBuyerModal open={buyofferModalOpen} close={closeBuyOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
-            </>
+        <button className="offerButton" onClick={openBuyOfferModal}>가격제안</button>
+        <OfferBuyerModal open={buyofferModalOpen} close={closeBuyOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
+      </>
     )
 
   }
@@ -108,11 +94,9 @@ const LiveChat = (props) => {
 
     return (
       <>
-      <button onClick={openSellOfferModal}>
-              <p>제안목록</p>
-            </button>
-            <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
-            </>
+        <button className="offerButton"  onClick={openSellOfferModal}>제안목록</button>
+        <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
+      </>
     )
 
   }
@@ -125,7 +109,7 @@ const LiveChat = (props) => {
         position: 'relative',
         display: 'flex', justifyContent: 'space-between'
       }}>
-        <div><h3 style={{ marginInline: '1rem' }}>채팅방</h3></div>
+        <div><h5 style={{ marginInline: '1rem' }}>채팅방</h5></div>
         <div>{store.info.info.userId === props.props.sellerInfo.userid ? <OfferSeller /> : <OfferBuyer />}</div>
       </div>
       <div className='chatbox'>

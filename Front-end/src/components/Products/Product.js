@@ -35,7 +35,7 @@ function Product() {
   const [timeState, setTimeState] = useState(1)
   const [livetime, setLiveTime] = useState(null)
   const [load, setLoad] = useState(0)
-  
+
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -274,7 +274,18 @@ function Product() {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, yourId:productData.user.userid, myId: store.info.info.userId, sellerId: productData.user.userid, yourPk: productData.user.id } })
+          navigate('/chatroom/' + res.data, {
+            state:
+            {
+              roomId: res.data,
+              me: store.info.info.nickName,
+              you: youNick,
+              yourId: productData.user.userid,
+              myId: store.info.info.userId,
+              sellerId: productData.user.userid,
+              yourPk: productData.user.id
+            }
+          })
         })
         .catch(err => {
           console.log(err)
@@ -310,15 +321,16 @@ function Product() {
       setTimeState(0)
     } else {
       setTimeState(1)
-      const selectTime =document.getElementById('LiveTime').value
+      const selectTime = document.getElementById('LiveTime').value
 
       console.log(selectTime)
       axios({
         url: `/api/product/time`,
         method: 'post',
         data: {
-          no:productid,
-          time: document.getElementById('LiveTime').value},
+          no: productid,
+          time: document.getElementById('LiveTime').value
+        },
       })
         .then(res => {
           console.log(res)
@@ -370,7 +382,7 @@ function Product() {
                   <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0' }}>
                     {productData.user.nickname} ({productData.region})</p>
                 </div>
-                <p className='score' style={{ marginTop: '30px' }}>평점</p>
+                <p className='score' style={{ marginTop: '30px' }}>평점 이름 어케 지을까요 {productData.user.score}점</p>
               </div>
 
               <div className='product_description'>
@@ -403,7 +415,7 @@ function Product() {
                             <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
                             <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
                             {livetime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{livetime}</button> : <TimeSet timeState={timeState}></TimeSet>}
-                            
+
                             <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
                               <ul><ShowReq /></ul>
                             </Modal>
@@ -423,7 +435,7 @@ function Product() {
                             <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
                             {productData.liveTime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{productData.liveTime}</button> : null}
                           </div>
-                          
+
                           <div>
                             {/* <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} /> */}
                             <LikeButton no={productData.no} />

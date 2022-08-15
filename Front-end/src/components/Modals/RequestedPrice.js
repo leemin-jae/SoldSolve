@@ -60,7 +60,15 @@ export default function RequestedPrice(props) {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, meId: store.info.info.userId } })
+          // navigate('/chatroom/' + res.data, { state: { 
+          //   roomId: res.data, 
+          //   me: store.info.info.nickName,
+          //   you: youNick,
+          //   yourId:"구매자아이디",
+          //   yourPk:"구매자pk",
+          //   myId: store.info.info.userId,
+          //   sellerid:store.info.info.nickName,
+          //  } })
         })
         .catch(err => {
           console.log(err)

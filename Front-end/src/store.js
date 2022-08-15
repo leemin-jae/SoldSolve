@@ -1,8 +1,9 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore, createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
+import axios from 'axios';
 
 
 let token = createSlice({
@@ -19,9 +20,9 @@ let token = createSlice({
 })
 
 let user = createSlice({
-  name:'user',
-  initialState:{
-    info : ''
+  name: 'user',
+  initialState: {
+    info: ''
   },
   reducers: {
     getInfo(state, action) {
@@ -29,12 +30,48 @@ let user = createSlice({
       console.log(state.info)
     },
   }
+})
 
+const asyncOnclickMessage = createAsyncThunk(
+  'updateRemainMessage', async () => {
+    const result = await axios.get(
+      'https://i7c110.p.ssafy.io/api/messages/count',
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.token}`
+        }
+      }
+    );
+    console.log(result.data)
+    return result.data
+  }
+
+)
+
+
+let notice = createSlice({
+  name: 'notice',
+  initialState: {
+    noticeCount: ''
+  },
+  extraReducers: (builder) => {
+    builder.addCase(asyncOnclickMessage.fulfilled, (state, action) => {
+      console.log(action.payload, typeof (action.payload))
+      state.noticeCount = action.payload
+    })
+    // builder.addCase(asyncOnclickMessage.fulfilled, (state, action)=>{
+
+    // })
+    // builder.addCase(asyncOnclickMessage.fulfilled, (state, action)=>{
+    // console.log()
+    // })
+  }
 })
 
 const reducers = combineReducers({
   token: token.reducer,
   info: user.reducer,
+  noticeCount: notice.reducer
 });
 
 const persistConfig = {
@@ -48,6 +85,7 @@ const persistedReducer = persistReducer(persistConfig, reducers);
 
 export let { getToken } = token.actions
 export let { getInfo } = user.actions
+export { asyncOnclickMessage }
 
 export default configureStore({
   reducer: persistedReducer,

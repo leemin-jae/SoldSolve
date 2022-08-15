@@ -17,7 +17,7 @@ const OfferSellerModal = (props) => {
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
       {open ?
-      <div className='scoreModal'>
+      <div className='offerModal'>
                   <div className='scoreTop'>
             <button className="close closeButton" onClick={close}>&times;</button>
           </div>

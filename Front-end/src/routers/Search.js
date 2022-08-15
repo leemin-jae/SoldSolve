@@ -1,8 +1,5 @@
-
-import Box from "@mui/material/Box";
 import NavBar from "../components/NavBar";
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
 import SearchBar from "../components/Search/SearchBar";
 import { useEffect, useState } from "react";
 import axios from "axios";

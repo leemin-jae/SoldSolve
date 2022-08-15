@@ -21,9 +21,9 @@ const OfferBuyerModal = (props) => {
 
     let submitButton = null;
     if (button === 'noInput') {
-      submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true} style={{width: 100}}>SUBMIT</button>
+      submitButton = <button className="offerSubmitButton" type="submit" disabled={true} style={{width: 100}}>SUBMIT</button>
     } else if (button === 'input') {
-      submitButton = <button className="inputform submitbutton-able" type="submit" style={{width: 100}}>SUBMIT</button>
+      submitButton = <button className="offerSubmitButton" type="submit" style={{width: 100}}>SUBMIT</button>
 
     }
 
@@ -51,7 +51,7 @@ const OfferBuyerModal = (props) => {
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
       {open ? (
-        <div className='scoreModal'>
+        <div className='offerModal'>
 
           <div className='scoreTop'>
             <button className="close closeButton" onClick={close}>&times;</button>
@@ -69,7 +69,7 @@ const OfferBuyerModal = (props) => {
           </div>
           <div className='offerBottom'>
           <form onSubmit={e => { Offer(e, money) }} className='d-flex align-items-center my-2 justify-content-between'>
-              <input className="inputform" onChange={e => { inputMoney(e) }} type="number" placeholder="가격을 입력해주세요" value={money}></input>
+              <input className="offerInput" onChange={e => { inputMoney(e) }} type="number" placeholder="가격을 입력해주세요" value={money}></input>
             {submitButton}
             </form>
           </div>

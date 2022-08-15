@@ -87,6 +87,9 @@ export default function RequestedPrice(props) {
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
+                  console.log(row)
+                  let price = row.price
+                  const wantPrice = price.toLocaleString('ko-KR');
 
                   return (
                     <TableRow sx={{ height: 10 }}
@@ -97,7 +100,7 @@ export default function RequestedPrice(props) {
                       >
                         {row.user.nickname}
                       </TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
+                      <TableCell align="right">{wantPrice}원</TableCell>
                       {changedata === 'seller' ? <TableCell align="right">
                       <IconButton aria-label="add to favorites" onClick={() => createRoom(row)}>
                         <ChatIcon />

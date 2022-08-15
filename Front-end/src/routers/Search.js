@@ -49,9 +49,7 @@ function Search() {
       return <div>최근 검색된 기록이 없습니다.</div>
     }
     return (
-      <>
         <Swiper
-          style={{ width: 400 }}
           slidesPerView={4}
           centeredSlides={true}
         >
@@ -59,7 +57,7 @@ function Search() {
             return (
               <SwiperSlide key={id} style={{ marginLeft: 10}}>
                 <div style={{ textAlign: 'center', display: 'flex' }}>
-                  <a href={`/search/${text}`} style={{ textDecoration: 'none'}}><Chip label={text} /></a>
+                  <a href={`/search/${text}`} style={{ textDecoration: 'none'}}><Chip label={text} style={{ }}/></a>
                   <button
                     onClick={() => {
                       onRemoveKeyword(id)
@@ -68,12 +66,10 @@ function Search() {
                     X
                   </button>
                 </div>
-
               </SwiperSlide>
             )
           })}
         </Swiper>
-      </>
     )
   }
 
@@ -93,19 +89,17 @@ function Search() {
       <div className="searchcontainer">
         <h5>인기 검색어</h5>
       </div>
-      <div className="searchcontainer2" >
+      <div className="searchcontainer2">
         <Swiper
-          style={{ width: 400 }}
           slidesPerView={4}
-          centeredSlides={true}
         >
           {pops.length > 0 ?
             <>
               {pops.map((pop) => {
                 console.log(pop)
                 return (
-                  <SwiperSlide key={pop.popId} style={{ textAlign: 'center'}}>
-                      <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} /></a>
+                  <SwiperSlide key={pop.popId}>
+                      <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} style={{  }}/></a>
                   </SwiperSlide>
                 );
               })}

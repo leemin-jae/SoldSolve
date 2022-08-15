@@ -2,14 +2,8 @@ package com.ssafy.soldsolve.api.service;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ssafy.soldsolve.api.request.ProductPostReq;
-import com.ssafy.soldsolve.db.entity.Product;
-import com.ssafy.soldsolve.db.entity.ProductImg;
-import com.ssafy.soldsolve.db.entity.Request;
-import com.ssafy.soldsolve.db.entity.User;
-import com.ssafy.soldsolve.db.repository.ProductImgRepository;
-import com.ssafy.soldsolve.db.repository.ProductRepository;
-import com.ssafy.soldsolve.db.repository.RequestRepository;
-import com.ssafy.soldsolve.db.repository.UserRepository;
+import com.ssafy.soldsolve.db.entity.*;
+import com.ssafy.soldsolve.db.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +36,17 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     MessageService messageService;
 
+    @Autowired
+    WishRepository wishRepository;
 
+    @Autowired
+    LiveRepository liveRepository;
+
+    @Autowired
+    OfferRepository offerRepository;
+
+    @Autowired
+    DealRepository dealRepository;
 
     @Override
     public int registProduct(ProductPostReq product) {
@@ -89,6 +93,35 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public int deleteProduct(String no) {
+        Product p = productRepository.findByNo(Integer.parseInt(no));
+        List<Request> requestList = requestRepository.findAllByProduct(p).orElseGet(null);
+        if (requestList!=null) {
+            for (int i=0; i<requestList.size(); i++) {
+                requestRepository.delete(requestList.get(i));
+            }
+        }
+        List<Wish> wishList = wishRepository.findAllByProduct(p).orElseGet(null);
+        if (wishList!=null) {
+            for (int j=0; j<wishList.size(); j++) {
+                wishRepository.delete(wishList.get(j));
+            }
+        }
+        Live live = liveRepository.findByProduct(p);
+        if (live!=null) {
+            liveRepository.delete(live);
+        }
+        List<Offer> offerList = offerRepository.findAllByProduct(p).orElseGet(null);
+        if (offerList!=null) {
+            for (int i=0; i<offerList.size(); i++) {
+                offerRepository.delete(offerList.get(i));
+            }
+        }
+        List<Deal> dealList = dealRepository.findAllByProduct(p).orElseGet(null);
+        if (dealList!=null) {
+            for (int i=0; i<dealList.size(); i++) {
+                dealRepository.delete(dealList.get(i));
+            }
+        }
         productRepository.delete(productRepository.getOne(Integer.parseInt(no)));
         return 0;
     }

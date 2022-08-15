@@ -56,7 +56,6 @@ public class User {
 	@JsonIgnore
 	List<Review> reviews = new ArrayList<>();
 
-
 	@Builder
 	public User(String userid, String password, String username, String nickname, String email, String role, String profileUrl, Timestamp createDate, List<Message> messages) {
 		this.userid = userid;

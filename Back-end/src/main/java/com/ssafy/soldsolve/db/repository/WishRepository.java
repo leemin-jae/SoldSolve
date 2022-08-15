@@ -15,5 +15,7 @@ public interface WishRepository extends JpaRepository<Wish, Integer> {
     int countByUserAndProduct(User user, Product product);
     Optional<Wish> findByUserAndProduct(User user, Product product);
 
+    Optional<List<Wish>> findAllByProduct(Product product);
+
     List<Wish> findByProduct(Product wishedProduct);
 }

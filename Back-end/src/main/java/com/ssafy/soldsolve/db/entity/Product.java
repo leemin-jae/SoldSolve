@@ -1,6 +1,7 @@
 package com.ssafy.soldsolve.db.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
@@ -46,11 +47,7 @@ public class Product {
     @JoinColumn(name = "user_pk")
     private User user;
 
-    @OneToMany(mappedBy = "userid")
+    @OneToMany(mappedBy = "userid", orphanRemoval = true)
     List<User> requestsUser = new ArrayList<>();
-
-
-
-
 
 }

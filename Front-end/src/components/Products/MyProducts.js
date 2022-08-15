@@ -31,7 +31,9 @@ function MyProducts() {
           }
         }
       );
-      setData(result.data.reverse());
+      if (result.data.length > 0) {
+        setData(result.data.reverse());
+      }
       setLoading(false)
     }
     fetchData();
@@ -92,13 +94,6 @@ function MyProducts() {
                           style={{ height: '170px', width: '100%' }}
                         />
                       }
-
-
-
-
-
-
-
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>
                         <p className='card_text'>{productPrice} 원</p>

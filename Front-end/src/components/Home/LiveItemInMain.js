@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 
 function LiveItemInMain() {
   const [LiveList, setLiveList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   SwiperCore.use([Pagination, Autoplay]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function LiveItemInMain() {
         `/api/live/list`
       );
       setLiveList(result.data)
-      setLoading(false)
+      // setLoading(false)
     }
     fetchData();
   }, []);
@@ -86,11 +86,7 @@ function LiveItemInMain() {
                       <img className='card_image'
                         src={mainImg}
                         alt={product.title}
-                        // <<<<<<< HEAD
                         style={{ minHeight: 200 }}
-                      // =======
-                      //                         style={{ height: 190 }}
-                      // >>>>>>> 50f36b241503b821f4bf18f58f2796b3def88703
                       />
                       <div className='card_content'>
                         <h5 className='card_title'>{pTitle}</h5>

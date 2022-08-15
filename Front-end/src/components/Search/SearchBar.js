@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 
 
-function SearchBar() {
+function SearchBar({ onAddKeyword }) {
   const [category, setCategory] = useState("")
   const [title, setTitle] = useState("")
   const params = useParams();
@@ -30,11 +30,15 @@ function SearchBar() {
     e.preventDefault();
     console.log(category)
     if ((category === ''|| category === 'all') && title !== '') {
+      
       document.location.href = `/search/` + title;
+      onAddKeyword(title)
     } else if (title === '') {
       alert("검색어를 입력해주세요")
     } else {
+      
       document.location.href = `/search/` + category + `/` + title;
+      onAddKeyword(title)
     }
   }
   return (

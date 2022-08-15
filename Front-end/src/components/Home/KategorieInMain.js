@@ -21,10 +21,12 @@ function KategorieInMain() {
       );
       // console.log(result)
       setNewData(result.data.reverse().slice(0, 10));
-
-      setHotData(result.data.sort(function (a, b) {
+      setHotData(result.data.filter((x) => x.state === 0).sort(function (a, b) {
         return b.viewCount - a.viewCount
-      }).slice(0, 20))
+      }).slice(0, 10))
+      // setHotData(result.data.sort(function (a, b) {
+      //   return b.viewCount - a.viewCount
+      // }).slice(0, 20))
       setLoading(false)
     }
     fetchData();
@@ -76,39 +78,35 @@ function KategorieInMain() {
 
                 let price = product.price
                 const productPrice = price.toLocaleString('ko-KR');
-                console.log(data)
-                console.log(hotdata)
-                console.log(newdata)
-                if ((data.data === hotdata && product.state === 0) || data.data === newdata) {
-                  return (
-                    <SwiperSlide className='cards_item' key={product.no}>
-                      <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
-                        {product.state ?
-                          <div style={{ height: '169px' }}>
-                            <img className='card_image'
-                              src={mainImg}
-                              alt={product.title}
-                              style={{ opacity: '70%', width: '100%', minHeight: 180 }}
-                            />
-                            <h1 style={{ marginTop: '-100px', color: '#6667ab' }}>판매 완료</h1>
-                          </div>
-                          :
-                          <img className='card_image'
-                            src={mainImg}
-                            alt={product.title}
-                            style={{ height: '169px', width: '100%' }}
-                          />
-
-                        }
-                        <div className='card_content'>
-                          <h5 className='card_title'>{pTitle}</h5>
-                          <p className='card_text'>{productPrice} 원</p>
-                        </div>
-                      </a>
-                    </SwiperSlide>
-                  );
-                }
-
+                // console.log(data)
+                // console.log(hotdata)
+                // console.log(newdata)
+                return (
+                  <SwiperSlide className='cards_item' key={product.no}>
+                    <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
+                      {product.state ? 
+                      <div style={{minHeight: 180}}>
+                        <img className='card_image'
+                        src={mainImg}
+                        alt={product.title}
+                        style={{opacity:'70%', width:'100%', minHeight: 180}}
+                        />
+                        <h1 style={{marginTop:'-100px', color:'#6667ab'}}>판매 완료</h1> 
+                      </div>
+                      : 
+                      <img className='card_image'
+                        src={mainImg}
+                        alt={product.title}
+                        style={{ minHeight: 180, width: '100%' }}
+                      />
+                      }
+                      <div className='card_content'>
+                        <h5 className='card_title'>{pTitle}</h5>
+                        <p className='card_text'>{productPrice} 원</p>
+                      </div>
+                    </a>
+                  </SwiperSlide>
+                );
               })}
             </>
             : null}
@@ -116,6 +114,8 @@ function KategorieInMain() {
       </>
     );
   };
+
+
 
   return (
     <>

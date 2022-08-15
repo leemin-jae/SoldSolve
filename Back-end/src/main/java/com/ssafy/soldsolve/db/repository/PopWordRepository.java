@@ -17,5 +17,5 @@ public interface PopWordRepository extends JpaRepository<PopWord, Integer> {
 
     PopWord findByTitle(String token);
 
-    List<PopWord> findAllOrderByCountDesc();
+    List<PopWord> findAllByOrderByCountDesc();
 }

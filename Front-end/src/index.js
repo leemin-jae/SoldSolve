@@ -14,7 +14,6 @@ import EditAccount from './routers/EditAccount';
 import NoticePage from './routers/NoticePage';
 import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
-import LiveDetail from './routers/LiveDetail';
 import CreateProduct from './routers/ProductForm';
 import ChatRoom from './routers/ChatRoom';
 //
@@ -53,7 +52,6 @@ root.render(
             <Route path="/notice" element={<NoticePage />} />
             <Route path='/createroom/:id' element={<CreateRoom />}></Route>
             <Route path='/live/:user/:title' element={<LivePage />}></Route>
-            <Route path='/livedetail' element={<LiveDetail />}></Route>
             <Route path='/product/:id' element={<Product />}></Route>
             <Route path='/product' element={<Products />}></Route>
             <Route path='/createproduct' element={<CreateProduct />}></Route>

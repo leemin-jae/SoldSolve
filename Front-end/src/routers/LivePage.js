@@ -239,179 +239,177 @@ class LivePage extends Component {
 
 
   async switchCamera() {
-  try {
-    const devices = await this.OV.getDevices()
-    var videoDevices = devices.filter(device => device.kind === 'videoinput');
-    if (videoDevices && videoDevices.length > 1) {
+    try {
+      const devices = await this.OV.getDevices()
+      var videoDevices = devices.filter(device => device.kind === 'videoinput');
+      if (videoDevices && videoDevices.length > 1) {
 
-      var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
-      if (newVideoDevice.length > 0) {
-        var newPublisher = this.OV.initPublisher(undefined, {
-          videoSource: newVideoDevice[0].deviceId,
-          publishAudio: true,
-          publishVideo: true,
-          mirror: true
-        });
+        var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
+        if (newVideoDevice.length > 0) {
+          var newPublisher = this.OV.initPublisher(undefined, {
+            videoSource: newVideoDevice[0].deviceId,
+            publishAudio: true,
+            publishVideo: true,
+            mirror: true
+          });
 
-        await this.state.session.unpublish(this.state.mainStreamManager)
+          await this.state.session.unpublish(this.state.mainStreamManager)
 
-        await this.state.session.publish(newPublisher)
-        this.setState({
-          currentVideoDevice: newVideoDevice,
-          mainStreamManager: newPublisher,
-          publisher: newPublisher,
-        });
+          await this.state.session.publish(newPublisher)
+          this.setState({
+            currentVideoDevice: newVideoDevice,
+            mainStreamManager: newPublisher,
+            publisher: newPublisher,
+          });
+        }
       }
+    } catch (e) {
+      console.error(e);
     }
-  } catch (e) {
-    console.error(e);
   }
-}
 
 
   async CameraOff() {
-  if (this.state.nowCamera) {
-    this.state.publisher.publishVideo(false);
-    this.setState({
-      nowCamera: false
-    })
-  } else {
-    this.state.publisher.publishVideo(true);
-    this.setState({
-      nowCamera: true
-    })
+    if (this.state.nowCamera) {
+      this.state.publisher.publishVideo(false);
+      this.setState({
+        nowCamera: false
+      })
+    } else {
+      this.state.publisher.publishVideo(true);
+      this.setState({
+        nowCamera: true
+      })
+    }
   }
-}
 
   async VoiceOff() {
-  console.log(this.state)
-  if (this.state.nowVoice) {
-    this.state.publisher.publishAudio(false);
-    this.setState({
-      nowVoice: false
-    })
-  } else {
-    this.state.publisher.publishAudio(true);
-    this.setState({
-      nowVoice: true
-    })
+    console.log(this.state)
+    if (this.state.nowVoice) {
+      this.state.publisher.publishAudio(false);
+      this.setState({
+        nowVoice: false
+      })
+    } else {
+      this.state.publisher.publishAudio(true);
+      this.setState({
+        nowVoice: true
+      })
+    }
   }
-}
 
 
-deleteSession() {
-  this.leaveSession()
-
-  axios
-    .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell' + this.state.productID, {
-      headers: {
-        Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-      },
-    })
-    .then((res) => {
-      console.log(res)
-    })
-
-  axios({
-    url: '/api/live',
-    method: 'delete',
-    params: { sessionId: this.state.mySessionId }
-  })
-    .then((res) => {
-      console.log(res)
-    })
-}
-render() {
-  if (this.state.session === undefined) {
-    this.joinSession()
-  }
-  return (
-    <div>
-      <NavBar></NavBar>
-      <div className="test">
-        {this.state.session !== undefined ? (
-
-          <div id="session">
-            <div className='liveTitle my-3'>
-              <h3 id="session-title">{this.state.RoomTitle}</h3>
-            </div>
-
-            <div className='live_container'>
-              <div>
-                {this.state.params[2] === this.state.myId ?
-                  <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
-                    <div>
-                      <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.switchCamera} icon={faRepeat} size="1x" />
-                      {this.state.nowCamera ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)' }} className='exiticon mx-3 iconsize' onClick={this.CameraOff} icon={faVideo} size="1x" /> :
-                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.CameraOff} icon={faVideoSlash} size="1x" />}
-                      {this.state.nowVoice ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)' }} className='exiticon mx-3 iconsize' onClick={this.VoiceOff} icon={faMicrophone} size="1x" /> :
-                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.VoiceOff} icon={faMicrophoneSlash} size="1x" />}
-                      <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.deleteSession} icon={faArrowRightFromBracket} />
-                    </div>
-                  </div>
-                  : null}
-                <div>
-                  {this.state.myId === this.state.params[2] ? (
-                    <div className='livebox'>
-                      <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
-                    </div>
-                  ) : (
-                    <div className='livebox'>
-                      <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
-                    </div>
-                  )}
-
-                </div>
-                {this.state.sellerInfo ?
-                  <>
-                    <p style={{ margin: '1em' }}>
-                      <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
-                      {this.state.sellerInfo.nickname} ({this.state.region}), 평점</p>
-                    <p style={{ margin: '1em' }}> {this.state.RoomContent}</p>
-                    <hr style={{ width: '100%' }} />
-                  </>
-
-                  : null}
-
-              </div>
-
-              <div>
-                {this.state.chatOn ? <LiveChat props={this.state} /> : null}
-              </div>
-
-
-            </div>
-          </div>
-        ) : null}
-      </div>
-    </div>
-
-  );
-}
-
-
-getToken(sessionId) {
-  return new Promise((resolve, reject) => {
-    var data = {};
+  deleteSession() {
     axios
-      .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection", data, {
+      .delete(OPENVIDU_SERVER_URL + '/openvidu/api/sessions/sell' + this.state.productID, {
         headers: {
           Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
-          'Content-Type': 'application/json',
         },
       })
-      .then((response) => {
-        console.log('TOKEN', response);
-        resolve(response.data.token);
+      .then((res) => {
+        console.log(res)
       })
-      .catch((error) => {
-        alert("아직 라이브방이 개설되지 않았습니다.")
-        document.location.href = '/'
-      });
-  });
-}
 
+    axios({
+      url: '/api/live',
+      method: 'delete',
+      params: { sessionId: this.state.mySessionId }
+    })
+      .then((res) => {
+        console.log(res)
+      })
+    this.leaveSession()
   }
+  render() {
+    if (this.state.session === undefined) {
+      this.joinSession()
+    }
+    return (
+      <div>
+        <NavBar></NavBar>
+        <div className="test">
+          {this.state.session !== undefined ? (
+
+            <div id="session">
+              <div className='liveTitle my-3'>
+                <h3 id="session-title">{this.state.RoomTitle}</h3>
+              </div>
+
+              <div className='live_container'>
+                <div>
+                  {this.state.params[2] === this.state.myId ?
+                    <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
+                      <div>
+                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.switchCamera} icon={faRepeat} size="1x" />
+                        {this.state.nowCamera ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)' }} className='exiticon mx-3 iconsize' onClick={this.CameraOff} icon={faVideo} size="1x" /> :
+                          <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.CameraOff} icon={faVideoSlash} size="1x" />}
+                        {this.state.nowVoice ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)' }} className='exiticon mx-3 iconsize' onClick={this.VoiceOff} icon={faMicrophone} size="1x" /> :
+                          <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.VoiceOff} icon={faMicrophoneSlash} size="1x" />}
+                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.deleteSession} icon={faArrowRightFromBracket} />
+                      </div>
+                    </div>
+                    : null}
+                  <div>
+                    {this.state.myId === this.state.params[2] ? (
+                      <div className='livebox'>
+                        <UserVideoComponent className="livebox2" streamManager={this.state.mainStreamManager} />
+                      </div>
+                    ) : (
+                      <div className='livebox'>
+                        <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
+                      </div>
+                    )}
+
+                  </div>
+                  {this.state.sellerInfo ?
+                    <>
+                      <p style={{ margin: '1em' }}>
+                        <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
+                        {this.state.sellerInfo.nickname} ({this.state.region}), 평점</p>
+                      <p style={{ margin: '1em' }}> {this.state.RoomContent}</p>
+                      <hr style={{ width: '100%' }} />
+                    </>
+
+                    : null}
+
+                </div>
+
+                <div>
+                  {this.state.chatOn ? <LiveChat props={this.state} /> : null}
+                </div>
+
+
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+
+    );
+  }
+
+
+  getToken(sessionId) {
+    return new Promise((resolve, reject) => {
+      var data = {};
+      axios
+        .post(OPENVIDU_SERVER_URL + "/openvidu/api/sessions/" + sessionId + "/connection", data, {
+          headers: {
+            Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
+            'Content-Type': 'application/json',
+          },
+        })
+        .then((response) => {
+          console.log('TOKEN', response);
+          resolve(response.data.token);
+        })
+        .catch((error) => {
+          document.location.href = '/'
+        });
+    });
+  }
+
+}
 
 const mapStateToProps = (state) => ({
   storeInfo: state.info.info

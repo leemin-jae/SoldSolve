@@ -98,7 +98,7 @@ function Chat() {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
                 <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
-                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you,yourId:yourId,myId:myId,sellerid:room.seller.userid,yourPk:yourPk} })
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me:me, you: you,yourId:yourId,myId:myId,sellerid:room.seller.userid,yourPk:yourPk} })
                 }}>
                   <div className="profile_box" style={{ background: '#BDBDBD' }}>
                     <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
@@ -128,7 +128,7 @@ function Chat() {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
                 <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
-                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you,yourId:yourId,myId:myId,sellerid:room.seller.userid,yourPk:yourPk } })
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you,yourId:yourId,myId:myId, sellerid:room.seller.userid, yourPk:yourPk } })
                 }}>
                   <div className="profile_box" style={{ background: '#BDBDBD' }}>
                     <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />

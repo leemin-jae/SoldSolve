@@ -30,6 +30,7 @@ function Notice() {
     axios({
       url: '/admin/notices/' + e,
       method: 'delete',
+      headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => {
         console.log(res)
@@ -67,7 +68,7 @@ function Notice() {
     lis.push(noticeTag)
   }
 
-  function clickNotice(e) { //읽음으로 바꾸는 axios 추가 안읽은것을 선택하면 title이 투명해져야함
+  function clickNotice(e) {
     e.stopPropagation();
     if (document.getElementById('ArticleContent' + e.currentTarget.id).classList.value === 'overText') {
       document.getElementById('ArticleContent' + e.currentTarget.id).classList = 'hide'

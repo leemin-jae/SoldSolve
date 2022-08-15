@@ -134,7 +134,7 @@ const ManagementModal = (props) => {
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
       {open ? (
-        <div className='scoreModal'>
+        <div className='userListModal'>
 
           <div className='scoreTop'>
             <h3>유저 관리</h3>

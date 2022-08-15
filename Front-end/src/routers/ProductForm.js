@@ -10,7 +10,7 @@ function CreateProduct() {
   const [price, setPrice] = useState(null)
   const [description, setDescription] = useState('')
   const [place, setPlace] = useState('')
-  const [taglist, setTagList] = useState([])
+  const [tagKeyword, setTagKeyword] = useState([])
   const [category, setCategory] = useState('')
   const [detailImgs, setDetailImgs] = useState('')
   const editMode = useParams().id
@@ -130,12 +130,22 @@ function CreateProduct() {
 
   function tagForm(e) {
     e.preventDefault();
-    if (e.key === 'Enter') {
-      const t = [...taglist]
-      t.push(<label className="tagbox">#{e.target.value}</label>)
-      setTagList(t)
+    if (e.key === 'Enter' && tagKeyword.indexOf(e.target.value)<0) {
+      const tk = [...tagKeyword]
+      tk.push(e.target.value)
+      setTagKeyword(tk)
       e.target.value = ''
     }
+  }
+
+  function deleteTag(e){
+    const t = [...tagKeyword]
+    for (let i=0; i<t.length; i++) {
+      if ('#'+t[i] === e.target.innerText) {
+        t.splice(i,1)
+      }
+    }
+    setTagKeyword(t)
   }
 
   const handleImageUpload = (e) => {
@@ -200,7 +210,14 @@ function CreateProduct() {
               <textarea onChange={e => { inputForm(e) }} className="descriptionform" name="content" placeholder="상품 설명"></textarea><br />
               <input onChange={e => { inputForm(e) }} className="inputform" name="place" type="text" placeholder="지역"></input><br />
               <input onKeyUp={e => { tagForm(e) }} className="inputform" name="relatedtags" type="text" placeholder="관련 태그"></input><br />
-              <div className="tagdiv">{taglist}</div>
+              <div className="tagdiv">
+                {tagKeyword ? tagKeyword.map((keyword) => {
+                  console.log(tagKeyword)
+                  return (
+                    <label onClick={e=>deleteTag(e)} className="tagbox">#{keyword}</label>
+                  )
+                }) :null}
+              </div>
               <button onClick={e => submitProduct(e)} className="inputform submitbutton-able" type="button">{editMode ? "수정하기" : "SUBMIT"}</button>
             </form>
           </div>

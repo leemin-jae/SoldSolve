@@ -25,17 +25,16 @@ function Message() {
 
     for (let i=messagedata.length-1; 0<=i; i--) {
         let t = messagedata[i]
-        console.log(t.isRead)
         let noticeTag = 
             <>
             { t.isRead ?
-                <li className='Article read' onClick={e => clickNotice(t)} key={t.id}>
+                <li className='Article read' id={t.id} onClick={e => clickNotice(t)} key={t.id}>
                   <div className='noticeTitle'>{ t.content }
                   <span className='articleSpan'>{t.writtenTimes}</span>
                   </div>
                 </li>
               :
-                <li className='Article' onClick={e => clickNotice(t)} key={t.id}>
+                <li className='Article' id={t.id} onClick={e => clickNotice(t)} key={t.id}>
                   <div className='noticeTitle'>{ t.content }
                   <span className='articleSpan'>{t.writtenTimes}</span>
                   </div>
@@ -47,8 +46,7 @@ function Message() {
         lis.push(noticeTag)
     }
 
-    function clickNotice(e){ //읽음으로 바꾸는 axios 추가 안읽은것을 선택하면 title이 투명해져야함
-      console.log(e)
+    function clickNotice(e){
       axios({
         url: '/api/messages/'+e.id,
         method: 'put',
@@ -56,6 +54,7 @@ function Message() {
       })
         .then(res => {
           console.log(res)
+          document.getElementById(e.id).classList.add('read')
         })
         .catch(err => {
           console.log(err)

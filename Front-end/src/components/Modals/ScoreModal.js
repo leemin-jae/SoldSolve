@@ -14,10 +14,11 @@ const ScoreModal = (props) => {
   const [sellerMethod, setSellerMethod] = useState('post');
 
   useEffect(() => {
+    console.log(header)
+    if (header.scoreMethod === 'patch') {
+      setSellerMethod('patch')
+    }
     if (header.myId === header.seller) {
-
-      http://localhost:8080/api/reviews/check/{userPk}
-
       axios({
         url: '/api/product/me',
         method: 'get',
@@ -77,7 +78,9 @@ const ScoreModal = (props) => {
       data: { score: score, content: content }
     })
       .then(res => {
-        console.log(res)
+        alert("평가가 완료되었습니다")
+        close()
+        window.location.href='/'
       })
       .catch(err => {
         console.error(err.response.data)
@@ -105,7 +108,7 @@ const ScoreModal = (props) => {
       
     } else {
       evaluation()
-    }
+    } 
   }
 
   return (

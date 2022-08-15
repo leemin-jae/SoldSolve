@@ -122,7 +122,17 @@
 }
 
 
-
+.userListModal{
+  width: 90%;
+  max-width: 450px;
+  height: 600px;
+  margin: 0 auto;
+  border-radius: 30px;
+  background-color: #fff;
+  /* 팝업이 열릴때 스르륵 열리는 효과 */
+  animation: modal-show 0.3s;
+  overflow: hidden;
+}
 
 
 .scoreSelect{
@@ -138,7 +148,6 @@
   height: 750px;
   margin: 0 auto;
   border-radius: 30px;
-
   background-color: #fff;
   /* 팝업이 열릴때 스르륵 열리는 효과 */
   animation: modal-show 0.3s;
@@ -231,9 +240,22 @@
   border-radius: 20px;
   padding-inline: 5px;
   padding-block: 10px;
-
   overflow-y: auto;
 }
+.managementMain::-webkit-scrollbar {
+  width: 10px;
+}
+.managementMain::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+.managementMain::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
+}
+
+
+
 
 .managementUser{
   display: flex;

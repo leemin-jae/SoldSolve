@@ -27,6 +27,9 @@ const LiveChat = (props) => {
         setMessageList([...messageListData]);
       }
     });
+  }, [props]);
+
+  useEffect(()=>{
     setCome(1)
     if (props.props && come === 1) {
       const welcome = {
@@ -41,8 +44,7 @@ const LiveChat = (props) => {
       });
       setCome(null)
     }
-  }, [props]);
-
+  },[])
 
 
   const handlePressKey = (event) => {

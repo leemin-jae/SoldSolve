@@ -266,10 +266,6 @@ function Product() {
 
   const createRoom = () => {
     if (window.confirm("판매자와 연락하시겠습니까?")) {
-      let buyerId = null
-      if (store.info.info.userId !== productData.user.userid) {
-        buyerId = store.info.info.userId
-      }
       axios({
         url: '/api/room',
         method: 'post',
@@ -278,7 +274,7 @@ function Product() {
       })
         .then(res => {
           console.log(res.data, '방생성')
-          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, meId: store.info.info.userId, productId: productid, sellerId: productData.user.userid, buyerId: buyerId } })
+          navigate('/chatroom/' + res.data, { state: { roomId: res.data, me: store.info.info.nickName, you: youNick, yourId:productData.user.userid, myId: store.info.info.userId, sellerId: productData.user.userid, yourPk: productData.user.id } })
         })
         .catch(err => {
           console.log(err)
@@ -326,6 +322,7 @@ function Product() {
       })
         .then(res => {
           console.log(res)
+          setLiveTime(res.data)
         })
         .catch(err => {
           console.log(err)
@@ -405,7 +402,7 @@ function Product() {
                           <div className='d-flex'>
                             <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
                             <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
-                            {productData.liveTime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{productData.liveTime}</button> : <TimeSet timeState={timeState}></TimeSet>}
+                            {livetime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{livetime}</button> : <TimeSet timeState={timeState}></TimeSet>}
                             
                             <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
                               <ul><ShowReq /></ul>

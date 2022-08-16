@@ -1,8 +1,5 @@
 import React from 'react';
 import './modal.css';
-import { useState } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSquareCheck } from '@fortawesome/free-solid-svg-icons'
 import RequestedPrice from './RequestedPrice';
 
 

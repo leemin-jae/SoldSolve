@@ -252,29 +252,33 @@ input::placeholder {
   border-radius: 10px;
   margin-left: -60px;
 }
+
 /* .category_reco {
   border: 2px solid #6667AB;
 } */
 
 @media (max-width: 414px) {
-  .fullscreenbutton{
+  .fullscreenbutton {
     position: absolute;
-    z-index:99;
+    z-index: 99;
     opacity: 30%;
     right: 0;
     margin-top: -15px;
   }
-  .livevolume{
+
+  .livevolume {
     position: absolute;
     z-index: 99;
     bottom: 0;
     right: 15px;
     opacity: 30%;
   }
-  .iconsize{
+
+  .iconsize {
     width: 14px;
     height: 14px;
   }
+
   .livechatbox {
     background-color: rgb(255, 251, 0);
     border-radius: 10px;
@@ -289,6 +293,7 @@ input::placeholder {
     background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
     background-size: 100% 100%;
   }
+
   .videosize {
     display: block;
     border-radius: 10px;
@@ -347,25 +352,29 @@ input::placeholder {
   .account_info {
     margin-right: -20px;
   }
-  .titletext{
+
+  .titletext {
     font-size: large;
   }
-  .pricetext{
-    font-size:medium;
+
+  .pricetext {
+    font-size: medium;
   }
-  .fullscreenbutton_margin{
+
+  .fullscreenbutton_margin {
     margin-bottom: -320px;
   }
 }
 
 @media (min-width: 414px) and (max-width: 767px) {
-  .livevolume{
+  .livevolume {
     position: absolute;
     z-index: 99;
     bottom: 0;
     right: 15px;
     opacity: 30%;
   }
+
   .livechatbox {
     background-color: rgb(255, 251, 0);
     border-radius: 10px;
@@ -441,22 +450,27 @@ input::placeholder {
   .account_info {
     margin-right: -40px;
   }
-  .titletext{
+
+  .titletext {
     font-size: large;
   }
-  .pricetext{
-    font-size:medium;
+
+  .pricetext {
+    font-size: medium;
   }
-  .fullscreenbutton_margin{
+
+  .fullscreenbutton_margin {
     margin-bottom: -470px;
   }
-  .iconsize{
+
+  .iconsize {
     width: 14px;
     height: 19px;
   }
-  .fullscreenbutton{
+
+  .fullscreenbutton {
     position: absolute;
-    z-index:99;
+    z-index: 99;
     opacity: 30%;
     right: 0;
     margin-top: -20px;
@@ -464,13 +478,14 @@ input::placeholder {
 }
 
 @media (min-width: 767px) and (max-width: 991px) {
-  .livevolume{
+  .livevolume {
     position: absolute;
     z-index: 99;
     bottom: 0;
     right: 20px;
     opacity: 30%;
   }
+
   .livechatbox {
     background-color: rgb(255, 251, 0);
     border-radius: 10px;
@@ -484,6 +499,7 @@ input::placeholder {
     background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
     background-size: 100% 100%;
   }
+
   .videosize {
     display: block;
     border-radius: 10px;
@@ -537,16 +553,19 @@ input::placeholder {
   .account_info {
     margin-right: -40px;
   }
-  .iconsize{
+
+  .iconsize {
     width: 19px;
     height: 29px;
   }
-  .fullscreenbutton_margin{
+
+  .fullscreenbutton_margin {
     margin-bottom: -470px;
   }
-  .fullscreenbutton{
+
+  .fullscreenbutton {
     position: absolute;
-    z-index:99;
+    z-index: 99;
     opacity: 30%;
     right: 3px;
     margin-top: -30px;
@@ -554,18 +573,20 @@ input::placeholder {
 }
 
 @media (min-width: 991px) and (max-width: 1199px) {
-  .livevolume{
+  .livevolume {
     position: absolute;
     z-index: 99;
     bottom: 0;
     right: 30px;
     opacity: 30%;
   }
+
   .livechatbox {
     background-color: rgb(255, 251, 0);
     border-radius: 10px;
     padding: 5%;
   }
+
   .liveTitle {
     max-height: 150px;
     padding-inline: 2rem;
@@ -579,6 +600,7 @@ input::placeholder {
     background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
     background-size: 100% 100%;
   }
+
   .videosize {
     display: block;
     border-radius: 10px;
@@ -631,16 +653,19 @@ input::placeholder {
   .account_info {
     margin-right: -40px;
   }
-  .iconsize{
+
+  .iconsize {
     width: 29px;
     height: 29px;
   }
-  .fullscreenbutton_margin{
+
+  .fullscreenbutton_margin {
     margin-bottom: -470px;
   }
-  .fullscreenbutton{
+
+  .fullscreenbutton {
     position: absolute;
-    z-index:99;
+    z-index: 99;
     opacity: 30%;
     right: 0;
     margin-top: -30px;
@@ -648,13 +673,14 @@ input::placeholder {
 }
 
 @media (min-width: 1199px) {
-  .fullscreenbutton{
+  .fullscreenbutton {
     position: absolute;
-    z-index:99;
+    z-index: 99;
     opacity: 30%;
     right: 0;
     margin-top: -30px;
   }
+
   /* 데스크탑 일반 */
   .livebox {
     position: relative;
@@ -665,13 +691,15 @@ input::placeholder {
     background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
     background-size: 100% 100%;
   }
-  .livevolume{
+
+  .livevolume {
     position: absolute;
     z-index: 99;
     bottom: 0;
     right: 30px;
     opacity: 30%;
   }
+
   .videosize {
     display: block;
     border-radius: 10px;
@@ -734,11 +762,13 @@ input::placeholder {
   .account_info {
     margin-right: -40px;
   }
-  .iconsize{
+
+  .iconsize {
     width: 29px;
     height: 29px;
   }
-  .fullscreenbutton_margin{
+
+  .fullscreenbutton_margin {
     margin-bottom: -470px;
   }
 }
@@ -826,6 +856,14 @@ input::placeholder {
   margin-bottom: 4rem;
   display: flex;
   justify-content: center;
+}
+
+.searchcontainer3 {
+  /* margin: auto;
+  margin-bottom: 4rem; */
+  display: flex;
+  justify-content: center;
+  margin: auto, 20px, 20px, 0;
 }
 
 .hearts {
@@ -923,7 +961,7 @@ input::placeholder {
 }
 
 
-.micreON{
+.micreON {
   color: rgba(58, 153, 74, 0.918);
 }
 
@@ -938,7 +976,7 @@ input::placeholder {
   margin-top: 10px;
 }
 
-.sellbutton{
+.sellbutton {
   background-color: #6667ab;
   color: white;
   height: 40px;
@@ -964,11 +1002,12 @@ input::placeholder {
   border-radius: 10px;
   font-size: small;
 }
-.openviduTag{
+
+.openviduTag {
   position: relative;
 }
 
-.sellerInfo{
+.sellerInfo {
   display: flex;
   flex-direction: row;
   align-items: center;

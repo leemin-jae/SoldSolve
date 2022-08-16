@@ -87,7 +87,7 @@ function NavBar() {
           <label className="category_toggle" htmlFor="category">
             <FontAwesomeIcon className='icon' icon={faBars} size="2x" />
           </label>
-          <a className="navbar_logo" href='/'><img src={logo} alt="#"></img></a>
+          <a className="navbar_logo2" href='/'><img src={logo} alt="#"></img></a>
           <ul className="screen_menu">
             {storeToken.info.info.role === 'ROLE_ADMIN' ?
               <li><a className="icon_sort" href='#!' onClick={openModal}><FontAwesomeIcon className='icon' icon={faGear} size="2x" /></a></li>

@@ -22,6 +22,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
+import NoItem from '../components/NoItem';
 
 
 
@@ -281,7 +282,7 @@ function MyPage() {
               <div>구매내역</div>
             </button>
             <Modal open={buyModalOpen} close={closeBuyModal} header="구매내역">
-            <BuyBox props={buy} />
+            {buy ? <BuyBox props={buy} /> : <NoItem />}
             </Modal>
           </div>
           <div className='column'>
@@ -290,7 +291,7 @@ function MyPage() {
               <div>판매내역</div>
             </button>
             <Modal open={sellModalOpen} close={closeSellModal} header="판매내역">
-            <SellBox props={sell} />
+            {sell ? <SellBox props={sell} /> : <NoItem />}
             </Modal>
           </div>
         </div>

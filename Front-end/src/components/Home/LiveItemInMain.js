@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 
 function LiveItemInMain() {
   const [LiveList, setLiveList] = useState([]);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   SwiperCore.use([Pagination, Autoplay]);
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function LiveItemInMain() {
         `/api/live/list`
       );
       setLiveList(result.data)
-      setLoading(false)
+      // setLoading(false)
     }
     fetchData();
   }, []);

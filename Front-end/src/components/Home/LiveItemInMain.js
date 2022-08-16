@@ -27,9 +27,9 @@ function LiveItemInMain() {
   const Loading = () => {
     return (
       <div style={{ textAlign: 'center', marginTop: '2em' }}>
-        <h5>진행중인 라이브가 없습니다</h5>
-        <h6>판매중인 상품에</h6>
-        <h6>실시간 소통을 더해보세요</h6>
+        <h5 style={{ fontFamily: 'Pretendard' }}>진행중인 라이브가 없습니다</h5>
+        <h6 style={{ fontFamily: 'Pretendard' }}>판매중인 상품에</h6>
+        <h6 style={{ fontFamily: 'Pretendard' }}>실시간 소통을 더해보세요</h6>
       </div>
     );
   };

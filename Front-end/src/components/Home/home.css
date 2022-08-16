@@ -121,10 +121,20 @@ h1 {
 
 
   .hometext {
-    margin: 70px 0px 0px 20px;
+    margin: 70px 0px 0px 0px;
 }
 
 .flicker {
     animation: flash 3s infinite;
     color: #6667AB;
+}
+
+hr{
+    text-align: center;
+    margin: 0px auto;
+    align-items: center;
+}
+
+.foot {
+    border-radius: 0px 0px 20px 20px;
 }

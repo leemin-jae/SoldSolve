@@ -130,6 +130,7 @@ function KategorieInMain() {
           {loading ? <Loading /> : <ShowMainItem data={hotdata} />}
         </ul>
       </div>
+      <div style={{marginBottom: 100}}></div>
     </>
   )
 }

@@ -11,33 +11,68 @@ function SignUp() {
   const [nickname,setNickname] = useState(null)
   const [username,setUsername] = useState(null)
   const [email,setEmail] = useState(null)
-  const [button,setButton] = useState('noInput')
   const [idCheck,setIdCheck] = useState(false)
   const [inputCode,setInputCode] = useState('')
   const [mailCode,setMailCode] = useState('')
 
   let submitButton = null;
-  if (button === 'noInput') {
-    submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
-  } else if (button === 'input') {
+  if (id && password && pwConfirm && nickname && username && email && inputCode) {
     submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
+  } else {
+    submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
   }
 
   function inputCodeForm(e) {
     setInputCode(e.target.value)
-    if (id && password && pwConfirm && nickname && username && email) {
-      setButton('input')
-    }
   }
   
   function inputForm(e) {
-    if (e.target.name === 'id') {setId(e.target.value)} 
-    else if (e.target.name === 'password') {setPassword(e.target.value)
-      if (inputCode && pwConfirm) {setButton('input')}}
-    else if (e.target.name === 'pwconfirm') {setPwConfirm(e.target.value)
-      if (inputCode && password) {setButton('input')}}
-    else if (e.target.name === 'nickname') {setNickname(e.target.value)}  
-    else if (e.target.name === 'username') {setUsername(e.target.value)} 
+    if (e.target.name === 'id') {setId(e.target.value)}
+    else if (e.target.name === 'password') {
+      if (e.target.value.length !== 0 && e.target.value.length < 4) {
+        e.target.classList.value = 'inputform signupWarning'
+        document.getElementById('PWwarning').hidden=false
+        setPassword(null)
+      } else {
+        e.target.classList.value = 'inputform'
+        document.getElementById('PWwarning').hidden=true
+        setPassword(e.target.value)
+      }
+    }
+
+    else if (e.target.name === 'pwconfirm') {
+      if (e.target.value.length !== 0 && password !== e.target.value){
+        e.target.classList.value = 'inputform signupWarning'
+        document.getElementById('PW2warning').hidden=false
+        setPwConfirm(null)
+      } else {
+        e.target.classList.value = 'inputform'
+        document.getElementById('PW2warning').hidden=true
+        setPwConfirm(e.target.value)
+      }
+    }
+    else if (e.target.name === 'nickname') {
+      if (e.target.value.length !== 0 && (e.target.value.length < 2 || e.target.value.length > 10)) {
+        e.target.classList.value = 'inputform signupWarning'
+        document.getElementById('Nickwarning').hidden=false
+        setNickname(null)
+      } else {
+        e.target.classList.value = 'inputform'
+        document.getElementById('Nickwarning').hidden=true
+        setNickname(e.target.value)
+      }
+    }  
+    else if (e.target.name === 'username') {
+      if (e.target.value.length !== 0 && (e.target.value.length < 2 || e.target.value.length > 10)) {
+        e.target.classList.value = 'inputform signupWarning'
+        document.getElementById('Namewarning').hidden=false
+        setUsername(null)
+      } else {
+        e.target.classList.value = 'inputform'
+        document.getElementById('Namewarning').hidden=true
+        setUsername(e.target.value)
+      }
+    } 
     else if (e.target.name === 'email') {setEmail(e.target.value)}
     }
 
@@ -54,7 +89,6 @@ function SignUp() {
       e.target.pwconfirm.value = ''
       setPassword(null)
       setPwConfirm(null)
-      setButton('noInput')
     }
     else if (mailCode !== inputCode) {
       alert("인증번호가 일치하지 않습니다!")
@@ -111,9 +145,7 @@ function SignUp() {
       params: { email:email}
       })
       .then(res => {
-          console.log(res)
           document.getElementById('CodeForm').hidden=false
-          setButton('input')
           e.target.classList.add('emailcode')
           e.target.classList.remove('emailcode2')
           alert("인증코드를 전송했습니다. Email을 확인해주세요")
@@ -157,9 +189,13 @@ function SignUp() {
             <form onSubmit={e=>{submitSignup(e)}}>
               <input className="inputform" name="id" onChange={e =>{inputForm(e)}} type="text" placeholder="ID"></input><a href="#!" ><FontAwesomeIcon className='IDcheck' onClick={e => CheckID(e)} icon={faSquareCheck} size="2x" /></a><br />
               <input className="inputform" name="password" onChange={e =>{inputForm(e)}} type="password" placeholder="PASSWORD"></input><br />
+              <p style={{ color:'red' }} id="PWwarning" hidden={true}>비밀번호는 4자리 이상으로 설정해주세요.</p>
               <input className="inputform" name="pwconfirm" onChange={e =>{inputForm(e)}} type="password" placeholder="PASSWORD CONFIRM"></input><br />
+              <p style={{ color:'red' }} id="PW2warning" hidden={true}>비밀번호가 틀렸습니다.</p>
               <input className="inputform" name="nickname" onChange={e =>{inputForm(e)}} type="text" placeholder="NICKNAME"></input><br />
+              <p style={{ color:'red' }} id="Nickwarning" hidden={true}>닉네임은 2~10자리로 입력해주세요.</p>
               <input className="inputform" name="username" onChange={e =>{inputForm(e)}} type="text" placeholder="USERNAME"></input><br />
+              <p style={{ color:'red' }} id="Namewarning" hidden={true}>이름은 2~10자리로입니다.</p>
               <input className="inputform" name="email" onChange={e =>{inputForm(e)}} type="email" placeholder="EMAIL"></input><a href="#!" ><FontAwesomeIcon className='IDcheck' onClick={e => CheckEmail(e)} icon={faSquareCheck} size="2x" /></a><br />
               <input className="inputform" id="CodeForm" onChange={e => inputCodeForm(e)} type="password" hidden={true} placeholder="EMAIL CODE"></input><br />
               { submitButton }

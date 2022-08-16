@@ -9,6 +9,8 @@ const LiveChat = (props) => {
   const [message, setMessage] = useState("");
   let store = useSelector((state) => { return state })
   const [nowUserModal,setNowUserModal] = useState(false);
+  const [buyofferModalOpen, setBuyOfferModalOpen] = useState(false);
+  const [sellofferModalOpen, setSellOfferModalOpen] = useState(false);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -68,52 +70,25 @@ const LiveChat = (props) => {
   function openNowUserModal(){
     setNowUserModal(true)
   }
-
   function closeNowUserModal(){
     setNowUserModal(false)
   }
 
 
-  const OfferBuyer = () => {
-    const [buyofferModalOpen, setBuyOfferModalOpen] = useState(false);
 
-    const openBuyOfferModal = () => {
-      setBuyOfferModalOpen(true);
-    };
-    const closeBuyOfferModal = () => {
-      setBuyOfferModalOpen(false);
-    };
-
-
-    return (
-      <>
-        <button className="offerButton" style={{ marginRight:'1rem' }} onClick={openBuyOfferModal}>가격제안</button>
-        <OfferBuyerModal open={buyofferModalOpen} close={closeBuyOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
-      </>
-    )
-
+  function openBuyOfferModal(){
+    setBuyOfferModalOpen(true);
+  }
+  function closeBuyOfferModal(){
+    setBuyOfferModalOpen(false);
   }
 
-  const OfferSeller = () => {
-    const [sellofferModalOpen, setSellOfferModalOpen] = useState(false);
-
-    const openSellOfferModal = () => {
-      setSellOfferModalOpen(true);
-    };
-    const closeSellOfferModal = () => {
-      setSellOfferModalOpen(false);
-    };
-
-
-    return (
-      <>
-        <button className="offerButton" style={{ marginRight:'1rem' }}  onClick={openSellOfferModal}>제안목록</button>
-        <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
-      </>
-    )
-
+  function openSellOfferModal(){
+    setSellOfferModalOpen(true);
   }
-
+  function closeSellOfferModal(){
+    setSellOfferModalOpen(false);
+  }
 
 
   return (
@@ -125,8 +100,11 @@ const LiveChat = (props) => {
         <div><h5 style={{ marginInline: '1rem' }}>채팅방</h5></div>
         <div>
         <button className="offerButton" onClick={openNowUserModal}>접속인원</button>
-        <LiveNowUser open={nowUserModal} close={closeNowUserModal} header={props.props.mySessionId} />
-          {store.info.info.userId === props.props.sellerInfo.userid ? <OfferSeller /> : <OfferBuyer />}
+          <LiveNowUser open={nowUserModal} close={closeNowUserModal} header={props.props.mySessionId} sellerid={props.props.sellerInfo.userid} sellerNick={props.props.sellerInfo.nickname} />
+          {store.info.info.userId === props.props.sellerInfo.userid ? 
+          <button className="offerButton" style={{ marginRight:'1rem' }}  onClick={openSellOfferModal}>제안목록</button> 
+          :
+          <button className="offerButton" style={{ marginRight:'1rem' }} onClick={openBuyOfferModal}>가격제안</button>}
         </div>
       </div>
       <div className='chatbox'>
@@ -170,6 +148,8 @@ const LiveChat = (props) => {
         />
         <button className="inputsubmitbutton" onClick={sendMessage} >전송</button>
       </div>
+      <OfferBuyerModal open={buyofferModalOpen} close={closeBuyOfferModal} productid={props.props.productID} />
+      <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} productid={props.props.productID} />
     </>
   );
 

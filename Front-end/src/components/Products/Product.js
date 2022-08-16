@@ -39,13 +39,13 @@ function Product() {
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
-
   useEffect(() => {
     axios({
       url: `/api/product/${productid}`,
       method: 'get',
     })
       .then(res => {
+        console.log(res)
         setProductData(res.data)
         setYouNick(res.data.user.nickname)
         setUserId(res.data.user.userid)

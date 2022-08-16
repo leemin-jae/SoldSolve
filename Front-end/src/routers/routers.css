@@ -1013,3 +1013,7 @@ input::placeholder {
   align-items: center;
   margin-inline: 2rem;
 }
+
+.signupWarning{
+  border: 2px solid rgba(250, 0, 0, 0.603);
+}

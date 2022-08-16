@@ -43,7 +43,7 @@ export default function RequestedPrice(props) {
     offerData()
     console.log(rows)
 
-  }, []);
+  }, [rows]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

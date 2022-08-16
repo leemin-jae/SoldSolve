@@ -2,7 +2,6 @@ import React from 'react';
 import './modal.css';
 import axios from 'axios';
 import { useState } from 'react';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import RequestedPrice from './RequestedPrice';
 
 

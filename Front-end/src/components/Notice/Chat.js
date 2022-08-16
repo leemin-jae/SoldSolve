@@ -13,11 +13,8 @@ function Chat() {
   const [roomOut, setRoomOut] = useState(false)
   const [roomList, setRoomList] = useState([])
   let store = useSelector((state) => { return state })
-  // console.log(store.info.info.nickName, '사용자이름')
   let navigate = useNavigate()
   useEffect(() => {
-    // const currentUserName = store.info.info.nickname
-    // console.log(currentUserName, '이름이름')
     const getRoomList = () => {
       axios({
         url: '/api/room',
@@ -25,7 +22,6 @@ function Chat() {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          console.log(res, '!!!')
           setRoomList(res.data)
         })
         .catch(err => {
@@ -47,7 +43,6 @@ function Chat() {
         exitRoomId = room.roomId
       }
     })
-    console.log(exitRoomId, '!@!!ASDFASD')
     if (window.confirm("대화방을 나가시겠습니까?")) {
       axios({
         url: `/api/room/${exitRoomId}`,
@@ -57,7 +52,6 @@ function Chat() {
       })
         .then(res => {
           setRoomOut(!roomOut)
-          console.log(res.data.message)
         })
         .catch(err => {
           console.log(err)
@@ -76,7 +70,6 @@ function Chat() {
           let myId = null;
           let yourPk = null;
 
-          console.log(room)
           if (store.info.info.userId === room.buyer.userid) {
             you = room.seller.nickname
             yourImg = room.seller.profileUrl
@@ -92,8 +85,6 @@ function Chat() {
             myId = room.seller.userid
             yourPk = room.buyer.id
           }
-          console.log(room, '룸룸')
-          console.log('room.buyerOut:' + room.buyerOut, 'room.sellerOut:' + room.sellerOut)
           if (room.buyerOut === 1 || room.sellerOut === 1) {
             return (
               <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
@@ -151,7 +142,7 @@ function Chat() {
                   </div>
                 </div>
                 <div>
-                  {room.isRead == 1 ? <div className='message_info'>
+                  {room.isRead === 1 ? <div className='message_info'>
                     {/* <p className='message_time'>{room.time}</p> */}
                     <div style={{ display: 'flex' }}>
                       <div className='unread_message'>

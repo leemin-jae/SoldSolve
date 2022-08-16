@@ -18,6 +18,8 @@ import { IconButton } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import Modal from '../Modals/Modal';
 import '../Modals/modal.css';
+import ShareIcon from '@mui/icons-material/Share';
+import CopyToClipboard from 'react-copy-to-clipboard';
 
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
@@ -38,6 +40,7 @@ function Product() {
   const [livetime, setLiveTime] = useState(null)
   const [load, setLoad] = useState(0)
 
+  const url = window.location.href;
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
@@ -151,7 +154,6 @@ function Product() {
         })
     }
   }
-
 
 
   const [reqModalOpen, setReqModalOpen] = useState(false);
@@ -359,11 +361,6 @@ function Product() {
                   <div className="slides">
                     {imglist}
                   </div>
-
-                  {/* <a href="#slide-1"></a>
-            <a href="#slide-2"></a>
-            <a href="#slide-3"></a>
-            <a href="#slide-4"></a> */}
                 </div>
               </div>
               <div className='user_box'>
@@ -393,13 +390,13 @@ function Product() {
                     <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
                   }
                 </div>
-                <div style={{marginInline:'10px'}}>
+                <div style={{ marginInline: '10px' }}>
                   {productData.tag.map((tag) => {
                     console.log(tag.name)
-                    function tagSearch(){
+                    function tagSearch() {
                       document.location.href = `/search/` + tag.name;
                     }
-                    return <label onClick={e=>tagSearch()} className="tagbox">#{tag.name}</label>
+                    return <label onClick={e => tagSearch()} className="tagbox">#{tag.name}</label>
                   })}
                 </div>
                 <hr></hr>
@@ -445,13 +442,16 @@ function Product() {
                           </div>
 
                           <div>
-                            {/* <FontAwesomeIcon icon={faHeart} size="2x" style={{ marginRight: '10px', padding: '0 0 0 8px', color: 'red' }} /> */}
                             <LikeButton no={productData.no} />
-                            {/* <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} onClick={createRoom}>채팅하기</button> */}
                             <IconButton aria-label="add to favorites" onClick={createRoom}>
                               <ChatIcon />
                             </IconButton>
                             {livetime ? null : <LiveButton no={productData.no} />}
+                            <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
+                              <CopyToClipboard text={url}>
+                                <ShareIcon />
+                              </CopyToClipboard>
+                            </IconButton>
                           </div>
                         </>
                       }

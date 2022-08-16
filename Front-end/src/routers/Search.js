@@ -51,8 +51,7 @@ function Search() {
 
     return (
       <Swiper
-        slidesPerView={5}
-        spaceBetween={10}
+        spaceBetween={0}
         // centeredSlides={true}
         breakpoints={{
           1200: {
@@ -67,7 +66,9 @@ function Search() {
           300: {
             slidesPerView: 3,
           }
+          
         }}
+        style={{ width: 600 }}
       >
         {keywords.map(({ id, text }) => {
           return (
@@ -107,8 +108,7 @@ function Search() {
       </div>
       <div className="searchcontainer3">
         <Swiper
-          slidesPerView={5}
-          spaceBetween={10}
+          spaceBetween={0}
           // centeredSlides={true}
           breakpoints={{
             1200: {
@@ -124,6 +124,7 @@ function Search() {
               slidesPerView: 3,
             }
           }}
+          style={{ width: 600 }}
         >
           {pops.length > 0 ?
             <>

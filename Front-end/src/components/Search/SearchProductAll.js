@@ -12,11 +12,28 @@ import LiveButton from '../Products/LiveButton';
 import LikeButton from '../Products/LikeButton';
 
 
-function SearchProduct() {
+function SearchProductAll() {
     const [searchData, setSearchData] = useState([]);
     const [oksearch, setOkSearch] = useState(false);
     const params = useParams();
     // console.log(params)
+
+    const [keywords, setKeywords] = useState(
+        JSON.parse(localStorage.getItem('keywords') || '[]'),
+      )
+    
+      useEffect(() => {
+        localStorage.setItem('keywords', JSON.stringify(keywords))
+      }, [keywords])
+    
+      const handleAddKeyword = (text) => {
+        console.log('text', text)
+        const newKeyword = {
+          id: Date.now(),
+          text: text,
+        }
+        setKeywords([newKeyword, ...keywords])
+      }
 
     useEffect(() => {
         async function fetchData() {
@@ -140,7 +157,7 @@ function SearchProduct() {
             <div className='fixnav'>
                 <NavBar />
             </div>
-            <SearchBar></SearchBar>
+            <SearchBar onAddKeyword={handleAddKeyword}></SearchBar>
             <div className='content'>
                 {oksearch ? <></> : <NoSearchItem />}
                 <ul className='cards' id='maincontent'>
@@ -151,4 +168,4 @@ function SearchProduct() {
     )
 }
 
-export default SearchProduct
+export default SearchProductAll

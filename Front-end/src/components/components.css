@@ -196,6 +196,8 @@ div#left_toggle ul li {
 
   }
 
+
+
   @keyframes fadeInDown {
     0% {
       opacity: 0;
@@ -232,10 +234,15 @@ div#left_toggle ul li {
 
   /* 태블릿 가로 */
   .navbar_logo {
-    margin-left: 365px;
+    margin-left: 250px;
     align-items: center;
   }
 
+  .navbar_logo2 {
+    /* margin-left: 300px; */
+    align-items: center;
+    margin-left: 34%;
+  }
 }
 
 @media (min-width: 1200px) {

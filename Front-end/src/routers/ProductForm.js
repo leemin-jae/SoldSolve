@@ -139,9 +139,12 @@ function CreateProduct() {
 
   function tagForm(e) {
     e.preventDefault();
-    if (e.key === 'Enter' && tagKeyword.indexOf(e.target.value) < 0) {
+    console.log(e.target.value)
+    let tagData = e.target.value.replace(/ /g,"")
+    console.log(tagData)
+    if (e.key === 'Enter' && tagData && tagKeyword.indexOf(tagData) < 0) {
       const tk = [...tagKeyword]
-      tk.push(e.target.value)
+      tk.push(tagData)
       setTagKeyword(tk)
       e.target.value = ''
     }
@@ -215,7 +218,7 @@ function CreateProduct() {
               <div><label className="uploadlabel" htmlFor="file">사진 업로드</label></div>
               <textarea onChange={e => { inputForm(e) }} className="descriptionform" name="content" placeholder="상품 설명"></textarea><br />
               <input onChange={e => { inputForm(e) }} className="inputform" name="place" type="text" placeholder="지역"></input><br />
-              <input onKeyUp={e => { tagForm(e) }} className="inputform" name="relatedtags" type="text" placeholder="관련 키워드를 입력후 Enter"></input><br />
+              <input onKeyUp={e => { tagForm(e) }} className="inputform" name="relatedtags" type="text" placeholder="검색에 도움되는 키워드를 등록해주세요"></input><br />
               <div className="tagdiv">
                 {tagKeyword ? tagKeyword.map((keyword) => {
                   console.log(tagKeyword)

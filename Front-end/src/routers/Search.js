@@ -48,16 +48,32 @@ function Search() {
     if (keywords.length === 0) {
       return <div>최근 검색된 기록이 없습니다.</div>
     }
+
     return (
       <Swiper
-        slidesPerView={4}
-        centeredSlides={true}
+        slidesPerView={5}
+        spaceBetween={10}
+        // centeredSlides={true}
+        breakpoints={{
+          1200: {
+            slidesPerView: 5,
+          },
+          991: {
+            slidesPerView: 5,
+          },
+          767: {
+            slidesPerView: 3,
+          },
+          300: {
+            slidesPerView: 3,
+          }
+        }}
       >
         {keywords.map(({ id, text }) => {
           return (
-            <SwiperSlide key={id} style={{ marginLeft: 10 }}>
+            <SwiperSlide key={id} style={{ display: 'flex', justifyContent: 'center' }}>
               <div style={{ textAlign: 'center', display: 'flex' }}>
-                <a href={`/search/${text}`} style={{ textDecoration: 'none' }}><Chip label={text} style={{}} /></a>
+                <a href={`/search/${text}`} style={{ textDecoration: 'none' }}><Chip label={text} style={{ width: '80px', backgroundColor: '#DBDBFF' }} /></a>
                 <button
                   onClick={() => {
                     onRemoveKeyword(id)
@@ -99,7 +115,7 @@ function Search() {
               slidesPerView: 5,
             },
             991: {
-              slidesPerView: 4,
+              slidesPerView: 5,
             },
             767: {
               slidesPerView: 3,
@@ -115,7 +131,7 @@ function Search() {
                 console.log(pop)
                 return (
                   <SwiperSlide key={pop.popId} style={{ display: 'flex', justifyContent: 'center' }} >
-                    <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} style={{ width: '90px', backgroundColor: '#DBDBFF' }} /></a>
+                    <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} style={{ width: '80px', backgroundColor: '#DBDBFF' }} /></a>
                   </SwiperSlide>
                 );
               })}

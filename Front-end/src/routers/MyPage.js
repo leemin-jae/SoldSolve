@@ -254,7 +254,7 @@ function MyPage() {
                 <a href='/editaccount'><ManageAccountsIcon color="secondary" /></a>
                 <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
                 <label htmlFor="imgChange"><PhotoCameraIcon /></label>
-                <div><a href='/mypage/products'>내상품관리</a></div>
+                <div><a style={{ textDecoration:'none' }} href='/mypage/products'>내상품관리</a></div>
               </Typography>
             </CardContent>
           </Box>

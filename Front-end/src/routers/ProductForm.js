@@ -82,7 +82,7 @@ function CreateProduct() {
     if (category === '') { alert("상품 카테고리를 선택해주세요") }
     else if (articlename === '') { alert("제목을 입력해주세요") }
     else if (price === null) { alert("판매가격을 설정해주세요") }
-    else if (editMode === null && imgData === '') { alert("이미지를 등록해주세요") }
+    else if (editMode === null || imgData === '') { alert("이미지를 등록해주세요") }
     else if (description === '') { alert("상세 설명을 적어주세요") }
     else if (place === '') { alert("거래하는 지역을 입력해주세요") }
     else {
@@ -95,8 +95,17 @@ function CreateProduct() {
 
       let value = price
       value = Number(value.replaceAll(',', ''))
-      const jsondata = { title: articlename, content: description, price: value, region: place, category: category }
 
+      const jsondata = {
+        title: articlename,
+        content: description,
+        price: value,
+        region: place,
+        category: category,
+        tag: tagKeyword
+      }
+
+      console.log(jsondata)
       productData.append("data", new Blob([JSON.stringify(jsondata)], { type: "application/json" }))
 
       let method = 'post'
@@ -130,7 +139,7 @@ function CreateProduct() {
 
   function tagForm(e) {
     e.preventDefault();
-    if (e.key === 'Enter' && tagKeyword.indexOf(e.target.value)<0) {
+    if (e.key === 'Enter' && tagKeyword.indexOf(e.target.value) < 0) {
       const tk = [...tagKeyword]
       tk.push(e.target.value)
       setTagKeyword(tk)
@@ -138,11 +147,11 @@ function CreateProduct() {
     }
   }
 
-  function deleteTag(e){
+  function deleteTag(e) {
     const t = [...tagKeyword]
-    for (let i=0; i<t.length; i++) {
-      if ('#'+t[i] === e.target.innerText) {
-        t.splice(i,1)
+    for (let i = 0; i < t.length; i++) {
+      if ('#' + t[i] === e.target.innerText) {
+        t.splice(i, 1)
       }
     }
     setTagKeyword(t)
@@ -174,9 +183,6 @@ function CreateProduct() {
 
 
 
-  // if (imgs.length === 0 ) {
-  //   console.log(document.getElementById('file'))   //이미지 안올렸을때 빈박스 안보이는거 시도
-  // }
 
   return (
     <div>
@@ -209,14 +215,14 @@ function CreateProduct() {
               <div><label className="uploadlabel" htmlFor="file">사진 업로드</label></div>
               <textarea onChange={e => { inputForm(e) }} className="descriptionform" name="content" placeholder="상품 설명"></textarea><br />
               <input onChange={e => { inputForm(e) }} className="inputform" name="place" type="text" placeholder="지역"></input><br />
-              <input onKeyUp={e => { tagForm(e) }} className="inputform" name="relatedtags" type="text" placeholder="관련 태그"></input><br />
+              <input onKeyUp={e => { tagForm(e) }} className="inputform" name="relatedtags" type="text" placeholder="관련 키워드를 입력후 Enter"></input><br />
               <div className="tagdiv">
                 {tagKeyword ? tagKeyword.map((keyword) => {
                   console.log(tagKeyword)
                   return (
-                    <label onClick={e=>deleteTag(e)} className="tagbox">#{keyword}</label>
+                    <label onClick={e => deleteTag(e)} className="tagbox">#{keyword}</label>
                   )
-                }) :null}
+                }) : null}
               </div>
               <button onClick={e => submitProduct(e)} className="inputform submitbutton-able" type="button">{editMode ? "수정하기" : "SUBMIT"}</button>
             </form>

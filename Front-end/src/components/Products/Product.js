@@ -393,6 +393,12 @@ function Product() {
                     <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
                   }
                 </div>
+                <div style={{marginInline:'10px'}}>
+                  {productData.tag.map((tag) => {
+                    console.log(tag.name)
+                    return <label className="tagbox">#{tag.name}</label>
+                  })}
+                </div>
                 <hr></hr>
                 <h5 className='pricetext' style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
                 <br></br>

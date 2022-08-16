@@ -97,7 +97,7 @@ function EditAccount() {
       <div>
         <div className="test">
           <div className="test3">
-            <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px', cursor: 'pointer', position: 'relative' }} onClick={() => { navigate(-1) }} />
+            <FontAwesomeIcon className='editBack' icon={faChevronLeft} onClick={() => { navigate(-1) }} />
             <h1 className="my-5">회원정보수정</h1>
             <div className="form">
               <form onSubmit={e => editAccount(e)}>

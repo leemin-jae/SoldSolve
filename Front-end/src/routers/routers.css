@@ -258,6 +258,16 @@ input::placeholder {
 } */
 
 @media (max-width: 414px) {
+  .editBack{
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 75%;
+    margin-bottom: -82px;
+    cursor: pointer;
+    position: relative;
+  }
   .fullscreenbutton {
     position: absolute;
     z-index: 99;
@@ -367,6 +377,16 @@ input::placeholder {
 }
 
 @media (min-width: 414px) and (max-width: 767px) {
+  .editBack{
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 65%;
+    margin-bottom: -83px;
+    cursor: pointer;
+    position: relative;
+  }
   .livevolume {
     position: absolute;
     z-index: 99;
@@ -478,6 +498,16 @@ input::placeholder {
 }
 
 @media (min-width: 767px) and (max-width: 991px) {
+  .editBack{
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 55%;
+    margin-bottom: -90px;
+    cursor: pointer;
+    position: relative;
+  }
   .livevolume {
     position: absolute;
     z-index: 99;
@@ -573,6 +603,16 @@ input::placeholder {
 }
 
 @media (min-width: 991px) and (max-width: 1199px) {
+  .editBack{
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 55%;
+    margin-bottom: -90px;
+    cursor: pointer;
+    position: relative;
+  }
   .livevolume {
     position: absolute;
     z-index: 99;
@@ -673,6 +713,16 @@ input::placeholder {
 }
 
 @media (min-width: 1199px) {
+  .editBack{
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 50%;
+    margin-bottom: -90px;
+    cursor: pointer;
+    position: relative;
+  }
   .fullscreenbutton {
     position: absolute;
     z-index: 99;

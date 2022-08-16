@@ -70,7 +70,7 @@ function SearchProductAll() {
             }
             console.log(result)
             if (result.length > 0) {
-                setSearchData(result.reverse())
+                setSearchData(result)
                 setOkSearch(true)
             } else {
                 const allData = await axios.get(`/api/product`);

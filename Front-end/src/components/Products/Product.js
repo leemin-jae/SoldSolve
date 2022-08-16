@@ -177,7 +177,7 @@ function Product() {
             {requser.map((user) => {
               return (
                 <li className='managementUser' key={user.id}>
-                <h6 style={{ margin:'0',padding:'5px'}}>{user.nickname}<span>({user.userid})</span></h6>
+                  <h6 style={{ margin: '0', padding: '5px' }}>{user.nickname}<span>({user.userid})</span></h6>
                 </li>
               );
             })}
@@ -339,56 +339,58 @@ function Product() {
                   })}
                 </div>
                 <hr></hr>
-                <h5 className='pricetext' style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
+                <div className='d-flex justify-content-between'>
+                  <h5 className='pricetext' style={{ margin: '0 10px 0 10px' }}>판매가 : {money}원</h5>
+                  {store.info.info && store.info.info.userId === productData.user.userid ?
+                    <div>
+                      <div>
+                        <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
+                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
+                      </div>
+                    </div>
+                    : null}
+                </div>
+
                 <br></br>
-                <p style={{ margin: '0 10px 0 10px' }}>{productData.content}</p>
-                {store.info.info && store.info.info.userId === productData.user.userid ?
-                  <div className='d-flex justify-content-end'>
-                    <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
-                    <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
-                  </div>
-                  : null}
+                <p style={{ margin: '0 10px 0 10px', minHeight: '400px', paddingBlock: '30px' }}>{productData.content}</p>
+
+                <div className='d-flex justify-content-between'>
+                  {store.info.info.userId === productData.user.userid ?
+                    <>
+                      <div className='d-flex'>
+                        <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
+                        <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
+                        {livetime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{livetime.slice(5, 7)}월 {livetime.slice(8, 10)}일 {livetime.slice(11, 13)}시 {livetime.slice(14, 16)}분</button> : <TimeSet timeState={timeState}></TimeSet>}
+                        <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간" hidden={timeState}></input>
+                        <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
+                          <ul><ShowReq /></ul>
+                        </Modal>
+                      </div>
+                    </>
+                    :
+                    <div>
+                      <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
+                      {productData.liveTime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{productData.liveTime.slice(5, 7)}월 {productData.liveTime.slice(8, 10)}일 {productData.liveTime.slice(11, 13)}시 {productData.liveTime.slice(14, 16)}분</button> : null}
+                    </div>}
+                </div>
                 <hr></hr>
                 {localStorage.token && productData.state === 0 ? (
                   <>
-                    <div className='button_box'>
-                      {store.info.info.userId === productData.user.userid
-                        ?
-                        <>
-                          <div className='d-flex'>
-                            <button className='submitbutton-able' onClick={e => createLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브</button>
-                            <button className='submitbutton-able' onClick={openReqModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브 요청목록</button>
-                            {livetime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{livetime}</button> : <TimeSet timeState={timeState}></TimeSet>}
-
-                            <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
-                              <ul><ShowReq /></ul>
-                            </Modal>
-                          </div>
-                        </>
-
-                        :
-                        <>
-                          <div>
-                            <button className='submitbutton-able' onClick={e => goLive(e)} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>라이브방</button>
-                            {productData.liveTime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{productData.liveTime}</button> : null}
-                          </div>
-
-                          <div>
-                            <LikeButton no={productData.no} />
-                            <IconButton aria-label="add to favorites" onClick={createRoom}>
-                              <ChatIcon />
-                            </IconButton>
-                            {livetime ? null : <LiveButton no={productData.no} />}
-                            <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
-                              <CopyToClipboard text={url}>
-                                <ShareIcon />
-                              </CopyToClipboard>
-                            </IconButton>
-                          </div>
-                        </>
-                      }
-                    </div>
-                    <input className="liveTimeset inputform2" id="LiveTime" type="datetime-local" placeholder="방송 시작 시간" hidden={timeState}></input>
+                    {store.info.info.userId === productData.user.userid
+                      ? null :
+                      <div>
+                        <LikeButton no={productData.no} />
+                        <IconButton aria-label="add to favorites" onClick={createRoom}>
+                          <ChatIcon />
+                        </IconButton>
+                        {livetime ? null : <LiveButton no={productData.no} />}
+                        <IconButton aria-label="share" onClick={function () { alert('링크가 복사되었습니다.') }} >
+                          <CopyToClipboard text={url}>
+                            <ShareIcon />
+                          </CopyToClipboard>
+                        </IconButton>
+                      </div>
+                    }
                   </>
                 ) : null}
               </div>

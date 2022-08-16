@@ -1039,7 +1039,6 @@ input::placeholder {
   padding-inline: 20px;
   padding-block: 5px;
   max-width: 200px;
-  margin-top: 10px;
 }
 
 .sellbutton {
@@ -1082,4 +1081,19 @@ input::placeholder {
 
 .signupWarning {
   border: 2px solid rgba(250, 0, 0, 0.603);
+}
+
+
+.slides::-webkit-scrollbar {
+  width: 10px;
+}
+
+.slides::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+
+.slides::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
 }

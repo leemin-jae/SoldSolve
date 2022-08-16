@@ -32,13 +32,13 @@ function Message() {
         {t.isRead ?
           <li className='Article read' id={t.id} onClick={e => clickNotice(t)} key={t.id}>
             <div className='noticeTitle'>{t.content}
-              <span className='articleSpan'>{t.writtenTimes}</span>
+              <span className='articleSpan'>{t.writtenTimes.slice(0,4)}년{t.writtenTimes.slice(5,7)}월{t.writtenTimes.slice(8,10)}일</span>
             </div>
           </li>
           :
           <li className='Article' id={t.id} onClick={e => clickNotice(t)} key={t.id}>
             <div className='noticeTitle'>{t.content}
-              <span className='articleSpan'>{t.writtenTimes}</span>
+              <span className='articleSpan'>{t.writtenTimes.slice(0,4)}년{t.writtenTimes.slice(5,7)}월{t.writtenTimes.slice(8,10)}일</span>
             </div>
           </li>}
       </>

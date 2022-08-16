@@ -53,8 +53,7 @@ button {
   grid-template-columns: 9fr 3fr;
 }
 
-.history_container,
-.heart_container {
+.history_container{
   margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
@@ -918,16 +917,28 @@ input::placeholder {
 
 .hearts {
   display: flex;
-  position: relative;
   flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
+  min-width: 260px;
+  max-width: 530px;
+  height: 400px;
+  margin-inline: auto;
+  justify-content: center;
   align-items: center;
-  max-width: 400px;
-  height: 600px;
-  justify-content: space-around;
-  margin-top: -80px;
-  /* width: auto; */
+  overflow-y: auto;
+}
+
+.hearts::-webkit-scrollbar {
+  width: 10px;
+}
+
+.hearts::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+
+.hearts::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
 }
 
 .heart_item {

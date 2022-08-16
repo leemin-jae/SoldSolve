@@ -17,6 +17,7 @@ function Notice() {
     })
       .then(res => {
         setNoticeData(res.data)
+        console.log(res.data)
       })
       .catch(err => {
         console.log(err)
@@ -45,8 +46,8 @@ function Notice() {
     let noticeTag =
       <li className='Article' id={t.id} onClick={e => clickNotice(e)} key={t.id}>
         <div className='noticeTitle'>
-          <h6>{t.title}</h6>
-          <span className='articleSpan'>{t.writtenTimes}</span>
+          <p style={{ marginBottom:'0' }}>{t.title}</p>
+          <span className='articleSpan'>{t.writtenTimes.slice(0,4)}년{t.writtenTimes.slice(5,7)}월{t.writtenTimes.slice(8,10)}일</span>
         </div>
         <div className='hide' id={'ArticleContent' + t.id}>
           <p className='article_line'>{t.content}</p>

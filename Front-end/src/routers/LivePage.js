@@ -157,7 +157,9 @@ class LivePage extends Component {
           mySession
             .connect(
               token,
-              { clientData: this.state.myUserName },
+              { clientData: this.state.myUserName,
+                clientId:this.state.myId
+               },
             )
             .then(async () => {
               if (this.state.myId === this.state.params[2]) {

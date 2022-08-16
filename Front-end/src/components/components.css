@@ -267,8 +267,8 @@ div#left_toggle ul li {
   overflow-y: auto;
 }
 
-.Article {
-  margin-block: 1%;
+.Article {  
+  margin-bottom: 3px;
   padding: 1%;
   background-color: rgba(180, 179, 179, 0.116);
   border-radius: 5px;
@@ -288,7 +288,7 @@ div#left_toggle ul li {
 .noticeTitle {
   display: flex;
   justify-content: space-between;
-  padding-inline: 5%;
+  padding-inline: 1%;
 
 }
 
@@ -560,6 +560,9 @@ div#left_toggle ul li {
 .li_box_container:-webkit-scrollbar-track {
   background: rgba(196, 217, 248, 0.1);
 }
+
+
+
 
 .articles::-webkit-scrollbar {
   width: 10px;

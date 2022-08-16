@@ -153,8 +153,8 @@ function Products() {
       <div className='fixnav'>
         <NavBar />
       </div>
-      <div className='content'>
-        <h1>{title}</h1>
+      <div className='content' style={{ textAlign:'center' }}>
+        <h1 className='categotytitle'>{title}</h1>
         <ul className='cards' id='maincontent'>
           {loading ? <Loading /> : <ShowProducts />}
         </ul>

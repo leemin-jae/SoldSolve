@@ -11,11 +11,13 @@ const Modal = (props) => {
       {open ? (
         <section>
           <header>
-            {header}
+            
             <button className="close" onClick={close}>
               &times;
             </button>
           </header>
+          <h5 className='titleText'>{header}</h5>
+         
           <main>{props.children}</main>
           <footer>
             <button className="close" onClick={close}>

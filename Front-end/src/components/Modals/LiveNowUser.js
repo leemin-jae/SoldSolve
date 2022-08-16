@@ -45,17 +45,18 @@ const LiveNowUser = (props) => {
 
   let seller =null;
   const userTag = [];
+  console.log(sellerNick)
   if (nowUser && nowUser.length > 0) {
     for (let i = 0; i < nowUser.length; i++) {
       let user = null
       const data = nowUser[i].clientData
-      const userNick = JSON.parse(data).clientData
-      if (store.info.info.nickName === sellerNick) {
+      const userNick = JSON.parse(data)
+      if (userNick.clientId === sellerid) {
         seller = userNick
       } else {
         user =
           <li className='managementUser'>
-            <p style={{ marginBottom: '0' }}>{userNick}</p>
+            <p style={{ marginBottom: '0' }}>{userNick.clientData}({userNick.clientId})</p>
             {store.info.info.userId === sellerid ?
               <button className='managementButton' onClick={e => Kick(nowUser[i].connectionId)}>강퇴</button>
               : null}
@@ -80,7 +81,7 @@ const LiveNowUser = (props) => {
             </div>
             <div className='nowUserBox'>
               <li className='managementUserAdmin'>
-                <p style={{ marginBottom: '0' }}>{seller}</p>
+                <p style={{ marginBottom: '0' }}>{seller.clientData}({seller.clientId})</p>
                 <p style={{ marginBottom: '0' }}>판매자</p>
               </li>
               {userTag}

@@ -163,14 +163,6 @@ function Product() {
     setReqModalOpen(false);
   };
 
-  const [sellModalOpen, setSellModalOpen] = useState(false);
-
-  const openSellModal = () => {
-    setSellModalOpen(true);
-  };
-  const closeSellModal = () => {
-    setSellModalOpen(false);
-  };
 
   const ShowReq = () => {
     return (
@@ -178,10 +170,11 @@ function Product() {
         {requser.length ?
           <>
             {requser.map((user) => {
+              console.log(user)
               return (
-                <li key={user.id}>
-                  {user.nickname}
-                </li>
+              <li className='managementUser' key={user.id}>
+                <h6 style={{ margin:'0',padding:'5px'}}>{user.nickname}<span>({user.userid})</span></h6>
+              </li>
               );
             })}
           </>
@@ -189,60 +182,6 @@ function Product() {
           <>
             <h5>라이브를 요청한 사람이 없습니다
             </h5>
-          </>
-        }
-      </>
-    );
-  };
-
-  const SellProduct = () => {
-    const [button, setButton] = useState('noInput')
-    const [id, setId] = useState(null)
-
-    function inputId(e) {
-      setId(e.target.value)
-      if (e.target.value) { setButton('input') }
-      else if (e.target.value === '') { setButton('noInput') }
-    }
-
-    let submitButton = null;
-    if (button === 'noInput') {
-      submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
-    } else if (button === 'input') {
-      submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
-    }
-
-    function trySell(e, id) {
-      e.preventDefault()
-      axios({
-        url: '/api/deal',
-        method: 'post',
-        params: { no: productid, buyerId: id },
-      })
-        .then(res => {
-          alert('거래가 완료되었습니다')
-          document.location.href = `/product/${productid}`
-        })
-        .catch(err => {
-          console.error(err.response.data)
-          alert('ID를 다시 확인해주세요')
-        })
-    }
-    return (
-      <>
-        {sell ?
-          <>
-            <h5>이미 판매된 상품입니다
-            </h5>
-          </>
-          :
-          <>
-
-            <form onSubmit={e => { trySell(e, id) }}>
-              <div>구매하시는분의 ID를 입력해주세요</div>
-              <input className="inputform" onChange={e => { inputId(e) }} type="text" placeholder="ID"></input>
-              {submitButton}
-            </form>
           </>
         }
       </>
@@ -360,10 +299,7 @@ function Product() {
                     {imglist}
                   </div>
 
-                  {/* <a href="#slide-1"></a>
-            <a href="#slide-2"></a>
-            <a href="#slide-3"></a>
-            <a href="#slide-4"></a> */}
+
                 </div>
               </div>
               <div className='user_box'>
@@ -387,8 +323,6 @@ function Product() {
               <div className='product_description'>
                 <div className='d-flex justify-content-between align-items-center'>
                   <h1 className='titletext' style={{ margin: '0 10px 0px 10px' }}>{productData.title}</h1>
-                  {store.info.info && productData.state === 0 && store.info.info.userId === productData.user.userid ?
-                    <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료</button> : null}
                   {store.info.info && productData.state ?
                     <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
                   }
@@ -425,18 +359,11 @@ function Product() {
                             {livetime ? <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>{livetime}</button> : <TimeSet timeState={timeState}></TimeSet>}
 
                             <Modal open={reqModalOpen} close={closeReqModal} header="라이브 요청 목록">
-                              <ul><ShowReq /></ul>
+                              <ul style={{ padding:'0' }}><ShowReq /></ul>
                             </Modal>
                           </div>
                           <br />
-                          <div>
-                            <Modal open={sellModalOpen} close={closeSellModal} header="판매창">
-                              <div><SellProduct /></div>
-                            </Modal>
-
-                          </div>
                         </>
-
                         :
                         <>
                           <div>

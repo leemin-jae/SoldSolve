@@ -33,7 +33,7 @@
 .modal>section>header {
   position: relative;
   padding: 16px 64px 16px 16px;
-  background-color: #f1f1f1;
+  background-color: white;
   font-weight: 700;
 }
 
@@ -50,14 +50,8 @@
 }
 
 .modal>section>main {
-  border-radius: 30px;
-
-  /* border: #6667AB 2px solid; */
-  /* width: 330px; */
-  padding: 16px;
-  border-bottom: 1px solid #dee2e6;
-  border-top: 1px solid #dee2e6;
-  /* display: none; */
+  border-radius: 10px;
+  margin: 20px;
 }
 
 .modal>section>footer {
@@ -370,4 +364,19 @@ input {
   height: 400px;
   width: 300px;
   border-radius: 10px;
+}
+
+
+.css-1hsrxby-MuiImageList-root::-webkit-scrollbar {
+  width: 10px;
+}
+
+.css-1hsrxby-MuiImageList-root::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+
+.css-1hsrxby-MuiImageList-root::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
 }

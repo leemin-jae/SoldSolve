@@ -114,69 +114,39 @@ function MyPage() {
       })
   }
 
-  function WishBox(props) {
-    console.log(props.props)
-    
-  
-    return (
-      <ImageList sx={{ width: 500, height: 450 }} cols={2} rowHeight={200}>
-        {props.props.map((item) => {
 
-
-           let price = item.product.price
-           const productPrice = price.toLocaleString('ko-KR');
-       
-      
-          return (
-          <a href={`/product/${item.product.no}`}>
-            <ImageListItem key={item.product.no}>
-              <img
-                src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
-                srcSet={`${item.product.productImg[0]}`}
-                alt={item.product.title}
-                loading="lazy"
-                style={{height:'200px'}}
-              />
-              <ImageListItemBar
-                title={item.product.title}
-                subtitle={productPrice}
-              />
-            </ImageListItem>
-          </a>
-        )})}
-      </ImageList>
-    );
-  }
   console.log(sell)
   console.log(buy)
 
   function SellBox(props) {
     console.log(props.props)
     return (
-      <ImageList sx={{ width: 280, height: 400 }} cols={2} rowHeight={150}>
+      <ImageList sx={{ width: 280, height: 400, justifyContent: 'space-between', margin: 'auto' }} cols={2} rowHeight={150}>
         {props.props.map((item) => {
 
 
-           let price = item.price
-           const productPrice = price.toLocaleString('ko-KR');
-       
-      
+          let price = item.price
+          const productPrice = price.toLocaleString('ko-KR');
+
+
           return (
-          <a href={`/product/${item.no}`}>
-            <ImageListItem key={item.no}>
-              <img
-                src={`https://i7c110.p.ssafy.io${item.productImg[0].path}`}
-                srcSet={`${item.productImg[0]}`}
-                alt={item.title}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={item.title}
-                subtitle={productPrice}
-              />
-            </ImageListItem>
-          </a>
-        )})}
+            <a href={`/product/${item.no}`} style={{ width: '125px', textAlign: 'center' }}>
+              <ImageListItem key={item.no}>
+                <img
+                  src={`https://i7c110.p.ssafy.io${item.productImg[0].path}`}
+                  srcSet={`${item.productImg[0]}`}
+                  alt={item.title}
+                  loading="lazy"
+                  style={{ height: '150px', objectFit: 'fill' }}
+                />
+                <ImageListItemBar
+                  title={item.title}
+                  subtitle={productPrice}
+                />
+              </ImageListItem>
+            </a>
+          )
+        })}
       </ImageList>
     );
   }
@@ -184,30 +154,32 @@ function MyPage() {
   function BuyBox(props) {
     console.log(props.props)
     return (
-      <ImageList sx={{ width: 280, height: 400 }} cols={2} rowHeight={150}>
+      <ImageList sx={{ width: 280, height: 400, justifyContent: 'space-between', margin: 'auto' }} cols={2} rowHeight={150}>
         {props.props.map((item) => {
 
 
-           let price = item.product.price
-           const productPrice = price.toLocaleString('ko-KR');
-       
-      
+          let price = item.product.price
+          const productPrice = price.toLocaleString('ko-KR');
+
+
           return (
-          <a href={`/product/${item.product.no}`}>
-            <ImageListItem key={item.product.no}>
-              <img
-                src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
-                srcSet={`${item.product.productImg[0]}`}
-                alt={item.title}
-                loading="lazy"
-              />
-              <ImageListItemBar
-                title={item.product.title}
-                subtitle={productPrice}
-              />
-            </ImageListItem>
-          </a>
-        )})}
+            <a href={`/product/${item.product.no}`} style={{ width: '125px', textAlign: 'center' }}>
+              <ImageListItem key={item.product.no}>
+                <img
+                  src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
+                  srcSet={`${item.product.productImg[0]}`}
+                  alt={item.title}
+                  loading="lazy"
+                  style={{ height: '150px', objectFit: 'fill' }}
+                />
+                <ImageListItemBar
+                  title={item.product.title}
+                  subtitle={productPrice}
+                />
+              </ImageListItem>
+            </a>
+          )
+        })}
       </ImageList>
     );
   }
@@ -254,7 +226,7 @@ function MyPage() {
                 <a href='/editaccount'><ManageAccountsIcon color="secondary" /></a>
                 <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
                 <label htmlFor="imgChange"><PhotoCameraIcon /></label>
-                <div><a style={{ textDecoration:'none' }} href='/mypage/products'>내상품관리</a></div>
+                <div><a style={{ textDecoration: 'none' }} href='/mypage/products'>내상품관리</a></div>
               </Typography>
             </CardContent>
           </Box>
@@ -282,7 +254,7 @@ function MyPage() {
               <div>구매내역</div>
             </button>
             <Modal open={buyModalOpen} close={closeBuyModal} header="구매내역">
-            {buy ? <BuyBox props={buy} /> : <NoItem />}
+              {buy ? <BuyBox props={buy} /> : <NoItem />}
             </Modal>
           </div>
           <div className='column'>
@@ -291,19 +263,34 @@ function MyPage() {
               <div>판매내역</div>
             </button>
             <Modal open={sellModalOpen} close={closeSellModal} header="판매내역">
-            {sell ? <SellBox props={sell} /> : <NoItem />}
+              {sell ? <SellBox props={sell} /> : <NoItem />}
             </Modal>
           </div>
         </div>
         <hr />
-        <div className='heart_container'>
-          <div className='column'>
-            찜한상품
-          </div>
-        </div>
-        <br />
+        <h4>찜한 상품</h4>
         <div className='hearts'>
-          <WishBox props={wish} />
+          {wish.map((item) => {
+            let price = item.product.price
+            const productPrice = price.toLocaleString('ko-KR');
+            return (
+              <a href={`/product/${item.product.no}`} style={{ width: '120px',height:'150px', textAlign: 'center', margin:'5px' }}>
+                <ImageListItem key={item.product.no}>
+                  <img
+                    src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
+                    srcSet={`${item.product.productImg[0]}`}
+                    alt={item.product.title}
+                    loading="lazy"
+                    style={{ height: '150px', objectFit: 'fill' }}
+                  />
+                  <ImageListItemBar
+                    title={item.product.title}
+                    subtitle={productPrice}
+                  />
+                </ImageListItem>
+              </a>
+            )
+          })}
         </div>
         <hr />
       </div>

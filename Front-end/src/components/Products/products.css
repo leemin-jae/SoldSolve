@@ -119,3 +119,12 @@ h1 {
     font-weight: bold;
     line-height: 30px;
 }
+
+.categotytitle{
+    background-color: #6667ab;
+    color: white;
+    max-width: 300px;
+    text-align: center;
+    margin-inline: auto;
+    border-radius: 10px;
+}

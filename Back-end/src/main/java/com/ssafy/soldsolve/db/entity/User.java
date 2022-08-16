@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.Builder;
@@ -25,12 +25,14 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
 	@Column(name = "user_pk")
 	private int id;
-	
+
 	private String userid;
 
 	@JsonIgnore
 	private String password;
+	@Size(min = 2, max = 10)
 	private String username;
+	@Size(min = 2, max = 10)
 	private String nickname;
 	private String email;
 	

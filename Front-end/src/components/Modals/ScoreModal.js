@@ -38,7 +38,7 @@ const ScoreModal = (props) => {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          if (res.data == true) {
+          if (res.data === true) {
             setSellerMethod('patch')
           }
         })

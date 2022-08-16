@@ -80,7 +80,9 @@ function Product() {
       setLoading(false)
       let recList = null;
       if (result.data && result.data.length > 0) {
-        recList = result.data.filter((x) => x.category === cat)
+        recList = result.data.filter((x) => x.category === cat).sort(function (a, b) {
+          return b.viewCount - a.viewCount
+        }).slice(0, 14)
       }
       setRecProducts(recList);
     }

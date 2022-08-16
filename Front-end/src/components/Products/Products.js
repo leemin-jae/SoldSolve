@@ -154,7 +154,7 @@ function Products() {
         <NavBar />
       </div>
       <div className='content' style={{ textAlign:'center' }}>
-        <h1 className='categotytitle'>{title}</h1>
+        <span className='categorytitle'>{title}</span>
         <ul className='cards' id='maincontent'>
           {loading ? <Loading /> : <ShowProducts />}
         </ul>

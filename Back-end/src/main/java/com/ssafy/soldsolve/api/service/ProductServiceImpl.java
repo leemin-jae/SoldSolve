@@ -56,17 +56,20 @@ public class ProductServiceImpl implements ProductService {
         User user = userRepository.findByUserid(product.getUserId());
         p.setUser(user);
 
-        for(String tag : product.getTag()){
-            Tag t = tagRepository.findByName(tag);
-            if(t == null){
-                t = new Tag();
-                t.setName(tag);
-                tagRepository.save(t).getId();
+        List<String> list = product.getTag();
+        if(list != null) {
+            for (String tag : list) {
+                Tag t = tagRepository.findByName(tag);
+                if (t == null) {
+                    t = new Tag();
+                    t.setName(tag);
+                    tagRepository.save(t).getId();
+                }
+                TagProduct tp = new TagProduct();
+                tp.setProduct(p);
+                tp.setTag(t);
+                tagProductRepository.save(tp);
             }
-            TagProduct tp = new TagProduct();
-            tp.setProduct(p);
-            tp.setTag(t);
-            tagProductRepository.save(tp);
         }
         return productRepository.save(p).getNo();
     }

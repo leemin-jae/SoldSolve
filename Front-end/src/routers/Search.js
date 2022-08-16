@@ -49,27 +49,27 @@ function Search() {
       return <div>최근 검색된 기록이 없습니다.</div>
     }
     return (
-        <Swiper
-          slidesPerView={4}
-          centeredSlides={true}
-        >
-          {keywords.map(({ id, text }) => {
-            return (
-              <SwiperSlide key={id} style={{ marginLeft: 10}}>
-                <div style={{ textAlign: 'center', display: 'flex' }}>
-                  <a href={`/search/${text}`} style={{ textDecoration: 'none'}}><Chip label={text} style={{ }}/></a>
-                  <button
-                    onClick={() => {
-                      onRemoveKeyword(id)
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
-              </SwiperSlide>
-            )
-          })}
-        </Swiper>
+      <Swiper
+        slidesPerView={4}
+        centeredSlides={true}
+      >
+        {keywords.map(({ id, text }) => {
+          return (
+            <SwiperSlide key={id} style={{ marginLeft: 10 }}>
+              <div style={{ textAlign: 'center', display: 'flex' }}>
+                <a href={`/search/${text}`} style={{ textDecoration: 'none' }}><Chip label={text} style={{}} /></a>
+                <button
+                  onClick={() => {
+                    onRemoveKeyword(id)
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
     )
   }
 
@@ -89,17 +89,33 @@ function Search() {
       <div className="searchcontainer">
         <h5>인기 검색어</h5>
       </div>
-      <div className="searchcontainer2">
+      <div className="searchcontainer3">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={5}
+          spaceBetween={10}
+          // centeredSlides={true}
+          breakpoints={{
+            1200: {
+              slidesPerView: 5,
+            },
+            991: {
+              slidesPerView: 4,
+            },
+            767: {
+              slidesPerView: 3,
+            },
+            300: {
+              slidesPerView: 3,
+            }
+          }}
         >
           {pops.length > 0 ?
             <>
               {pops.map((pop) => {
                 console.log(pop)
                 return (
-                  <SwiperSlide key={pop.popId}>
-                      <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} style={{  }}/></a>
+                  <SwiperSlide key={pop.popId} style={{ display: 'flex', justifyContent: 'center' }} >
+                    <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} style={{ width: '90px', backgroundColor: '#DBDBFF' }} /></a>
                   </SwiperSlide>
                 );
               })}

@@ -50,6 +50,10 @@ input#category:checked+div#left_toggle {
   width: 100px;
 }
 
+.navbar_logo2 img {
+  width: 100px;
+}
+
 .screen_menu {
   justify-content: center;
   align-items: center;
@@ -240,6 +244,12 @@ div#left_toggle ul li {
   .navbar_logo {
     /* margin-left: 300px; */
     align-items: center;
+    margin-left: 18%;
+  }
+
+  .navbar_logo2 {
+    /* margin-left: 300px; */
+    align-items: center;
     margin-left: 27%;
   }
 
@@ -251,10 +261,12 @@ div#left_toggle ul li {
   padding-inline: 0%;
   padding-block: 3%;
 }
-.articles{
+
+.articles {
   height: 700px;
   overflow-y: auto;
 }
+
 .Article {
   margin-block: 1%;
   padding: 1%;
@@ -437,7 +449,7 @@ div#left_toggle ul li {
   text-align: center;
   font-size: x-large;
   position: absolute;
-  top: 15px; 
+  top: 15px;
 }
 
 .li_box_container {

@@ -126,7 +126,7 @@ const ScoreModal = (props) => {
               <p className='titleText'>상대방을 <span style={{ color: '#6667ab' }}>평가</span>해주세요 <span style={{ color: '#6667ab' }}>:D</span></p>
 
               {header.myId === header.seller && myItem ?
-                <div>
+                <div className='scoreSeller'>
                   <p>판매하는 상품을 골라주세요</p>
                   <select className='optionscroll' onChange={e => setSellItem(e.target.value)}>
                     <option className='optionfont' selected disabled>내 판매상품</option>
@@ -150,7 +150,8 @@ const ScoreModal = (props) => {
               <div className='d-flex align-items-center my-2'><FontAwesomeIcon className='scoreCheck' id="1" onClick={e => scoreCheck(e)} icon={faSquareCheck} size="2x" /><p className='scoreSelect'>매우 나빠요!</p></div>
             </div>
           </div>
-
+          {header.myId !== header.seller?
+            <div className='scoreSeller'></div> : null}
           <div className='scoreBottom'>
             <button className="submitbutton-able scoreSubmit" onClick={e => submitScore(e)} style={{ fontWeight: 'bold', fontSize: '18px' }}>평가하기</button>
           </div>

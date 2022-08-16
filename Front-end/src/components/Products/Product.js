@@ -267,7 +267,6 @@ function Product() {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          console.log(res.data, '방생성')
           navigate('/chatroom/' + res.data, {
             state:
             {
@@ -288,9 +287,7 @@ function Product() {
   }
   const imglist = []
   if (productData && productData.productImg.length > 0) {
-    console.log(1234)
     for (let i = 0; i < productData.productImg.length; i++) {
-      console.log(productData.productImg[i].path)
       imglist.push(<div id="slide-1"><img className='carousel_img' src={'https://i7c110.p.ssafy.io' + productData.productImg[i].path} alt=""></img></div>)
     }
   }
@@ -302,10 +299,11 @@ function Product() {
           Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
         },
       })
-      .then(() => {
+      .then((res) => {
         document.location.href = `/live/${productData.user.userid}/sell${productid}`
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         alert("아직 라이브방이 생성되지 않았습니다.")
       })
   }
@@ -317,7 +315,6 @@ function Product() {
       setTimeState(1)
       const selectTime = document.getElementById('LiveTime').value
 
-      console.log(selectTime)
       axios({
         url: `/api/product/time`,
         method: 'post',

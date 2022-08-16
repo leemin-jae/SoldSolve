@@ -331,7 +331,7 @@ function Product() {
                   {productData.tag.map((tag) => {
                     console.log(tag.name)
                     function tagSearch() {
-                      document.location.href = `/search/` + tag.name;
+                      document.location.href = `/search/tag/` + tag.name;
                     }
                     return <label onClick={e => tagSearch()} className="tagbox">#{tag.name}</label>
                   })}

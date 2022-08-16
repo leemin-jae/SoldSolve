@@ -16,7 +16,6 @@ function Notice() {
       method: 'get'
     })
       .then(res => {
-        console.log(res)
         setNoticeData(res.data)
       })
       .catch(err => {
@@ -26,14 +25,12 @@ function Notice() {
 
 
   function deleteArticle(e) {
-    console.log(e)
     axios({
       url: '/admin/notices/' + e,
       method: 'delete',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => {
-        console.log(res)
         window.location.href = '/notice'
       })
       .catch(err => {
@@ -45,7 +42,6 @@ function Notice() {
   for (let i = 0; i < noticeData.length; i++) {
     let t = noticeData[i]
 
-
     let noticeTag =
       <li className='Article' id={t.id} onClick={e => clickNotice(e)} key={t.id}>
         <div className='noticeTitle'>
@@ -54,15 +50,12 @@ function Notice() {
         </div>
         <div className='hide' id={'ArticleContent' + t.id}>
           <p className='article_line'>{t.content}</p>
-
-
           {storeToken.info.info.role === 'ROLE_ADMIN' ?
             <div className='d-flex justify-content-end'>
               <button onClick={e => updateButton(t.id)} className='noticeButton'>UPDATE</button>
               <button onClick={e => deleteArticle(t.id)} className='noticeButton'>DLETE</button>
             </div>
             : null}
-
         </div>
       </li>
     lis.push(noticeTag)
@@ -86,7 +79,6 @@ function Notice() {
   };
   const closeModal = () => {
     setModalOpen(false);
-    console.log(1234)
     window.location.href = '/notice'
   };
 
@@ -106,11 +98,11 @@ function Notice() {
           <div className='d-flex justify-content-end'>
             <button className='noticeButton my-1 d-flex justify-content-end' onClick={e => createButton(e)}>공지사항 작성하기</button>
           </div>
-           : null}
-          <div className='articles'>
-            {lis}
-          </div>
-        
+          : null}
+        <div className='articles'>
+          {lis}
+        </div>
+
       </div>
       <ModalNotice open={modalOpen} close={closeModal} header={modalMode}>
         판매내역리스트

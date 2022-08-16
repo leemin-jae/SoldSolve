@@ -104,9 +104,6 @@ function LiveItemInMain() {
     );
   };
 
-
-
-  console.log(LiveList)
   return (
     <div className="content">
       <div className='hometext'><h4 style={{ textAlign: 'center' }}>NOW LIVE</h4></div>

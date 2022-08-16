@@ -11,7 +11,9 @@ import { useSelector } from 'react-redux'
 import NotFound from '../../routers/PageNotFound'
 import LikeButton from './LikeButton';
 import LiveButton from './LiveButton';
-
+import MoodIcon from '@mui/icons-material/Mood';
+import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { IconButton } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import Modal from '../Modals/Modal';
@@ -39,7 +41,6 @@ function Product() {
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
-  console.log(store)
 
   useEffect(() => {
     axios({
@@ -47,14 +48,10 @@ function Product() {
       method: 'get',
     })
       .then(res => {
-        console.log(res)
         setProductData(res.data)
-        console.log(res.data.user, '이름찾자')
         setYouNick(res.data.user.nickname)
-        console.log(youNick, '상대 닉넴')
         setUserId(res.data.user.userid)
         let money = res.data.price;
-        // console.log(money)
         money = Number(String(money).replaceAll(',', ''));
         const formatValue = money.toLocaleString('ko-KR');
         setMoney(formatValue)
@@ -93,7 +90,6 @@ function Product() {
     return (
       <>{
         recproducts.map((product) => {
-          console.log(product)
           let goDetail = '/product/' + product.no
           let mainImg = null;
           if (product.productImg.length > 0) {
@@ -217,7 +213,6 @@ function Product() {
     }
 
     function trySell(e, id) {
-      // console.log(getLoginForm)
       e.preventDefault()
       axios({
         url: '/api/deal',
@@ -260,7 +255,6 @@ function Product() {
   }
   function goLive(e) {
     e.preventDefault();
-    console.log(productData.user.userid)
     SessionCheck()
   }
 
@@ -354,7 +348,6 @@ function Product() {
     }
   }
 
-  console.log(productData)
   return (
     <>
       {load ?
@@ -379,17 +372,26 @@ function Product() {
               <div className='user_box'>
                 <div className='user_info'>
                   <img className="livechatimg" src={'https://i7c110.p.ssafy.io' + productData.user.profileUrl} alt="#"></img>
-                  <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0' }}>
+                  <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0', fontSize: '16px', fontWeight: 'bold' }}>
                     {productData.user.nickname} ({productData.region})</p>
                 </div>
-                <p className='score' style={{ marginTop: '30px' }}>평점 이름 어케 지을까요 {productData.user.score}점</p>
+                <p className='score' style={{ marginTop: '30px' }}>
+                  {
+                    productData.user.score >= 40 ?
+                      <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '30px' }} /> : (productData.user.score >= 20 ?
+                        <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '30px' }} /> :
+                        <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '30px' }} />)}
+                  {/* <MoodIcon className='score_emotion' /> */}
+                  <div className='score_text'>{productData.user.score}솔브</div>
+                  {/* </CircularProgress> */}
+                </p>
               </div>
 
               <div className='product_description'>
                 <div className='d-flex justify-content-between align-items-center'>
                   <h1 className='titletext' style={{ margin: '0 10px 0px 10px' }}>{productData.title}</h1>
                   {store.info.info && productData.state === 0 && store.info.info.userId === productData.user.userid ?
-                    <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료하기</button> : null}
+                    <button className='submitbutton-able' onClick={openSellModal} style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }}>판매완료</button> : null}
                   {store.info.info && productData.state ?
                     <button className='submitbutton-able' style={{ border: '0', borderRadius: '10px', height: '30px', margin: '0 0 0 10px' }} disabled>판매완료된 상품</button> : null
                   }

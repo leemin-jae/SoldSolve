@@ -42,7 +42,6 @@ const asyncOnclickMessage = createAsyncThunk(
         }
       }
     );
-    console.log(result.data)
     return result.data
   }
 
@@ -56,7 +55,6 @@ let notice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(asyncOnclickMessage.fulfilled, (state, action) => {
-      console.log(action.payload, typeof (action.payload))
       state.noticeCount = action.payload
     })
     // builder.addCase(asyncOnclickMessage.fulfilled, (state, action)=>{

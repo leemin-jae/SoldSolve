@@ -17,7 +17,6 @@ function Message() {
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => {
-        console.log(res)
         setMessagedata(res.data)
       })
       .catch(err => {
@@ -56,7 +55,6 @@ function Message() {
       data: e
     })
       .then(res => {
-        console.log(res)
         document.getElementById(e.id).classList.add('read')
         dispatch(asyncOnclickMessage(res.data))
       })

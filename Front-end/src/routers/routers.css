@@ -1075,14 +1075,13 @@ input::placeholder {
 .sellerInfo {
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin-inline: 2rem;
+  justify-content: space-between;
 }
 
 .signupWarning {
   border: 2px solid rgba(250, 0, 0, 0.603);
 }
-
 
 .slides::-webkit-scrollbar {
   width: 10px;
@@ -1096,4 +1095,14 @@ input::placeholder {
 
 .slides::-webkit-scrollbar-track {
   background: rgba(196, 217, 248, 0.1);
+}
+
+.infoList {
+  display: flex;
+}
+
+.live_profile {
+  display: flex;
+  align-items: center;
+
 }

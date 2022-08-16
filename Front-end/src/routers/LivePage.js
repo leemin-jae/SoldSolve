@@ -9,6 +9,11 @@ import LiveChat from './Live/LiveChat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash, faArrowRightFromBracket, faRepeat } from '@fortawesome/free-solid-svg-icons'
 import { LinearProgress, Stack } from '@mui/material';
+import '../components/Products/products.css'
+import MoodIcon from '@mui/icons-material/Mood';
+import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
 
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
@@ -157,9 +162,10 @@ class LivePage extends Component {
           mySession
             .connect(
               token,
-              { clientData: this.state.myUserName,
-                clientId:this.state.myId
-               },
+              {
+                clientData: this.state.myUserName,
+                clientId: this.state.myId
+              },
             )
             .then(async () => {
               if (this.state.myId === this.state.params[2]) {
@@ -239,7 +245,7 @@ class LivePage extends Component {
     });
   }
 
-  
+
 
   async CameraOff() {
     if (this.state.nowCamera) {
@@ -293,9 +299,9 @@ class LivePage extends Component {
     const Loading = () => {
       return (
         < >
-             <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
-        <LinearProgress color="secondary" />
-      </Stack>
+          <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+            <LinearProgress color="secondary" />
+          </Stack>
         </>
       );
     };
@@ -338,11 +344,21 @@ class LivePage extends Component {
                   {this.state.sellerInfo ?
                     <>
                       <div className='sellerInfo my-2'>
-                        <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
-                        <div className='mx-2 d-flex flex-column'>
-                          <p style={{ marginBottom: '0' }}>{this.state.sellerInfo.nickname} ({this.state.region})</p>
-                          <p style={{ marginBottom: '0' }}>거래만족도{this.state.sellerInfo.score}점</p>
-                          
+                        <div className='live_profile'>
+                          <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
+                          <h4 style={{ marginTop: 0, marginBottom: 0, marginLeft: 10 }}>{this.state.sellerInfo.nickname} ({this.state.region})</h4>
+                        </div>
+                        <div className='infoList'>
+                          <p className='score' style={{ marginTop: 10 }}>
+                            {
+                              this.state.sellerInfo.score >= 40 ?
+                                <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '40px' }} /> : (this.state.sellerInfo.score >= 20 ?
+                                  <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '40px' }} /> :
+                                  <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '40px' }} />)}
+                            {/* <MoodIcon className='score_emotion' /> */}
+                            <div className='score_text' style={{ fontSize: 18, lineHeight: '37px' }}>{this.state.sellerInfo.score}솔브</div>
+                            {/* </CircularProgress> */}
+                          </p>
                         </div>
 
 

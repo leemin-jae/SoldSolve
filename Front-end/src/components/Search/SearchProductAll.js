@@ -16,7 +16,6 @@ function SearchProductAll() {
     const [searchData, setSearchData] = useState([]);
     const [oksearch, setOkSearch] = useState(false);
     const params = useParams();
-    // console.log(params)
 
     const [keywords, setKeywords] = useState(
         JSON.parse(localStorage.getItem('keywords') || '[]'),
@@ -27,7 +26,6 @@ function SearchProductAll() {
       }, [keywords])
     
       const handleAddKeyword = (text) => {
-        console.log('text', text)
         const newKeyword = {
           id: Date.now(),
           text: text,
@@ -37,7 +35,6 @@ function SearchProductAll() {
 
     useEffect(() => {
         async function fetchData() {
-            console.log(params)
             let result1 = [];
             await axios({
                 url: '/api/product/tag',
@@ -68,7 +65,6 @@ function SearchProductAll() {
             } else {
                 result = result2.data
             }
-            console.log(result)
             if (result.length > 0) {
                 setSearchData(result)
                 setOkSearch(true)

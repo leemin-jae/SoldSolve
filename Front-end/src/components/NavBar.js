@@ -34,13 +34,16 @@ function NavBar() {
 
   function Logout(e) {
     e.preventDefault();
+    deleteToken()
+    alert('로그아웃되었습니다')
+    document.location.href = '/'
+  }
+  function deleteToken(){
     localStorage.removeItem('token')
     dispatch(getToken(null))
     dispatch(getInfo(null))
-    alert('로그아웃되었습니다')
-    document.location.href = '/'
-
   }
+  
 
   const openModal = () => {
     setModalOpen(true);

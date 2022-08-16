@@ -49,7 +49,6 @@ function SearchProduct() {
     }, [keywords])
 
     const handleAddKeyword = (text) => {
-        console.log('text', text)
         const newKeyword = {
             id: Date.now(),
             text: text,

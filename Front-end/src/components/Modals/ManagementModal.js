@@ -27,7 +27,6 @@ const ManagementModal = (props) => {
 
 
   function userCheck(e) {
-    console.log(e)
     if (e.role === 'ROLE_USER') {
       userBan(e)
     } else if (e.role === 'ROLE_SUSPENDED') {
@@ -65,7 +64,6 @@ const ManagementModal = (props) => {
 
   }
   function BanCancle(e) {
-    console.log(e)
     if (e.role === 'ROLE_SUSPENDED') {
       axios({
         url: '/admin/users/recover/' + e.id,
@@ -117,7 +115,6 @@ const ManagementModal = (props) => {
   }
 
   function deleteUser(e) {
-    console.log(e)
     if (window.confirm(`정말로 ${e.userid}(${e.username})님의 계정을 삭제하시겠습니까?`)) {
       axios({
         url: '/admin/users/' + e.id,

@@ -77,9 +77,7 @@ function KategorieInMain() {
 
                 let price = product.price
                 const productPrice = price.toLocaleString('ko-KR');
-                // console.log(data)
-                // console.log(hotdata)
-                // console.log(newdata)
+
                 return (
                   <SwiperSlide className='cards_item' key={product.no}>
                     <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>

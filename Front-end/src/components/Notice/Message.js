@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux'
 function Message() {
   let dispatch = useDispatch()
 
-  const readlis = []
   const lis = []
   const [messagedata, setMessagedata] = useState('')
   useEffect(() => {
@@ -67,7 +66,6 @@ function Message() {
     <div>
       <div className="articles">
         {lis}
-        {readlis}
       </div>
     </div>
   )

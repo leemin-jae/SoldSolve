@@ -349,7 +349,7 @@ class LivePage extends Component {
                           <h4 style={{ marginTop: 0, marginBottom: 0, marginLeft: 10 }}>{this.state.sellerInfo.nickname} ({this.state.region})</h4>
                         </div>
                         <div className='infoList'>
-                          <p className='score' style={{ marginTop: 10 }}>
+                          <div className='score' style={{ marginTop: 10 }}>
                             {
                               this.state.sellerInfo.score >= 40 ?
                                 <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '40px' }} /> : (this.state.sellerInfo.score >= 20 ?
@@ -358,7 +358,7 @@ class LivePage extends Component {
                             {/* <MoodIcon className='score_emotion' /> */}
                             <div className='score_text' style={{ fontSize: 18, lineHeight: '37px' }}>{this.state.sellerInfo.score}솔브</div>
                             {/* </CircularProgress> */}
-                          </p>
+                          </div>
                         </div>
 
 

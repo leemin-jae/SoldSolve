@@ -18,7 +18,6 @@ export default function RequestedPrice(props) {
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
   const { productid, changedata } = props;
-  console.log(changedata)
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 5;
   const [rows, setRows] = React.useState([]);
@@ -34,13 +33,11 @@ export default function RequestedPrice(props) {
           }
         }
       );
-      console.log(result)
       setRows(result.data.sort(function(a, b){
         return b.price - a.price
       }))
     }
     offerData()
-    console.log(rows)
 
   }, [changedata]);
 
@@ -49,7 +46,6 @@ export default function RequestedPrice(props) {
   };
 
   const createRoom = (row) => {
-    console.log(row)
     if (window.confirm("구매자와 연락하시겠습니까?")) {
       axios({
         url: '/api/room/buy',
@@ -58,7 +54,6 @@ export default function RequestedPrice(props) {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          console.log(res.data, '방생성')
           navigate('/chatroom/' + res.data, { state: { 
             roomId: res.data, 
             me: store.info.info.nickName,
@@ -86,7 +81,6 @@ export default function RequestedPrice(props) {
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  console.log(row)
                   let price = row.price
                   const wantPrice = price.toLocaleString('ko-KR');
 

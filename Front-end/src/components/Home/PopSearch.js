@@ -16,9 +16,7 @@ function PopSearch() {
             const result = await axios.get(
                 `/api/pop`
             );
-            // console.log(result.data)
             setPops(result.data.slice(0, 5))
-            // setLoading(false)
         }
         fetchData();
     }, []);

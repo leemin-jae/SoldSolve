@@ -14,7 +14,6 @@ const ScoreModal = (props) => {
   const [sellerMethod, setSellerMethod] = useState('post');
 
   useEffect(() => {
-    console.log(header)
     if (header.scoreMethod === 'patch') {
       setSellerMethod('patch')
     }

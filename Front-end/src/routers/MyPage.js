@@ -273,8 +273,8 @@ function MyPage() {
             let price = item.product.price
             const productPrice = price.toLocaleString('ko-KR');
             return (
-              <a href={`/product/${item.product.no}`} style={{ width: '120px', height: '150px', textAlign: 'center', margin: '5px' }}>
-                <ImageListItem key={item.product.no}>
+              <a key={item.product.no} href={`/product/${item.product.no}`} style={{ width: '120px', height: '150px', textAlign: 'center', margin: '5px' }}>
+                <ImageListItem>
                   <img
                     src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}
                     srcSet={`${item.product.productImg[0]}`}

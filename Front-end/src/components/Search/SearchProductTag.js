@@ -26,7 +26,6 @@ function SearchProductTag() {
       }, [keywords])
     
       const handleAddKeyword = (text) => {
-        console.log('text', text)
         const newKeyword = {
           id: Date.now(),
           text: text,
@@ -36,7 +35,6 @@ function SearchProductTag() {
 
     useEffect(() => {
         async function fetchData() {
-            console.log(params)
             let result = [];
             await axios({
                 url: '/api/product/tag',

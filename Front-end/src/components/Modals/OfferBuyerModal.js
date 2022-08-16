@@ -28,7 +28,6 @@ const OfferBuyerModal = (props) => {
 
     function Offer(e, money) {
       e.preventDefault()
-      console.log(money)
       axios({
         url: '/api/offers/' + productid,
         method: 'post',

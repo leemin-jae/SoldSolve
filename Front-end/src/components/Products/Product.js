@@ -231,7 +231,7 @@ function Product() {
   const imglist = []
   if (productData && productData.productImg.length > 0) {
     for (let i = 0; i < productData.productImg.length; i++) {
-      imglist.push(<div id="slide-1"><img className='carousel_img' src={'https://i7c110.p.ssafy.io' + productData.productImg[i].path} alt=""></img></div>)
+      imglist.push(<div id="slide-1" key={i}><img className='carousel_img' src={'https://i7c110.p.ssafy.io' + productData.productImg[i].path} alt=""></img></div>)
     }
   }
 
@@ -310,16 +310,16 @@ function Product() {
                   <p className='user_name mx-2' style={{ margin: '1em 1em 1em 0', fontSize: '16px', fontWeight: 'bold' }}>
                     {productData.user.nickname} ({productData.region})</p>
                 </div>
-                <p className='score' style={{ marginTop: '30px' }}>
+                <div className='score' style={{ marginTop: '30px' }}>
                   {
                     productData.user.score >= 40 ?
                       <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '30px' }} /> : (productData.user.score >= 20 ?
                         <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '30px' }} /> :
                         <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '30px' }} />)}
                   {/* <MoodIcon className='score_emotion' /> */}
-                  <div className='score_text'>{productData.user.score}솔브</div>
+                  <p className='score_text' style={{ marginBottom: '0 ' }}>{productData.user.score}솔브</p>
                   {/* </CircularProgress> */}
-                </p>
+                </div>
               </div>
 
               <div className='product_description'>
@@ -331,11 +331,10 @@ function Product() {
                 </div>
                 <div style={{ marginInline: '10px' }}>
                   {productData.tag.map((tag) => {
-                    console.log(tag.name)
                     function tagSearch() {
                       document.location.href = `/search/tag/` + tag.name;
                     }
-                    return <label onClick={e => tagSearch()} className="tagbox">#{tag.name}</label>
+                    return <label key={tag.id} onClick={e=>tagSearch()} className="tagbox">#{tag.name}</label>
                   })}
                 </div>
                 <hr></hr>

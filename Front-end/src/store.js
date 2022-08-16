@@ -14,7 +14,6 @@ let token = createSlice({
   reducers: {
     getToken(state, action) {
       state.token = action.payload
-      console.log(state.token)
     },
   }
 })
@@ -27,7 +26,6 @@ let user = createSlice({
   reducers: {
     getInfo(state, action) {
       state.info = action.payload
-      console.log(state.info)
     },
   }
 })
@@ -60,8 +58,6 @@ let notice = createSlice({
     // builder.addCase(asyncOnclickMessage.fulfilled, (state, action)=>{
 
     // })
-    // builder.addCase(asyncOnclickMessage.fulfilled, (state, action)=>{
-    // console.log()
     // })
   }
 })

@@ -15,14 +15,12 @@ function SearchBar({ onAddKeyword }) {
   const paramList = window.location.pathname.split('/')
 
   useEffect(()=>{
-    console.log(params)
     if (params.category) {
       setCategory(params.category)
       document.getElementById("searchCategory").value = params.category
     }
     if (params.title) {
       if (paramList[2] == 'tag'){
-        console.log('#'+params.title)
         setTitle('#'+params.title)
         document.getElementById("standard-search").value = '#'+params.title
       } else {
@@ -38,10 +36,7 @@ function SearchBar({ onAddKeyword }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title.substr(0,1) === '#') {
-      console.log('태그검색')
-      console.log(title.substr(1))
       let tagKeyword = title.substr(1).replace(/ /g,"")
-      console.log(tagKeyword)
       if (tagKeyword) {
         document.location.href = `/search/tag/` + tagKeyword;
         onAddKeyword(title)

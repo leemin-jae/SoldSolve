@@ -45,7 +45,6 @@ const LiveNowUser = (props) => {
 
   let seller =null;
   const userTag = [];
-  console.log(sellerNick)
   if (nowUser && nowUser.length > 0) {
     for (let i = 0; i < nowUser.length; i++) {
       let user = null

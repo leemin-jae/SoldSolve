@@ -35,7 +35,6 @@ function LiveItemInMain() {
   };
 
   const ShowMainItem = (data) => {
-    console.log(data.data)
     return (
       <>
         <Swiper spaceBetween={-50}
@@ -61,7 +60,6 @@ function LiveItemInMain() {
           {data.data.length > 0 ?
             <>
               {data.data.map((product) => {
-                console.log(product)
                 const mainImg = 'https://i7c110.p.ssafy.io' + product.product.productImg[0].path
                 let pTitle = null;
                 if (product.title.length > 8) {

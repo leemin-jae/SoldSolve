@@ -26,16 +26,12 @@ const ModalChat = (props) => {
   const [dbChats, setDbChats] = useState()
 
   const onConnected = () => {
-    // console.log(payload)
     if (stompClient && stompClient.connected && header) {
       setUserData({ ...userData, "": true })
-      console.log(stompClient)
-      console.log(header, '!~!~!')
       stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
         let payloadData = JSON.parse(payload.body);
         chats.push(payloadData);
         setChats([...chats]);
-        console.log(chats)
       })
     }
   }
@@ -72,15 +68,11 @@ const ModalChat = (props) => {
         })
           .then(res => {
             const copyDbChats = res.data.reverse().slice(0, 50)
-            console.log(copyDbChats)
             const copyChats = []
             copyDbChats.reverse().map(chat => {
-              console.log(chat.chatContent)
               copyChats.push(chat.chatContent)
             })
-            console.log(copyChats)
             setDbChats(copyChats)
-            console.log(dbChats)
           })
           .catch(err => {
             console.log(err)
@@ -91,8 +83,6 @@ const ModalChat = (props) => {
   }, [])
 
   useEffect(() => {
-    console.log('연결중')
-    // if (stompClient && stompClient.connected) stompClient.disconnect();
     let Sock = new SockJS('/ws-stomp');
     stompClient = over(Sock);
     stompClient.connect({}, onConnected, onError);

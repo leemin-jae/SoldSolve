@@ -12,15 +12,12 @@ const ModalNotice = (props) => {
   
   useEffect(()=>{
     if (header !== 0){
-      console.log(header)
       axios({
       url:'/api/notices/'+header ,
       method: 'get',
     })
     .then(res => {
       console.log(res.data)
-      console.log(document.getElementsByClassName('NoticeModal_title')[0].value = res.data.title)
-      console.log(document.getElementsByClassName('NoticeModal_content')[0].value = res.data.content)
       setTitle(res.data.title)
       setContent(res.data.content)
     })
@@ -66,7 +63,6 @@ const ModalNotice = (props) => {
   }
 
   function textInput(e) {
-    console.log(e.target.name)
     if (e.target.name === 'title') {
       setTitle(e.target.value)
     } else {

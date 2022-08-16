@@ -16,7 +16,6 @@ function LiveButton(no) {
         }
       }
       )
-      // console.log(res.data)
       if (res.data === true) {
         setLive(true)
       }

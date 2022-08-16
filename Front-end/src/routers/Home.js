@@ -3,6 +3,8 @@ import NavBar from '../components/NavBar';
 import HomeBanner from '../components/Home/HomeBanner';
 import LiveItemInMain from '../components/Home/LiveItemInMain';
 import KategorieInMain from '../components/Home/KategorieInMain';
+import PopSearch from '../components/Home/PopSearch';
+import Footer from '../components/Home/Footer';
 
 function Home() {
   return (
@@ -11,8 +13,10 @@ function Home() {
       <NavBar></NavBar>
       </header>
       <HomeBanner></HomeBanner>
+      <PopSearch />
       <LiveItemInMain></LiveItemInMain>
       <KategorieInMain></KategorieInMain>
+      <Footer />
     </div>
   );
 }

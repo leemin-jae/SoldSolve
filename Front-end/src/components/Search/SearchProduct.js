@@ -15,6 +15,7 @@ import LiveButton from '../Products/LiveButton';
 
 function SearchProduct() {
     const [searchData, setSearchData] = useState([]);
+    const [oksearch, setOkSearch] = useState(false);
     const params = useParams();
 
     useEffect(() => {
@@ -28,12 +29,43 @@ function SearchProduct() {
                     }
                 }
             );
-            setSearchData(result.data.reverse())
-            console.log(searchData);
-            console.log(result.data)
+            if (result.data.length === 0) {
+                const allData = await axios.get(`/api/product`);
+                setSearchData(allData.data.reverse())
+            } else {
+                setSearchData(result.data.reverse())
+                setOkSearch(true)
+            }
+            // console.log(searchData);
+            // console.log(result.data)
         }
         fetchData();
     }, []);
+
+    const [keywords, setKeywords] = useState(
+        JSON.parse(localStorage.getItem('keywords') || '[]'),
+    )
+
+    useEffect(() => {
+        localStorage.setItem('keywords', JSON.stringify(keywords))
+    }, [keywords])
+
+    const handleAddKeyword = (text) => {
+        console.log('text', text)
+        const newKeyword = {
+            id: Date.now(),
+            text: text,
+        }
+        setKeywords([newKeyword, ...keywords])
+    }
+
+    const NoSearchItem = () => {
+        return (
+            <div style={{ textAlign: 'center' }}>
+                <h5>검색결과가 없습니다</h5>
+            </div>
+        )
+    }
 
     const ShowProducts = () => {
         return (
@@ -112,8 +144,9 @@ function SearchProduct() {
             <div className='fixnav'>
                 <NavBar />
             </div>
-            <SearchBar></SearchBar>
+            <SearchBar onAddKeyword={handleAddKeyword}></SearchBar>
             <div className='content'>
+                {oksearch ? <></> : <NoSearchItem />}
                 <ul className='cards' id='maincontent'>
                     {<ShowProducts />}
                 </ul>

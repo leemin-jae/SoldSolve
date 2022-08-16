@@ -34,10 +34,10 @@ function NavBar() {
 
   function Logout(e) {
     e.preventDefault();
-    alert('로그아웃되었습니다')
     localStorage.removeItem('token')
     dispatch(getToken(null))
     dispatch(getInfo(null))
+    alert('로그아웃되었습니다')
     document.location.href = '/'
 
   }

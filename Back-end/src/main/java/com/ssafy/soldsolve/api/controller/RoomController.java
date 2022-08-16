@@ -52,8 +52,29 @@ public class RoomController {
         }else{
             return ResponseEntity.status(200).body(num);
         }
+    }
 
+    @PostMapping("/buy")
+    public ResponseEntity<?> createBuyRoom(@RequestParam String buyer, Authentication authentication){
 
+        SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+        String userId = userDetails.getUsername();
+        User sellerUser = userService.getUserByUserId(userId);
+
+        User buyerUser = userService.getUserByUserId(buyer);
+
+        if(buyerUser == null){
+            return  ResponseEntity.status(200).body(BaseResponseBody.of(400, "없는 유저"));
+        }
+
+        int num = roomService.findDuplicate(buyerUser, sellerUser);
+        if(num == -1){
+            String log = messageService.roomLog(buyerUser);
+            messageService.createLog(sellerUser, log);
+            return ResponseEntity.status(200).body(roomService.createRoom(sellerUser, buyerUser));
+        }else{
+            return ResponseEntity.status(200).body(num);
+        }
     }
 
     @GetMapping("")

@@ -36,8 +36,6 @@ function SearchProduct() {
                 setSearchData(result.data.reverse())
                 setOkSearch(true)
             }
-            // console.log(searchData);
-            // console.log(result.data)
         }
         fetchData();
     }, []);

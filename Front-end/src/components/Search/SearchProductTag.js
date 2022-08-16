@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import axios from "axios"
-import NavBar from '../../components/NavBar';
+import NavBar from '../NavBar';
 import SearchBar from './SearchBar';
 
 import CardActions from '@mui/material/CardActions';
@@ -12,11 +12,10 @@ import LiveButton from '../Products/LiveButton';
 import LikeButton from '../Products/LikeButton';
 
 
-function SearchProductAll() {
+function SearchProductTag() {
     const [searchData, setSearchData] = useState([]);
     const [oksearch, setOkSearch] = useState(false);
     const params = useParams();
-    // console.log(params)
 
     const [keywords, setKeywords] = useState(
         JSON.parse(localStorage.getItem('keywords') || '[]'),
@@ -38,49 +37,25 @@ function SearchProductAll() {
     useEffect(() => {
         async function fetchData() {
             console.log(params)
-            let result1 = [];
+            let result = [];
             await axios({
                 url: '/api/product/tag',
                 method: 'get',
                 params: { tag: params.title },
               })
                 .then(res => {
-                  result1 = res.data
+                  result = res.data
                 })
                 .catch(err => {
                 })
 
-            const result2 = await axios.get(
-                `/api/product`,
-                {
-                    params: {
-                        title: params.title
-                    }
-                }
-            );
-            let result = null;
-            if (result1) {
-                if (result2.data) {
-                    result = result2.data.concat(result1)
-                } else {
-                    result = result1
-                }
-            } else {
-                result = result2.data
-            }
-            console.log(result)
+
             if (result.length > 0) {
                 setSearchData(result.reverse())
                 setOkSearch(true)
-            } else {
-                const allData = await axios.get(`/api/product`);
-                setSearchData(allData.data.reverse())
             }
         }
         fetchData();
-
-
-
     }, []);
 
     const ShowProducts = () => {
@@ -148,7 +123,7 @@ function SearchProductAll() {
     const NoSearchItem = () => {
         return (
             <div style={{ textAlign: 'center' }}>
-                <h5>검색결과가 없습니다</h5>
+                <h5><label className="tagbox">#{params.title}</label> 태그로 검색된 결과가 없습니다</h5>
             </div>
         )
     }
@@ -169,4 +144,4 @@ function SearchProductAll() {
     )
 }
 
-export default SearchProductAll
+export default SearchProductTag

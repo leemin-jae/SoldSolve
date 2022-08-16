@@ -50,8 +50,11 @@ function Login() {
         getMyInfo()
       })
       .catch(err => {
-        // console.error(err.response.data)
-        alert("아이디와 비밀번호를 확인해주세요")
+        if (err.response.status === 403) {
+          alert("이용이 제한된 계정입니다.")
+        } else {
+          alert("아이디와 비밀번호를 확인해주세요")
+        }
       })
   }
   function getMyInfo(){

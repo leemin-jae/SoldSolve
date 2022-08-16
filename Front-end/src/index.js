@@ -29,7 +29,7 @@ import Products from './components/Products/Products';
 import MyProducts from './components/Products/MyProducts';
 import SearchProduct from './components/Search/SearchProduct';
 import SearchProductAll from './components/Search/SearchProductAll';
-
+import SearchProductTag from './components/Search/SearchProductTag'
 
 let persistor = persistStore(store);
 
@@ -57,6 +57,7 @@ root.render(
             <Route path='/createproduct' element={<CreateProduct />}></Route>
             <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
             <Route path='/search/:category/:title' element={<SearchProduct />}></Route>
+            <Route path='/search/tag/:title' element={<SearchProductTag />}></Route>
             <Route path='/search/:title' element={<SearchProductAll />}></Route>
             <Route path='/chatroom/:id' element={<ChatRoom />}></Route>
             <Route path='/mypage/products' element={<MyProducts />}></Route>

@@ -57,6 +57,20 @@ public class User {
 	@OneToMany(orphanRemoval = true, mappedBy = "reviewId")
 	@JsonIgnore
 	List<Review> reviews = new ArrayList<>();
+//////////////////////////////////////////////////////////////////////////////////////////
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Offer> offers = new ArrayList<>();
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Deal> deals = new ArrayList<>();
+
+	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Wish> wishes = new ArrayList<>();
+
 
 	@Builder
 	public User(String userid, String password, String username, String nickname, String email, String role, String profileUrl, Timestamp createDate, List<Message> messages) {

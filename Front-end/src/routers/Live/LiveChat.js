@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from 'react-redux'
 import OfferBuyerModal from "../../components/Modals/OfferBuyerModal";
 import OfferSellerModal from "../../components/Modals/OfferSellerModal";
+import LiveNowUser from "../../components/Modals/LiveNowUser";
 
 const LiveChat = (props) => {
   const [messageList, setMessageList] = useState([]);
   const [message, setMessage] = useState("");
   let store = useSelector((state) => { return state })
+  const [nowUserModal,setNowUserModal] = useState(false);
 
   const handleChange = (event) => {
     setMessage(event.target.value);
@@ -63,6 +65,15 @@ const LiveChat = (props) => {
     setMessage("");
   };
 
+  function openNowUserModal(){
+    setNowUserModal(true)
+  }
+
+  function closeNowUserModal(){
+    setNowUserModal(false)
+  }
+
+
   const OfferBuyer = () => {
     const [buyofferModalOpen, setBuyOfferModalOpen] = useState(false);
 
@@ -76,7 +87,7 @@ const LiveChat = (props) => {
 
     return (
       <>
-        <button className="offerButton" onClick={openBuyOfferModal}>가격제안</button>
+        <button className="offerButton" style={{ marginRight:'1rem' }} onClick={openBuyOfferModal}>가격제안</button>
         <OfferBuyerModal open={buyofferModalOpen} close={closeBuyOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
       </>
     )
@@ -96,7 +107,7 @@ const LiveChat = (props) => {
 
     return (
       <>
-        <button className="offerButton"  onClick={openSellOfferModal}>제안목록</button>
+        <button className="offerButton" style={{ marginRight:'1rem' }}  onClick={openSellOfferModal}>제안목록</button>
         <OfferSellerModal open={sellofferModalOpen} close={closeSellOfferModal} header={'가격 제안 목록'} productid={props.props.productID} />
       </>
     )
@@ -112,7 +123,11 @@ const LiveChat = (props) => {
         display: 'flex', justifyContent: 'space-between'
       }}>
         <div><h5 style={{ marginInline: '1rem' }}>채팅방</h5></div>
-        <div>{store.info.info.userId === props.props.sellerInfo.userid ? <OfferSeller /> : <OfferBuyer />}</div>
+        <div>
+        <button className="offerButton" onClick={openNowUserModal}>접속인원</button>
+        <LiveNowUser open={nowUserModal} close={closeNowUserModal} header={props.props.mySessionId} />
+          {store.info.info.userId === props.props.sellerInfo.userid ? <OfferSeller /> : <OfferBuyer />}
+        </div>
       </div>
       <div className='chatbox'>
         <div className=''>

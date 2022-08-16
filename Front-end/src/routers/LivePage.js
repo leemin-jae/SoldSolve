@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import LiveChat from './Live/LiveChat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash, faArrowRightFromBracket, faRepeat } from '@fortawesome/free-solid-svg-icons'
+import { LinearProgress, Stack } from '@mui/material';
+
 
 const OPENVIDU_SERVER_URL = 'https://i7c110.p.ssafy.io:8443';
 const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
@@ -35,7 +37,8 @@ class LivePage extends Component {
             RoomContent: res.data.content,
             productID: res.data.product.no,
             nowCamera: true,
-            nowVoice: true
+            nowVoice: true,
+            loading: false,
           })
         }
       })
@@ -47,6 +50,7 @@ class LivePage extends Component {
 
 
     this.state = {
+      loading: false,
       myId: props.storeInfo.userId,
       params: params,
       mySessionId: params[3],
@@ -64,7 +68,6 @@ class LivePage extends Component {
 
     this.joinSession = this.joinSession.bind(this);
     this.leaveSession = this.leaveSession.bind(this);
-    this.switchCamera = this.switchCamera.bind(this);
     this.handleChangeSessionId = this.handleChangeSessionId.bind(this);
     this.handleChangeUserName = this.handleChangeUserName.bind(this);
     this.handleMainVideoStream = this.handleMainVideoStream.bind(this);
@@ -203,6 +206,9 @@ class LivePage extends Component {
                 });
 
               }
+              this.setState({
+                loading: true,
+              })
             })
             .catch((error) => {
               console.log('There was an error connecting to the session:', error.code, error.message);
@@ -231,37 +237,7 @@ class LivePage extends Component {
     });
   }
 
-
-
-  async switchCamera() {
-    try {
-      const devices = await this.OV.getDevices()
-      var videoDevices = devices.filter(device => device.kind === 'videoinput');
-      if (videoDevices && videoDevices.length > 1) {
-
-        var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
-        if (newVideoDevice.length > 0) {
-          var newPublisher = this.OV.initPublisher(undefined, {
-            videoSource: newVideoDevice[0].deviceId,
-            publishAudio: true,
-            publishVideo: true,
-            mirror: true
-          });
-
-          await this.state.session.unpublish(this.state.mainStreamManager)
-
-          await this.state.session.publish(newPublisher)
-          this.setState({
-            currentVideoDevice: newVideoDevice,
-            mainStreamManager: newPublisher,
-            publisher: newPublisher,
-          });
-        }
-      }
-    } catch (e) {
-    }
-  }
-
+  
 
   async CameraOff() {
     if (this.state.nowCamera) {
@@ -312,6 +288,16 @@ class LivePage extends Component {
     if (this.state.session === undefined) {
       this.joinSession()
     }
+    const Loading = () => {
+      return (
+        < >
+             <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+        <LinearProgress color="secondary" />
+      </Stack>
+        </>
+      );
+    };
+
     return (
       <div>
         <NavBar></NavBar>
@@ -328,7 +314,6 @@ class LivePage extends Component {
                   {this.state.params[2] === this.state.myId ?
                     <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
                       <div>
-                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.switchCamera} icon={faRepeat} size="1x" />
                         {this.state.nowCamera ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)' }} className='exiticon mx-3 iconsize' onClick={this.CameraOff} icon={faVideo} size="1x" /> :
                           <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} onClick={this.CameraOff} icon={faVideoSlash} size="1x" />}
                         {this.state.nowVoice ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)' }} className='exiticon mx-3 iconsize' onClick={this.VoiceOff} icon={faMicrophone} size="1x" /> :
@@ -347,7 +332,6 @@ class LivePage extends Component {
                         <UserVideoComponent className="livebox2" streamManager={this.state.subscribers[0]} />
                       </div>
                     )}
-
                   </div>
                   {this.state.sellerInfo ?
                     <>
@@ -356,6 +340,7 @@ class LivePage extends Component {
                         <div className='mx-2 d-flex flex-column'>
                           <p style={{ marginBottom: '0' }}>{this.state.sellerInfo.nickname} ({this.state.region})</p>
                           <p style={{ marginBottom: '0' }}>거래만족도{this.state.sellerInfo.score}점</p>
+                          
                         </div>
 
 

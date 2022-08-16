@@ -39,7 +39,6 @@ function Product() {
 
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
-  console.log(store)
 
   useEffect(() => {
     axios({
@@ -47,14 +46,10 @@ function Product() {
       method: 'get',
     })
       .then(res => {
-        console.log(res)
         setProductData(res.data)
-        console.log(res.data.user, '이름찾자')
         setYouNick(res.data.user.nickname)
-        console.log(youNick, '상대 닉넴')
         setUserId(res.data.user.userid)
         let money = res.data.price;
-        // console.log(money)
         money = Number(String(money).replaceAll(',', ''));
         const formatValue = money.toLocaleString('ko-KR');
         setMoney(formatValue)
@@ -93,7 +88,6 @@ function Product() {
     return (
       <>{
         recproducts.map((product) => {
-          console.log(product)
           let goDetail = '/product/' + product.no
           let mainImg = null;
           if (product.productImg.length > 0) {
@@ -217,7 +211,6 @@ function Product() {
     }
 
     function trySell(e, id) {
-      // console.log(getLoginForm)
       e.preventDefault()
       axios({
         url: '/api/deal',
@@ -260,7 +253,6 @@ function Product() {
   }
   function goLive(e) {
     e.preventDefault();
-    console.log(productData.user.userid)
     SessionCheck()
   }
 
@@ -273,7 +265,6 @@ function Product() {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          console.log(res.data, '방생성')
           navigate('/chatroom/' + res.data, {
             state:
             {
@@ -294,9 +285,7 @@ function Product() {
   }
   const imglist = []
   if (productData && productData.productImg.length > 0) {
-    console.log(1234)
     for (let i = 0; i < productData.productImg.length; i++) {
-      console.log(productData.productImg[i].path)
       imglist.push(<div id="slide-1"><img className='carousel_img' src={'https://i7c110.p.ssafy.io' + productData.productImg[i].path} alt=""></img></div>)
     }
   }
@@ -308,10 +297,11 @@ function Product() {
           Authorization: 'Basic ' + btoa('OPENVIDUAPP:' + OPENVIDU_SERVER_SECRET),
         },
       })
-      .then(() => {
+      .then((res) => {
         document.location.href = `/live/${productData.user.userid}/sell${productid}`
       })
-      .catch(() => {
+      .catch((err) => {
+        console.log(err)
         alert("아직 라이브방이 생성되지 않았습니다.")
       })
   }
@@ -323,7 +313,6 @@ function Product() {
       setTimeState(1)
       const selectTime = document.getElementById('LiveTime').value
 
-      console.log(selectTime)
       axios({
         url: `/api/product/time`,
         method: 'post',
@@ -354,7 +343,6 @@ function Product() {
     }
   }
 
-  console.log(productData)
   return (
     <>
       {load ?

@@ -22,7 +22,6 @@ export default function RequestedPrice(props) {
   const [page, setPage] = React.useState(0);
   const rowsPerPage = 5;
   const [rows, setRows] = React.useState([]);
-  const [youNick, setYouNick] = React.useState('')
 
 
   React.useEffect(() => {
@@ -50,25 +49,25 @@ export default function RequestedPrice(props) {
   };
 
   const createRoom = (row) => {
+    console.log(row)
     if (window.confirm("구매자와 연락하시겠습니까?")) {
-      setYouNick(row.user.nickname)
       axios({
-        url: '/api/room',
+        url: '/api/room/buy',
         method: 'post',
-        params: { seller: row.user.userid },
+        params: { buyer: row.user.userid },
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res.data, '방생성')
-          // navigate('/chatroom/' + res.data, { state: { 
-          //   roomId: res.data, 
-          //   me: store.info.info.nickName,
-          //   you: youNick,
-          //   yourId:"구매자아이디",
-          //   yourPk:"구매자pk",
-          //   myId: store.info.info.userId,
-          //   sellerid:store.info.info.nickName,
-          //  } })
+          navigate('/chatroom/' + res.data, { state: { 
+            roomId: res.data, 
+            me: store.info.info.nickName,
+            you: row.user.nickname,
+            yourId:row.user.userid,
+            yourPk:row.user.id,
+            myId: store.info.info.userId,
+            sellerid:store.info.info.userId,
+           } })
         })
         .catch(err => {
           console.log(err)

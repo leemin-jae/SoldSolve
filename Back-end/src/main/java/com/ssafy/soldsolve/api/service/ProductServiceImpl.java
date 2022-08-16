@@ -21,32 +21,29 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     ProductRepository productRepository;
     @Autowired
     ProductImgRepository productImgRepository;
-
     @Autowired
     FileService fileService;
-
     @Autowired
     RequestRepository requestRepository;
-
     @Autowired
     MessageService messageService;
-
     @Autowired
     WishRepository wishRepository;
-
     @Autowired
     LiveRepository liveRepository;
-
     @Autowired
     OfferRepository offerRepository;
-
     @Autowired
     DealRepository dealRepository;
+    @Autowired
+    TagRepository tagRepository;
+    @Autowired
+    TagProductRepository tagProductRepository;
+
 
     @Override
     public int registProduct(ProductPostReq product) {
@@ -59,6 +56,18 @@ public class ProductServiceImpl implements ProductService {
         User user = userRepository.findByUserid(product.getUserId());
         p.setUser(user);
 
+        for(String tag : product.getTag()){
+            Tag t = tagRepository.findByName(tag);
+            if(t == null){
+                t = new Tag();
+                t.setName(tag);
+                tagRepository.save(t).getId();
+            }
+            TagProduct tp = new TagProduct();
+            tp.setProduct(p);
+            tp.setTag(t);
+            tagProductRepository.save(tp);
+        }
         return productRepository.save(p).getNo();
     }
 
@@ -169,6 +178,23 @@ public class ProductServiceImpl implements ProductService {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
         return simpleDateFormat.format(p.getLiveTime());
+    }
+
+    @Override
+    public List<Product> searchTagProduct(String tag) {
+        Tag t = tagRepository.findByName(tag);
+        List<Product> productList = null;
+        if(t == null){
+            return null;
+        }else{
+            List<TagProduct> l = tagProductRepository.findByTag(t);
+            productList = new ArrayList<>();
+            for(TagProduct tp : l){
+                productList.add(tp.getProduct());
+            }
+        }
+
+        return productList;
     }
 
 

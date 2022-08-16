@@ -28,4 +28,6 @@ public interface ProductService {
     List<Product> getSellProduct(User user);
 
     String setLiveTime(Timestamp time, String no);
+
+    List<Product> searchTagProduct(String tag);
 }

@@ -65,8 +65,6 @@ public class ProductController {
     @GetMapping("")
     public ResponseEntity<?> listProduct(@RequestParam(required = false) String title, @RequestParam(required = false) String category, @RequestParam(required = false) String region) {
 
-
-
         try {
             List<Product> result=null;
             String t = title==null?"":title;
@@ -78,6 +76,27 @@ public class ProductController {
             }
 
             result = productService.searchProduct(t,c,r);
+
+            if(result==null) {
+                return new ResponseEntity<String>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);
+            }else if(result.size()==0) {
+                return new ResponseEntity<String>("조회된 내용이 없습니다.", HttpStatus.NO_CONTENT);
+            }else {
+                return new ResponseEntity<List<Product>>(result, HttpStatus.OK);
+            }
+
+        } catch (Exception e) {
+            return new ResponseEntity<String>("조회 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping("/tag")
+    public ResponseEntity<?> tagProductList(@RequestParam String tag) {
+
+        try {
+
+            List<Product> result = productService.searchTagProduct(tag);
 
             if(result==null) {
                 return new ResponseEntity<String>("잘못된 요청입니다.", HttpStatus.BAD_REQUEST);

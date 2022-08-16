@@ -396,7 +396,10 @@ function Product() {
                 <div style={{marginInline:'10px'}}>
                   {productData.tag.map((tag) => {
                     console.log(tag.name)
-                    return <label className="tagbox">#{tag.name}</label>
+                    function tagSearch(){
+                      document.location.href = `/search/` + tag.name;
+                    }
+                    return <label onClick={e=>tagSearch()} className="tagbox">#{tag.name}</label>
                   })}
                 </div>
                 <hr></hr>

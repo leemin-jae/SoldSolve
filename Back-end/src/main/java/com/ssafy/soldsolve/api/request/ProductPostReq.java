@@ -20,6 +20,7 @@ public class ProductPostReq {
 
 
     private String userId;
+    private List<String> tag;
 
 
 }

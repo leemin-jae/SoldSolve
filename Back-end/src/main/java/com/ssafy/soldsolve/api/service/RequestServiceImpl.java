@@ -37,6 +37,8 @@ public class RequestServiceImpl implements RequestService {
         Product requestedProduct = productRepository.findByNo(product);
         request.setProduct(requestedProduct);
         request.setUser(user);
+        request.setUserid(user.getUserid());
+        request.setNickname(user.getNickname());
         if (requestRepository.countByUserAndProduct(user, requestedProduct) == 0) {
             requestRepository.save(request);
         }

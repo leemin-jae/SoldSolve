@@ -47,7 +47,13 @@ public class Product {
     @JoinColumn(name = "user_pk")
     private User user;
 
-    @OneToMany(mappedBy = "userid", orphanRemoval = true)
-    List<User> requestsUser = new ArrayList<>();
+
+    /////////////////
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    List<Request> requestsUser = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    List<TagProduct> tag = new ArrayList<>();
 
 }

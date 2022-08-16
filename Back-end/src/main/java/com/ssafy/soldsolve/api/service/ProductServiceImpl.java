@@ -54,7 +54,6 @@ public class ProductServiceImpl implements ProductService {
         p.setCategory(product.getCategory());
         p.setContent(product.getContent());
         p.setPrice(product.getPrice());
-
         p.setRegion(product.getRegion());
         p.setTitle(product.getTitle());
         User user = userRepository.findByUserid(product.getUserId());
@@ -80,10 +79,6 @@ public class ProductServiceImpl implements ProductService {
             p.setPrice(product.getPrice());
             p.setRegion(product.getRegion());
             p.setTitle(product.getTitle());
-
-
-
-
             productRepository.save(p);
             return 1;
         }else{
@@ -135,12 +130,6 @@ public class ProductServiceImpl implements ProductService {
 
         p.setProductImg(productImgRepository.findByNo(p));
 
-        List<Request> r = requestRepository.findByProduct(p);
-        List<User> requestUser = new ArrayList<>();
-        for(Request now : r){
-            requestUser.add(now.getUser());
-        }
-        p.setRequestsUser(requestUser);
         return p;
     }
 

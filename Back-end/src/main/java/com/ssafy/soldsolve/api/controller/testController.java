@@ -138,4 +138,25 @@ public class testController {
 		return new ResponseEntity<Product>(p, HttpStatus.OK);
 
 	}
+
+
+
+	@PostMapping("/product")
+	public ResponseEntity<?> registProduct( @RequestPart("data") ProductPostReq product, Authentication authentication) {
+		SsafyUserDetails userDetails = (SsafyUserDetails)authentication.getDetails();
+		String userId = userDetails.getUsername();
+		product.setUserId(userId);
+
+		try {
+			int number = productService.registProduct(product);
+			return new ResponseEntity<Product>(productService.getProduct(Integer.toString(number)), HttpStatus.OK);
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<String>("등록 실패", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
 }

@@ -53,7 +53,7 @@ button {
   grid-template-columns: 9fr 3fr;
 }
 
-.history_container{
+.history_container {
   margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
@@ -257,7 +257,7 @@ input::placeholder {
 } */
 
 @media (max-width: 414px) {
-  .editBack{
+  .editBack {
     width: 28px;
     height: 28px;
     margin: 4px 2px 0 8px;
@@ -267,6 +267,7 @@ input::placeholder {
     cursor: pointer;
     position: relative;
   }
+
   .fullscreenbutton {
     position: absolute;
     z-index: 99;
@@ -376,7 +377,7 @@ input::placeholder {
 }
 
 @media (min-width: 414px) and (max-width: 767px) {
-  .editBack{
+  .editBack {
     width: 28px;
     height: 28px;
     margin: 4px 2px 0 8px;
@@ -386,6 +387,7 @@ input::placeholder {
     cursor: pointer;
     position: relative;
   }
+
   .livevolume {
     position: absolute;
     z-index: 99;
@@ -497,7 +499,7 @@ input::placeholder {
 }
 
 @media (min-width: 767px) and (max-width: 991px) {
-  .editBack{
+  .editBack {
     width: 28px;
     height: 28px;
     margin: 4px 2px 0 8px;
@@ -507,6 +509,7 @@ input::placeholder {
     cursor: pointer;
     position: relative;
   }
+
   .livevolume {
     position: absolute;
     z-index: 99;
@@ -602,7 +605,7 @@ input::placeholder {
 }
 
 @media (min-width: 991px) and (max-width: 1199px) {
-  .editBack{
+  .editBack {
     width: 28px;
     height: 28px;
     margin: 4px 2px 0 8px;
@@ -612,6 +615,7 @@ input::placeholder {
     cursor: pointer;
     position: relative;
   }
+
   .livevolume {
     position: absolute;
     z-index: 99;
@@ -712,7 +716,7 @@ input::placeholder {
 }
 
 @media (min-width: 1199px) {
-  .editBack{
+  .editBack {
     width: 28px;
     height: 28px;
     margin: 4px 2px 0 8px;
@@ -722,6 +726,7 @@ input::placeholder {
     cursor: pointer;
     position: relative;
   }
+
   .fullscreenbutton {
     position: absolute;
     z-index: 99;
@@ -1075,6 +1080,6 @@ input::placeholder {
   margin-inline: 2rem;
 }
 
-.signupWarning{
+.signupWarning {
   border: 2px solid rgba(250, 0, 0, 0.603);
 }

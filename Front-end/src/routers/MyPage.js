@@ -1,28 +1,25 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { getInfo } from '../store.js'
 import NavBar from '../components/NavBar'
 import Modal from '../components/Modals/Modal';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartArrowDown, faReceipt } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import './routers.css';
-import { useSelector, useDispatch } from 'react-redux'
-
-import { getInfo } from '../store.js'
-
+import './MyPage.css'
 import '../components/Products/products.css';
-
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
-
-import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import NoItem from '../components/NoItem';
+import SettingsIcon from '@mui/icons-material/Settings';
+import Accordion from 'react-bootstrap/Accordion';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton';
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -36,6 +33,15 @@ function MyPage() {
   const [sell, setSell] = useState([]);
   const [buy, setBuy] = useState([]);
 
+  function CustomToggle({ children, eventKey }) {
+    const decoratedOnClick = useAccordionButton(eventKey, () =>
+      console.log(eventKey),
+    );
+
+    return (
+      <SettingsIcon onClick={decoratedOnClick} style={{ position: 'absolute', left: 120, top: 2 }}></SettingsIcon>
+    );
+  }
 
   useEffect(() => {
     profileUpdate()
@@ -210,34 +216,27 @@ function MyPage() {
   function ProfileCard() {
 
     return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-
-      >
-        <Card sx={{ display: 'flex' }}>
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography component="div" variant="h5">
-                {profile.nickName}
-              </Typography>
-              <Typography variant="subtitle1" color="text.secondary" component="div">
-                <a href='/editaccount'><ManageAccountsIcon color="secondary" /></a>
-                <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
-                <label htmlFor="imgChange"><PhotoCameraIcon /></label>
-                <div><a style={{ textDecoration: 'none' }} href='/mypage/products'>내상품관리</a></div>
-              </Typography>
-            </CardContent>
-          </Box>
-          <CardMedia
-            component="img"
-            sx={{ width: 151 }}
-            image={'https://i7c110.p.ssafy.io' + profile.profileUrl}
-            alt="Live from space album cover"
-          />
-        </Card>
-      </Box>
+      <>
+        <div className="profileImgBox">
+          <img className="profile" src={'https://i7c110.p.ssafy.io' + profile.profileUrl} />
+        </div>
+        <Accordion eventKey="0">
+          <h3 style={{ margin: 15, position: 'relative', display: 'inline-block' }}>
+            {profile.nickName}
+            <CustomToggle eventKey="0" />
+            <Accordion.Collapse eventKey="0">
+              <Card.Body style={{ position: 'absolute', left: 86, zIndex: 99, top: 26, margin: 0, padding: 0, opacity: '100%' }}>
+                <div className='setting_list'>
+                  <a href='/editaccount' style={{ margin: '5px', color: 'black' }}><ManageAccountsIcon /></a>
+                  <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
+                  <label htmlFor="imgChange"><PhotoCameraIcon style={{}} /></label>
+                  <a style={{ textDecoration: 'none', margin: '5px', color: 'black' }} href='/mypage/products'><StorefrontIcon /></a>
+                </div>
+              </Card.Body>
+            </Accordion.Collapse>
+          </h3>
+        </Accordion>
+      </>
     );
   }
 
@@ -274,7 +273,7 @@ function MyPage() {
             let price = item.product.price
             const productPrice = price.toLocaleString('ko-KR');
             return (
-              <a href={`/product/${item.product.no}`} style={{ width: '120px',height:'150px', textAlign: 'center', margin:'5px' }}>
+              <a href={`/product/${item.product.no}`} style={{ width: '120px', height: '150px', textAlign: 'center', margin: '5px' }}>
                 <ImageListItem key={item.product.no}>
                   <img
                     src={`https://i7c110.p.ssafy.io${item.product.productImg[0].path}`}

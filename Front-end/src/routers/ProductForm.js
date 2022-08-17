@@ -40,6 +40,12 @@ function CreateProduct() {
           setCategory(res.data.category)
           setDescription(res.data.content)
 
+          const updateTag = []
+          for (let i=0; i<res.data.tag.length; i++){
+            updateTag.push(res.data.tag[i].name)
+          }
+          setTagKeyword(updateTag)
+
 
           const imgs2 = []
           for (let i = 0; i < res.data.productImg.length; i++) {
@@ -54,8 +60,6 @@ function CreateProduct() {
         })
     }
   }, [editMode])
-
-
 
   function inputForm(e) {
     if (e.target.name === 'articlename') { setArticleName(e.target.value) }
@@ -82,7 +86,7 @@ function CreateProduct() {
     if (category === '') { alert("상품 카테고리를 선택해주세요") }
     else if (articlename === '') { alert("제목을 입력해주세요") }
     else if (price === null) { alert("판매가격을 설정해주세요") }
-    else if (editMode === null || imgData === '') { alert("이미지를 등록해주세요") }
+    else if (editMode === undefined && imgData === '') { alert("이미지를 등록해주세요") }
     else if (description === '') { alert("상세 설명을 적어주세요") }
     else if (place === '') { alert("거래하는 지역을 입력해주세요") }
     else {

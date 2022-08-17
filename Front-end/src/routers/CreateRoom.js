@@ -17,9 +17,9 @@ function CreateRoom() {
   const [category, setCategory] = useState('');
   let submitButton = null;
   if (button === 'noInput') {
-    submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>SUBMIT</button>
+    submitButton = <button className="inputform submitbutton-disable" type="submit" disabled={true}>방 생성하기</button>
   } else if (button === 'input') {
-    submitButton = <button className="inputform submitbutton-able" type="submit">SUBMIT</button>
+    submitButton = <button className="inputform submitbutton-able" type="submit">방 생성하기</button>
   }
 
   useEffect(() => {

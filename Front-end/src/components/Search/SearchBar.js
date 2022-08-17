@@ -55,7 +55,8 @@ function SearchBar({ onAddKeyword }) {
     }
   }
   return (
-    <div className="test searchcontainer2">
+    <div style={{ marginBlock:'50px'}}>
+    <div className="testSearch d-flex justify-content-center">
         <Box className="searchbox"
           component="form"
           sx={{
@@ -89,10 +90,13 @@ function SearchBar({ onAddKeyword }) {
             variant="standard"
             color="secondary"
             onChange={event => setTitle(event.target.value)}
+            style = {{ width:'400px' }}
           />
           <button type="submit" onClick={handleSubmit}><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></button>
         </Box>
       </div>
+      <p className="test3333333" style={{ marginBottom:'0',textAlign:'center' }}>#을 붙여 태그검색이 가능합니다.</p>
+    </div>
   )
 }
 

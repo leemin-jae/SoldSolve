@@ -898,6 +898,11 @@ input::placeholder {
   align-items: center;
   min-width: 200px;
   position: relative;
+  padding-inline: 5%;
+}
+
+.test3333333{
+  color: rgb(196, 193, 193);
 }
 
 .searchcontainer {

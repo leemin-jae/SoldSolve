@@ -334,7 +334,7 @@ function Product() {
                     function tagSearch() {
                       document.location.href = `/search/tag/` + tag.name;
                     }
-                    return <label key={tag.id} onClick={e=>tagSearch()} className="tagbox">#{tag.name}</label>
+                    return <label key={tag.id} onClick={e=>tagSearch()} style={{ cursor:'pointer' }} className="tagbox">#{tag.name}</label>
                   })}
                 </div>
                 <hr></hr>
@@ -343,8 +343,8 @@ function Product() {
                   {store.info.info && store.info.info.userId === productData.user.userid ?
                     <div>
                       <div>
-                        <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
-                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
+                        <FontAwesomeIcon className='mx-3 iconsize' style={{ color: 'rgba(58, 153, 74, 0.918)', cursor:'pointer' }} size="lg" onClick={e => editProduct(e)} icon={faPenToSquare} />
+                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor:'pointer' }} size="lg" onClick={e => deleteProduct(e)} icon={faTrash} />
                       </div>
                     </div>
                     : null}

@@ -60,7 +60,7 @@ function NavBar() {
         <div className='navbarColor'>
         <nav className="navbar">
           <label className="category_toggle" htmlFor="category">
-            <FontAwesomeIcon className='icon' icon={faBars} size="2x" />
+            <FontAwesomeIcon style={{ cursor:'pointer'}} className='icon' icon={faBars} size="2x" />
           </label>
           <a className="navbar_logo2" href='/'><img src={logo} alt="#"></img></a>
           <ul className="screen_menu">
@@ -134,6 +134,7 @@ function NavBar() {
 
         <h3 style={{ textAlign: 'center', margin: '20px 0 0 0', color: '#6667ab' }}>Category</h3><hr />
         <ul>
+        <li><Link to={`/product`} state={{ category: "all" }}><h5>전체상품</h5></Link></li>
           <li><Link to={`/product`} state={{ category: "digital" }}><h5>디지털기기</h5></Link></li>
           <li><Link to={`/product`} state={{ category: "appliances" }}><h5><input id="category" type="checkbox"></input>생활가전</h5></Link></li>
           <li><Link to={`/product`} state={{ category: "furniture" }}><h5><input id="category" type="checkbox"></input>가구</h5></Link></li>

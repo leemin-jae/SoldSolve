@@ -14,7 +14,7 @@ import LikeButton from '../Products/LikeButton';
 import LiveButton from '../Products/LiveButton';
 
 function SearchProduct() {
-    const [searchData, setSearchData] = useState([]);
+    const [searchData, setSearchData] = useState(null);
     const [oksearch, setOkSearch] = useState(false);
     const params = useParams();
 
@@ -29,13 +29,10 @@ function SearchProduct() {
                     }
                 }
             );
-            if (result.data.length === 0) {
-                const allData = await axios.get(`/api/product`);
-                setSearchData(allData.data.reverse())
-            } else {
+            if (result.data) {
                 setSearchData(result.data.reverse())
-                setOkSearch(true)
             }
+            setOkSearch(true)
         }
         fetchData();
     }, []);
@@ -59,7 +56,7 @@ function SearchProduct() {
     const NoSearchItem = () => {
         return (
             <div style={{ textAlign: 'center' }}>
-                <h5>검색결과가 없습니다</h5>
+                <img src='https://i7c110.p.ssafy.io/images/profile/Noitem.png' alt='#' style={{ display:'block' ,width:'100%'}}></img>
             </div>
         )
     }
@@ -143,10 +140,12 @@ function SearchProduct() {
             </div>
             <SearchBar onAddKeyword={handleAddKeyword}></SearchBar>
             <div className='content'>
-                {oksearch ? <></> : <NoSearchItem />}
+            {oksearch ? 
                 <ul className='cards' id='maincontent'>
-                    {<ShowProducts />}
+                    { searchData ? <ShowProducts /> : <NoSearchItem></NoSearchItem>}
                 </ul>
+                : <div>로딩</div>
+                }
             </div>
         </>
     )

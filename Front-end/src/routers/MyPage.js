@@ -134,8 +134,9 @@ function MyPage() {
           let price = item.price
           const productPrice = price.toLocaleString('ko-KR');
 
-
-          return (
+          console.log(item.state)
+          if (item.state === 1){
+           return (
             <a href={`/product/${item.no}`} style={{ width: '125px', textAlign: 'center' }}>
               <ImageListItem key={item.no}>
                 <img
@@ -151,7 +152,9 @@ function MyPage() {
                 />
               </ImageListItem>
             </a>
-          )
+          ) 
+          }
+          
         })}
       </ImageList>
     );
@@ -250,7 +253,7 @@ function MyPage() {
           <div className='column'>
             <button className='dot' onClick={openBuyModal}>
               <FontAwesomeIcon className='icon' icon={faCartArrowDown} size="2x" />
-              <div>구매내역</div>
+              <div>구매완료 내역</div>
             </button>
             <Modal open={buyModalOpen} close={closeBuyModal} header="구매내역">
               {buy ? <BuyBox props={buy} /> : <NoItem />}
@@ -259,7 +262,7 @@ function MyPage() {
           <div className='column'>
             <button className='dot' onClick={openSellModal}>
               <FontAwesomeIcon className='icon' icon={faReceipt} size="2x" />
-              <div>판매내역</div>
+              <div>판매완료 내역</div>
             </button>
             <Modal open={sellModalOpen} close={closeSellModal} header="판매내역">
               {sell ? <SellBox props={sell} /> : <NoItem />}

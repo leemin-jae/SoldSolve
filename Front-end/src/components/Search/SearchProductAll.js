@@ -65,13 +65,16 @@ function SearchProductAll() {
             } else {
                 result = result2.data
             }
+
+            console.log(result)
             if (result.length > 0) {
                 setSearchData(result)
                 setOkSearch(true)
-            } else {
-                const allData = await axios.get(`/api/product`);
-                setSearchData(allData.data.reverse())
+            } else{
+                setSearchData(null)
+                setOkSearch(true)
             }
+            
         }
         fetchData();
 
@@ -144,11 +147,11 @@ function SearchProductAll() {
     const NoSearchItem = () => {
         return (
             <div style={{ textAlign: 'center' }}>
-                <h5>검색결과가 없습니다</h5>
+                <img src='https://i7c110.p.ssafy.io/images/profile/Noitem.png' alt='#' style={{ display:'block' ,width:'100%'}}></img>
             </div>
         )
     }
-
+    console.log(searchData)
     return (
         <>
             <div className='fixnav'>
@@ -156,10 +159,13 @@ function SearchProductAll() {
             </div>
             <SearchBar onAddKeyword={handleAddKeyword}></SearchBar>
             <div className='content'>
-                {oksearch ? <></> : <NoSearchItem />}
+                {oksearch ? 
                 <ul className='cards' id='maincontent'>
-                    {<ShowProducts />}
+                    { searchData ? <ShowProducts /> : <NoSearchItem></NoSearchItem>}
                 </ul>
+                : <div>로딩</div>
+                }
+                
             </div>
         </>
     )

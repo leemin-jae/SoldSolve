@@ -24,9 +24,12 @@ function Products() {
 
 
   const Title = () => {
-    if (location === 'digital') {
+    
+    if (location === 'all') {
+      setTitle('전체 상품')
+    } else if (location === 'digital') {
       setTitle('디지털기기')
-    } else if (location === 'appliances') {
+    }else if (location === 'appliances') {
       setTitle('생활가전')
     } else if (location === 'furniture') {
       setTitle('가구')
@@ -55,10 +58,15 @@ function Products() {
       setData(result.data.reverse());
       setLoading(false)
       let updatedList = null;
-      if (result.data && result.data.length > 0) {
+      if (location === 'all') {
+        setFilter(result.data);
+      } else{
+        if (result.data && result.data.length > 0) {
         updatedList = result.data.filter((x) => x.category === location)
       }
       setFilter(updatedList);
+      }
+      
     }
     fetchData();
     Title();

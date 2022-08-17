@@ -46,30 +46,56 @@ public class User {
 
 	private double score;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Message> messages = new ArrayList<>();
 
-	@OneToMany(orphanRemoval = true, mappedBy = "roomId")
+	@OneToMany(orphanRemoval = true, mappedBy = "roomId", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Room> roomList = new ArrayList<>();
 
-	@OneToMany(orphanRemoval = true, mappedBy = "reviewId")
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewId", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Review> reviews = new ArrayList<>();
 //////////////////////////////////////////////////////////////////////////////////////////
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Offer> offers = new ArrayList<>();
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Deal> deals = new ArrayList<>();
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Wish> wishes = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Request> requests= new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Product> products = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "buyer" , cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Room> room1 = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "seller" , cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Room> room2 = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewee", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Review> review1 = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewer", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Review> review2 = new ArrayList<>();
+
+
 
 
 	@Builder

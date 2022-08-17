@@ -20,7 +20,7 @@ const OfferSellerModal = (props) => {
           </div>
           <div className='offerMain'>
           <div className='offerTitle' style={{marginTop: -10}}>
-              <p className='titleText'>지금까지 제안된 가격입니다</p>
+              <p className='titleText' style={{marginLeft: -35}}>지금까지 제안된 가격입니다</p>
             </div>
           <div className='offerBox' style={{marginTop: 20, marginBottom: -20, display: 'flex', justifyContent: 'center', marginLeft: '-10%'}}>
       <RequestedPrice productid={productid} changedata={changedata}/>

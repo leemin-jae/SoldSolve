@@ -584,3 +584,11 @@ div#left_toggle ul li {
 .articles::-webkit-scrollbar-track {
   background: rgba(196, 217, 248, 0.1);
 }
+
+.navbarColor{
+  background-color: white;
+  border-radius: 20px 20px 0px 0px;
+}
+.navbarColor2{
+  background-color: #EAEAF6;
+}

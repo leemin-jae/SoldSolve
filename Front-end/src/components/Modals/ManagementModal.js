@@ -123,7 +123,7 @@ const ManagementModal = (props) => {
       })
         .then(res => {
           console.log(res)
-          document.getElementById(e.id).className = 'managementButton deleted'
+          document.getElementById(e.id).className = 'managementUser deleted'
         })
         .catch(err => {
           console.log(err)

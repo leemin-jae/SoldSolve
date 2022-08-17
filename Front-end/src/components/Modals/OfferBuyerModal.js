@@ -57,7 +57,7 @@ const OfferBuyerModal = (props) => {
 
           <div className='offerMain'>
             <div className='offerTitle' style={{marginTop: -10}}>
-              <p className='titleText'>원하는 가격을 제안해주세요!</p>
+              <p className='titleText' style={{marginLeft: -35}}>원하는 가격을 제안해주세요!</p>
             </div>
             
             <div className='offerBox' style={{marginTop: 20, marginBottom: -20, display: 'flex', justifyContent: 'center', marginLeft: '-10%'}}>

@@ -56,6 +56,8 @@ function NavBar() {
   return (
     <>
       {Token ? (
+        <div className='navbarColor2'>
+        <div className='navbarColor'>
         <nav className="navbar">
           <label className="category_toggle" htmlFor="category">
             <FontAwesomeIcon className='icon' icon={faBars} size="2x" />
@@ -90,9 +92,13 @@ function NavBar() {
             <label className="account_toggle" htmlFor="account">
               <FontAwesomeIcon className='icon' icon={faUser} size="2x" />
             </label>}
-
         </nav>
-      ) : <nav className="navbar">
+        </div>
+        </div>
+      ) : 
+      <div  className='navbarColor2'>
+      <div className='navbarColor'>
+        <nav className="navbar navbarColor">
         <label className="category_toggle" htmlFor="category">
           <FontAwesomeIcon className='icon' icon={faBars} size="2x" />
         </label>
@@ -111,7 +117,10 @@ function NavBar() {
           :
           null
         }
-      </nav>}
+      </nav>
+      </div>
+      </div>
+      }
 
       <input id="category" type="checkbox"></input>
       <div id="left_toggle">

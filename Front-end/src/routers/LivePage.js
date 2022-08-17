@@ -351,8 +351,8 @@ class LivePage extends Component {
                         <div className='infoList'>
                           <div className='score' style={{ marginTop: 10 }}>
                             {
-                              this.state.sellerInfo.score >= 40 ?
-                                <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '40px' }} /> : (this.state.sellerInfo.score >= 20 ?
+                              this.state.sellerInfo.score >=70 ?
+                                <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '40px' }} /> : (this.state.sellerInfo.score >= 30 ?
                                   <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '40px' }} /> :
                                   <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '40px' }} />)}
                             {/* <MoodIcon className='score_emotion' /> */}

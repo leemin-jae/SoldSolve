@@ -312,8 +312,8 @@ function Product() {
                 </div>
                 <div className='score' style={{ marginTop: '30px' }}>
                   {
-                    productData.user.score >= 40 ?
-                      <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '30px' }} /> : (productData.user.score >= 20 ?
+                    productData.user.score >= 70 ?
+                      <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '30px' }} /> : (productData.user.score >= 30 ?
                         <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '30px' }} /> :
                         <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '30px' }} />)}
                   {/* <MoodIcon className='score_emotion' /> */}

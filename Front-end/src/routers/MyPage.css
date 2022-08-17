@@ -19,4 +19,5 @@
   flex-direction: row;
   animation: fadeInDown 0.5s;
   align-items: center;
+  opacity: 1;
 }

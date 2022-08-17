@@ -118,12 +118,12 @@ const ManagementModal = (props) => {
     if (window.confirm(`정말로 ${e.userid}(${e.username})님의 계정을 삭제하시겠습니까?`)) {
       axios({
         url: '/admin/users/' + e.id,
-        method: 'patch',
+        method: 'delete',
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
           console.log(res)
-          document.getElementById(e.id).className = 'deleted'
+          document.getElementById(e.id).className = 'managementButton deleted'
         })
         .catch(err => {
           console.log(err)

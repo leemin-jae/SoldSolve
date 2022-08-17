@@ -264,13 +264,13 @@ div#left_toggle ul li {
 
 .noticeTab {
   margin: 1%;
-  height: 700px;
+  height: 400px;
   padding-inline: 0%;
   padding-block: 3%;
 }
 
 .articles {
-  height: 700px;
+  height: 600px;
   overflow-y: auto;
 }
 

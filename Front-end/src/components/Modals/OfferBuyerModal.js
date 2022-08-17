@@ -67,7 +67,7 @@ const OfferBuyerModal = (props) => {
           </div>
           <div className='offerBottom'>
           <form onSubmit={e => { Offer(e, money) }} className='d-flex align-items-center my-2 justify-content-between'>
-              <input className="offerInput" onChange={e => { inputMoney(e) }} type="number" placeholder="가격을 입력해주세요" value={money}></input>
+              <input className="offerInput" onChange={e => { inputMoney(e) }} type="text" placeholder="가격을 입력해주세요" value={money}></input>
             {submitButton}
             </form>
           </div>

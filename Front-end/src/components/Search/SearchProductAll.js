@@ -10,6 +10,7 @@ import ShareIcon from '@mui/icons-material/Share';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import LiveButton from '../Products/LiveButton';
 import LikeButton from '../Products/LikeButton';
+import { LinearProgress, Stack } from '@mui/material';
 
 
 function SearchProductAll() {
@@ -81,6 +82,16 @@ function SearchProductAll() {
 
 
     }, []);
+
+    const Loading = () => {
+        return (
+          <>
+            <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+              <LinearProgress color="secondary" />
+            </Stack>
+          </>
+        );
+      };
 
     const ShowProducts = () => {
         return (
@@ -163,7 +174,7 @@ function SearchProductAll() {
                 <ul className='cards' id='maincontent'>
                     { searchData ? <ShowProducts /> : <NoSearchItem></NoSearchItem>}
                 </ul>
-                : <div>로딩</div>
+                : <div><Loading /></div>
                 }
                 
             </div>

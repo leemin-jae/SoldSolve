@@ -17,9 +17,7 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import NoItem from '../components/NoItem';
 import SettingsIcon from '@mui/icons-material/Settings';
-import Accordion from 'react-bootstrap/Accordion';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
-import Card from 'react-bootstrap/Card';
 
 
 
@@ -32,16 +30,6 @@ function MyPage() {
   const [wish, setWish] = useState([]);
   const [sell, setSell] = useState([]);
   const [buy, setBuy] = useState([]);
-
-  function CustomToggle({ children, eventKey }) {
-    const decoratedOnClick = useAccordionButton(eventKey, () =>
-      console.log(eventKey),
-    );
-
-    return (
-      <SettingsIcon onClick={decoratedOnClick} style={{ position: 'absolute', left: 120, top: 2 }}></SettingsIcon>
-    );
-  }
 
   useEffect(() => {
     profileUpdate()
@@ -124,37 +112,73 @@ function MyPage() {
   console.log(sell)
   console.log(buy)
 
-  function SellBox(props) {
-    console.log(props.props)
+  function SellBox() {
+    const [data, setData] = useState([]);
+    const title = store.info.info.nickName;
+    let nTitle = null;
+    if (title.length > 8) {
+      nTitle = title.substr(0, 8) + "...";
+    } else {
+      nTitle = title
+    }
+
+    useEffect(() => {
+      async function fetchData() {
+        const result = await axios.get(
+          `/api/product/me`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.token}`
+            }
+          }
+        );
+        if (result.data.length > 0) {
+          setData(result.data.reverse());
+        }
+      }
+      fetchData();
+    }, []);
+    console.log(data, '123123123123')
     return (
       <ImageList sx={{ width: 280, height: 400, justifyContent: 'space-between', margin: 'auto' }} cols={2} rowHeight={150}>
-        {props.props.map((item) => {
-
+        {data.map((item) => {
 
           let price = item.price
           const productPrice = price.toLocaleString('ko-KR');
-
           console.log(item.state)
-          if (item.state === 1){
-           return (
+          return (
             <a href={`/product/${item.no}`} style={{ width: '125px', textAlign: 'center' }}>
-              <ImageListItem key={item.no}>
+              {item.state ? <ImageListItem key={item.no}>
                 <img
                   src={`https://i7c110.p.ssafy.io${item.productImg[0].path}`}
                   srcSet={`${item.productImg[0]}`}
                   alt={item.title}
                   loading="lazy"
-                  style={{ height: '150px', objectFit: 'fill' }}
+                  style={{ position: 'relative', height: '150px', objectFit: 'fill', opacity: '60%' }}
                 />
+                <h4 style={{ position: 'absolute', top: 60, left: 16, color: '#6667ab' }}>판매 완료</h4>
+
                 <ImageListItemBar
                   title={item.title}
                   subtitle={productPrice}
                 />
-              </ImageListItem>
+              </ImageListItem> :
+                <ImageListItem key={item.no}>
+                  <img
+                    src={`https://i7c110.p.ssafy.io${item.productImg[0].path}`}
+                    srcSet={`${item.productImg[0]}`}
+                    alt={item.title}
+                    loading="lazy"
+                    style={{ height: '150px', objectFit: 'fill' }}
+                  />
+                  <ImageListItemBar
+                    title={item.title}
+                    subtitle={productPrice}
+                  />
+                </ImageListItem>}
             </a>
-          ) 
-          }
-          
+          )
+
         })}
       </ImageList>
     );
@@ -223,22 +247,14 @@ function MyPage() {
         <div className="profileImgBox">
           <img className="profile" src={'https://i7c110.p.ssafy.io' + profile.profileUrl} />
         </div>
-        <Accordion eventKey="0">
-          <h3 style={{ margin: 15, position: 'relative', display: 'inline-block' }}>
-            {profile.nickName}
-            <CustomToggle eventKey="0" />
-            <Accordion.Collapse eventKey="0">
-              <Card.Body style={{ position: 'absolute', left: 86, zIndex: 99, top: 26, margin: 0, padding: 0, opacity: '100%' }}>
-                <div className='setting_list'>
-                  <a href='/editaccount' style={{ margin: '5px', color: 'black' }}><ManageAccountsIcon /></a>
-                  <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
-                  <label htmlFor="imgChange"><PhotoCameraIcon style={{}} /></label>
-                  <a style={{ textDecoration: 'none', margin: '5px', color: 'black' }} href='/mypage/products'><StorefrontIcon /></a>
-                </div>
-              </Card.Body>
-            </Accordion.Collapse>
-          </h3>
-        </Accordion>
+        <h3 style={{ margin: 15, position: 'relative', display: 'inline-block' }}>
+          {profile.nickName}
+          <div className='setting_list'>
+            <a href='/editaccount' style={{ margin: '5px', color: 'black' }}><ManageAccountsIcon /></a>
+            <input type="file" accept='image/*' onChange={e => imgupdate(e)} id="imgChange" hidden={true}></input>
+            <label htmlFor="imgChange"><PhotoCameraIcon /></label>
+          </div>
+        </h3>
       </>
     );
   }
@@ -253,7 +269,7 @@ function MyPage() {
           <div className='column'>
             <button className='dot' onClick={openBuyModal}>
               <FontAwesomeIcon className='icon' icon={faCartArrowDown} size="2x" />
-              <div>구매완료 내역</div>
+              <div>구매상품</div>
             </button>
             <Modal open={buyModalOpen} close={closeBuyModal} header="구매내역">
               {buy ? <BuyBox props={buy} /> : <NoItem />}
@@ -262,10 +278,10 @@ function MyPage() {
           <div className='column'>
             <button className='dot' onClick={openSellModal}>
               <FontAwesomeIcon className='icon' icon={faReceipt} size="2x" />
-              <div>판매완료 내역</div>
+              <div>판매상품</div>
             </button>
             <Modal open={sellModalOpen} close={closeSellModal} header="판매내역">
-              {sell ? <SellBox props={sell} /> : <NoItem />}
+              {sell ? <SellBox /> : <NoItem />}
             </Modal>
           </div>
         </div>

@@ -21,7 +21,7 @@ function ChatRoom() {
   const [message, setMessage] = useState('');
   const [dbChats, setDbChats] = useState()
   const [modalOpen, setModalOpen] = useState(false);
-  const [scoreMethod,setScoreMethod] = useState('post')
+  const [scoreMethod, setScoreMethod] = useState('post')
   const openModal = () => {
     setModalOpen(true);
   };
@@ -35,14 +35,14 @@ function ChatRoom() {
 
   function evaluationCheck() {
     axios({
-      url: '/api/reviews/check/'+state.yourPk,
+      url: '/api/reviews/check/' + state.yourPk,
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
       .then(res => {
         console.log(res.data)
         if (state.myId !== state.sellerid && res.data === true) {
-          if (window.confirm("이미 평가를 했던 유저입니다. 다시 평가하시겠습니까?")){
+          if (window.confirm("이미 평가를 했던 유저입니다. 다시 평가하시겠습니까?")) {
             setScoreMethod('patch')
             openModal()
           }
@@ -149,12 +149,12 @@ function ChatRoom() {
     throw err;
   };
   const scoreheader = {
-    you:state.you,
-    yourId:state.yourId,
-    seller : state.sellerid,
-    myId : state.myId,
+    you: state.you,
+    yourId: state.yourId,
+    seller: state.sellerid,
+    myId: state.myId,
     yourPk: state.yourPk,
-    scoreMethod:scoreMethod
+    scoreMethod: scoreMethod
   }
   console.log(message, chats)
   return (
@@ -191,9 +191,9 @@ function ChatRoom() {
           <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e => sendChatHandler(e)} />
         </form>
         {state.sellerid === state.myId ?
-         <button className='sellbutton' onClick={e=>scoreButton(e)}>이 사람에게 판매했습니다!</button>
-        :
-        <button className='sellbutton' onClick={e=>scoreButton(e)}>이 사람을 평가하고 싶어요!</button>}
+          <button className='sellbutton' onClick={e => scoreButton(e)}>이 사람에게 판매했습니다!</button>
+          :
+          <button className='sellbutton' onClick={e => scoreButton(e)}>이 사람을 평가하고 싶어요!</button>}
       </div>
       <ScoreModal open={modalOpen} close={closeModal} header={scoreheader}></ScoreModal>
     </div >

@@ -8,13 +8,27 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { LinearProgress, Stack } from '@mui/material';
 
 function Chat() {
   const [roomOut, setRoomOut] = useState(false)
   const [roomList, setRoomList] = useState([])
+  const [loading, setLoading] = useState(false);
+
+  const Loading = () => {
+    return (
+      < >
+        <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+          <LinearProgress color="secondary" />
+        </Stack>
+      </>
+    );
+  };
+
   let store = useSelector((state) => { return state })
   let navigate = useNavigate()
   useEffect(() => {
+    setLoading(true)
     const getRoomList = () => {
       axios({
         url: '/api/room',
@@ -22,7 +36,10 @@ function Chat() {
         headers: { Authorization: `Bearer ${localStorage.token}` }
       })
         .then(res => {
-          setRoomList(res.data)
+          console.log(res.data, '방')
+          setRoomList(res.data.reverse())
+          setLoading(false)
+
         })
         .catch(err => {
           console.log(err)
@@ -180,7 +197,7 @@ function Chat() {
     <>
       <h2 style={{ textAlign: 'center', marginTop: '40px' }}>{store.info.info.userId}의 채팅방</h2>
       <ul style={{ padding: '0' }}>
-        {<ShowChat />}
+        {loading ? <Loading /> : <ShowChat />}
       </ul>
     </>
   );

@@ -44,7 +44,7 @@ function PopSearch() {
                                     return (
                                         <SwiperSlide key={pop.popId} >
                                             <div>
-                                                <a href={`/search/${pop.title}`} style={{ textDecoration: 'none', textAlign: 'center' }}><h1 style={{ color: '#6667AB', fontSize: 50 }}>{pop.title}</h1></a>
+                                                <a href={`/search/${pop.title}`} style={{ textDecoration: 'none', textAlign: 'center' }}><h1 className='keywordTitle' style={{ color: '#6667AB',fontSize:30 }}>{pop.title}</h1></a>
                                             </div>
                                         </SwiperSlide>
                                     );

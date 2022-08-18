@@ -1089,11 +1089,11 @@ input::placeholder {
 }
 
 .slides::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 .slides::-webkit-scrollbar-thumb {
-  height: 30%;
+  height: 20%;
   background: #6667abad;
   border-radius: 10px;
 }
@@ -1126,7 +1126,7 @@ input::placeholder {
   border: 1px solid #EAEAF6;
   margin-top: 30px;
   border-radius: 20px;
-  height: 100px;
+  height: 80px;
   width: 300px;
 }
 .PopularsearchTitle{

@@ -1,74 +1,191 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from "react"
 // import ChatRoom from '../Modals/ChatRoom'
 // import { useNavigate } from 'react-router-dom';
-import ModalChat from '../Modals/ModalChat';
 import '../components.css'
-
+import axios from 'axios';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { LinearProgress, Stack } from '@mui/material';
 
 function Chat() {
-  const [buyerName, setBuyerName] = useState('')
+  const [roomOut, setRoomOut] = useState(false)
+  const [roomList, setRoomList] = useState([])
+  const [loading, setLoading] = useState(false);
+
+  const Loading = () => {
+    return (
+      < >
+        <Stack sx={{ width: '100%', color: 'grey.500' }} spacing={2}>
+          <LinearProgress color="secondary" />
+        </Stack>
+      </>
+    );
+  };
+
+  let store = useSelector((state) => { return state })
+  let navigate = useNavigate()
+  useEffect(() => {
+    setLoading(true)
+    const getRoomList = () => {
+      axios({
+        url: '/api/room',
+        method: 'get',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
+      })
+        .then(res => {
+          console.log(res.data, '방')
+          setRoomList(res.data.reverse())
+          setLoading(false)
+
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+    getRoomList()
+  }, [roomOut])
 
   // let navigate = useNavigate()
-  const [modalOpen, setModalOpen] = useState(false);
 
-  const openModal = (buyerName) => {
-    // console.log(e)
-    setBuyerName(buyerName)
-    setModalOpen(true);
-    // console.log(buyerName)
+  const exitRoom = (you, me) => {
+    let exitRoomId = null
+    roomList.map((room) => {
 
-  };
-  const closeModal = () => {
-    setModalOpen(false);
-    console.log(modalOpen)
+      if (room.buyer.nickname === you && room.seller.nickname === me) {
+        exitRoomId = room.roomId
+      } else if (room.buyer.nickname === me && room.seller.nickname === you) {
+        exitRoomId = room.roomId
+      }
+    })
+    if (window.confirm("대화방을 나가시겠습니까?")) {
+      axios({
+        url: `/api/room/${exitRoomId}`,
+        method: 'delete',
+        headers: { Authorization: `Bearer ${localStorage.token}` }
 
-  };
-
-
-  const data = [
-    { id: 1, buyer: 'buyer 1', thumbnail: 'https://images.mypetlife.co.kr/content/uploads/2019/09/09152804/ricky-kharawala-adK3Vu70DEQ-unsplash.jpg', text: '안녕하세유', time: '22/08/03 pm 09:56' },
-    { id: 2, buyer: 'buyer 2', thumbnail: 'https://post-phinf.pstatic.net/MjAyMDAyMjJfMSAg/MDAxNTgyMzY1NzE3MzEw.GsKJMsvSf2CnkhZQ4eTSGD8m3DS5QLUJNKPs3P97vW0g.ca3xreRCcA2dmsA73cDuVU8c15vaQaPbjANR-ykoYDog.JPEG/%ED%96%84%EC%8A%A4%ED%84%B05.jpg?type=w1200', text: '가나다라', time: '22/08/03 pm 09:56' },
-    { id: 3, buyer: 'buyer 3', thumbnail: 'https://pds.joongang.co.kr/news/FbMetaImage/202203/96548fe5-a590-41ea-9233-262ee6774a4f.png', text: '반갑습니다', time: '22/08/03 pm 09:56' },
-    { id: 4, buyer: 'buyer 4', thumbnail: 'https://img.seoul.co.kr/img/upload/2021/05/03/SSI_20210503113234_O2.jpg', text: '하이하이', time: '22/08/03 pm 09:56' },
-    { id: 5, buyer: 'buyer 5', thumbnail: 'https://blog.kakaocdn.net/dn/5hzaw/btqDqiXDHo6/gtyyKVxoQbDgzJuzMMzDYk/img.jpg', text: '졸립니다', time: '22/08/03 pm 09:56' },
-  ]
-  const [roomLists] = useState(data)
-  const [userName] = useState('hoho')
-
+      })
+        .then(res => {
+          setRoomOut(!roomOut)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
+  }
   const ShowChat = () => {
     // filterProduct("women's clothing")
-    console.log(buyerName)
     return (
       <>
-        {roomLists.map((roomList) => {
-          return (
-            <li className='chat_room' key={roomList.id} style={{ cursor: 'pointer' }} >
-              <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
-                // setBuyerName()
-                openModal(roomList.buyer)
-              }}>
-                <div className="profile_box" style={{ background: '#BDBDBD' }}>
-                  <img className="profile_img" src={roomList.thumbnail} alt='profileImg' />
-                </div>
+        {roomList.map((room, idx) => {
+          let you = null;
+          let yourImg = null;
+          let me = null;
+          let yourId = null;
+          let myId = null;
+          let yourPk = null;
 
-                <div>
-                  <h6 className='profile_text'>{roomList.buyer}</h6><br />
-                  <div className='profile_text'>{roomList.text}</div>
-                </div>
-              </div>
-              <div>
-                <div className='message_info'>
-                  <p className='message_time'>{roomList.time}</p>
-                  <div className='unread_message'>
-                    <p>2</p>
+          if (store.info.info.userId === room.buyer.userid) {
+            you = room.seller.nickname
+            yourImg = room.seller.profileUrl
+            me = room.buyer.nickname
+            yourId = room.seller.userid
+            yourPk = room.seller.id
+            myId = room.buyer.userid
+          } else {
+            you = room.buyer.nickname
+            yourImg = room.buyer.profileUrl
+            me = room.seller.nickname
+            yourId = room.buyer.userid
+            myId = room.seller.userid
+            yourPk = room.buyer.id
+          }
+          if (room.buyerOut === 1 || room.sellerOut === 1) {
+            return (
+              <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
+                <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
+                  navigate('/chatroom/' + room.roomId, { state: { roomId: room.roomId, me: me, you: you, yourId: yourId, myId: myId, sellerid: room.seller.userid, yourPk: yourPk } })
+                }}>
+                  <div className="profile_box" style={{ background: '#BDBDBD' }}>
+                    <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
+                  </div>
+
+                  <div>
+                    <h6 className='profile_text'>{you}</h6><br />
+                    <div className='profile_text'>상대방이 대화방을 나갔습니다</div>
                   </div>
                 </div>
-              </div>
-              <ModalChat open={modalOpen} close={closeModal} header={buyerName}>
-              </ModalChat>
-            </li>
-          );
+                <div>
+                  <div className='message_info'>
+                    {/* <p className='message_time'>{room.time}</p> */}
+                    <div style={{ display: 'flex' }}>
+                      <div className='unread_message'>
+                        <p>!</p>
+                      </div>
+                      <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
+
+                      {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
+                    </div>
+                  </div>
+                </div>
+              </span>
+            );
+          } else if (room.buyerOut === 0 && room.sellerOut === 0) {
+            return (
+              <span className='chat_room' key={idx} style={{ cursor: 'pointer' }} >
+                <div style={{ display: 'flex', alignItems: 'center' }} onClick={() => {
+                  navigate('/chatroom/' + room.roomId, {
+                    state:
+                    {
+                      roomId: room.roomId,
+                      me: me,
+                      you: you,
+                      yourId: yourId,
+                      myId: myId,
+                      sellerid: room.seller.userid,
+                      yourPk: yourPk
+                    }
+                  })
+                }}>
+                  <div className="profile_box" style={{ background: '#BDBDBD' }}>
+                    <img className="profile_img" src={'https://i7c110.p.ssafy.io' + yourImg} alt='profileImg' />
+                  </div>
+
+                  <div>
+                    <h6 className='profile_text'>{you}</h6><br />
+                    <div className='profile_text'>{room.lastMessage}.</div>
+                  </div>
+                </div>
+                <div>
+                  {room.isRead === 1 ? <div className='message_info'>
+                    {/* <p className='message_time'>{room.time}</p> */}
+                    <div style={{ display: 'flex' }}>
+                      <div className='unread_message'>
+                        <p>!</p>
+                      </div>
+                      <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
+                      {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
+                    </div>
+                  </div>
+                    :
+                    <div className='message_info'>
+                      {/* <p className='message_time'>{room.time}</p> */}
+                      <div style={{ display: 'flex' }}>
+                        {/* <div className='unread_message'> */}
+                        {/* <p></p> */}
+                        {/* </div> */}
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} style={{ cursor: 'pointer', width: '27px', height: '27px', marginLeft: '10px', color: '#6667AB' }} onClick={() => { exitRoom(you, me) }} />
+                        {/* <button className='submitbutton-able' style={{ borderRadius: '10px', marginLeft: '7px' }} onClick={() => { exitRoom(you, me) }}>방 나가기</button> */}
+                      </div>
+                    </div>
+                  }
+
+                </div>
+              </span>)
+          }
+
         })}
       </>
     );
@@ -78,9 +195,9 @@ function Chat() {
 
   return (
     <>
-      <h2 style={{ textAlign: 'center', marginTop: '40px' }}>{userName}의 채팅방</h2>
+      <h2 style={{ textAlign: 'center', marginTop: '40px' }}>{store.info.info.userId}의 채팅방</h2>
       <ul style={{ padding: '0' }}>
-        {<ShowChat />}
+        {loading ? <Loading /> : <ShowChat />}
       </ul>
     </>
   );

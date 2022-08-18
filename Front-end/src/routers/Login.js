@@ -2,7 +2,7 @@ import NavBar from "../components/NavBar"
 import { useState } from 'react'
 import axios from "axios"
 import { useDispatch } from 'react-redux'
-import { getToken,getInfo } from '../store.js'
+import { getToken, getInfo } from '../store.js'
 
 // import url from '../api/api.js'
 
@@ -37,7 +37,7 @@ function Login() {
   // console.log(url.login)
 
   function tryLogin(getLoginForm) {
-    console.log(getLoginForm)
+    // console.log(getLoginForm)
     axios({
       url: '/api/auth/login',
       method: 'post',
@@ -50,23 +50,27 @@ function Login() {
         getMyInfo()
       })
       .catch(err => {
-        console.error(err.response.data)
+        if (err.response.status === 403) {
+          alert("이용이 제한된 계정입니다.")
+        } else {
+          alert("아이디와 비밀번호를 확인해주세요")
+        }
       })
   }
-  function getMyInfo(){
+  function getMyInfo() {
     axios({
       url: '/api/users/me',
       method: 'get',
       headers: { Authorization: `Bearer ${localStorage.token}` }
     })
-    .then(res => {
-      console.log(res)
-      dispatch(getInfo(res.data))
-      window.location.href='/'
-    })
-    .catch(err => {
-      console.error(err)
-    })
+      .then(res => {
+        console.log(res)
+        dispatch(getInfo(res.data))
+        window.location.href = '/'
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
   function submitLogin(e) {
     e.preventDefault()
@@ -79,7 +83,7 @@ function Login() {
       <div>
         <div className="test">
           <div className="test3">
-            <h1 className="my-5">LOGIN</h1>
+            <h1 className="my-5">로그인</h1>
             <form onSubmit={e => { submitLogin(e) }}>
               <input className="inputform" onChange={e => { inputId(e) }} type="text" placeholder="ID"></input><br />
               <input className="inputform" onChange={e => { inputPw(e) }} type="password" placeholder="PASSWORD"></input><br />

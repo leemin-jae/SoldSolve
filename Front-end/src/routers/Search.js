@@ -1,96 +1,144 @@
-
-import NativeSelect from "@mui/material/NativeSelect";
-import FormControl from "@mui/material/FormControl";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
 import NavBar from "../components/NavBar";
 import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import SearchBar from "../components/Search/SearchBar";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 function Search() {
-  const [category, setCategory] = useState("")
-  const [title, setTitle] = useState("")
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(category)
-    if (category === '' && title !== '') {
-      document.location.href = `/` + title;
-    } else if (title === ''){
-      alert("검색어를 입력해주세요")
-    } else {
-      document.location.href = `/` + category + `/` + title;
+  const [pops, setPops] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get(
+        `/api/pop`
+      );
+      // console.log(result.data)
+      setPops(result.data.slice(0, 5))
+      // setLoading(false)
     }
+    fetchData();
+  }, []);
+
+  const [keywords, setKeywords] = useState(
+    JSON.parse(localStorage.getItem('keywords') || '[]'),
+  )
+
+  useEffect(() => {
+    localStorage.setItem('keywords', JSON.stringify(keywords))
+  }, [keywords])
+
+  const handleAddKeyword = (text) => {
+    console.log('text', text)
+    const newKeyword = {
+      id: Date.now(),
+      text: text,
+    }
+    setKeywords([newKeyword, ...keywords])
+  }
+
+  const handleRemoveKeyword = (id) => {
+    const nextKeyword = keywords.filter((thisKeyword) => {
+      return thisKeyword.id !== id
+    })
+    setKeywords(nextKeyword)
+  }
+
+  function History({ keywords, onRemoveKeyword }) {
+    console.log('keyword', keywords)
+    if (keywords.length === 0) {
+      return <div>최근 검색된 기록이 없습니다.</div>
+    }
+
+    return (
+      <Swiper
+        spaceBetween={0}
+        // centeredSlides={true}
+        breakpoints={{
+          1200: {
+            slidesPerView: 5,
+          },
+          991: {
+            slidesPerView: 5,
+          },
+          767: {
+            slidesPerView: 3,
+          },
+          300: {
+            slidesPerView: 3,
+          }
+          
+        }}
+        style={{ width: 600 }}
+      >
+        {keywords.map(({ id, text }) => {
+          return (
+            <SwiperSlide key={id} style={{ display: 'flex', justifyContent: 'center' }}>
+              <div style={{ textAlign: 'center', display: 'flex' }}>
+                <a href={`/search/${text}`} style={{ textDecoration: 'none' }}><Chip label={text} style={{ width: '80px', backgroundColor: '#DBDBFF' }} /></a>
+                <button
+                  onClick={() => {
+                    onRemoveKeyword(id)
+                  }}
+                >
+                  X
+                </button>
+              </div>
+            </SwiperSlide>
+          )
+        })}
+      </Swiper>
+    )
   }
 
   return (
     <>
-    <NavBar />
-    <div className="test searchcontainer2">
-      <Box className="searchbox"
-          component="form"
-          sx={{
-              '& .MuiTextField-root': { m: 1 },
-          }}
-          noValidate
-          autoComplete="off"
-      >
-      <FormControl sx={{ m: 1, minWidth: 100 }}>
-          <NativeSelect
-              defaultValue={"none"}
-              color="secondary"
-              onChange={event => setCategory(event.target.value)}
-          >
-              <option value={"all"}>카테고리</option>
-              <option value={"digital"}>디지털기기</option>
-              <option value={"appliances"}>생활가전</option>
-              <option value={"furniture"}>가구</option>
-              <option value={"fashion"}>패션/잡화</option>
-              <option value={"beauty"}>뷰티/미용</option>
-              <option value={"sports"}>스포츠</option>
-              <option value={"games"}>취미/게임</option>
-              <option value={"book"}>도서</option>
-              <option value={"etc"}>기타</option>
-          </NativeSelect>
-      	</FormControl>
-          <TextField
-            	id="standard-search"
-              type="search"
-              variant="standard"
-              color="secondary"
-              onChange={event => setTitle(event.target.value)}
-          />
-          <button type="submit" onClick={handleSubmit}><FontAwesomeIcon className='icon' icon={faMagnifyingGlass} size="2x" /></button>
-      </Box>
-      </div>
+      <NavBar />
+      <SearchBar onAddKeyword={handleAddKeyword}></SearchBar>
       <div className="searchcontainer">
         <h5>최근 검색어</h5>
-        </div>
-        <div className="searchcontainer2">
-        <Box>
-        <Stack direction="row" spacing={1}>
-            <a href="/#"><Chip label="Extra Soft" /></a>
-            <a href="/#"><Chip label="Soft" /></a>
-            <a href="/#"><Chip label="Medium" /></a>
-            <a href="/#"><Chip label="Hard" /></a>
-            </Stack>
-        </Box>
+      </div>
+      <div className="searchcontainer2">
+        <History
+          keywords={keywords}
+          onRemoveKeyword={handleRemoveKeyword}
+        />
       </div>
       <div className="searchcontainer">
         <h5>인기 검색어</h5>
-        </div>
-        <div className="searchcontainer2">
-        <Box>
-        <Stack spacing={1} className="searchbox">
-            <a href="/#"><Chip label="Extra Soft" /></a>
-            <a href="/#"><Chip label="Soft" /></a>
-            <a href="/#"><Chip label="Medium" /></a>
-            <a href="/#"><Chip label="Hard" /></a>
-            </Stack>
-        </Box>
+      </div>
+      <div className="searchcontainer3">
+        <Swiper
+          spaceBetween={0}
+          // centeredSlides={true}
+          breakpoints={{
+            1200: {
+              slidesPerView: 5,
+            },
+            991: {
+              slidesPerView: 5,
+            },
+            767: {
+              slidesPerView: 3,
+            },
+            300: {
+              slidesPerView: 3,
+            }
+          }}
+          style={{ width: 600 }}
+        >
+          {pops.length > 0 ?
+            <>
+              {pops.map((pop) => {
+                console.log(pop)
+                return (
+                  <SwiperSlide key={pop.popId} style={{ display: 'flex', justifyContent: 'center' }} >
+                    <a href={`/search/${pop.title}`} style={{ textDecoration: 'none' }}><Chip label={pop.title} style={{ width: '80px', backgroundColor: '#DBDBFF' }} /></a>
+                  </SwiperSlide>
+                );
+              })}
+            </>
+            : null}
+        </Swiper>
       </div>
       <div className="searchcontainer2"></div>
     </>

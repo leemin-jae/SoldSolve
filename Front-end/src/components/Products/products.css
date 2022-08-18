@@ -1,21 +1,21 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
-*{
-  box-sizing: border-box;
+* {
+    box-sizing: border-box;
 }
 
 
-.content{
+.content {
     max-width: 1200px;
     margin: 0 auto;
-    margin-top: 2rem;
-  }
+    margin-top: 4rem;
+}
 
 .cards {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    /* margin: 0; */
+    margin-top: 2em;
     padding: 0;
 }
 
@@ -25,32 +25,35 @@
     padding: 1rem;
     justify-content: space-around;
 }
-  
+
 @media (max-width: 767px) {
     .cards_item {
-        width:50%
+        width: 50%
     }
-  
-  }
-  
+
+}
+
 @media (min-width: 768px) and (max-width: 991px) {
+
     /* 태블릿 세로 */
     .cards_item {
-        width:33.333%;
+        width: 33.333%;
     }
 }
-  
+
 @media (min-width: 992px) and (max-width: 1199px) {
+
     /* 태블릿 가로 */
     .cards_item {
-        width:25%;
+        width: 25%;
     }
 }
-  
+
 @media (min-width: 1200px) {
+
     /* 데스크탑 일반 */
     .cards_item {
-        width:16.666%;
+        width: 16.666%;
     }
 }
 
@@ -62,7 +65,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    height: 15rem;
+    height: 18rem;
     border: 0;
     width: 15rem;
 }
@@ -71,17 +74,19 @@ h1 {
     font-size: 2em;
     font-weight: 400;
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
     margin-top: 4rem;
 }
 
 
 .card_image {
-    height: 10rem;
-    max-width: 100%;
+    /* max-height: 100%; */
+    width: 100%;
+    height: 150px;
     vertical-align: middle;
+    /* object-fit: cover; */
 }
-  
+
 .card_content {
     padding: 0.5rem;
     text-align: center;
@@ -103,4 +108,26 @@ h1 {
     line-height: 1.5;
     font-family: Pretendard;
     text-align: center;
+}
+
+.score_emotion {
+    font-size: 30px;
+}
+
+.score_text {
+    margin-left: 1px;
+    font-weight: bold;
+    line-height: 30px;
+}
+
+.categorytitle{
+    background-color: #6667AB;
+    font-size: 2em;
+    color: white;
+    max-width: 300px;
+    text-align: center;
+    margin-inline: auto;
+    border-radius: 10px;
+    padding: 10px 20px 10px 20px;
+    font-family: 'ONE-Mobile-Title';
 }

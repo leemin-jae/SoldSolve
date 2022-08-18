@@ -12,15 +12,12 @@ const ModalNotice = (props) => {
   
   useEffect(()=>{
     if (header !== 0){
-      console.log(header)
       axios({
       url:'/api/notices/'+header ,
       method: 'get',
     })
     .then(res => {
       console.log(res.data)
-      console.log(document.getElementsByClassName('NoticeModal_title')[0].value = res.data.title)
-      console.log(document.getElementsByClassName('NoticeModal_content')[0].value = res.data.content)
       setTitle(res.data.title)
       setContent(res.data.content)
     })
@@ -35,9 +32,10 @@ const ModalNotice = (props) => {
     e.preventDefault();
     if (header !== 0) {
       axios({
-        url:'/api/notices/'+header ,
+        url:'/admin/notices/'+header ,
         method: 'patch',
-        data : { title:title, content:content}
+        data : { title:title, content:content},
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
       .then(res => {
         console.log(res)
@@ -48,9 +46,10 @@ const ModalNotice = (props) => {
       })
     } else {
       axios({
-        url:'/api/notices' ,
+        url:'/admin/notices' ,
         method: 'post',
-        data : { title:title, content:content}
+        data : { title:title, content:content},
+        headers: { Authorization: `Bearer ${localStorage.token}` }
       })
       .then(res => {
         console.log(res)
@@ -64,7 +63,6 @@ const ModalNotice = (props) => {
   }
 
   function textInput(e) {
-    console.log(e.target.name)
     if (e.target.name === 'title') {
       setTitle(e.target.value)
     } else {

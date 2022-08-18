@@ -1,98 +1,154 @@
 import React, { useEffect, useState } from 'react';
 import { over } from 'stompjs'
 import SockJS from 'sockjs-client';
-import axios from 'axios'
+// import axios from 'axios'
 import './modal.css';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
 // import '../../routers/routers.css'
 // import { useNavigate } from 'react-router-dom';
 
-let stompClient = null
+let stompClient = null;
 
 const ModalChat = (props) => {
+
   // 열기, 닫기, 모달 헤더 텍스트를 부모로부터 받아옴
   // let navigate = useNavigate()
-
   const { open, close, header } = props;
-
+  let store = useSelector((state) => { return state })
   const [chats, setChats] = useState([])
+  const [you, setYou] = useState(null)
   // const [privateChats, setPrivateChats] = useState(new Map())
   // const [tab, setTab] = useState("CHAT ROOM")
-  const [userData, setUserData] = useState({
-    username: '',
-    receivername: '',
-    connected: false,
-    message: ''
-  })
+  const [userData, setUserData] = useState()
+  const [dbChats, setDbChats] = useState()
+
   const onConnected = () => {
-    // console.log(payload)
-    setUserData({ ...userData, "": true })
-    console.log('???')
-    console.log(stompClient)
-    stompClient.subscribe('/sub/chat/room/1', (payload) => {
-      let payloadData = JSON.parse(payload.body);
-      chats.push(payloadData);
-      setChats([...chats]);
-      console.log(chats)
-    })
+    if (stompClient && stompClient.connected && header) {
+      setUserData({ ...userData, "": true })
+      stompClient.subscribe(`/sub/chat/room/${header.roomId}`, (payload) => {
+        let payloadData = JSON.parse(payload.body);
+        chats.push(payloadData);
+        setChats([...chats]);
+      })
+    }
   }
 
+  const onError = err => {
+    console.log(err);
+    throw err;
+  };
+
   useEffect(() => {
-    let Sock = new SockJS("http://localhost:8080/ws-stomp")
-    // console.log(Sock)
-    stompClient = over(Sock)
-    stompClient.connect({}, onConnected)
-    // const userJoin = () => {
-    //   // let chatMessage = {
-    //   //   senderName: userData.username,
-    //   //   status: 'JOIN'
-    //   }
-    //   // stompClient.send('/sub/chat/room/1', {}, JSON.stringify(chatMessage))
-    //   console.log('!@#!@#!@#')
-    // }
-  }, [])
-  const getAxios = () => {
-    axios.get('http://localhost:8080/api/users/me', {
-      headers: {
-        Authorization: `Bearer ${localStorage.token}` //the token is a variable which holds the token
+    if (header) {
+      setUserData({
+        username: store.info.info.userId,
+        receivername: header.buyer.nickname,
+        connected: false,
+        message: ''
+      })
+
+      if (store.info.info.userId === header.buyer.userid) {
+        setYou(header.seller.nickname)
+      } else {
+        setYou(header.buyer.nickname)
       }
-    }).then(res => {
-      setUserData({ ...userData, 'username': res.data.userId })
-    }).catch(err => console.log(err.response.status))
-  }
+
+    }
+  }, [header])
+
+  useEffect(() => {
+    if (header) {
+      const roomChats = () => {
+        axios({
+          url: `/api/room/${header.roomId}`,
+          method: 'get',
+        })
+          .then(res => {
+            const copyDbChats = res.data.reverse().slice(0, 50)
+            const copyChats = []
+            copyDbChats.reverse().map(chat => {
+              copyChats.push(chat.chatContent)
+            })
+            setDbChats(copyChats)
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+      roomChats()
+    }
+  }, [])
+
+  useEffect(() => {
+    let Sock = new SockJS('/ws-stomp');
+    stompClient = over(Sock);
+    stompClient.connect({}, onConnected, onError);
+
+    return () => {
+      if (stompClient.connected) stompClient.disconnect();
+    };
+
+    // }, [])
+  }, [header])
+
   const handleValue = (e) => {
+
     const { value, name } = e.target
     setUserData({ ...userData, [name]: value })
   }
   // const onPublicMessageReceived = 
-  const sendPublicMessage = () => {
+  const sendPublicMessage = (e) => {
+    e.preventDefault();
     if (stompClient) {
       let chatMessage = {
-        senderName: userData.username,
+        sender: store.info.info.userId,
         message: userData.message,
-        roomId: '1',
-        status: 'MESSAGE'
+        roomId: header.roomId,
+        type: 'TALK'
       }
-      stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
-      setUserData({ ...userData, "message": "" })
-      console.log(userData)
+      console.log(stompClient)
+      console.log(chatMessage.message, '12!@#!@#')
+      if (chatMessage.message === '' || chatMessage.message == null || chatMessage.message === ' ') {
+        alert('메세지를 입력하세요')
+      } else {
+        stompClient.send('/pub/chat/message/', {}, JSON.stringify(chatMessage))
+        setUserData({ ...userData, "message": "" })
+      }
     }
   }
-
   return (
     // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className={open ? 'openModal modal' : 'modal'}>
-      {open ? (
+      {open && userData ? (
         <section>
           <main>
             <div className='chat_box'>
               <FontAwesomeIcon className='buyer_nickname' icon={faChevronLeft} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB', marginRight: '265px', marginBottom: '12px', left: '6px', top: '11px' }} onClick={close} />
-              <h3 className='buyer_nickname'>{header}</h3>
+              <h3 className='buyer_nickname'>{you}</h3>
               <div className='chat_background'>
                 <div className='chat_div' >
                   <ul className='li_box_container'>
+                    {dbChats && dbChats.map(dbChat => {
+                      // let ChatMessage = null;
+                      // if (chat.sender === store.info.info.userId) {
+                      //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
+                      // } else {
+                      //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
+                      // }
+                      return (
+                        <span className='li_box_me' key={userData.userId}>{dbChat}</span>
+                      )
+                    })}
                     {chats.map(chat => {
+                      // let ChatMessage = null;
+                      // if (chat.sender === store.info.info.userId) {
+                      //   ChatMessage = <span className='li_box_me' key={userData.userId}>{chat.message}</span>
+                      // } else {
+                      //   ChatMessage =<span className='li_box_other' key={userData.userId}>{chat.message}</span>
+                      // }
                       return (
                         <span className='li_box_me' key={userData.userId}>{chat.message}</span>
                       )
@@ -102,8 +158,10 @@ const ModalChat = (props) => {
               </div>
             </div>
             <div className='input_box'>
-              <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message} onChange={handleValue} />
-              <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={sendPublicMessage} />
+              <form onSubmit={e => sendPublicMessage(e)} style={{ display: 'flex', width: '100%' }}>
+                <input className='chat_input' type="text" name="message" placeholder={'enter message'} value={userData.message || ''} onChange={handleValue} />
+                <FontAwesomeIcon icon={faPaperPlane} style={{ float: 'right', width: '28px', height: '28px', margin: '4px 2px 0 8px', color: '#6667AB' }} onClick={e => sendPublicMessage(e)} />
+              </form>
             </div>
           </main>
         </section>

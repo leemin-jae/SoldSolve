@@ -1,6 +1,6 @@
 # SOL:D SOL:VE (구매와 판매의 재미를 쏠쏠하게)
 
-----------
+---
 
 <img src="assets/e8c1216844e722623434129fe0153f4e60148e9b.PNG" title="" alt="logo.PNG" data-align="center">
 
@@ -19,8 +19,6 @@
 |                                   |                                       | :black_square_button: Kotlin     |                                      |
 
 ---
-
-
 
 ## 🗯팀 소개
 
@@ -78,8 +76,9 @@
   Frontend
   </td>
     </tr>
+    </table>
 </div>
----
+
 
 
 
@@ -98,43 +97,44 @@
 #### - 기술스택
 
 <div align=left>
-<table>
-  <tr>
-      <td>Back-end</td>
+  <table>
+    <tr>
+        <td>Back-end</td>
+        <td>
+          <img src="https://img.shields.io/badge/Java-1.8.0-007396?style=flat&logo=Java&logoColor=white"/>
+          <img src="https://img.shields.io/badge/Spring Boot-2.6.9-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/>
+          <img src="https://img.shields.io/badge/Spring Security-5.6.6-6DB33F?style=flat-square&logo=Spring Security&logoColor=white"/>
+          <br>
+          <img src="https://img.shields.io/badge/MySQL-8.0.29-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
+          <img src="https://img.shields.io/badge/H2-1.4.199-4479A1?style=flat-square&logo=H2&logoColor=white"/>
+          <img src="https://img.shields.io/badge/JPA Hibernate-5.6.3.Final-59666C?style=flat-square&logo=Hibernate&logoColor=white"/>
+          <br>
+          <img src="https://img.shields.io/badge/Gradle-7.4.1-02303A?style=flat-square&logo=Gradle&logoColor=white"/>
+          <img src="https://img.shields.io/badge/JWT-000000?style=flat-square&logo=JSON Web Tokens&logoColor=white"/>
+        </td>
+    </tr>
+    <tr> 
+      <td><b>Front-end</td>
       <td>
-        <img src="https://img.shields.io/badge/Java-1.8.0-007396?style=flat&logo=Java&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Spring Boot-2.6.9-6DB33F?style=flat-square&logo=Spring Boot&logoColor=white"/>
-        <img src="https://img.shields.io/badge/Spring Security-5.6.6-6DB33F?style=flat-square&logo=Spring Security&logoColor=white"/>
-        <br>
-        <img src="https://img.shields.io/badge/MySQL-8.0.29-4479A1?style=flat-square&logo=MySQL&logoColor=white"/>
-        <img src="https://img.shields.io/badge/H2-1.4.199-4479A1?style=flat-square&logo=H2&logoColor=white"/>
-        <img src="https://img.shields.io/badge/JPA Hibernate-5.6.3.Final-59666C?style=flat-square&logo=Hibernate&logoColor=white"/>
-        <br>
-        <img src="https://img.shields.io/badge/Gradle-7.4.1-02303A?style=flat-square&logo=Gradle&logoColor=white"/>
-        <img src="https://img.shields.io/badge/JWT-000000?style=flat-square&logo=JSON Web Tokens&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Node.js-16.16.0-339933?style=flat-square&logo=Node.js&logoColor=white"/>
+      <img src="https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat-square&logo=React&logoColor=white"/>
+      <img src="https://img.shields.io/badge/React Router-6.3.0-CA4245?style=flat-square&logo=React Router&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Redux Toolkit-1.8.3-764ABC?style=flat-square&logo=Redux&logoColor=white"/>
+      <img src="https://img.shields.io/badge/Bootstrap-5.1.3-7952B3?style=flat-square&logo=Bootstrap&logoColor=white"/>
+      <img src="https://img.shields.io/badge/NPM-8.11.0-CB3837?style=flat-square&logo=NPM&logoColor=white"/>
+      <br>
       </td>
-  </tr>
-  <tr> 
-    <td><b>Front-end</td>
-    <td>
-    <img src="https://img.shields.io/badge/Node.js-16.16.0-339933?style=flat-square&logo=Node.js&logoColor=white"/>
-    <img src="https://img.shields.io/badge/React-18.2.0-61DAFB?style=flat-square&logo=React&logoColor=white"/>
-    <img src="https://img.shields.io/badge/React Router-6.3.0-CA4245?style=flat-square&logo=React Router&logoColor=white"/>
-    <img src="https://img.shields.io/badge/Redux Toolkit-1.8.3-764ABC?style=flat-square&logo=Redux&logoColor=white"/>
-    <img src="https://img.shields.io/badge/Bootstrap-5.1.3-7952B3?style=flat-square&logo=Bootstrap&logoColor=white"/>
-    <img src="https://img.shields.io/badge/NPM-8.11.0-CB3837?style=flat-square&logo=NPM&logoColor=white"/>
-    <br>
-    </td>
-  <tr>
-  <td><b>Tools</td>
-    <td>
-    <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=white"/>
-      <img src="https://img.shields.io/badge/JIRA-0052CC?style=flat-square&logo=JIRA Software&logoColor=white"/>
-    <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon aws&logoColor=white"/>
-    <img src="https://camo.githubusercontent.com/9204bc954b6ef734a734efe000c7f3681652abd7db20df72de49edd7adcfa047/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5765625254432d3333333333333f7374796c653d666c61742d737175617265266c6f676f3d576562525443266c6f676f436f6c6f723d7768697465"/>
-      <img src="https://camo.githubusercontent.com/eadafa6446a654bd37b16fe5b198450b709494ef8215576ae82ca1b8e097ebf1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4f70656e766964752d322e32302e302d3333333333333f7374796c653d666c61742d737175617265"/>
-      <img src="https://camo.githubusercontent.com/9f8aabcd1fcde2728ff8a8d5cead1aa6b2d040487fcc000dc60ad15f12f3e51f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e47494e582d312e31382e30285562756e7475292d3030393633393f7374796c653d666c61742d737175617265266c6f676f3d4e47494e58266c6f676f436f6c6f723d7768697465"/><img src="https://img.shields.io/badge/Notion-333333?style=flat-square&logo=Notion&logoColor=white"/>
-    </td>
+    <tr>
+    <td><b>Tools</td>
+      <td>
+      <img src="https://img.shields.io/badge/GitLab-FCA121?style=flat-square&logo=GitLab&logoColor=white"/>
+        <img src="https://img.shields.io/badge/JIRA-0052CC?style=flat-square&logo=JIRA Software&logoColor=white"/>
+      <img src="https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazon aws&logoColor=white"/>
+      <img src="https://camo.githubusercontent.com/9204bc954b6ef734a734efe000c7f3681652abd7db20df72de49edd7adcfa047/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f5765625254432d3333333333333f7374796c653d666c61742d737175617265266c6f676f3d576562525443266c6f676f436f6c6f723d7768697465"/>
+        <img src="https://camo.githubusercontent.com/eadafa6446a654bd37b16fe5b198450b709494ef8215576ae82ca1b8e097ebf1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4f70656e766964752d322e32302e302d3333333333333f7374796c653d666c61742d737175617265"/>
+        <img src="https://camo.githubusercontent.com/9f8aabcd1fcde2728ff8a8d5cead1aa6b2d040487fcc000dc60ad15f12f3e51f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e47494e582d312e31382e30285562756e7475292d3030393633393f7374796c653d666c61742d737175617265266c6f676f3d4e47494e58266c6f676f436f6c6f723d7768697465"/><img src="https://img.shields.io/badge/Notion-333333?style=flat-square&logo=Notion&logoColor=white"/>
+      </td>
+    </table>  
   </div>
 
 #### - 서비스 아키텍쳐

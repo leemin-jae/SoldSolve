@@ -1,0 +1,1135 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
+    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
+    "Malgun Gothic", sans-serif;
+}
+
+.fixnav {
+  position: sticky;
+  top: 0px;
+  z-index: 99;
+}
+
+.stream-container {
+  padding: 0;
+}
+
+.mypage {
+  text-align: center;
+}
+
+.icon {
+  color: #6667ab;
+}
+
+button {
+  border: none;
+  background-color: white;
+}
+
+.account_container {
+  margin-top: 200px;
+}
+
+.livebox {
+  position: relative;
+  max-width: 950px;
+  min-height: 500px;
+  border-radius: 10px;
+  margin-inline: 2em;
+  display: flex;
+  grid-template-columns: auto auto auto auto;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  border: 10px solid rgba(black, 0.1);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+}
+
+.history_container {
+  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-width: 600px;
+  position: relative;
+  display: flex;
+}
+
+.history_container {
+  max-width: 400px;
+}
+
+.column {
+  width: 100%;
+}
+
+.test {
+  margin-block: 50px;
+  margin-inline: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 상품 디테일 css */
+.product_box {
+  margin: auto;
+  border: 1px solid black;
+  width: 80%;
+  height: 400px;
+  border-radius: 10px;
+  margin: 1em;
+}
+
+.pro_img {
+  margin: auto;
+}
+
+.inputform {
+  width: 100%;
+  min-height: 65px;
+  margin-block: 10px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+  margin-inline: auto;
+}
+
+.inputform2 {
+  text-align: center;
+}
+
+.pform {
+  width: 100%;
+  height: 65px;
+  margin-block: 10px;
+  margin-inline: auto;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.descriptionform {
+  width: 100%;
+  height: 150px;
+  margin-block: 10px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 500px;
+}
+
+.descriptionform::placeholder {
+  font-family: "ONE-Mobile-Regular";
+  text-align: center;
+  transform: translateY(250%);
+}
+
+.product_description {
+  display: block;
+  /* font-size: 12px; */
+  max-width: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 20px;
+}
+
+.product_description>.button_box {
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+}
+
+input[type="text"]:disabled {
+  background-color: rgb(255, 255, 255);
+}
+
+.submitbutton-disable {
+  background-color: #eaeaf6;
+  color: gray;
+  max-width: 500px;
+}
+
+.submitbutton-able {
+  background-color: #6667ab;
+  color: white;
+  max-width: 500px;
+}
+
+.test3 {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.atag {
+  text-decoration: none;
+  color: gray;
+}
+
+.findtext {
+  color: gray;
+  text-align: left;
+  max-width: 500px;
+}
+
+.form {
+  max-width: 600px;
+  margin-inline: 20%;
+}
+
+input[type="password"] {
+  font-family: "굴림";
+}
+
+input::placeholder {
+  font-family: "ONE-Mobile-Regular";
+  text-align: center;
+}
+
+.dot {
+  height: 100px;
+  width: 100px;
+  display: inline-block;
+}
+
+.livebox {
+  position: relative;
+  max-width: 950px;
+  min-height: 350px;
+  display: grid;
+  background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+  background-size: 100% 100%;
+}
+
+.container {
+  border: 10px solid rgba(black, 0.1);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: 12fr;
+}
+
+.inputform3 {
+  height: 30px;
+  margin-left: 1em;
+  border-radius: 10px;
+  border: 1px solid;
+  padding: 0 65px 0 10px;
+  outline: none;
+}
+
+.chatbox {
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 0 1em 1em 1em;
+  overflow-y: auto;
+  height: 500px;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.inputsubmitbutton {
+  background-color: #6667ab;
+  color: white;
+  width: 60px;
+  height: 30px;
+  border: 0;
+  border-radius: 10px;
+  margin-left: -60px;
+}
+
+/* .category_reco {
+  border: 2px solid #6667AB;
+} */
+
+@media (max-width: 414px) {
+  .editBack {
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 75%;
+    margin-bottom: -82px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .fullscreenbutton {
+    position: absolute;
+    z-index: 99;
+    opacity: 30%;
+    right: 0;
+    margin-top: -15px;
+  }
+
+  .livevolume {
+    position: absolute;
+    z-index: 99;
+    bottom: 0;
+    right: 15px;
+    opacity: 30%;
+  }
+
+  .iconsize {
+    width: 14px;
+    height: 14px;
+  }
+
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
+
+  /* 모바일 iphone, Galaxy */
+  .livebox {
+    position: relative;
+    max-width: 950px;
+    min-height: 350px;
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
+  }
+
+  .videosize {
+    display: block;
+    border-radius: 10px;
+    width: 300px;
+    height: 350px;
+    object-fit: fill;
+    z-index: 99;
+
+  }
+
+  .chatbox {
+    overflow-y: auto;
+    max-width: 950px;
+    min-height: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .inputform3 {
+    width: 91%;
+    outline: none;
+  }
+
+  .category_reco_box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* padding: 0 20px 0 20px */
+  }
+
+  .category_reco {
+    /* border: 1px solid #6667AB; */
+    width: 130px;
+    margin: 10px auto 10px auto;
+    border-radius: 10px;
+  }
+
+  .category_img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .product_description {
+    display: block;
+    font-size: 12px;
+    max-width: 313px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+
+  .notice_list {
+    font-size: 12px;
+  }
+
+  .account_info {
+    margin-right: -20px;
+  }
+
+  .titletext {
+    font-size: large;
+  }
+
+  .pricetext {
+    font-size: medium;
+  }
+
+  .fullscreenbutton_margin {
+    margin-bottom: -320px;
+  }
+}
+
+@media (min-width: 414px) and (max-width: 767px) {
+  .editBack {
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 65%;
+    margin-bottom: -83px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .livevolume {
+    position: absolute;
+    z-index: 99;
+    bottom: 0;
+    right: 15px;
+    opacity: 30%;
+  }
+
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
+
+  .livebox {
+    position: relative;
+    max-width: 950px;
+    min-height: 500px;
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
+  }
+
+  .videosize {
+    display: block;
+    border-radius: 10px;
+    width: 400px;
+    height: 500px;
+    object-fit: fill;
+  }
+
+  .chatbox {
+    overflow-y: auto;
+    max-width: 950px;
+    min-height: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .inputform3 {
+    width: 94%;
+    height: 30px;
+    outline: none;
+  }
+
+  .category_reco_box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* padding: 0 20px 0 20px */
+  }
+
+  .category_reco {
+    /* border: 1px solid #6667AB; */
+    width: 200px;
+    border-radius: 10px;
+    margin: 20px auto 20px auto;
+  }
+
+  .category_img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .product_description {
+    max-width: 700px;
+  }
+
+  .product_description {
+    display: block;
+    font-size: 12px;
+    max-width: 500px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 20px;
+  }
+
+  .notice_list {
+    font-size: large;
+  }
+
+  .account_info {
+    margin-right: -40px;
+  }
+
+  .titletext {
+    font-size: large;
+  }
+
+  .pricetext {
+    font-size: medium;
+  }
+
+  .fullscreenbutton_margin {
+    margin-bottom: -470px;
+  }
+
+  .iconsize {
+    width: 14px;
+    height: 19px;
+  }
+
+  .fullscreenbutton {
+    position: absolute;
+    z-index: 99;
+    opacity: 30%;
+    right: 0;
+    margin-top: -20px;
+  }
+}
+
+@media (min-width: 767px) and (max-width: 991px) {
+  .editBack {
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 55%;
+    margin-bottom: -90px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .livevolume {
+    position: absolute;
+    z-index: 99;
+    bottom: 0;
+    right: 20px;
+    opacity: 30%;
+  }
+
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
+
+  .livebox {
+    position: relative;
+    max-width: 950px;
+    min-height: 500px;
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
+  }
+
+  .videosize {
+    display: block;
+    border-radius: 10px;
+    width: 700px;
+    height: 500px;
+    object-fit: fill;
+  }
+
+  .chatbox {
+    overflow-y: auto;
+    max-width: 950px;
+    min-height: 200px;
+    width: 96%;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .inputform3 {
+    width: 96%;
+    height: 30px;
+    outline: none;
+  }
+
+  .category_reco_box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* padding: 0 20px 0 20px */
+  }
+
+  .category_reco {
+    /* border: 1px solid #6667AB; */
+    width: 200px;
+    border-radius: 10px;
+    margin: 20px auto 20px auto;
+  }
+
+  .category_img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .product_description {
+    max-width: 700px;
+  }
+
+  .notice_list {
+    font-size: x-large;
+  }
+
+  .account_info {
+    margin-right: -40px;
+  }
+
+  .iconsize {
+    width: 19px;
+    height: 29px;
+  }
+
+  .fullscreenbutton_margin {
+    margin-bottom: -470px;
+  }
+
+  .fullscreenbutton {
+    position: absolute;
+    z-index: 99;
+    opacity: 30%;
+    right: 3px;
+    margin-top: -30px;
+  }
+}
+
+@media (min-width: 991px) and (max-width: 1199px) {
+  .editBack {
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 55%;
+    margin-bottom: -90px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .livevolume {
+    position: absolute;
+    z-index: 99;
+    bottom: 0;
+    right: 30px;
+    opacity: 30%;
+  }
+
+  .livechatbox {
+    background-color: rgb(255, 251, 0);
+    border-radius: 10px;
+    padding: 5%;
+  }
+
+  .liveTitle {
+    max-height: 150px;
+    padding-inline: 2rem;
+  }
+
+  /* 태블릿 가로 */
+  .livebox {
+    position: relative;
+    max-width: 820px;
+    min-height: 500px;
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
+  }
+
+  .videosize {
+    display: block;
+    border-radius: 10px;
+    width: 820px;
+    height: 500px;
+    object-fit: fill;
+  }
+
+  .chatbox {
+    overflow-y: auto;
+    max-width: 950px;
+    min-height: 200px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .inputform3 {
+    width: 950px;
+    outline: none;
+  }
+
+  .category_reco_box {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* padding: 0 20px 0 20px */
+  }
+
+  .category_reco {
+    /* border: 1px solid #6667AB; */
+    width: 200px;
+
+    border-radius: 10px;
+    margin: 20px auto 20px auto;
+  }
+
+  .category_img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .product_description {
+    max-width: 800px;
+  }
+
+  .notice_list {
+    font-size: x-large;
+  }
+
+  .account_info {
+    margin-right: -40px;
+  }
+
+  .iconsize {
+    width: 29px;
+    height: 29px;
+  }
+
+  .fullscreenbutton_margin {
+    margin-bottom: -470px;
+  }
+
+  .fullscreenbutton {
+    position: absolute;
+    z-index: 99;
+    opacity: 30%;
+    right: 0;
+    margin-top: -30px;
+  }
+}
+
+@media (min-width: 1199px) {
+  .editBack {
+    width: 28px;
+    height: 28px;
+    margin: 4px 2px 0 8px;
+    color: #6667ab;
+    margin-right: 50%;
+    margin-bottom: -90px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .fullscreenbutton {
+    position: absolute;
+    z-index: 99;
+    opacity: 30%;
+    right: 0;
+    margin-top: -30px;
+  }
+
+  /* 데스크탑 일반 */
+  .livebox {
+    position: relative;
+    max-width: 1500px;
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    background-image: url('https://i7c110.p.ssafy.io/images/profile/NoLive.png');
+    background-size: 100% 100%;
+  }
+
+  .livevolume {
+    position: absolute;
+    z-index: 99;
+    bottom: 0;
+    right: 30px;
+    opacity: 30%;
+  }
+
+  .videosize {
+    display: block;
+    border-radius: 10px;
+    width: 776px;
+    height: 500px;
+    object-fit: fill;
+    z-index: 999;
+  }
+
+  .chatbox {
+    overflow-y: auto;
+    width: 250px;
+    height: 500px;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .live_container {
+    border: 10px solid rgba(black, 0.1);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+  }
+
+  .inputform3 {
+    width: 86%;
+    outline: none;
+  }
+
+  /* .inputbox {
+    max-width: 290px;
+  } */
+
+  .category_reco_box {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* padding: 0 20px 0 20px */
+  }
+
+  .category_reco {
+    /* border: 1px solid #6667AB; */
+    width: 200px;
+    border-radius: 10px;
+    margin: 20px auto 20px auto;
+  }
+
+  .category_img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .product_description {
+    max-width: 900px;
+  }
+
+  .notice_list {
+    font-size: x-large;
+  }
+
+  .account_info {
+    margin-right: -40px;
+  }
+
+  .iconsize {
+    width: 29px;
+    height: 29px;
+  }
+
+  .fullscreenbutton_margin {
+    margin-bottom: -470px;
+  }
+}
+
+.notice_list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  /* font-size: large; */
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+}
+
+.noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  /* font-size: large; */
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+}
+
+/* .noticeSpan {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab;
+  border: none;
+} */
+
+/* .noticeSpan2 {
+  background-color: white;
+  margin-inline: 5%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #6667ab71;
+  border: none;
+} */
+
+.IDcheck {
+  color: rgba(128, 128, 128, 0.438);
+  width: 80px;
+  margin-left: -80px;
+  margin-bottom: -5px;
+}
+
+.checkedcolor {
+  color: rgb(36, 255, 72);
+}
+
+.emailcode {
+  color: #6667ab;
+}
+
+.emailcode2 {
+  color: rgba(128, 128, 128, 0.438);
+}
+
+.notice_list {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.searchbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+  position: relative;
+  padding-inline: 5%;
+}
+
+.test3333333{
+  color: rgb(196, 193, 193);
+}
+
+.searchcontainer {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.searchcontainer2 {
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+}
+
+.searchcontainer3 {
+  /* margin: auto;
+  margin-bottom: 4rem; */
+  display: flex;
+  justify-content: center;
+  margin: auto, 20px, 20px, 0;
+}
+
+.hearts {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 260px;
+  max-width: 530px;
+  height: 400px;
+  margin-inline: auto;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.hearts::-webkit-scrollbar {
+  width: 10px;
+}
+
+.hearts::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+
+.hearts::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
+}
+
+.heart_item {
+  width: 50%;
+  /* display: flex; */
+  margin-left: -30px;
+  padding: 2rem;
+  justify-content: space-around;
+  list-style: none;
+  position: relative;
+}
+
+.liveChatItem {
+  /* background: #c1c2f1; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-inline: 10px;
+}
+
+.liveChatItem2 {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin-inline: 10px;
+}
+
+.livechatimg {
+  width: 50px;
+  height: 50px;
+  object-fit: fill;
+  border-radius: 15px;
+}
+
+.livechatbox {
+  background: #9a9bdf;
+  border-radius: 10px;
+  min-width: 100px;
+  padding: 10%;
+  word-break: break-all;
+}
+
+.livechatbox2 {
+  background: #c1c2f1;
+  border-radius: 10px;
+  min-width: 100px;
+  padding: 10%;
+  word-break: break-all;
+}
+
+/* .livechatbox2 {
+  background: #c1c2f1;
+  border-radius: 10px;
+  min-width: 100px;
+  padding: 10%;
+  word-break: break-all;
+} */
+
+.chatnickname {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+.liveTitle {
+  max-height: 150px;
+  margin-inline: 2rem;
+}
+
+.chatbox::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chatbox::-webkit-scrollbar-thumb {
+  height: 30%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+
+.chatbox::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
+}
+
+
+.micreON {
+  color: rgba(58, 153, 74, 0.918);
+}
+
+.liveTimeset {
+  width: 40%;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #6667ab;
+  padding-inline: 20px;
+  padding-block: 5px;
+  max-width: 200px;
+}
+
+.sellbutton {
+  background-color: #6667ab;
+  color: white;
+  height: 40px;
+  text-align: center;
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 10px auto auto auto;
+  top: 45px;
+  max-width: 380px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  /* height: 500px; */
+}
+
+.offerButton {
+  background-color: #6667ab;
+  color: white;
+  width: 80px;
+  height: 20px;
+  border: 0;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.openviduTag {
+  position: relative;
+}
+
+.sellerInfo {
+  display: flex;
+  flex-direction: row;
+  margin-inline: 2rem;
+  justify-content: space-between;
+}
+
+.signupWarning {
+  border: 2px solid rgba(250, 0, 0, 0.603);
+}
+
+.slides::-webkit-scrollbar {
+  width: 5px;
+}
+
+.slides::-webkit-scrollbar-thumb {
+  height: 20%;
+  background: #6667abad;
+  border-radius: 10px;
+}
+
+.slides::-webkit-scrollbar-track {
+  background: rgba(196, 217, 248, 0.1);
+}
+
+.infoList {
+  display: flex;
+}
+
+.live_profile {
+  display: flex;
+  align-items: center;
+
+}
+
+.abtitle{
+  background-color: #EAEAF6;
+  color: rgba(0, 0, 0, 0.836);
+  height: 50px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Popularsearch{
+  border: 1px solid #EAEAF6;
+  margin-top: 30px;
+  border-radius: 20px;
+  height: 80px;
+  width: 300px;
+}
+.PopularsearchTitle{
+  background-color: #EAEAF6;
+  border-radius: 20px 20px 0 0;
+}

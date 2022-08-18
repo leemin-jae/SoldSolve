@@ -18,68 +18,70 @@
 | :black_square_button: Desktop App | :black_square_button: Game            | :white_check_mark: Java          | :white_check_mark: Spring/Springboot |
 |                                   |                                       | :black_square_button: Kotlin     |                                      |
 
-<!-- 자유 양식 -->
-
 ---
+
+
 
 ## 🗯팀 소개
 
-<div align=center>
-<table>
-  <tr>
-      <td><b>이름</td>
-      <td>
-사진
-</td>
-<td>
-역할
-</td>
-  </tr>  
-  <tr>
-      <td><b>조영훈/팀장</td>
-      <td>
-<img src="assets/1.jpg" width="150" height="150"/>
-</td>
-<td>
-Backend
-</td>
-  </tr>  
-  <tr>
-      <td><b>이민재/팀원</td>
-      <td>
-<img src="assets/4.jpeg" width="150" height="150"/>
-</td>
-<td>
-Backend
-</td>
-  </tr>  
-  <tr>
-      <td><b>문유주/팀원</td>
-      <td>
-<img src="assets/2.jpg" width="150" height="150"/>
-<td>
-Frontend
-</td>
-  </tr>  
-  <tr>
-      <td><b>오행송/팀원</td>
-      <td>
-<img src="assets/3.jpeg" width="150" height="150"/>
-</td>
-<td>
-Frontend
-</td>
-  </tr>  
-  <tr>
-      <td><b>이건후/팀원</td>
-      <td>
-<img src="assets/5.jpeg" width="150" height="150"/>
-<td>
-Frontend
-</td>
-  </tr>
-
+<div align=left>
+  <table>
+    <tr>
+        <td><b>이름</td>
+        <td>
+  사진
+  </td>
+  <td>
+  역할
+  </td>
+    </tr>  
+    <tr>
+        <td><b>조영훈/팀장</td>
+        <td>
+  <img src="assets/1.jpg" width="150" height="150"/>
+  </td>
+  <td>
+  Backend
+  </td>
+    </tr>  
+    <tr>
+        <td><b>이민재/팀원</td>
+        <td>
+  <img src="assets/4.jpeg" width="150" height="150"/>
+  </td>
+  <td>
+  Backend
+  </td>
+    </tr>  
+    <tr>
+        <td><b>문유주/팀원</td>
+        <td>
+  <img src="assets/2.jpg" width="150" height="150"/>
+  <td>
+  Frontend
+  </td>
+    </tr>  
+    <tr>
+        <td><b>오행송/팀원</td>
+        <td>
+  <img src="assets/3.jpeg" width="150" height="150"/>
+  </td>
+  <td>
+  Frontend
+  </td>
+    </tr>  
+    <tr>
+        <td><b>이건후/팀원</td>
+        <td>
+  <img src="assets/5.jpeg" width="150" height="150"/>
+  <td>
+  Frontend
+  </td>
+    </tr>
+</div>
 ---
+
+
 
 ## 💡 프로젝트 소개
 
@@ -88,6 +90,8 @@ Frontend
 > LIVE를 통해 중고물품을 보다 더 안전하게 **거래**하세요! 😆
 
 ---
+
+
 
 ## 🔧 기술 스택 & 서비스 아키텍쳐
 
@@ -131,15 +135,16 @@ Frontend
       <img src="https://camo.githubusercontent.com/eadafa6446a654bd37b16fe5b198450b709494ef8215576ae82ca1b8e097ebf1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4f70656e766964752d322e32302e302d3333333333333f7374796c653d666c61742d737175617265"/>
       <img src="https://camo.githubusercontent.com/9f8aabcd1fcde2728ff8a8d5cead1aa6b2d040487fcc000dc60ad15f12f3e51f/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4e47494e582d312e31382e30285562756e7475292d3030393633393f7374796c653d666c61742d737175617265266c6f676f3d4e47494e58266c6f676f436f6c6f723d7768697465"/><img src="https://img.shields.io/badge/Notion-333333?style=flat-square&logo=Notion&logoColor=white"/>
     </td>
-
-
-
+  </div>
 
 #### - 서비스 아키텍쳐
 
-![KakaoTalk_20220818_152725434.png](assets/260a913ae277db2e8481906df6708c6a603027a2.png)
+<img src='assets/service architecture.jpeg'>
+
 
 ---
+
+
 
 ## 🎨 ERD & 와이어 프레임
 
@@ -152,6 +157,8 @@ Frontend
 ![](assets/2022-08-18-16-53-51-image.png)
 
 ---
+
+
 
 ## 🔎 기술 소개
 

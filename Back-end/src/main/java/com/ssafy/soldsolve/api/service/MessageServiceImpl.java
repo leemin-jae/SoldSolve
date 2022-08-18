@@ -83,7 +83,7 @@ public class MessageServiceImpl implements MessageService {
     @Override
     public String requestLog(User user, Product p) {
         String log = user.getNickname() + "(" + user.getUserid() + ") 님이 " + p.getTitle() + "(" + p.getNo() + ")에 라이브를 요청했습니다. " +
-                "[현재 총 라이브 요청 인원 : " + requestRepository.countByUserAndProduct(user, p) +"명 ]";
+                "[현재 총 라이브 요청 인원 : " + requestRepository.countByProduct(p) +"명 ]";
         return log;
     }
 

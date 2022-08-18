@@ -1,6 +1,6 @@
-import NavBar from "../components/NavBar";
+import NavBar from "../NavBar";
 import Chip from '@mui/material/Chip';
-import SearchBar from "../components/Search/SearchBar";
+import SearchBar from "./SearchBar";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";

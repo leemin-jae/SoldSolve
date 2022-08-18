@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { OpenVidu } from 'openvidu-browser';
 import React, { Component } from 'react';
-import UserVideoComponent from './Live/UserVideoComponent';
-import NavBar from '../components/NavBar';
-import './routers.css';
+import UserVideoComponent from './UserVideoComponent';
+import NavBar from '../../components/NavBar';
+import '../routers.css';
 import { connect } from 'react-redux'
-import LiveChat from './Live/LiveChat';
+import LiveChat from './LiveChat';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash, faArrowRightFromBracket, faRepeat } from '@fortawesome/free-solid-svg-icons'
-import { LinearProgress, Stack } from '@mui/material';
-import '../components/Products/products.css'
+import { faMicrophone, faMicrophoneSlash, faVideo, faVideoSlash, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import '../../components/Products/products.css'
 import MoodIcon from '@mui/icons-material/Mood';
 import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';

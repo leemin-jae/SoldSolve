@@ -54,7 +54,6 @@ public class User {
 	@JsonIgnore
 	List<Room> roomList = new ArrayList<>();
 
-
 	@OneToMany(orphanRemoval = true, mappedBy = "reviewId", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Review> reviews = new ArrayList<>();
@@ -70,6 +69,10 @@ public class User {
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Wish> wishes = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Request> requests= new ArrayList<>();
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -90,7 +93,7 @@ public class User {
 	@OneToMany(orphanRemoval = true, mappedBy = "reviewer", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Review> review2 = new ArrayList<>();
-	
+
 
 	@Builder
 	public User(String userid, String password, String username, String nickname, String email, String role, String profileUrl, Timestamp createDate, List<Message> messages) {

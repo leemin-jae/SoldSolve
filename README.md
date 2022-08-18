@@ -1,12 +1,6 @@
-
-
-
-
 # SOL:D SOL:VE (구매와 판매의 재미를 쏠쏠하게)
 
 ----------
-
-
 
 <img src="assets/e8c1216844e722623434129fe0153f4e60148e9b.PNG" title="" alt="logo.PNG" data-align="center">
 
@@ -29,8 +23,6 @@
 ---
 
 ## 🗯팀 소개
-
-
 
 <div align=left>
 <table>
@@ -85,7 +77,7 @@
 <td>
 소개
 </td>
-  </tr>  
+  </tr>
 
 <!-- 자유 양식 -->
 
@@ -169,28 +161,22 @@
 
 #### 회원가입 & 로그인                      회원 탈퇴
 
-<img title="" src="https://im2.ezgif.com/tmp/ezgif-2-2a2de97663.gif" alt="[video-to-gif output image]" width="221">              <img title="" src="https://im2.ezgif.com/tmp/ezgif-2-cef9a140e0.gif" alt="videotogif output image" width="221">  
-
-
+<img title="" src="assets/signup.gif" alt="[video-to-gif output image]" width="221">              <img title="" src="assets/Withdrawal.gif" alt="videotogif output image" width="221">  
 
 #### 메인페이지                                  마이페이지 & 회원정보 수정
 
-<img title="" src="https://im2.ezgif.com/tmp/ezgif-2-e4e254fa12.gif" alt="[video-to-gif output image]" width="225">             <img title="" src="https://im2.ezgif.com/tmp/ezgif-2-7961cbe9ac.gif" alt="videotogif output image" width="226">
-
-
+<img title="" src="assets/main.gif" alt="[video-to-gif output image]" width="225">             <img title="" src="assets/mypage.gif" alt="videotogif output image" width="226">
 
 #### 검색 & 태그검색                          상품등록
 
-<img title="" src="https://im2.ezgif.com/tmp/ezgif-2-608c5d5ca0.gif" alt="[video-to-gif output image]" width="228">             <img title="" src="https://im2.ezgif.com/tmp/ezgif-2-7b168f4c87.gif" alt="videotogif output image" width="207">
+<img title="" src="assets/search.gif" alt="[video-to-gif output image]" width="228">             <img title="" src="assets/product.gif" alt="videotogif output image" width="207">
 
 #### 
 
 #### 찜하기 & 링크 복사 & 채팅하기
 
-<img title="" src="https://im2.ezgif.com/tmp/ezgif-2-f39282d499.gif" alt="[video-to-gif output image]" width="228">
+<img title="" src="assets/like.gif" alt="[video-to-gif output image]" width="228">
 
-#### 라이브 & 채팅 & 가격제안       채팅 & 평가 (구매자)
+#### 라이브 & 채팅 & 가격제안       채팅 & 평가(판매자)
 
-<img title="" src="https://im2.ezgif.com/tmp/ezgif-2-49377ed6e2.gif" alt="[video-to-gif output image]" width="229">          <img title="" src="https://im2.ezgif.com/tmp/ezgif-2-58481f9741.gif" alt="videotogif output image" width="226">
-
-
+<img title="" src="assets/live.gif" alt="[video-to-gif output image]" width="229">          <img title="" src="assets/seller.gif" alt="videotogif output image" width="226">

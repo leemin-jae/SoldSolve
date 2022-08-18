@@ -332,17 +332,17 @@ class LivePage extends Component {
                       <div className='sellerInfo my-2'>
                         <div className='live_profile'>
                           <img className='livechatimg' src={'https://i7c110.p.ssafy.io' + this.state.sellerInfo.profileUrl}></img>
-                          <h4 style={{ marginTop: 0, marginBottom: 0, marginLeft: 10 }}>{this.state.sellerInfo.nickname} ({this.state.region})</h4>
+                          <p style={{ marginTop: 0, marginBottom: 0, marginLeft: 10, fontSize: 13, fontWeight: 'bold' }}>{this.state.sellerInfo.nickname} ({this.state.region})</p>
                         </div>
                         <div className='infoList'>
                           <div className='score' style={{ marginTop: 10 }}>
                             {
                               this.state.sellerInfo.score >= 70 ?
-                                <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '40px' }} /> : (this.state.sellerInfo.score >= 30 ?
-                                  <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '40px' }} /> :
-                                  <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '40px' }} />)}
+                                <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '25px' }} /> : (this.state.sellerInfo.score >= 30 ?
+                                  <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '25px' }} /> :
+                                  <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '25px' }} />)}
                             {/* <MoodIcon className='score_emotion' /> */}
-                            <div className='score_text' style={{ fontSize: 18, lineHeight: '37px' }}>{this.state.sellerInfo.score}솔브</div>
+                            <div className='score_text' style={{ fontSize: 13, lineHeight: '25px' }}>{this.state.sellerInfo.score}솔브</div>
                             {/* </CircularProgress> */}
                           </div>
                         </div>

@@ -36,19 +36,7 @@ function SearchProductAll() {
 
     useEffect(() => {
         async function fetchData() {
-            let result1 = [];
-            await axios({
-                url: '/api/product/tag',
-                method: 'get',
-                params: { tag: params.title },
-              })
-                .then(res => {
-                  result1 = res.data
-                })
-                .catch(err => {
-                })
-
-            const result2 = await axios.get(
+            const result = await axios.get(
                 `/api/product`,
                 {
                     params: {
@@ -56,20 +44,9 @@ function SearchProductAll() {
                     }
                 }
             );
-            let result = null;
-            if (result1) {
-                if (result2.data) {
-                    result = result2.data.concat(result1)
-                } else {
-                    result = result1
-                }
-            } else {
-                result = result2.data
-            }
-
             console.log(result)
-            if (result.length > 0) {
-                setSearchData(result)
+            if (result.data.length > 0) {
+                setSearchData(result.data)
                 setOkSearch(true)
             } else{
                 setSearchData(null)

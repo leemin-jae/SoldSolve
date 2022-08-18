@@ -23,6 +23,8 @@ function PopSearch() {
 
 
     return (
+        <div className='d-flex justify-content-center'>
+        
         <div className='Popularsearch'>
             <div className=''>
                 <h6 className='PopularsearchTitle' style={{ textAlign: 'center', fontFamily: 'Pretendard',fontWeight:'bold' }}>쏠쏠러들이 찾고있는 검색어</h6>
@@ -58,7 +60,7 @@ function PopSearch() {
             </div>
             <div style={{marginBottom: 100}}></div>
         </div>
-
+        </div>
     )
 }
 

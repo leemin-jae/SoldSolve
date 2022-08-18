@@ -1125,8 +1125,9 @@ input::placeholder {
 .Popularsearch{
   border: 1px solid #EAEAF6;
   margin-top: 30px;
-  margin-inline: 20%; 
   border-radius: 20px;
+  height: 100px;
+  width: 300px;
 }
 .PopularsearchTitle{
   background-color: #EAEAF6;

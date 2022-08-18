@@ -350,7 +350,7 @@ class LivePage extends Component {
 
                       </div>
                       <hr></hr>
-                      <p style={{ margin: '2rem' }}> {this.state.RoomContent}</p>
+                      <p style={{ margin: '2rem',whiteSpace:'pre-line' }}> {this.state.RoomContent}</p>
                       <hr style={{ width: '100%' }} />
                     </>
 

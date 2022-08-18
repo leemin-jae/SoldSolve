@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import NavBar from "../components/NavBar"
+import NavBar from "../NavBar"
 import './CreateProduct.css'
 import axios from "axios"
 import { useParams } from "react-router-dom"

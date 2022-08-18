@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 
 
 function NoticePage() {
-  const [mode,setMode] = useState('notice')
+  const [mode,setMode] = useState('message')
   let Articlebox = null
   if (mode === 'notice') {
     Articlebox = <Notice></Notice> 
@@ -42,7 +42,7 @@ function NoticePage() {
       <NavBar></NavBar>
       <div className="mx-5 my-5">
         <div className="notice_list">
-        <button className="noticeSpan" onClick={e=>clickTab(e)} id="noticeSpan">공지사항</button><button className="noticeSpan2" onClick={e=>clickTab(e)} id="messageSpan">알림함</button><button className="noticeSpan2" onClick={e=>clickTab(e)} id="chatSpan">채팅방</button>
+        <button className="noticeSpan" onClick={e=>clickTab(e)} id="messageSpan">알림함</button><button className="noticeSpan2" onClick={e=>clickTab(e)} id="chatSpan">채팅방</button><button className="noticeSpan2" onClick={e=>clickTab(e)} id="noticeSpan">공지사항</button>
         </div>
         <hr style={{ margin:0 }} />
         { Articlebox }

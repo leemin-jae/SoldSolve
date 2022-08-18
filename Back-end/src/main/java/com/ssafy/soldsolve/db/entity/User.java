@@ -46,19 +46,18 @@ public class User {
 
 	private double score;
 
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Message> messages = new ArrayList<>();
 
-	@OneToMany(orphanRemoval = true, mappedBy = "roomId")
+	@OneToMany(orphanRemoval = true, mappedBy = "roomId", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Room> roomList = new ArrayList<>();
 
 
-	@OneToMany(orphanRemoval = true, mappedBy = "reviewId")
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewId", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Review> reviews = new ArrayList<>();
-//////////////////////////////////////////////////////////////////////////////////////////
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -76,7 +75,22 @@ public class User {
 	@JsonIgnore
 	List<Product> products = new ArrayList<>();
 
+	@OneToMany(orphanRemoval = true, mappedBy = "buyer" , cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Room> room1 = new ArrayList<>();
 
+	@OneToMany(orphanRemoval = true, mappedBy = "seller" , cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Room> room2 = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewee", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Review> review1 = new ArrayList<>();
+
+	@OneToMany(orphanRemoval = true, mappedBy = "reviewer", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Review> review2 = new ArrayList<>();
+	
 
 	@Builder
 	public User(String userid, String password, String username, String nickname, String email, String role, String profileUrl, Timestamp createDate, List<Message> messages) {

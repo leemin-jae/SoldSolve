@@ -117,13 +117,13 @@ function KategorieInMain() {
   return (
     <>
       <div className="content">
-        <div className='hometext'><h4 style={{ textAlign: 'center' }}>새로 등록 된 상품</h4></div>
+        <div className='hometext'><hr></hr><h4 className='' style={{ textAlign: 'center' }}>새로 등록 된 상품</h4></div>
         <ul className='cards' id='maincontent' style={{ marginTop: '-10px' }}>
           {loading ? <Loading /> : <ShowMainItem data={newdata} />}
         </ul>
       </div>
       <div className="content">
-        <div className='hometext'><h4 style={{ textAlign: 'center' }}>인기 상품</h4></div>
+        <div className='hometext'><hr></hr><h4 className='' style={{ textAlign: 'center' }}>인기 상품</h4></div>
         <ul className='cards' id='maincontent' style={{ marginTop: '-10px' }}>
           {loading ? <Loading /> : <ShowMainItem data={hotdata} />}
         </ul>

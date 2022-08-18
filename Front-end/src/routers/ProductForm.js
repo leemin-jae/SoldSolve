@@ -82,7 +82,6 @@ function CreateProduct() {
   function submitProduct(e) {
     e.preventDefault();
 
-
     if (category === '') { alert("상품 카테고리를 선택해주세요") }
     else if (articlename === '') { alert("제목을 입력해주세요") }
     else if (price === null) { alert("판매가격을 설정해주세요") }
@@ -197,7 +196,12 @@ function CreateProduct() {
       <div>
         <div className="test">
           <div className="test3">
-            <h1 className="my-5">CREATE ROOM</h1>
+            {editMode ? 
+            <h1 className="my-5 categorytitle">상품 수정</h1>
+            :
+            <h1 className="my-5 categorytitle">상품 등록</h1>
+            }
+            
             <form>
               <div>
                 <select className="pform" onChange={e => inputForm(e)} name="categorys">

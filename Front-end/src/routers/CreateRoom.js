@@ -124,7 +124,14 @@ function CreateRoom() {
     })
       .then((res) => {
         console.log(res)
-        document.location.href = `/live/${productData.user.userid}/sell${productid}`
+        const constraints = {
+          audio: true,
+          video: true
+        }
+        navigator.mediaDevices.getUserMedia(constraints)
+        .then(res=>{
+          document.location.href = `/live/${productData.user.userid}/sell${productid}`
+        })
       })
       .catch((err) => {
         console.log(err)

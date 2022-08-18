@@ -14,6 +14,8 @@ function SignUp() {
   const [idCheck, setIdCheck] = useState(false)
   const [inputCode, setInputCode] = useState('')
   const [mailCode, setMailCode] = useState('')
+  const [waitCode, setWaitCode] = useState(null)
+  const [waitID, setWaitID] = useState(null)
 
   let submitButton = null;
   if (id && password && pwConfirm && nickname && username && email && inputCode) {
@@ -27,7 +29,12 @@ function SignUp() {
   }
 
   function inputForm(e) {
-    if (e.target.name === 'id') { setId(e.target.value) }
+    if (e.target.name === 'id') { 
+      if (waitID) {
+        setWaitID(null)
+      }
+      setId(e.target.value)
+    }
     else if (e.target.name === 'password') {
       if (e.target.value.length !== 0 && e.target.value.length < 4) {
         e.target.classList.value = 'inputform signupWarning'
@@ -73,7 +80,12 @@ function SignUp() {
         setUsername(e.target.value)
       }
     }
-    else if (e.target.name === 'email') { setEmail(e.target.value) }
+    else if (e.target.name === 'email') {
+      if (waitCode) {
+        setWaitCode(null)
+      }
+      setEmail(e.target.value)
+    }
   }
 
 
@@ -90,12 +102,17 @@ function SignUp() {
       setPassword(null)
       setPwConfirm(null)
     }
+    else if (id !== waitID) {
+      alert("변경된 아이디 중복체크를 다시 해주세요!")
+    }
+    else if (email !== waitCode) {
+      alert("변경된 이메일로 다시 인증번호를 받아주세요!")
+    }
     else if (mailCode !== inputCode) {
       alert("인증번호가 일치하지 않습니다!")
     } else {
       axiosSignup(signUpForm)
     }
-
   }
 
 
@@ -124,6 +141,7 @@ function SignUp() {
       .then(res => {
         console.log(res)
         e.target.classList.add('emailcode')
+        setWaitID(id)
         setIdCheck(true)
       })
       .catch(err => {
@@ -146,10 +164,11 @@ function SignUp() {
       })
         .then(res => {
           document.getElementById('CodeForm').hidden = false
+          console.log(e.target)
           e.target.classList.add('emailcode')
           e.target.classList.remove('emailcode2')
           alert("인증코드를 전송했습니다. Email을 확인해주세요")
-
+          setWaitCode(email)
           codeEmail(e)
         })
         .catch(err => {
@@ -196,7 +215,7 @@ function SignUp() {
               <p style={{ color: 'red' }} id="Nickwarning" hidden={true}>닉네임은 2~10자리로 입력 해주세요.</p>
               <input className="inputform" name="username" onChange={e => { inputForm(e) }} type="text" placeholder="USERNAME"></input><br />
               <p style={{ color: 'red' }} id="Namewarning" hidden={true}>이름은 2~10자리로 입력 해주세요.</p>
-              <input className="inputform" name="email" onChange={e => { inputForm(e) }} type="email" placeholder="EMAIL"></input><a href="#!" ><FontAwesomeIcon className='IDcheck' onClick={e => CheckEmail(e)} icon={faSquareCheck} size="2x" /></a><br />
+              <input className="inputform" name="email" onChange={e => { inputForm(e) }} type="email" placeholder="EMAIL"></input><a href="#!" ><FontAwesomeIcon className='IDcheck' id="IDcheck" onClick={e => CheckEmail(e)} icon={faSquareCheck} size="2x" /></a><br />
               <input className="inputform" id="CodeForm" onChange={e => inputCodeForm(e)} type="password" hidden={true} placeholder="EMAIL CODE"></input><br />
               {submitButton}
             </form>

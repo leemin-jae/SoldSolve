@@ -104,7 +104,7 @@ function LiveItemInMain() {
 
   return (
     <div className="content">
-      <div className='hometext'><h4 style={{ textAlign: 'center' }}>진행중인 라이브</h4></div>
+      <div className='hometext'><hr></hr><h4 className='' style={{ textAlign: 'center' }}>진행중인 라이브</h4></div>
       {LiveList.length ? <ShowMainItem data={LiveList} /> : <Loading />}
     </div>
   )

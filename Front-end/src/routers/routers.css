@@ -1111,3 +1111,24 @@ input::placeholder {
   align-items: center;
 
 }
+
+.abtitle{
+  background-color: #EAEAF6;
+  color: rgba(0, 0, 0, 0.836);
+  height: 50px;
+  margin-bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Popularsearch{
+  border: 1px solid #EAEAF6;
+  margin-top: 30px;
+  margin-inline: 20%; 
+  border-radius: 20px;
+}
+.PopularsearchTitle{
+  background-color: #EAEAF6;
+  border-radius: 20px 20px 0 0;
+}

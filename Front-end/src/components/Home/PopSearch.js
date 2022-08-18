@@ -23,8 +23,9 @@ function PopSearch() {
 
 
     return (
-        <div>
-            <div className='hometext'><h4 style={{ textAlign: 'center', fontFamily: 'Pretendard' }}>쏠쏠러들이 찾고있는 검색어</h4>
+        <div className='Popularsearch'>
+            <div className=''>
+                <h6 className='PopularsearchTitle' style={{ textAlign: 'center', fontFamily: 'Pretendard',fontWeight:'bold' }}>쏠쏠러들이 찾고있는 검색어</h6>
                 <>
                     <Swiper
                         direction={"vertical"}

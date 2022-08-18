@@ -124,7 +124,7 @@ h1 {
     background-color: #6667AB;
     font-size: 2em;
     color: white;
-    /* max-width: 300px; */
+    max-width: 300px;
     text-align: center;
     margin-inline: auto;
     border-radius: 10px;

@@ -21,15 +21,10 @@ const OPENVIDU_SERVER_SECRET = 'SOLDSOLVE';
 
 class LivePage extends Component {
   constructor(props) {
-    // const constraints={
-    //   audio: true,
-    //   video: true
-    // }
-    // navigator.mediaDevices.getUserMedia(constraints)
-
     super(props);
     const params = window.location.pathname.split('/')
     params[2] = decodeURI(params[2])
+
     axios({
       url: '/api/live',
       method: 'get',
@@ -51,11 +46,6 @@ class LivePage extends Component {
           })
         }
       })
-
-    window.addEventListener('beforeunload', (event) => {
-      event.preventDefault();
-      event.returnValue = '라이브가 종료됩니다';
-    });
 
 
     this.state = {
@@ -173,7 +163,7 @@ class LivePage extends Component {
             )
             .then(async () => {
 
-              
+
               if (this.state.myId === this.state.params[2]) {
                 var devices = await this.OV.getDevices();
                 var videoDevices = devices.filter(device => device.kind === 'videoinput');
@@ -318,11 +308,11 @@ class LivePage extends Component {
                   {this.state.params[2] === this.state.myId ?
                     <div className='d-flex justify-content-between' style={{ marginInline: '2rem' }}>
                       <div>
-                        {this.state.nowCamera ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)', cursor:'pointer' }} className='exiticon mx-3 iconsize' onClick={this.CameraOff} icon={faVideo} size="1x" /> :
-                          <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor:'pointer'  }} onClick={this.CameraOff} icon={faVideoSlash} size="1x" />}
-                        {this.state.nowVoice ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)', cursor:'pointer'  }} className='exiticon mx-3 iconsize' onClick={this.VoiceOff} icon={faMicrophone} size="1x" /> :
-                          <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor:'pointer'  }} onClick={this.VoiceOff} icon={faMicrophoneSlash} size="1x" />}
-                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor:'pointer'  }} onClick={this.deleteSession} icon={faArrowRightFromBracket} />
+                        {this.state.nowCamera ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)', cursor: 'pointer' }} className='exiticon mx-3 iconsize' onClick={this.CameraOff} icon={faVideo} size="1x" /> :
+                          <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor: 'pointer' }} onClick={this.CameraOff} icon={faVideoSlash} size="1x" />}
+                        {this.state.nowVoice ? <FontAwesomeIcon style={{ color: 'rgba(58, 153, 74, 0.918)', cursor: 'pointer' }} className='exiticon mx-3 iconsize' onClick={this.VoiceOff} icon={faMicrophone} size="1x" /> :
+                          <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor: 'pointer' }} onClick={this.VoiceOff} icon={faMicrophoneSlash} size="1x" />}
+                        <FontAwesomeIcon className='mx-2 iconsize' style={{ color: 'rgba(238, 81, 81, 0.918)', cursor: 'pointer' }} onClick={this.deleteSession} icon={faArrowRightFromBracket} />
                       </div>
                     </div>
                     : null}
@@ -347,7 +337,7 @@ class LivePage extends Component {
                         <div className='infoList'>
                           <div className='score' style={{ marginTop: 10 }}>
                             {
-                              this.state.sellerInfo.score >=70 ?
+                              this.state.sellerInfo.score >= 70 ?
                                 <MoodIcon className='score_emotion' style={{ color: '#81c147', fontSize: '40px' }} /> : (this.state.sellerInfo.score >= 30 ?
                                   <SentimentNeutralIcon className='score_emotion' style={{ color: '#ff7f00', fontSize: '40px' }} /> :
                                   <SentimentVeryDissatisfiedIcon className='score_emotion' style={{ color: '#ff615f', fontSize: '40px' }} />)}

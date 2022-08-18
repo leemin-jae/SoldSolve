@@ -50,7 +50,7 @@ function Product() {
       method: 'get',
     })
       .then(res => {
-        console.log(res)
+        console.log(res.data.content)
         setProductData(res.data)
         setYouNick(res.data.user.nickname)
         setUserId(res.data.user.userid)
@@ -287,7 +287,7 @@ function Product() {
       </>
     }
   }
-
+  console.log(productData)
   return (
     <>
       {load ?
@@ -351,7 +351,7 @@ function Product() {
                 </div>
 
                 <br></br>
-                <p style={{ margin: '0 10px 0 10px', minHeight: '400px', paddingBlock: '30px' }}>{productData.content}</p>
+                <p style={{ margin: '0 10px 0 10px', minHeight: '250px', paddingBlock: '30px',whiteSpace:'pre-line' }}>{productData.content}</p>
 
                 <div className='d-flex justify-content-between'>
                   {store.info.info.userId === productData.user.userid ?

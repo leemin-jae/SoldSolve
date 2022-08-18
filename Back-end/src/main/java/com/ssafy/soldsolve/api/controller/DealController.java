@@ -73,9 +73,7 @@ public class DealController {
 
                 String log = p.getTitle() + "(" + p.getNo() + ") 의 거래가 완료되었습니다";
                 messageService.createLog(buy,log);
-                messageService.createLog(buy,log);
-
-
+                messageService.createLog(p.getUser(),log);
 
                 return new ResponseEntity<String>("거래가 완료되었습니다", HttpStatus.OK);
 

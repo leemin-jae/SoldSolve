@@ -54,22 +54,28 @@ public class User {
 	@JsonIgnore
 	List<Room> roomList = new ArrayList<>();
 
+
 	@OneToMany(orphanRemoval = true, mappedBy = "reviewId")
 	@JsonIgnore
 	List<Review> reviews = new ArrayList<>();
 //////////////////////////////////////////////////////////////////////////////////////////
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Offer> offers = new ArrayList<>();
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Deal> deals = new ArrayList<>();
 
-	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	@JsonIgnore
 	List<Wish> wishes = new ArrayList<>();
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnore
+	List<Product> products = new ArrayList<>();
+
 
 
 	@Builder

@@ -79,7 +79,7 @@ public class ReviewServiceImpl implements ReviewService {
         for (int i=0; i<reviewList.size(); i++) {
             sumV += reviewList.get(i).getScore()-3.0;
         }
-        reviewee.setScore(30.0+sumV/reviewList.size());
+        reviewee.setScore(55.0+sumV/reviewList.size());
         userRepository.save(reviewee);
         return true;
     }
@@ -94,7 +94,7 @@ public class ReviewServiceImpl implements ReviewService {
         for (int i=0; i<reviewList.size(); i++) {
             sumV += reviewList.get(i).getScore()-3.0;
         }
-        reviewee.setScore(30.0+sumV/reviewList.size());
+        reviewee.setScore(55.0+sumV/reviewList.size());
         userRepository.save(reviewee);
     }
 

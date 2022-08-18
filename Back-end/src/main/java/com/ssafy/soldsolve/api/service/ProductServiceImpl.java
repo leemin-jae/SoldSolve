@@ -95,7 +95,33 @@ public class ProductServiceImpl implements ProductService {
             p.setPrice(product.getPrice());
             p.setRegion(product.getRegion());
             p.setTitle(product.getTitle());
-            productRepository.save(p);
+            int p_no = productRepository.save(p).getNo();
+
+
+            for(TagProduct a : tagProductRepository.findByProduct(p)){
+                tagProductRepository.delete(a);
+            }
+
+
+            List<String> list = product.getTag();
+            if(list != null) {
+                for (String tag : list) {
+
+                    Tag t = tagRepository.findByName(tag);
+                    if (t == null) {
+                        t = new Tag();
+                        t.setName(tag);
+                        t = tagRepository.getOne(tagRepository.save(t).getId());
+                    }
+                    TagProduct tp = new TagProduct();
+                    tp.setProduct(productRepository.getOne(p_no));
+                    tp.setTag(t);
+                    tp.setName(tag);
+                    tagProductRepository.save(tp);
+                }
+            }
+
+
             return 1;
         }else{
             return 0;
@@ -111,6 +137,7 @@ public class ProductServiceImpl implements ProductService {
                 requestRepository.delete(requestList.get(i));
             }
         }
+
         List<Wish> wishList = wishRepository.findAllByProduct(p).orElseGet(null);
         if (wishList!=null) {
             for (int j=0; j<wishList.size(); j++) {

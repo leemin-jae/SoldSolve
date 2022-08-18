@@ -14,8 +14,6 @@
 
 .content {
     max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 2rem;
     align-items: center;
 }
 
@@ -23,10 +21,9 @@
     display: flex;
     flex-wrap: wrap;
     list-style: none;
-    /* margin: 0; */
+    margin-top: -5px;
     padding: 0;
 }
-
 
 .cards_item {
     display: flex;
@@ -87,18 +84,21 @@ h1 {
 
 
 .card_image {
-    height: 10rem;
-    max-width: 100%;
+    /* height: 10rem; */
+    width: 100%;
     vertical-align: middle;
+    height: 180px;
+    
 }
 
 .card_content {
     padding: 0.5rem;
+    margin-top: 10px;
 }
 
 .card_title {
     color: black;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     text-transform: capitalize;
     margin: 0px;
     font-family: Pretendard;
@@ -111,6 +111,30 @@ h1 {
     font-family: Pretendard;
 }
 
-.hometext {
-    margin: 100px 0px 0px 20px;
+
+
+.carousel-item > img {
+    min-height: 200px;
+  } 
+
+  @keyframes flash { 0%, 20%, 40%, to { opacity: 1; } 10%, 30% { opacity: 0; } }
+
+
+  .hometext {
+    margin: 70px 0px 0px 0px;
+}
+
+.flicker {
+    animation: flash 3s infinite;
+    color: #6667AB;
+}
+
+hr{
+    text-align: center;
+    margin: 0px auto;
+    align-items: center;
+}
+
+.foot {
+    border-radius: 0px 0px 20px 20px;
 }

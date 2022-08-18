@@ -14,10 +14,8 @@ import EditAccount from './routers/EditAccount';
 import NoticePage from './routers/NoticePage';
 import CreateRoom from './routers/CreateRoom';
 import LivePage from './routers/LivePage';
-import LiveDetail from './routers/LiveDetail';
 import CreateProduct from './routers/ProductForm';
-import ChatRoom from './components/Modals/ChatRoom';
-import ChatTest from './components/Notice/ChatTest';
+import ChatRoom from './routers/ChatRoom';
 //
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
@@ -26,11 +24,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom' // react-router-
 import 'bootstrap/dist/css/bootstrap.css';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import Product from './routers/Products/Product';
-import Products from './routers/Products/Products';
-import SearchProduct from './routers/Products/SearchProduct';
-import SearchProductAll from './routers/Products/SearchProductAll';
-
+import Product from './components/Products/Product';
+import Products from './components/Products/Products';
+import MyProducts from './components/Products/MyProducts';
+import SearchProduct from './components/Search/SearchProduct';
+import SearchProductAll from './components/Search/SearchProductAll';
+import SearchProductTag from './components/Search/SearchProductTag'
 
 let persistor = persistStore(store);
 
@@ -38,37 +37,37 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <div className='background'>
 
-    <React.StrictMode>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/find" element={<FindAccount />} />
-              <Route path="/search" element={<Search />} />
-              <Route path="/mypage" element={<MyPage />} />
-              <Route path="/editaccount" element={<EditAccount />} />
-              <Route path="/notice" element={<NoticePage />} />
-              <Route path='/createroom/:id' element={<CreateRoom />}></Route>
-              <Route path='/live/:user/:title' element={<LivePage />}></Route>
-              <Route path='/livedetail' element={<LiveDetail />}></Route>
-              <Route path='/product/:id' element={<Product />}></Route>
-              <Route path='/product' element={<Products />}></Route>
-              <Route path='/createproduct' element={<CreateProduct />}></Route>
-              <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
-              <Route path='/chatroom' element={<ChatRoom />}></Route>
-              <Route path='/:category/:title' element={<SearchProduct />}></Route>
-              <Route path='/chattest' element={<ChatTest />}></Route>
-              <Route path='/:title' element={<SearchProductAll />}></Route>
-              
-              <Route path="/*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </PersistGate>
-      </Provider>
-    </React.StrictMode>
+    {/* <React.StrictMode> */}
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/find" element={<FindAccount />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/editaccount" element={<EditAccount />} />
+            <Route path="/notice" element={<NoticePage />} />
+            <Route path='/createroom/:id' element={<CreateRoom />}></Route>
+            <Route path='/live/:user/:title' element={<LivePage />}></Route>
+            <Route path='/product/:id' element={<Product />}></Route>
+            <Route path='/product' element={<Products />}></Route>
+            <Route path='/createproduct' element={<CreateProduct />}></Route>
+            <Route path='/editproduct/:id' element={<CreateProduct />}></Route>
+            <Route path='/search/:category/:title' element={<SearchProduct />}></Route>
+            <Route path='/search/tag/:title' element={<SearchProductTag />}></Route>
+            <Route path='/search/:title' element={<SearchProductAll />}></Route>
+            <Route path='/chatroom/:id' element={<ChatRoom />}></Route>
+            <Route path='/mypage/products' element={<MyProducts />}></Route>
+
+            <Route path="/*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
+    {/* </React.StrictMode> */}
   </div>
 
 );

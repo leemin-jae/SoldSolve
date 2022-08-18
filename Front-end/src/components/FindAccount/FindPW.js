@@ -38,7 +38,6 @@ function FindPW() {
       data: { userId:id, userName:name, email:email}
     })
     .then(res => {
-      console.log(res)
       alert("메일로 임시 비밀번호가 전송되었습니다!")
       document.location.href = '/login'
     })

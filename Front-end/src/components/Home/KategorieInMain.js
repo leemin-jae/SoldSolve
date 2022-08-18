@@ -4,26 +4,31 @@ import axios from 'axios';
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import SwiperCore, { Pagination } from "swiper";
+import SwiperCore, { Pagination, Autoplay } from "swiper";
 
 import "swiper/css/pagination";
 
 function KategorieInMain() {
-  const [data, setData] = useState([]);
+  const [newdata, setNewData] = useState([]);
+  const [hotdata, setHotData] = useState([]);
   const [loading, setLoading] = useState(false);
-  SwiperCore.use([Pagination]);
+  SwiperCore.use([Pagination, Autoplay]);
 
   useEffect(() => {
     async function fetchData() {
       const result = await axios.get(
         `/api/product`
       );
-      console.log(result)
-      setData(result.data.slice(0, 10));
+      setNewData(result.data.reverse().slice(0, 10));
+      setHotData(result.data.filter((x) => x.state === 0).sort(function (a, b) {
+        return b.viewCount - a.viewCount
+      }).slice(0, 10))
+      // setHotData(result.data.sort(function (a, b) {
+      //   return b.viewCount - a.viewCount
+      // }).slice(0, 20))
       setLoading(false)
     }
     fetchData();
-    console.log(data)
   }, []);
 
 
@@ -36,11 +41,12 @@ function KategorieInMain() {
   };
 
 
-  const ShowNew = () => {
+  const ShowMainItem = (data) => {
     return (
       <>
-        <Swiper spaceBetween={0}
-          scrollbar={{ draggable: true }}
+        <Swiper spaceBetween={-15}
+          // scrollbar={{ draggable: true }}
+          height={200}
           breakpoints={{
             1200: {
               slidesPerView: 6,
@@ -51,48 +57,78 @@ function KategorieInMain() {
             767: {
               slidesPerView: 3,
             },
-            414: {
+            300: {
               slidesPerView: 2,
             }
           }}
           pagination={{ clickable: true }}
-          className='cards' id='maincontent'>
-          {data.map((product) => {
-            return (
-              <SwiperSlide className='cards_item' key={product.no}>
-                <a href={`/product/${product.no}`} className='card'>
-                  <img className='card_image'
-                    src={product.image}
-                    alt={product.title}
-                  />
-                  <div className='card_content'>
-                    <h5 className='card_title'>{product.title}</h5>
-                    <p className='card_text'>{product.price}</p>
-                  </div>
-                </a>
-              </SwiperSlide>
+          autoplay={{ delay: 3000 }}
+        >
+          {data.data.length > 0 ?
+            <>
+              {data.data.map((product) => {
+                const mainImg = 'https://i7c110.p.ssafy.io' + product.productImg[0].path
+                let pTitle = null;
+                if (product.title.length > 8) {
+                  pTitle = product.title.substr(0, 8) + "...";
+                } else {
+                  pTitle = product.title
+                }
 
-            );
-          })}
+                let price = product.price
+                const productPrice = price.toLocaleString('ko-KR');
+
+                return (
+                  <SwiperSlide className='cards_item' key={product.no}>
+                    <a href={`/product/${product.no}`} className='card' style={{ height: 250 }}>
+                      {product.state ?
+                        <div style={{ minHeight: 180 }}>
+                          <img className='card_image'
+                            src={mainImg}
+                            alt={product.title}
+                            style={{ opacity: '70%', width: '100%', minHeight: 180 }}
+                          />
+                          <h1 style={{ marginTop: '-100px', color: '#6667ab' }}>판매 완료</h1>
+                        </div>
+                        :
+                        <img className='card_image'
+                          src={mainImg}
+                          alt={product.title}
+                          style={{ minHeight: 180, width: '100%' }}
+                        />
+                      }
+                      <div className='card_content'>
+                        <h5 className='card_title'>{pTitle}</h5>
+                        <p className='card_text'>{productPrice} 원</p>
+                      </div>
+                    </a>
+                  </SwiperSlide>
+                );
+              })}
+            </>
+            : null}
         </Swiper>
       </>
     );
   };
 
+
+
   return (
     <>
       <div className="content">
-        <div className='hometext'><h4>NEW ARRIVAL</h4></div>
-        <ul className='cards' id='maincontent'>
-          {loading ? <Loading /> : <ShowNew />}
+        <div className='hometext'><hr></hr><h4 className='' style={{ textAlign: 'center' }}>새로 등록 된 상품</h4></div>
+        <ul className='cards' id='maincontent' style={{ marginTop: '-10px' }}>
+          {loading ? <Loading /> : <ShowMainItem data={newdata} />}
         </ul>
       </div>
       <div className="content">
-        <div className='hometext'><h4>HOT ITEMS</h4></div>
-        <ul className='cards' id='maincontent'>
-          {loading ? <Loading /> : <ShowNew />}
+        <div className='hometext'><hr></hr><h4 className='' style={{ textAlign: 'center' }}>인기 상품</h4></div>
+        <ul className='cards' id='maincontent' style={{ marginTop: '-10px' }}>
+          {loading ? <Loading /> : <ShowMainItem data={hotdata} />}
         </ul>
       </div>
+      <div style={{ marginBottom: 100 }}></div>
     </>
   )
 }

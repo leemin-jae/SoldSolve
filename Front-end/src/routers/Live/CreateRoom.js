@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import NavBar from "../components/NavBar"
+import NavBar from "../../components/NavBar"
 import { useParams } from 'react-router-dom';
 import axios from "axios"
 import { useSelector } from 'react-redux'

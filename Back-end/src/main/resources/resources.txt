@@ -1,0 +1,4 @@
+application.propertise의 active 값을
+
+local로 변경시에 localhost 설정
+server로 변경시에 server 설정

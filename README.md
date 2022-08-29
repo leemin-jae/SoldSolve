@@ -45,7 +45,7 @@
     <tr>
         <td><b>이민재/팀원</td>
         <td>
-  <img src="assets/4.jpeg" width="150" height="150"/>
+  <img src="assets/2.jpg" width="150" height="150"/>
   </td>
   <td>
   Backend
@@ -54,7 +54,7 @@
     <tr>
         <td><b>문유주/팀원</td>
         <td>
-  <img src="assets/2.jpg" width="150" height="150"/>
+  <img src="assets/3.jpg" width="150" height="150"/>
   <td>
   Frontend
   </td>
@@ -62,7 +62,7 @@
     <tr>
         <td><b>오행송/팀원</td>
         <td>
-  <img src="assets/3.jpeg" width="150" height="150"/>
+  <img src="assets/4.jpg" width="150" height="150"/>
   </td>
   <td>
   Frontend
@@ -71,16 +71,13 @@
     <tr>
         <td><b>이건후/팀원</td>
         <td>
-  <img src="assets/5.jpeg" width="150" height="150"/>
+  <img src="assets/5.jpg" width="150" height="150"/>
   <td>
   Frontend
   </td>
     </tr>
     </table>
 </div>
-
-
-
 
 ## 💡 프로젝트 소개
 
@@ -89,8 +86,6 @@
 > LIVE를 통해 중고물품을 보다 더 안전하게 **거래**하세요! 😆
 
 ---
-
-
 
 ## 🔧 기술 스택 & 서비스 아키텍쳐
 
@@ -141,10 +136,7 @@
 
 <img src='assets/service architecture.jpeg'>
 
-
 ---
-
-
 
 ## 🎨 ERD & 와이어 프레임
 
@@ -158,17 +150,16 @@
 
 ---
 
-
-
 ## 🔎 기술 소개
 
 ### 모든기기에 맞춘 반응형 웹, 라이브를 통한 판매 기능, 상호평가, 1:1채팅
+
 #### 회원가입 & 로그인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회원 탈퇴
 
 <img title="" src="assets/signup.gif" alt="[video-to-gif output image]" width="221">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img title="" src="assets/Withdrawal.gif" alt="videotogif output image" width="220">  
 
->사용자는 유효성 검증을 통해 회원가입을진행 할 수 있고,
->
+> 사용자는 유효성 검증을 통해 회원가입을진행 할 수 있고,
+> 
 > 필요 시 마이페이지를 통해 회원 수정과, 탈퇴가 가능합니다.
 
 #### 메인페이지&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;마이페이지 & 회원정보 수정
@@ -176,7 +167,7 @@
 <img title="" src="assets/main.gif" alt="[video-to-gif output image]" width="221">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img title="" src="assets/mypage.gif" alt="videotogif output image" width="221">
 <br/>
 
->마이페이지를 통한 회원 수정이 가능하며 본인의 프로필 사진을 수정하거나 구매한 내역, 판매중인 내역을 확인 할 수 있고, 찜한 상품을 확인 할 수 있습니다.
+> 마이페이지를 통한 회원 수정이 가능하며 본인의 프로필 사진을 수정하거나 구매한 내역, 판매중인 내역을 확인 할 수 있고, 찜한 상품을 확인 할 수 있습니다.
 
 #### 검색 & 태그검색&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;상품등록
 
@@ -187,7 +178,6 @@
 > 
 > 좌상단 햄버거바를 이용하여 상품 등록을 할 수 있으며, 등록 시 판매 지역과 태그 또한 등록이 가능합니다. 
 
-
 #### 찜하기 & 링크 복사 & 채팅하기(판매자)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;라이브 시간 설정 & 라이브 요청목록 & 라이브
 
 <img title="" src="assets/like.gif" alt="[video-to-gioutput image]" width="228">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img title="" src="assets/sellerproduct.gif" alt="[video-to-gioutput image]" width="270"><br/>
@@ -195,7 +185,6 @@
 > 상품 상세 페이지를 통해 판매자는 구매자에게 라이브 요청과 채팅을 할 수 있으며, 상품이 마음에 들 경우 좋아요를 통해 찜한 상품을 등록 할 수 있습니다.
 > 
 > 구매자는 본인이 등록한 상품의 상세 페이지를 통해 라이브 요청 목록을 확인하고, 목록들의 사람들에게 시간을 설정함으로써 해당 시간에 방송하겠다는 알림을 보내줍니다. 그 후 라이브 버튼을 통해 라이브 방송을 진행 할 수 있습니다.
-
 
 #### 라이브 & 채팅 & 가격제안&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;채팅 & 평가(판매자)
 

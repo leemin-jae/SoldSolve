@@ -22,62 +22,35 @@
 
 ## 🗯팀 소개
 
-<div align=left>
-  <table>
-    <tr>
-        <td><b>이름</td>
-        <td>
-  사진
-  </td>
-  <td>
-  역할
-  </td>
-    </tr>  
-    <tr>
-        <td><b>조영훈/팀장</td>
-        <td>
-  <img src="assets/1.jpg" width="150" height="150"/>
-  </td>
-  <td>
-  Backend
-  </td>
-    </tr>  
-    <tr>
-        <td><b>이민재/팀원</td>
-        <td>
-  <img src="assets/2.jpg" width="150" height="150"/>
-  </td>
-  <td>
-  Backend
-  </td>
-    </tr>  
-    <tr>
-        <td><b>문유주/팀원</td>
-        <td>
-  <img src="assets/3.jpg" width="150" height="150"/>
-  <td>
-  Frontend
-  </td>
-    </tr>  
-    <tr>
-        <td><b>오행송/팀원</td>
-        <td>
-  <img src="assets/4.jpg" width="150" height="150"/>
-  </td>
-  <td>
-  Frontend
-  </td>
-    </tr>  
-    <tr>
-        <td><b>이건후/팀원</td>
-        <td>
-  <img src="assets/5.jpg" width="150" height="150"/>
-  <td>
-  Frontend
-  </td>
-    </tr>
-    </table>
-</div>
+<table>
+<thead>
+<tr>
+<th><g-emoji class="g-emoji" alias="smiling_face_with_sunglasses" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60e.png">😎</g-emoji>조영훈/팀장</th>
+<th><g-emoji class="g-emoji" alias="winking_face" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f609.png">😉</g-emoji>이민재/팀원</th>
+<th><g-emoji class="g-emoji" alias="woozy_face" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f974.png">🥴</g-emoji>문유주/팀원</th>
+<th><g-emoji class="g-emoji" alias="beaming_face_with_smiling_eyes" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f601.png">😁</g-emoji>오행송/팀원</th>
+<th><g-emoji class="g-emoji" alias="face_savoring_food" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f60b.png">😋</g-emoji>이건후/팀원</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="assets/1.jpg" width="150" height="150"/></td>
+<td><img src="assets/2.jpg" width="150" height="150"/></td>
+<td><img src="assets/3.jpg" width="150" height="150"/></td>
+<td><img src="assets/4.jpg" width="150" height="150"/></td>
+<td><img src="assets/5.jpg" width="150" height="150"/></td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Backend</td>
+<td>Frontend</td>
+<td>Frontend</td>
+<td>Frontend</td>
+</tr>
+</tbody>
+</table>
+
+
 
 ## 💡 프로젝트 소개
 

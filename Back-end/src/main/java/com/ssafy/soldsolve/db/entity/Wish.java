@@ -1,5 +1,6 @@
 package com.ssafy.soldsolve.db.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,4 +23,5 @@ public class Wish {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "no")
     private Product product;
+
 }
